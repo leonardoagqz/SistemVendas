@@ -1,0 +1,43 @@
+unit U_inicial;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.ComCtrls, Vcl.Menus,
+  Vcl.Buttons;
+
+type
+  TF_inicial = class(TForm)
+    Stb_inicial: TStatusBar;
+    Panel_menu: TPanel;
+    menu_inicial: TMenuItem;
+    Produtos1: TMenuItem;
+    Clientes1: TMenuItem;
+    menu_principal: TMainMenu;
+    Movimentos1: TMenuItem;
+    Venda1: TMenuItem;
+    Caixa1: TMenuItem;
+    MVendas1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    VendasRelatrio1: TMenuItem;
+    btn_clientes: TSpeedButton;
+    btn_produtos: TSpeedButton;
+    SpeedButton1: TSpeedButton;
+    Configuraes1: TMenuItem;
+    Sair1: TMenuItem;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  F_inicial: TF_inicial;
+
+implementation
+
+{$R *.dfm}
+
+end.

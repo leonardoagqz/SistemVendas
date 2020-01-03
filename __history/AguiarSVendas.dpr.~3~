@@ -1,0 +1,14 @@
+program AguiarSVendas;
+
+uses
+  Vcl.Forms,
+  U_inicial in 'Fontes\U_inicial.pas' {Form1};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.Run;
+end.

@@ -1,0 +1,36 @@
+unit U_produtos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ComCtrls;
+
+type
+  TF_produtos = class(TForm)
+    stb_produtos: TStatusBar;
+    dbg_produtos: TDBGrid;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  F_produtos: TF_produtos;
+
+implementation
+
+uses
+  u_DM;
+
+{$R *.dfm}
+
+procedure TF_produtos.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  F_produtos := nil;
+end;
+
+end.
