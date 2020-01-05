@@ -2,7 +2,7 @@ object F_inicial: TF_inicial
   Left = 0
   Top = 0
   Caption = 'Vendas'
-  ClientHeight = 522
+  ClientHeight = 542
   ClientWidth = 1184
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -17,10 +17,11 @@ object F_inicial: TF_inicial
   TextHeight = 13
   object Stb_inicial: TStatusBar
     Left = 0
-    Top = 503
+    Top = 523
     Width = 1184
     Height = 19
     Panels = <>
+    ExplicitTop = 503
   end
   object Panel_menu: TPanel
     Left = 0
