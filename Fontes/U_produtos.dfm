@@ -82,8 +82,8 @@ object F_produtos: TF_produtos
         ExplicitHeight = 127
       end
       object Label1: TLabel
-        Left = 153
-        Top = 8
+        Left = 125
+        Top = 20
         Width = 35
         Height = 14
         Margins.Left = 4
@@ -101,8 +101,8 @@ object F_produtos: TF_produtos
         ParentFont = False
       end
       object SpeedButton_buscarprodutos: TSpeedButton
-        Left = 380
-        Top = 29
+        Left = 352
+        Top = 41
         Width = 23
         Height = 22
         Glyph.Data = {
@@ -170,6 +170,14 @@ object F_produtos: TF_produtos
           FFFFFFFFFF00}
         OnClick = SpeedButton_buscarprodutosClick
       end
+      object btn_editar_produto: TSpeedButton
+        Left = 400
+        Top = 40
+        Width = 113
+        Height = 22
+        Caption = 'Editar Selecionado'
+        OnClick = btn_editar_produtoClick
+      end
       object dbg_produtos: TDBGrid
         Left = 0
         Top = 72
@@ -187,6 +195,7 @@ object F_produtos: TF_produtos
         TitleFont.Height = -12
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDblClick = dbg_produtosDblClick
         Columns = <
           item
             Expanded = False
@@ -261,8 +270,8 @@ object F_produtos: TF_produtos
           end>
       end
       object edt_busca: TEdit
-        Left = 153
-        Top = 28
+        Left = 125
+        Top = 40
         Width = 222
         Height = 22
         Margins.Left = 4
@@ -275,6 +284,25 @@ object F_produtos: TF_produtos
         TabOrder = 0
         OnChange = edt_buscaChange
         OnKeyPress = edt_buscaKeyPress
+      end
+      object rg_buscar: TRadioGroup
+        Left = 2
+        Top = 0
+        Width = 105
+        Height = 71
+        Margins.Top = 2
+        Margins.Bottom = 2
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clOlive
+        Font.Height = -12
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ItemIndex = 0
+        Items.Strings = (
+          'Por Nome'
+          'Por Barras')
+        ParentFont = False
+        TabOrder = 2
       end
     end
     object tab_cadastrar: TTabSheet
@@ -298,46 +326,231 @@ object F_produtos: TF_produtos
           0954506E67496D61676589504E470D0A1A0A0000000D49484452000003290000
           006308020000001023D8AA000000017352474200AECE1CE90000000467414D41
           0000B18F0BFC6105000000097048597300000EC300000EC301C76FA864000001
-          CF4944415478DAEDD6410100200C0021D7BF980556C11CB6B817A460EEBE0300
-          4062DC0B0020E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F0080
-          8E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE0500D071
-          2F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE05
-          00D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD0000
-          3AEE0500D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7
-          BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B817
-          0040C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E00001DF70200
-          E8B8170040C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E00001D
-          F70200E8B8170040C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E
-          00001DF70200E8B8170040C7BD00003AEE0500D0712F00808E7B010074DC0B00
-          A0E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F00808E7B010074
-          DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F00808E7B
-          010074DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F00
-          808E7B010074DC0B00A0E35E00009D0F6A65F90D0E8500230000000049454E44
-          AE426082}
+          CC4944415478DAEDD6310100301003A1BE7FB391501737810A6EDB03002071EE
+          050090712F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD00
+          003AEE0500D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040
+          C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B8
+          170040C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E00001DF702
+          00E8B8170040C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E35E0000
+          1DF70200E8B8170040C7BD00003AEE0500D0712F00808E7B010074DC0B00A0E3
+          5E00001DF70200E8B8170040C7BD00003AEE0500D0712F00808E7B010074DC0B
+          00A0E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F00808E7B0100
+          74DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F00808E
+          7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE0500D0712F
+          00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD00003AEE0500
+          D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD00003A
+          EE0500D0712F00808E7B010074DC0B00A0E35E00001DF70200E8B8170040C7BD
+          00003AEE0500D0712F0080CE076F8D16E3840D69700000000049454E44AE4260
+          82}
         Stretch = True
-        ExplicitTop = -2
-        ExplicitWidth = 1162
-        ExplicitHeight = 110
+        ExplicitTop = -4
+      end
+      object Label3: TLabel
+        Left = 40
+        Top = 25
+        Width = 48
+        Height = 14
+        Caption = 'Produto:'
+        FocusControl = DBEdit2
+      end
+      object Label4: TLabel
+        Left = 40
+        Top = 64
+        Width = 61
+        Height = 14
+        Caption = 'Cod. Barras'
+        FocusControl = DBEdit3
+      end
+      object Label5: TLabel
+        Left = 40
+        Top = 105
+        Width = 18
+        Height = 14
+        Caption = 'Ref'
+        FocusControl = DBEdit4
+      end
+      object Label6: TLabel
+        Left = 40
+        Top = 145
+        Width = 49
+        Height = 14
+        Caption = 'R$ Custo'
+        FocusControl = DBEdit5
+      end
+      object Label7: TLabel
+        Left = 40
+        Top = 185
+        Width = 49
+        Height = 14
+        Caption = 'R$ Pre'#231'o'
+        FocusControl = DBEdit6
+      end
+      object Label8: TLabel
+        Left = 40
+        Top = 225
+        Width = 82
+        Height = 14
+        Caption = 'R$ Pre'#231'o Prazo'
+        FocusControl = DBEdit7
+      end
+      object Label9: TLabel
+        Left = 40
+        Top = 265
+        Width = 45
+        Height = 14
+        Caption = 'Estoque'
+        FocusControl = DBEdit8
+      end
+      object btn_novo_cad: TSpeedButton
+        Left = 208
+        Top = 332
+        Width = 100
+        Height = 40
+        Action = ac_insert
+      end
+      object btn_editar_cad: TSpeedButton
+        Left = 314
+        Top = 332
+        Width = 100
+        Height = 40
+        Action = ac_editar
+      end
+      object btn_gravar_cad: TSpeedButton
+        Left = 420
+        Top = 332
+        Width = 100
+        Height = 40
+        Action = ac_post
+      end
+      object btn_cancelar_cad: TSpeedButton
+        Left = 526
+        Top = 332
+        Width = 100
+        Height = 40
+        Action = ac_cancelar
+      end
+      object btn_apagar_cad: TSpeedButton
+        Left = 632
+        Top = 332
+        Width = 100
+        Height = 40
+        Action = ac_delet
+      end
+      object DBEdit2: TDBEdit
+        Left = 40
+        Top = 41
+        Width = 500
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_nome'
+        DataSource = ds_produtos_cad
+        TabOrder = 0
+      end
+      object DBEdit3: TDBEdit
+        Left = 40
+        Top = 81
+        Width = 500
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_barra'
+        DataSource = ds_produtos_cad
+        TabOrder = 1
+      end
+      object DBEdit4: TDBEdit
+        Left = 40
+        Top = 121
+        Width = 500
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_ref'
+        DataSource = ds_produtos_cad
+        TabOrder = 2
+      end
+      object DBEdit5: TDBEdit
+        Left = 40
+        Top = 161
+        Width = 100
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_custo'
+        DataSource = ds_produtos_cad
+        TabOrder = 3
+      end
+      object DBEdit6: TDBEdit
+        Left = 40
+        Top = 201
+        Width = 100
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_preco'
+        DataSource = ds_produtos_cad
+        TabOrder = 4
+      end
+      object DBEdit7: TDBEdit
+        Left = 40
+        Top = 241
+        Width = 100
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_preco_prazo'
+        DataSource = ds_produtos_cad
+        TabOrder = 5
+      end
+      object DBEdit8: TDBEdit
+        Left = 40
+        Top = 281
+        Width = 100
+        Height = 22
+        CharCase = ecUpperCase
+        DataField = 'pro_estoque'
+        DataSource = ds_produtos_cad
+        TabOrder = 6
       end
     end
   end
-  object rg_buscar: TRadioGroup
-    Left = 4
-    Top = 25
-    Width = 105
-    Height = 72
-    Margins.Top = 2
-    Margins.Bottom = 2
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clOlive
-    Font.Height = -12
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ItemIndex = 0
-    Items.Strings = (
-      'Por Nome'
-      'Por Barras')
-    ParentFont = False
-    TabOrder = 2
+  object ds_produtos_cad: TDataSource
+    DataSet = dm.TB_produtos
+    Left = 264
+    Top = 216
+  end
+  object acm_produtos: TActionManager
+    Left = 472
+    Top = 192
+    StyleName = 'Platform Default'
+    object ac_insert: TDataSetInsert
+      Category = 'Dataset'
+      Caption = 'Novo'
+      Hint = 'Insert'
+      ImageIndex = 4
+      DataSource = ds_produtos_cad
+    end
+    object ac_delet: TDataSetDelete
+      Category = 'Dataset'
+      Caption = 'Apagar'
+      Hint = 'Delete'
+      ImageIndex = 5
+      DataSource = ds_produtos_cad
+    end
+    object ac_editar: TDataSetEdit
+      Category = 'Dataset'
+      Caption = 'Editar'
+      Hint = 'Edit'
+      ImageIndex = 6
+      DataSource = ds_produtos_cad
+    end
+    object ac_post: TDataSetPost
+      Category = 'Dataset'
+      Caption = 'Gravar'
+      Hint = 'Post'
+      ImageIndex = 7
+      DataSource = ds_produtos_cad
+    end
+    object ac_cancelar: TDataSetCancel
+      Category = 'Dataset'
+      Caption = 'Cancelar'
+      Hint = 'Cancel'
+      ImageIndex = 8
+      DataSource = ds_produtos_cad
+    end
   end
 end

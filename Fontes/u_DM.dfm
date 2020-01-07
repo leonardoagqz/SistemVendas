@@ -83,7 +83,59 @@ object dm: Tdm
   end
   object ds_produtos: TDataSource
     DataSet = SQL_produtos
-    Left = 128
+    Left = 120
     Top = 104
+  end
+  object TB_produtos: TFDTable
+    IndexFieldNames = 'pro_id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.produtos'
+    TableName = 'aguiarsvendasbd.produtos'
+    Left = 200
+    Top = 104
+    object TB_produtospro_id: TFDAutoIncField
+      DisplayLabel = 'ID:'
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object TB_produtospro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      Size = 100
+    end
+    object TB_produtospro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      Size = 100
+    end
+    object TB_produtospro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      Size = 100
+    end
+    object TB_produtospro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+    end
+    object TB_produtospro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+    end
+    object TB_produtospro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+    end
+    object TB_produtospro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+    end
   end
 end

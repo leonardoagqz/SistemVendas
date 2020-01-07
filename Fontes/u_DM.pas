@@ -25,6 +25,15 @@ type
     SQL_produtospro_preco_prazo: TFloatField;
     SQL_produtospro_estoque: TIntegerField;
     ds_produtos: TDataSource;
+    TB_produtos: TFDTable;
+    TB_produtospro_id: TFDAutoIncField;
+    TB_produtospro_nome: TStringField;
+    TB_produtospro_barra: TStringField;
+    TB_produtospro_ref: TStringField;
+    TB_produtospro_custo: TFloatField;
+    TB_produtospro_preco: TFloatField;
+    TB_produtospro_preco_prazo: TFloatField;
+    TB_produtospro_estoque: TIntegerField;
   private
     { Private declarations }
   public
