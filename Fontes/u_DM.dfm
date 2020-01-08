@@ -27,6 +27,7 @@ object dm: Tdm
     Top = 16
   end
   object SQL_produtos: TFDQuery
+    Active = True
     IndexesActive = False
     Connection = conexao
     SQL.Strings = (
@@ -87,6 +88,7 @@ object dm: Tdm
     Top = 104
   end
   object TB_produtos: TFDTable
+    Active = True
     IndexFieldNames = 'pro_id'
     Connection = conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.produtos'
@@ -98,6 +100,7 @@ object dm: Tdm
       FieldName = 'pro_id'
       Origin = 'pro_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object TB_produtospro_nome: TStringField
       AutoGenerateValue = arDefault

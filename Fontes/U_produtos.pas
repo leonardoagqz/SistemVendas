@@ -49,6 +49,10 @@ type
     btn_cancelar_cad: TSpeedButton;
     btn_apagar_cad: TSpeedButton;
     btn_editar_produto: TSpeedButton;
+    btn_gravar_cad_prod: TSpeedButton;
+    btn_apagar_cad_prod: TSpeedButton;
+    btn_cancelar_cad_prod: TSpeedButton;
+    btn_cadastrar_cad_prod: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edt_buscaKeyPress(Sender: TObject; var Key: Char);
@@ -57,6 +61,10 @@ type
     procedure SpeedButton_buscarprodutosClick(Sender: TObject);
     procedure btn_editar_produtoClick(Sender: TObject);
     procedure dbg_produtosDblClick(Sender: TObject);
+    procedure btn_gravar_cad_prodClick(Sender: TObject);
+    procedure btn_apagar_cad_prodClick(Sender: TObject);
+    procedure btn_cancelar_cad_prodClick(Sender: TObject);
+    procedure btn_cadastrar_cad_prodClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -73,11 +81,36 @@ uses
 
 {$R *.dfm}
 
+procedure TF_produtos.btn_apagar_cad_prodClick(Sender: TObject);
+begin
+  dm.TB_produtos.Delete;
+  dm.SQL_produtos.Close;
+  dm.SQL_produtos.Open;
+  page_produtos.ActivePage := tab_consultar;
+end;
+
+procedure TF_produtos.btn_cadastrar_cad_prodClick(Sender: TObject);
+begin
+    page_produtos.ActivePage := tab_cadastrar;
+    btn_novo_cad.Click;
+    btn_novo_cad.Enabled:=False;
+
+end;
+
+procedure TF_produtos.btn_cancelar_cad_prodClick(Sender: TObject);
+begin
+  dm.TB_produtos.Cancel;
+  dm.SQL_produtos.Close;
+  dm.SQL_produtos.Open;
+  page_produtos.ActivePage := tab_consultar;
+end;
+
 procedure TF_produtos.btn_editar_produtoClick(Sender: TObject);
 begin
   dm.TB_produtos.Locate('pro_id',dm.SQL_produtospro_id.Value,[]);
   page_produtos.ActivePage := tab_cadastrar;
   btn_editar_cad.Click;
+  btn_novo_cad.Enabled:=False;
 end;
 
 procedure TF_produtos.dbg_produtosDblClick(Sender: TObject);
@@ -124,22 +157,33 @@ begin
 
                  if RecordCount = 0 then
                  ShowMessage('Produto não encontrado!');
+
                end;
 
           end;
-  
+
 
 end;
 
 procedure TF_produtos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   F_produtos := nil;
+
 end;
 
 procedure TF_produtos.FormCreate(Sender: TObject);
 begin
   //dm.SQL_produtos.Open;
-  dm.TB_produtos.Active := True;
+   dm.TB_produtos.Active:=True;
+  page_produtos.ActivePage := tab_consultar;
+
+end;
+
+procedure TF_produtos.btn_gravar_cad_prodClick(Sender: TObject);
+begin
+  dm.TB_produtos.Post;
+  dm.SQL_produtos.Close;
+  dm.SQL_produtos.Open;
   page_produtos.ActivePage := tab_consultar;
 
 end;
@@ -168,18 +212,22 @@ procedure TF_produtos.SpeedButton_buscarprodutosClick(Sender: TObject);
 begin
   with dm.SQL_produtos do
          begin
-           Close;
-           SQL.Clear;
-           SQL.Add('select * from produtos');
-           SQL.Add('where pro_nome like :nome');
-           ParamByName('nome').Value := edt_busca.Text + '%';
-           Open;
+            if edt_busca.Text = '' then
+            ShowMessage('Campo vazio!')
 
-           if RecordCount = 0 then
-           ShowMessage('Produto não encontrado!');
+            else
+              begin
+               Close;
+               SQL.Clear;
+               SQL.Add('select * from produtos');
+               SQL.Add('where pro_nome like :nome');
+               ParamByName('nome').Value := edt_busca.Text + '%';
+               Open;
 
-           if edt_busca.Text = '' then
-           ShowMessage('Campo vazio!');
+               if RecordCount = 0 then
+               ShowMessage('Produto não encontrado!');
+             end
+
 
          end;
 end;
