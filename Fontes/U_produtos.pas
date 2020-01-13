@@ -24,19 +24,19 @@ type
     rg_buscar: TRadioGroup;
     ds_produtos_cad: TDataSource;
     Label3: TLabel;
-    DBEdit2: TDBEdit;
+    edt_nomeprod_cad_prod: TDBEdit;
     Label4: TLabel;
-    DBEdit3: TDBEdit;
+    edt_cod_barras: TDBEdit;
     Label5: TLabel;
-    DBEdit4: TDBEdit;
+    edt_ref_cad_prod: TDBEdit;
     Label6: TLabel;
-    DBEdit5: TDBEdit;
+    edt_custo_cad_prod: TDBEdit;
     Label7: TLabel;
-    DBEdit6: TDBEdit;
+    edt_preco_cad_prod: TDBEdit;
     Label8: TLabel;
-    DBEdit7: TDBEdit;
+    edt_preco_prazo_cad_prod: TDBEdit;
     Label9: TLabel;
-    DBEdit8: TDBEdit;
+    edt_estoque_cad_prod: TDBEdit;
     acm_produtos: TActionManager;
     ac_insert: TDataSetInsert;
     ac_delet: TDataSetDelete;
@@ -53,6 +53,7 @@ type
     btn_apagar_cad_prod: TSpeedButton;
     btn_cancelar_cad_prod: TSpeedButton;
     btn_cadastrar_cad_prod: TSpeedButton;
+    SpeedButton1: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edt_buscaKeyPress(Sender: TObject; var Key: Char);
@@ -65,6 +66,7 @@ type
     procedure btn_apagar_cad_prodClick(Sender: TObject);
     procedure btn_cancelar_cad_prodClick(Sender: TObject);
     procedure btn_cadastrar_cad_prodClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,7 +79,7 @@ var
 implementation
 
 uses
-  u_DM;
+  u_DM, U_funcoes;
 
 {$R *.dfm}
 
@@ -94,6 +96,7 @@ begin
     page_produtos.ActivePage := tab_cadastrar;
     btn_novo_cad.Click;
     btn_novo_cad.Enabled:=False;
+    btn_apagar_cad_prod.Enabled:=False;
 
 end;
 
@@ -110,7 +113,7 @@ begin
   dm.TB_produtos.Locate('pro_id',dm.SQL_produtospro_id.Value,[]);
   page_produtos.ActivePage := tab_cadastrar;
   btn_editar_cad.Click;
-  btn_novo_cad.Enabled:=False;
+  btn_novo_cad.Enabled:=True;
 end;
 
 procedure TF_produtos.dbg_produtosDblClick(Sender: TObject);
@@ -206,6 +209,11 @@ begin
            ShowMessage('Campo vazio!');
 
          end;
+end;
+
+procedure TF_produtos.SpeedButton1Click(Sender: TObject);
+begin
+    edt_cod_barras.Text := EAN13;
 end;
 
 procedure TF_produtos.SpeedButton_buscarprodutosClick(Sender: TObject);

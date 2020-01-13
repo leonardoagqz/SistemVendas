@@ -10,8 +10,8 @@ object dm: Tdm
       'DriverID=MySQL')
     Connected = True
     LoginPrompt = False
-    Left = 48
-    Top = 16
+    Left = 32
+    Top = 8
   end
   object Mysql_link: TFDPhysMySQLDriverLink
     DriverID = 'MySQL'
@@ -19,12 +19,12 @@ object dm: Tdm
       'C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SV' +
       'ENDAS\Fontes\libmysql.dll'
     Left = 104
-    Top = 16
+    Top = 8
   end
   object WaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 168
-    Top = 16
+    Left = 184
+    Top = 8
   end
   object SQL_produtos: TFDQuery
     Active = True
@@ -32,8 +32,8 @@ object dm: Tdm
     Connection = conexao
     SQL.Strings = (
       'select * from produtos')
-    Left = 40
-    Top = 104
+    Left = 32
+    Top = 64
     object SQL_produtospro_id: TFDAutoIncField
       FieldName = 'pro_id'
       Origin = 'pro_id'
@@ -84,8 +84,8 @@ object dm: Tdm
   end
   object ds_produtos: TDataSource
     DataSet = SQL_produtos
-    Left = 120
-    Top = 104
+    Left = 112
+    Top = 64
   end
   object TB_produtos: TFDTable
     Active = True
@@ -93,8 +93,8 @@ object dm: Tdm
     Connection = conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.produtos'
     TableName = 'aguiarsvendasbd.produtos'
-    Left = 200
-    Top = 104
+    Left = 184
+    Top = 64
     object TB_produtospro_id: TFDAutoIncField
       DisplayLabel = 'ID:'
       FieldName = 'pro_id'
@@ -140,5 +140,156 @@ object dm: Tdm
       FieldName = 'pro_estoque'
       Origin = 'pro_estoque'
     end
+  end
+  object SQL_clientes: TFDQuery
+    Active = True
+    Connection = conexao
+    SQL.Strings = (
+      'select * from clientes')
+    Left = 32
+    Top = 120
+    object SQL_clientescli_id: TFDAutoIncField
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object SQL_clientescli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      Size = 100
+    end
+    object SQL_clientescli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      Size = 100
+    end
+    object SQL_clientescli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+    end
+    object SQL_clientescli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      Size = 50
+    end
+    object SQL_clientescli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      Size = 50
+    end
+    object SQL_clientescli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+    end
+    object SQL_clientescli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+    end
+    object SQL_clientescli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+    end
+    object SQL_clientescli_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cpf'
+      Origin = 'cli_cpf'
+    end
+    object SQL_clientescli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      Size = 50
+    end
+    object SQL_clientescli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+    end
+  end
+  object TB_clientes: TFDTable
+    IndexFieldNames = 'cli_id'
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.clientes'
+    TableName = 'aguiarsvendasbd.clientes'
+    Left = 184
+    Top = 120
+    object TB_clientescli_id: TFDAutoIncField
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object TB_clientescli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      Size = 100
+    end
+    object TB_clientescli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      Size = 100
+    end
+    object TB_clientescli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+    end
+    object TB_clientescli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      Size = 50
+    end
+    object TB_clientescli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      Size = 50
+    end
+    object TB_clientescli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+    end
+    object TB_clientescli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+    end
+    object TB_clientescli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+    end
+    object TB_clientescli_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cpf'
+      Origin = 'cli_cpf'
+    end
+    object TB_clientescli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      Size = 50
+    end
+    object TB_clientescli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+    end
+  end
+  object ds_clientes: TDataSource
+    DataSet = SQL_clientes
+    Left = 112
+    Top = 120
   end
 end

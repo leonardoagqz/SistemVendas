@@ -34,6 +34,33 @@ type
     TB_produtospro_preco: TFloatField;
     TB_produtospro_preco_prazo: TFloatField;
     TB_produtospro_estoque: TIntegerField;
+    SQL_clientes: TFDQuery;
+    SQL_clientescli_id: TFDAutoIncField;
+    SQL_clientescli_nome: TStringField;
+    SQL_clientescli_endereco: TStringField;
+    SQL_clientescli_numero: TStringField;
+    SQL_clientescli_bairro: TStringField;
+    SQL_clientescli_cidade: TStringField;
+    SQL_clientescli_fone: TStringField;
+    SQL_clientescli_celular: TStringField;
+    SQL_clientescli_rg: TStringField;
+    SQL_clientescli_cpf: TStringField;
+    SQL_clientescli_profissao: TStringField;
+    SQL_clientescli_data_nasc: TDateField;
+    TB_clientes: TFDTable;
+    TB_clientescli_id: TFDAutoIncField;
+    TB_clientescli_nome: TStringField;
+    TB_clientescli_endereco: TStringField;
+    TB_clientescli_numero: TStringField;
+    TB_clientescli_bairro: TStringField;
+    TB_clientescli_cidade: TStringField;
+    TB_clientescli_fone: TStringField;
+    TB_clientescli_celular: TStringField;
+    TB_clientescli_rg: TStringField;
+    TB_clientescli_cpf: TStringField;
+    TB_clientescli_profissao: TStringField;
+    TB_clientescli_data_nasc: TDateField;
+    ds_clientes: TDataSource;
   private
     { Private declarations }
   public
