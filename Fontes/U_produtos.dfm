@@ -37,7 +37,7 @@ object F_produtos: TF_produtos
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
-    ActivePage = tab_cadastrar
+    ActivePage = tab_consultar
     Align = alClient
     TabOrder = 0
     TabWidth = 200

@@ -14,8 +14,8 @@
     <Transaction>2019/12/23 21:13:51.000.664,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2019/12/23 21:16:30.000.073,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.dfm</Transaction>
     <Transaction>2019/12/23 21:16:30.000.073,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.pas</Transaction>
-    <Transaction>2019/12/23 21:17:36.000.093,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_clientes.dfm</Transaction>
     <Transaction>2019/12/23 21:17:36.000.093,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_clientes.pas</Transaction>
+    <Transaction>2019/12/23 21:17:36.000.093,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_clientes.dfm</Transaction>
     <Transaction>2019/12/23 21:36:21.000.793,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2019/12/23 21:36:45.000.842,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_funcoes.pas</Transaction>
     <Transaction>2019/12/23 21:50:59.000.802,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
@@ -29,5 +29,7 @@
     <Transaction>2020/01/02 20:45:52.000.314,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\SisVendas.dproj=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\SistemVendas.dproj</Transaction>
     <Transaction>2020/01/13 09:24:28.284,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2020/01/13 09:25:06.804,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
+    <Transaction>2020/01/13 09:25:19.741,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
+    <Transaction>2020/01/13 09:25:53.581,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
   </Transactions>
 </BorlandProject>
