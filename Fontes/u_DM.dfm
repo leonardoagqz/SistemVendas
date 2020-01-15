@@ -286,6 +286,7 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'cli_data_nasc'
       Origin = 'cli_data_nasc'
+      EditMask = '!99/99/0000;1;_'
     end
   end
   object ds_clientes: TDataSource

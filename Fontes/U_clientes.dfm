@@ -22,7 +22,7 @@ object F_clientes: TF_clientes
     Top = 0
     Width = 994
     Height = 422
-    ActivePage = tab_consultar
+    ActivePage = tab_cadastrar
     Align = alClient
     TabOrder = 0
     object tab_consultar: TTabSheet
@@ -866,8 +866,8 @@ object F_clientes: TF_clientes
         FocusControl = DBEdit3
       end
       object Label4: TLabel
-        Left = 32
-        Top = 136
+        Left = 302
+        Top = 96
         Width = 37
         Height = 13
         Caption = 'N'#250'mero'
@@ -875,7 +875,7 @@ object F_clientes: TF_clientes
       end
       object Label5: TLabel
         Left = 32
-        Top = 176
+        Top = 144
         Width = 28
         Height = 13
         Caption = 'Bairro'
@@ -883,7 +883,7 @@ object F_clientes: TF_clientes
       end
       object Label6: TLabel
         Left = 213
-        Top = 176
+        Top = 144
         Width = 33
         Height = 13
         Caption = 'Cidade'
@@ -891,15 +891,15 @@ object F_clientes: TF_clientes
       end
       object Label7: TLabel
         Left = 32
-        Top = 216
+        Top = 184
         Width = 24
         Height = 13
         Caption = 'Fone'
         FocusControl = DBEdit7
       end
       object Label8: TLabel
-        Left = 32
-        Top = 256
+        Left = 140
+        Top = 184
         Width = 33
         Height = 13
         Caption = 'Celular'
@@ -960,16 +960,16 @@ object F_clientes: TF_clientes
       object DBEdit3: TDBEdit
         Left = 32
         Top = 112
-        Width = 400
+        Width = 264
         Height = 21
         DataField = 'cli_endereco'
         DataSource = ds_clientes_cad
         TabOrder = 5
       end
       object DBEdit4: TDBEdit
-        Left = 32
-        Top = 152
-        Width = 264
+        Left = 302
+        Top = 112
+        Width = 75
         Height = 21
         DataField = 'cli_numero'
         DataSource = ds_clientes_cad
@@ -977,7 +977,7 @@ object F_clientes: TF_clientes
       end
       object DBEdit5: TDBEdit
         Left = 32
-        Top = 192
+        Top = 160
         Width = 153
         Height = 21
         DataField = 'cli_bairro'
@@ -986,7 +986,7 @@ object F_clientes: TF_clientes
       end
       object DBEdit6: TDBEdit
         Left = 213
-        Top = 192
+        Top = 160
         Width = 134
         Height = 21
         DataField = 'cli_cidade'
@@ -995,17 +995,17 @@ object F_clientes: TF_clientes
       end
       object DBEdit7: TDBEdit
         Left = 32
-        Top = 232
-        Width = 264
+        Top = 200
+        Width = 89
         Height = 21
         DataField = 'cli_fone'
         DataSource = ds_clientes_cad
         TabOrder = 9
       end
       object DBEdit8: TDBEdit
-        Left = 32
-        Top = 272
-        Width = 264
+        Left = 140
+        Top = 200
+        Width = 89
         Height = 21
         DataField = 'cli_celular'
         DataSource = ds_clientes_cad
@@ -1041,10 +1041,11 @@ object F_clientes: TF_clientes
       object DBEdit13: TDBEdit
         Left = 352
         Top = 26
-        Width = 134
+        Width = 129
         Height = 21
         DataField = 'cli_data_nasc'
         DataSource = ds_clientes_cad
+        MaxLength = 10
         TabOrder = 1
       end
     end
