@@ -27,7 +27,6 @@ object dm: Tdm
     Top = 8
   end
   object SQL_produtos: TFDQuery
-    Active = True
     IndexesActive = False
     Connection = conexao
     SQL.Strings = (
@@ -88,7 +87,6 @@ object dm: Tdm
     Top = 64
   end
   object TB_produtos: TFDTable
-    Active = True
     IndexFieldNames = 'pro_id'
     Connection = conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.produtos'
@@ -142,7 +140,7 @@ object dm: Tdm
     end
   end
   object SQL_clientes: TFDQuery
-    Active = True
+    IndexesActive = False
     Connection = conexao
     SQL.Strings = (
       'select * from clientes')
@@ -152,6 +150,7 @@ object dm: Tdm
       FieldName = 'cli_id'
       Origin = 'cli_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_clientescli_nome: TStringField
       AutoGenerateValue = arDefault
@@ -197,10 +196,10 @@ object dm: Tdm
       FieldName = 'cli_rg'
       Origin = 'cli_rg'
     end
-    object SQL_clientescli_cpf: TStringField
+    object SQL_clientescli_cnpj_cpf: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'cli_cpf'
-      Origin = 'cli_cpf'
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
     end
     object SQL_clientescli_profissao: TStringField
       AutoGenerateValue = arDefault
@@ -215,6 +214,7 @@ object dm: Tdm
     end
   end
   object TB_clientes: TFDTable
+    Active = True
     IndexFieldNames = 'cli_id'
     Connection = conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.clientes'
@@ -225,6 +225,7 @@ object dm: Tdm
       FieldName = 'cli_id'
       Origin = 'cli_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object TB_clientescli_nome: TStringField
       AutoGenerateValue = arDefault
@@ -270,10 +271,10 @@ object dm: Tdm
       FieldName = 'cli_rg'
       Origin = 'cli_rg'
     end
-    object TB_clientescli_cpf: TStringField
+    object TB_clientescli_cnpj_cpf: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'cli_cpf'
-      Origin = 'cli_cpf'
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
     end
     object TB_clientescli_profissao: TStringField
       AutoGenerateValue = arDefault

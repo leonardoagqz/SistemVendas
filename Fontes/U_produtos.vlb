@@ -22,9 +22,6 @@ Coordinates=10,322,93,36
 [page_produtos]
 Coordinates=405,254,100,36
 
-[SpeedButton_buscarprodutos]
-Coordinates=211,254,184,36
-
 [tab_consultar]
 Coordinates=109,254,92,36
 
@@ -40,4 +37,7 @@ Visible=True
 
 []
 Coordinates=182,427,91,36
+
+[btn_buscarprodutos]
+Coordinates=211,254,184,36
 
