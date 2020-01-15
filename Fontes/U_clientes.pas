@@ -69,6 +69,8 @@ type
     procedure btn_cancelar_cad_cliClick(Sender: TObject);
     procedure btn_apagar_cad_cliClick(Sender: TObject);
     procedure tab_cadastrarShow(Sender: TObject);
+    procedure btn_editar_clienteClick(Sender: TObject);
+    procedure dbg_clientesDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -137,12 +139,25 @@ begin
   pag_clientes.ActivePage := tab_consultar;
 end;
 
+procedure TF_clientes.btn_editar_clienteClick(Sender: TObject);
+begin
+  dm.TB_clientes.Locate('cli_id',dm.SQL_clientescli_id.Value,[]);
+  pag_clientes.ActivePage := tab_cadastrar;
+  btn_editar_cad_cli.Click;
+  btn_novo_cad_cli.Enabled:=True;
+end;
+
 procedure TF_clientes.btn_gravar_cad_cliClick(Sender: TObject);
 begin
   dm.TB_clientes.Post;
   dm.SQL_clientes.Close;
   dm.SQL_clientes.Open;
   pag_clientes.ActivePage := tab_consultar;
+end;
+
+procedure TF_clientes.dbg_clientesDblClick(Sender: TObject);
+begin
+  btn_editar_cliente.Click;
 end;
 
 procedure TF_clientes.edt_buscar_cliKeyPress(Sender: TObject; var Key: Char);

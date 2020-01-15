@@ -22,7 +22,7 @@ object F_clientes: TF_clientes
     Top = 0
     Width = 994
     Height = 422
-    ActivePage = tab_cadastrar
+    ActivePage = tab_consultar
     Align = alClient
     TabOrder = 0
     object tab_consultar: TTabSheet
@@ -262,6 +262,7 @@ object F_clientes: TF_clientes
           6375383838383838383838383838383838383838383838383838386F63753838
           38383838383838383838383838383838383838383838386F6375383838383838
           383838383838383838383838383838383838386F6375}
+        OnClick = btn_editar_clienteClick
       end
       object img_ico_cad_cli: TImage
         Left = 953
@@ -350,6 +351,7 @@ object F_clientes: TF_clientes
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDblClick = dbg_clientesDblClick
         Columns = <
           item
             Expanded = False
