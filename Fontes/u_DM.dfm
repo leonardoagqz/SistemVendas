@@ -185,11 +185,13 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'cli_fone'
       Origin = 'cli_fone'
+      EditMask = '(99) 9999-9999;0;'
     end
     object SQL_clientescli_celular: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_celular'
       Origin = 'cli_celular'
+      EditMask = '(99) 9 9999-9999;0;'
     end
     object SQL_clientescli_rg: TStringField
       AutoGenerateValue = arDefault
@@ -260,11 +262,13 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'cli_fone'
       Origin = 'cli_fone'
+      EditMask = '(99) 9999-9999;0; '
     end
     object TB_clientescli_celular: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_celular'
       Origin = 'cli_celular'
+      EditMask = '(99) 9 9999-9999;0;'
     end
     object TB_clientescli_rg: TStringField
       AutoGenerateValue = arDefault
@@ -275,6 +279,7 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'cli_cnpj_cpf'
       Origin = 'cli_cnpj_cpf'
+      EditMask = '99999999999999;0;'
     end
     object TB_clientescli_profissao: TStringField
       AutoGenerateValue = arDefault

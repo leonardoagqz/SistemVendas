@@ -262,6 +262,7 @@ object F_clientes: TF_clientes
           6375383838383838383838383838383838383838383838383838386F63753838
           38383838383838383838383838383838383838383838386F6375383838383838
           383838383838383838383838383838383838386F6375}
+        OnClick = btn_editar_clienteClick
       end
       object img_ico_cad_cli: TImage
         Left = 953
@@ -350,6 +351,7 @@ object F_clientes: TF_clientes
         TitleFont.Height = -11
         TitleFont.Name = 'Tahoma'
         TitleFont.Style = []
+        OnDblClick = dbg_clientesDblClick
         Columns = <
           item
             Expanded = False
@@ -467,6 +469,7 @@ object F_clientes: TF_clientes
       Caption = 'Cadastrar'
       ImageIndex = 1
       TabVisible = False
+      OnShow = tab_cadastrarShow
       object img_cadastrar_cli: TImage
         Left = 0
         Top = 0
@@ -852,7 +855,7 @@ object F_clientes: TF_clientes
         Width = 27
         Height = 13
         Caption = 'Nome'
-        FocusControl = DBEdit2
+        FocusControl = edt_nome_cli
       end
       object Label3: TLabel
         Left = 32
@@ -863,8 +866,8 @@ object F_clientes: TF_clientes
         FocusControl = DBEdit3
       end
       object Label4: TLabel
-        Left = 32
-        Top = 136
+        Left = 302
+        Top = 96
         Width = 37
         Height = 13
         Caption = 'N'#250'mero'
@@ -872,7 +875,7 @@ object F_clientes: TF_clientes
       end
       object Label5: TLabel
         Left = 32
-        Top = 176
+        Top = 144
         Width = 28
         Height = 13
         Caption = 'Bairro'
@@ -880,7 +883,7 @@ object F_clientes: TF_clientes
       end
       object Label6: TLabel
         Left = 213
-        Top = 176
+        Top = 144
         Width = 33
         Height = 13
         Caption = 'Cidade'
@@ -888,15 +891,15 @@ object F_clientes: TF_clientes
       end
       object Label7: TLabel
         Left = 32
-        Top = 216
+        Top = 184
         Width = 24
         Height = 13
         Caption = 'Fone'
         FocusControl = DBEdit7
       end
       object Label8: TLabel
-        Left = 32
-        Top = 256
+        Left = 140
+        Top = 184
         Width = 33
         Height = 13
         Caption = 'Celular'
@@ -945,11 +948,12 @@ object F_clientes: TF_clientes
         TabOrder = 11
         Visible = False
       end
-      object DBEdit2: TDBEdit
+      object edt_nome_cli: TDBEdit
         Left = 32
         Top = 26
         Width = 300
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_nome'
         DataSource = ds_clientes_cad
         TabOrder = 0
@@ -957,53 +961,59 @@ object F_clientes: TF_clientes
       object DBEdit3: TDBEdit
         Left = 32
         Top = 112
-        Width = 400
+        Width = 264
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_endereco'
         DataSource = ds_clientes_cad
         TabOrder = 5
       end
       object DBEdit4: TDBEdit
-        Left = 32
-        Top = 152
-        Width = 264
+        Left = 302
+        Top = 112
+        Width = 75
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_numero'
         DataSource = ds_clientes_cad
         TabOrder = 6
       end
       object DBEdit5: TDBEdit
         Left = 32
-        Top = 192
+        Top = 160
         Width = 153
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_bairro'
         DataSource = ds_clientes_cad
         TabOrder = 7
       end
       object DBEdit6: TDBEdit
         Left = 213
-        Top = 192
+        Top = 160
         Width = 134
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_cidade'
         DataSource = ds_clientes_cad
         TabOrder = 8
       end
       object DBEdit7: TDBEdit
         Left = 32
-        Top = 232
-        Width = 264
+        Top = 200
+        Width = 89
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_fone'
         DataSource = ds_clientes_cad
         TabOrder = 9
       end
       object DBEdit8: TDBEdit
-        Left = 32
-        Top = 272
-        Width = 264
+        Left = 140
+        Top = 200
+        Width = 89
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_celular'
         DataSource = ds_clientes_cad
         TabOrder = 10
@@ -1013,6 +1023,7 @@ object F_clientes: TF_clientes
         Top = 69
         Width = 134
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_rg'
         DataSource = ds_clientes_cad
         TabOrder = 2
@@ -1022,6 +1033,7 @@ object F_clientes: TF_clientes
         Top = 69
         Width = 92
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_cnpj_cpf'
         DataSource = ds_clientes_cad
         TabOrder = 3
@@ -1031,6 +1043,7 @@ object F_clientes: TF_clientes
         Top = 69
         Width = 200
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_profissao'
         DataSource = ds_clientes_cad
         TabOrder = 4
@@ -1038,10 +1051,12 @@ object F_clientes: TF_clientes
       object DBEdit13: TDBEdit
         Left = 352
         Top = 26
-        Width = 134
+        Width = 125
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_data_nasc'
         DataSource = ds_clientes_cad
+        MaxLength = 10
         TabOrder = 1
       end
     end

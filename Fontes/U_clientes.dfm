@@ -22,7 +22,7 @@ object F_clientes: TF_clientes
     Top = 0
     Width = 994
     Height = 422
-    ActivePage = tab_cadastrar
+    ActivePage = tab_consultar
     Align = alClient
     TabOrder = 0
     object tab_consultar: TTabSheet
@@ -953,6 +953,7 @@ object F_clientes: TF_clientes
         Top = 26
         Width = 300
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_nome'
         DataSource = ds_clientes_cad
         TabOrder = 0
@@ -962,6 +963,7 @@ object F_clientes: TF_clientes
         Top = 112
         Width = 264
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_endereco'
         DataSource = ds_clientes_cad
         TabOrder = 5
@@ -971,6 +973,7 @@ object F_clientes: TF_clientes
         Top = 112
         Width = 75
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_numero'
         DataSource = ds_clientes_cad
         TabOrder = 6
@@ -980,6 +983,7 @@ object F_clientes: TF_clientes
         Top = 160
         Width = 153
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_bairro'
         DataSource = ds_clientes_cad
         TabOrder = 7
@@ -989,6 +993,7 @@ object F_clientes: TF_clientes
         Top = 160
         Width = 134
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_cidade'
         DataSource = ds_clientes_cad
         TabOrder = 8
@@ -998,8 +1003,10 @@ object F_clientes: TF_clientes
         Top = 200
         Width = 89
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_fone'
         DataSource = ds_clientes_cad
+        MaxLength = 14
         TabOrder = 9
       end
       object DBEdit8: TDBEdit
@@ -1007,8 +1014,10 @@ object F_clientes: TF_clientes
         Top = 200
         Width = 89
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_celular'
         DataSource = ds_clientes_cad
+        MaxLength = 16
         TabOrder = 10
       end
       object DBEdit9: TDBEdit
@@ -1016,6 +1025,7 @@ object F_clientes: TF_clientes
         Top = 69
         Width = 134
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_rg'
         DataSource = ds_clientes_cad
         TabOrder = 2
@@ -1025,8 +1035,10 @@ object F_clientes: TF_clientes
         Top = 69
         Width = 92
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_cnpj_cpf'
         DataSource = ds_clientes_cad
+        MaxLength = 14
         TabOrder = 3
       end
       object DBEdit11: TDBEdit
@@ -1034,6 +1046,7 @@ object F_clientes: TF_clientes
         Top = 69
         Width = 200
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_profissao'
         DataSource = ds_clientes_cad
         TabOrder = 4
@@ -1041,8 +1054,9 @@ object F_clientes: TF_clientes
       object DBEdit13: TDBEdit
         Left = 352
         Top = 26
-        Width = 129
+        Width = 125
         Height = 21
+        CharCase = ecUpperCase
         DataField = 'cli_data_nasc'
         DataSource = ds_clientes_cad
         MaxLength = 10
