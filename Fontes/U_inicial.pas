@@ -12,11 +12,11 @@ type
     Stb_inicial: TStatusBar;
     Panel_menu: TPanel;
     menu_inicial: TMenuItem;
-    Produtos1: TMenuItem;
-    Clientes1: TMenuItem;
+    menu_produtos: TMenuItem;
+    menu_clientes: TMenuItem;
     menu_principal: TMainMenu;
     Movimentos1: TMenuItem;
-    Venda1: TMenuItem;
+    menu_vendas: TMenuItem;
     Caixa1: TMenuItem;
     MVendas1: TMenuItem;
     N1: TMenuItem;
@@ -24,14 +24,16 @@ type
     VendasRelatrio1: TMenuItem;
     btn_clientes: TSpeedButton;
     btn_produtos: TSpeedButton;
-    SpeedButton1: TSpeedButton;
+    btn_venda: TSpeedButton;
     Configuraes1: TMenuItem;
     Sair1: TMenuItem;
-    procedure Clientes1Click(Sender: TObject);
+    procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);
-    procedure Produtos1Click(Sender: TObject);
-    procedure Sair1Click(Sender: TObject);
+    procedure onclick_menu_produtos(Sender: TObject);
+    procedure onclick_menu_sair(Sender: TObject);
+    procedure onclick_menu_vendas(Sender: TObject);
+    procedure btn_vendasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,53 +47,76 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM;
 
 //clique do botao clientes
 procedure TF_inicial.btn_clientesClick(Sender: TObject);
 begin
-
-if TestarPermissao('F_clientes') = False then
-   exit;
+      if TestarPermissao('F_clientes') = false then
+   Exit;
   if F_clientes = nil then
-  F_clientes := TF_clientes.Create(self);
-  F_clientes.Show;
+  begin
+      F_clientes := TF_clientes.Create(Self);
+      F_clientes.Show;
+   end;
 end;
 
 //clique main.menu clientes
 procedure TF_inicial.btn_produtosClick(Sender: TObject);
 begin
-    if TestarPermissao('F_produtos') = false then
-  exit;
-
+     if TestarPermissao('F_produtos') = false then
+   Exit;
   if F_produtos = nil then
-  F_produtos := TF_produtos.Create(self);
-  F_produtos.Show;
+  begin
+      F_produtos := TF_produtos.Create(Self);
+      F_produtos.Show;
+   end;
 end;
 
-procedure TF_inicial.Clientes1Click(Sender: TObject);
+procedure TF_inicial.onclick_menu_clientes(Sender: TObject);
 begin
-   if TestarPermissao('F_clientes') = False then
-   exit;
+   
+  begin
+      if F_clientes = nil then
+      F_clientes := TF_clientes.Create(self);
+      F_clientes.Show;
+  end;
 
-  if F_clientes = nil then
-  F_clientes := TF_clientes.Create(self);
-  F_clientes.Show;
+
 end;
 
-procedure TF_inicial.Produtos1Click(Sender: TObject);
+procedure TF_inicial.onclick_menu_produtos(Sender: TObject);
 begin
-  if TestarPermissao('F_produtos') = false then
-  exit;
-
-  if F_produtos = nil then
-  F_produtos := TF_produtos.Create(self);
-  F_produtos.Show;
+    if F_produtos = nil then
+     F_produtos := TF_produtos.Create(self);
+     F_produtos.Show;
 end;
 
-procedure TF_inicial.Sair1Click(Sender: TObject);
+procedure TF_inicial.onclick_menu_sair(Sender: TObject);
 begin
  Application.Terminate;
+end;
+
+procedure TF_inicial.btn_vendasClick(Sender: TObject);
+begin
+    if TestarPermissao('F_PDV') = false then
+   Exit;
+  if F_PDV = nil then
+  begin
+      F_PDV := TF_PDV.Create(Self);
+      F_PDV.Show;
+   end;
+end;
+
+procedure TF_inicial.onclick_menu_vendas(Sender: TObject);
+begin
+
+  if F_PDV = nil then
+  begin
+      F_PDV := TF_PDV.Create(Self);
+      F_PDV.Show;
+   end;
+
 end;
 
 end.

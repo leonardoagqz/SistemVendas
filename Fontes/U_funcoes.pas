@@ -18,7 +18,7 @@ implementation
 
 function TestarPermissao (NOME_FORM:STRING):boolean;
     begin
-       if result = true then
+       if result = True then
           begin
           ShowMessage('Acesso Negado.');
           end

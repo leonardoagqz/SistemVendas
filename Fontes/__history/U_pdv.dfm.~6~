@@ -1,0 +1,108 @@
+﻿object F_PDV: TF_PDV
+  Left = 0
+  Top = 0
+  BorderStyle = bsDialog
+  Caption = 'Venda'
+  ClientHeight = 472
+  ClientWidth = 774
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object btn_pro_add_pdv: TSpeedButton
+    Left = 142
+    Top = 130
+    Width = 59
+    Height = 24
+    Caption = 'Adicionar'
+  end
+  object stb_pdv: TStatusBar
+    Left = 0
+    Top = 453
+    Width = 774
+    Height = 19
+    Panels = <>
+  end
+  object panel_pdv_baixo: TPanel
+    Left = 0
+    Top = 393
+    Width = 774
+    Height = 60
+    Align = alBottom
+    TabOrder = 1
+    ExplicitTop = 412
+  end
+  object dbg_lançamento_pdv: TDBGrid
+    Left = 0
+    Top = 160
+    Width = 641
+    Height = 233
+    TabOrder = 2
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object edt_pro_barras_pdv: TEdit
+    Left = 0
+    Top = 101
+    Width = 130
+    Height = 21
+    TabOrder = 3
+  end
+  object edt_pro_nome_pdv: TEdit
+    Left = 136
+    Top = 101
+    Width = 265
+    Height = 21
+    TabOrder = 4
+  end
+  object edt_pro_preco_pdv: TCurrencyEdit
+    Left = -1
+    Top = 130
+    Width = 66
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+  end
+  object edt_pro_prazo_pdv: TCurrencyEdit
+    Left = 71
+    Top = 130
+    Width = 65
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 6
+  end
+  object edt_pro_qtd_pdv: TCurrencyEdit
+    Left = 407
+    Top = 99
+    Width = 73
+    Height = 24
+    DisplayFormat = '0'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 7
+  end
+end
