@@ -30,15 +30,22 @@ type
     btn_iten_remove_pdv: TSpeedButton;
     edt_cli_codigo_pdv: TEdit;
     edt_cli_nome_pdv: TEdit;
-    Image1: TImage;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label6: TLabel;
-    Label7: TLabel;
+    lbl_buscarporbarras_pdv: TLabel;
+    lbl_buscar_clientes_pdv: TLabel;
+    lbl_qtd_pdv: TLabel;
+    lbl_buscarpornome_pdv: TLabel;
+    btn_iniciar_venda_pdv: TSpeedButton;
+    btn_venda_sair_pdv: TSpeedButton;
+    panel_btns_venda: TPanel;
+    panel_dados: TPanel;
+    panel_dados_clientes: TPanel;
+    panel_buscar_barras_nome_pdv: TPanel;
+    panel_btn_iniciar_venda_pdv: TPanel;
+    panel_btns_grv_can_fec_vendas_pdv: TPanel;
+    DBGrid1: TDBGrid;
+    lbl_cod_cliente: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btn_venda_sair_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,6 +62,12 @@ implementation
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     F_PDV:= nil;
+end;
+
+procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);
+begin
+    Close;
+    F_PDV := nil;
 end;
 
 end.
