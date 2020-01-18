@@ -62,6 +62,9 @@ type
     procedure edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure ProcedureBuscaProduto;
     procedure edt_pro_barras_pdvChange(Sender: TObject);
+    procedure edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edt_pro_nome_pdvChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -74,7 +77,7 @@ var
 implementation
 
 uses
-  U_clientes, u_DM;
+  U_clientes, u_DM, U_PesquisarProduto;
 
 {$R *.dfm}
 
@@ -196,7 +199,7 @@ end;
 
 procedure TF_PDV.edt_pro_barras_pdvChange(Sender: TObject);
 begin
-  ProcedureBuscaProduto;
+  //ProcedureBuscaProduto;
 end;
 
 procedure TF_PDV.edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -224,10 +227,39 @@ begin
             edt_pro_barras_pdv.Text := dm.SQL_produtospro_barra.AsString;
             edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
             lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
+            edt_pro_qtd_pdv.SetFocus;
+            edt_pro_qtd_pdv.SelectAll;
           end;
 
          end;
     end;
+
+end;
+
+procedure TF_PDV.edt_pro_nome_pdvChange(Sender: TObject);
+begin
+   edt_pro_nome_pdv.SelectAll;
+   edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
+   edt_pro_barras_pdv.Text := dm.SQL_produtospro_barra.AsString;
+   edt_pro_preco_pdv.Value := dm.SQL_produtospro_preco.Value;
+   edt_pro_prazo_pdv.Value := dm.SQL_produtospro_preco_prazo.Value;
+   lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
+   edt_pro_nome_pdv.SetFocus;
+   edt_pro_nome_pdv.SelectAll;
+end;
+
+procedure TF_PDV.edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  case Key of
+  VK_F2:
+  begin
+    F_pdv_produtos_listar := TF_pdv_produtos_listar.Create(self);
+    F_pdv_produtos_listar.ShowModal;
+  end;
+
+  end;
+
 
 end;
 
@@ -262,6 +294,8 @@ begin
                    edt_pro_preco_pdv.Value := dm.SQL_produtospro_preco.Value;
                    edt_pro_prazo_pdv.Value := dm.SQL_produtospro_preco_prazo.Value;
                    lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
+                   edt_pro_nome_pdv.SetFocus;
+                   edt_pro_nome_pdv.SelectAll;
                  end;
 
                end;

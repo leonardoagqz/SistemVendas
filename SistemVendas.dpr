@@ -7,7 +7,8 @@ uses
   U_funcoes in 'Fontes\U_funcoes.pas',
   U_produtos in 'Fontes\U_produtos.pas' {F_produtos},
   u_DM in 'Fontes\u_DM.pas' {dm: TDataModule},
-  U_pdv in 'Fontes\U_pdv.pas' {F_PDV};
+  U_pdv in 'Fontes\U_pdv.pas' {F_PDV},
+  U_PesquisarProduto in 'Fontes\U_PesquisarProduto.pas' {F_pdv_produtos_listar};
 
 {$R *.res}
 

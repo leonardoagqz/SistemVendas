@@ -618,6 +618,8 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
+        OnChange = edt_pro_nome_pdvChange
+        OnKeyDown = edt_pro_nome_pdvKeyDown
         OnKeyPress = edt_pro_nome_pdvKeyPress
       end
       object edt_pro_prazo_pdv: TCurrencyEdit
