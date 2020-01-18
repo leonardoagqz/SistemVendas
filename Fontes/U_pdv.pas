@@ -21,8 +21,8 @@ type
     btn_pro_add_pdv: TSpeedButton;
     edt_total_pdv: TCurrencyEdit;
     edt_total_prazo_pdv: TCurrencyEdit;
-    lbl_total: TLabel;
-    ldb_total_prazo: TLabel;
+    lbl_total_pn_baixo_pdv: TLabel;
+    ldb_total_prazol_pn_baixo_pdv: TLabel;
     btn_impressao_pdv: TSpeedButton;
     btn_venda_fechar_pdv: TSpeedButton;
     btn_venda_gravar_pdv: TSpeedButton;
@@ -50,10 +50,18 @@ type
     lbl_result_cel_cli_pdv: TLabel;
     lbl_end_cli_pdv: TLabel;
     lbl_result_end_cli_pdv: TLabel;
+    lbl_qtd_estoq_pro_pdv: TLabel;
+    lbl_result_qtd_estoque_prod_pdv: TLabel;
+    lbl_total_pro_pdv: TLabel;
+    lbl_total_prazo_pro_pdv: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);
+    procedure ProcedureBuscaProduto;
+    procedure edt_pro_barras_pdvChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,6 +77,39 @@ uses
   U_clientes, u_DM;
 
 {$R *.dfm}
+
+procedure TF_PDV.ProcedureBuscaProduto;
+begin
+    if Length(edt_pro_barras_pdv.Text) = 13 then
+    with dm.SQL_produtos do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from produtos');
+      SQL.Add('where pro_barra = :barra');
+      ParamByName('barra').Value := edt_pro_barras_pdv.Text;
+      Open;
+      begin
+
+
+          begin
+              if RecordCount = 0 then
+               ShowMessage('Produto não encontrado!');
+               edt_pro_barras_pdv.Clear;
+          end;
+
+          begin
+            if RecordCount = 1 then
+            edt_pro_barras_pdv.Text := dm.SQL_produtospro_barra.AsString;
+            edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
+            lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
+          end;
+
+         end;
+    end;
+
+
+end;
 
 procedure TF_PDV.edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -111,6 +152,53 @@ begin
       end;
 end;
 
+procedure TF_PDV.edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);
+begin
+     if Key = #13 then
+      begin
+         if edt_cli_nome_pdv.Text = '' then
+                ShowMessage('Campo vazio!')
+              else
+              begin
+                    with dm.SQL_clientes do
+                 begin
+                   Close;
+                   SQL.Clear;
+                   SQL.Add('select * from clientes');
+                   SQL.Add('where cli_nome like :nome');
+                   ParamByName('nome').Value := edt_cli_nome_pdv.Text + '%';
+                   Open;
+                   begin
+                       if RecordCount = 0 then
+                        ShowMessage('Cliente não encontrado!');
+                        edt_cli_nome_pdv.Clear;
+                        edt_cli_codigo_pdv.Clear;
+                   end;
+
+                   begin
+                     if RecordCount = 1 then
+                     edt_cli_nome_pdv.SelectAll;
+                     edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
+                     edt_cli_codigo_pdv.Text := dm.SQL_clientescli_id.AsString;
+                     lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
+                     lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
+                     lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
+                     edt_cli_codigo_pdv.SelectAll;
+
+                   end;
+
+               end;
+              end;
+
+
+          end;
+end;
+
+procedure TF_PDV.edt_pro_barras_pdvChange(Sender: TObject);
+begin
+  ProcedureBuscaProduto;
+end;
+
 procedure TF_PDV.edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
     if key = #13 then
@@ -122,6 +210,9 @@ begin
       SQL.Add('where pro_barra = :barra');
       ParamByName('barra').Value := edt_pro_barras_pdv.Text;
       Open;
+      begin
+
+
           begin
               if RecordCount = 0 then
                ShowMessage('Produto não encontrado!');
@@ -130,12 +221,54 @@ begin
 
           begin
             if RecordCount = 1 then
+            edt_pro_barras_pdv.Text := dm.SQL_produtospro_barra.AsString;
             edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
+            lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
           end;
 
-
+         end;
     end;
 
+end;
+
+procedure TF_PDV.edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
+begin
+    if Key = #13 then
+      begin
+         if edt_pro_nome_pdv.Text = '' then
+                ShowMessage('Campo vazio!')
+              else
+              begin
+                  with dm.SQL_produtos do
+               begin
+                 Close;
+                 SQL.Clear;
+                 SQL.Add('select * from produtos');
+                 SQL.Add('where pro_nome like  :nome');
+                 ParamByName('nome').Value := edt_pro_nome_pdv.Text + '%';
+                 Open;
+                 begin
+                     if RecordCount = 0 then
+                      ShowMessage('Produto não encontrado!');
+                      edt_pro_nome_pdv.Clear;
+                      edt_pro_barras_pdv.Clear;
+                 end;
+
+                 begin
+                   if RecordCount = 1 then
+                   edt_pro_nome_pdv.SelectAll;
+                   edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
+                   edt_pro_barras_pdv.Text := dm.SQL_produtospro_barra.AsString;
+                   edt_pro_preco_pdv.Value := dm.SQL_produtospro_preco.Value;
+                   edt_pro_prazo_pdv.Value := dm.SQL_produtospro_preco_prazo.Value;
+                   lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
+                 end;
+
+               end;
+              end;
+
+
+          end;
 end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
