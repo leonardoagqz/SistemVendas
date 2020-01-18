@@ -46,11 +46,14 @@ type
     lbl_cod_cliente: TLabel;
     lbl_cpf_cnpj_cli_pdv: TLabel;
     lbl_cel_cli_pdv: TLabel;
-    ldb_resut_cpf_cnpj_cli_pdv: TLabel;
-    ldb_result_cel_cli_pdv: TLabel;
+    lbl_resut_cpf_cnpj_cli_pdv: TLabel;
+    lbl_result_cel_cli_pdv: TLabel;
+    lbl_end_cli_pdv: TLabel;
+    lbl_result_end_cli_pdv: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -72,6 +75,7 @@ begin
     if Key = #13 then
     with dm.SQL_clientes do
       begin
+
         Close;
         SQL.Clear;
         SQL.Add('select * from clientes');
@@ -79,29 +83,59 @@ begin
         ParamByName('id').Value:= edt_cli_codigo_pdv.Text;
         Open;
              begin
-                if RecordCount = 0 then
-                ShowMessage('Cliente não encontrato!')
-                edt_cli_codigo_pdv.Clear
-                edt_cli_nome_pdv.Clear
-                else
-              begin
-                edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
-                ldb_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
-                ldb_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
-                end;
+
+                  begin
+                     if RecordCount = 0 then
+                    ShowMessage('Cliente não encontrato!');
+                    edt_cli_codigo_pdv.Clear;
+                    edt_cli_nome_pdv.Clear;
+
+                  end;
+
+                 begin
+                   if RecordCount = 1 then
+                   edt_cli_codigo_pdv.Text := dm.SQL_clientescli_id.AsString;
+                   edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
+                   lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
+                   lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
+                   lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
+                   edt_cli_codigo_pdv.SelectAll;
+                 end
+
+             end;
 
 
-                end;
-             // begin
 
-                   // if RecordCount = 1 then
-                   // edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
-                   // ldb_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
-                   // ldb_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
-                   // end;
 
 
       end;
+end;
+
+procedure TF_PDV.edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
+begin
+    if key = #13 then
+    with dm.SQL_produtos do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from produtos');
+      SQL.Add('where pro_barra = :barra');
+      ParamByName('barra').Value := edt_pro_barras_pdv.Text;
+      Open;
+          begin
+              if RecordCount = 0 then
+               ShowMessage('Produto não encontrado!');
+               edt_pro_barras_pdv.Clear;
+          end;
+
+          begin
+            if RecordCount = 1 then
+            edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
+          end;
+
+
+    end;
+
 end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);

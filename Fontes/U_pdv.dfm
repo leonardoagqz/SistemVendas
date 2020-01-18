@@ -22,7 +22,6 @@
     Width = 898
     Height = 19
     Panels = <>
-    ExplicitWidth = 774
   end
   object pn_pdv_baixo: TPanel
     Left = 0
@@ -32,8 +31,6 @@
     Align = alBottom
     TabOrder = 1
     TabStop = True
-    ExplicitLeft = -1
-    ExplicitTop = 395
     object lbl_total: TLabel
       Left = 32
       Top = 0
@@ -262,7 +259,6 @@
     ParentBackground = False
     TabOrder = 3
     TabStop = True
-    ExplicitWidth = 729
     object pn_buscar_clientes: TPanel
       Left = 203
       Top = 4
@@ -270,7 +266,7 @@
       Height = 49
       TabOrder = 0
       object lbl_buscar_clientes_pdv: TLabel
-        Left = 94
+        Left = 67
         Top = 5
         Width = 109
         Height = 16
@@ -290,56 +286,97 @@
         Caption = 'Cod Cliente'
       end
       object lbl_cpf_cnpj_cli_pdv: TLabel
-        Left = 287
+        Left = 274
         Top = 2
         Width = 59
         Height = 13
         Caption = 'CPF/CNPJ: '
+        Color = clHighlight
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = 9247509
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
+        ParentColor = False
         ParentFont = False
       end
       object lbl_cel_cli_pdv: TLabel
-        Left = 287
-        Top = 14
+        Left = 274
+        Top = 25
         Width = 45
         Height = 13
         Caption = 'Celular: '
+        Color = clHighlight
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lbl_resut_cpf_cnpj_cli_pdv: TLabel
+        Left = 334
+        Top = 2
+        Width = 3
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_result_cel_cli_pdv: TLabel
+        Left = 322
+        Top = 25
+        Width = 3
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_end_cli_pdv: TLabel
+        Left = 274
+        Top = 13
+        Width = 58
+        Height = 13
+        Caption = 'Endere'#231'o: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object ldb_resut_cpf_cnpj_cli_pdv: TLabel
-        Left = 349
-        Top = 2
-        Width = 107
-        Height = 13
-      end
-      object ldb_result_cel_cli_pdv: TLabel
+      object lbl_result_end_cli_pdv: TLabel
         Left = 333
-        Top = 14
-        Width = 71
+        Top = 13
+        Width = 3
         Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object edt_cli_codigo_pdv: TEdit
         Left = 2
         Top = 22
-        Width = 89
+        Width = 55
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
         OnKeyPress = edt_cli_codigo_pdvKeyPress
       end
       object edt_cli_nome_pdv: TEdit
-        Left = 94
+        Left = 67
         Top = 22
-        Width = 187
+        Width = 203
         Height = 21
         TabOrder = 1
       end
@@ -544,6 +581,7 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
+        OnKeyPress = edt_pro_barras_pdvKeyPress
       end
       object edt_pro_nome_pdv: TEdit
         Left = 177
@@ -585,7 +623,7 @@
         Left = 444
         Top = 18
         Width = 73
-        Height = 21
+        Height = 24
         DisplayFormat = '0'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText

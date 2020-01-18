@@ -22,17 +22,15 @@
     Width = 898
     Height = 19
     Panels = <>
-    ExplicitWidth = 774
   end
-  object panel_pdv_baixo: TPanel
+  object pn_pdv_baixo: TPanel
     Left = 0
     Top = 394
     Width = 898
     Height = 59
     Align = alBottom
     TabOrder = 1
-    ExplicitLeft = -1
-    ExplicitTop = 395
+    TabStop = True
     object lbl_total: TLabel
       Left = 32
       Top = 0
@@ -66,7 +64,6 @@
       Top = 22
       Width = 81
       Height = 32
-      TabStop = False
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1517814
@@ -81,7 +78,6 @@
       Top = 22
       Width = 82
       Height = 32
-      TabStop = False
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = 1517814
@@ -92,13 +88,14 @@
       TabOrder = 1
     end
   end
-  object panel_btns_venda: TPanel
+  object pn_btns_iconis_pdv: TPanel
     Left = 856
     Top = 139
     Width = 41
     Height = 255
     ParentBackground = False
     TabOrder = 2
+    TabStop = True
     object btn_impressao_pdv: TSpeedButton
       Left = 3
       Top = 190
@@ -252,7 +249,7 @@
       OnClick = btn_venda_sair_pdvClick
     end
   end
-  object panel_dados: TPanel
+  object pn_principal: TPanel
     Left = 0
     Top = 0
     Width = 898
@@ -261,19 +258,19 @@
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 3
-    ExplicitWidth = 729
-    object panel_dados_clientes: TPanel
-      Left = 202
+    TabStop = True
+    object pn_buscar_clientes: TPanel
+      Left = 203
       Top = 4
-      Width = 353
+      Width = 511
       Height = 49
       TabOrder = 0
-      object Label2: TLabel
-        Left = 94
+      object lbl_buscar_clientes_pdv: TLabel
+        Left = 67
         Top = 5
-        Width = 114
+        Width = 109
         Height = 16
-        Caption = 'Descri'#231#227'o do cliente'
+        Caption = 'Buscar Cliente (F2)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -288,28 +285,109 @@
         Height = 13
         Caption = 'Cod Cliente'
       end
+      object lbl_cpf_cnpj_cli_pdv: TLabel
+        Left = 274
+        Top = 2
+        Width = 59
+        Height = 13
+        Caption = 'CPF/CNPJ: '
+        Color = clHighlight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lbl_cel_cli_pdv: TLabel
+        Left = 274
+        Top = 25
+        Width = 45
+        Height = 13
+        Caption = 'Celular: '
+        Color = clHighlight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object lbl_resut_cpf_cnpj_cli_pdv: TLabel
+        Left = 334
+        Top = 2
+        Width = 3
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_result_cel_cli_pdv: TLabel
+        Left = 322
+        Top = 25
+        Width = 3
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
+      object lbl_end_cli_pdv: TLabel
+        Left = 274
+        Top = 13
+        Width = 58
+        Height = 13
+        Caption = 'Endere'#231'o: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object lbl_result_end_cli_pdv: TLabel
+        Left = 333
+        Top = 13
+        Width = 3
+        Height = 13
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = 9247509
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
+      end
       object edt_cli_codigo_pdv: TEdit
         Left = 2
         Top = 22
-        Width = 89
+        Width = 55
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
+        OnKeyPress = edt_cli_codigo_pdvKeyPress
       end
       object edt_cli_nome_pdv: TEdit
-        Left = 94
+        Left = 67
         Top = 22
-        Width = 249
+        Width = 203
         Height = 21
         TabOrder = 1
       end
     end
-    object panel_buscar_barras_nome_pdv: TPanel
-      Left = 8
+    object pn_buscar_barras_nome_pdv: TPanel
+      Left = 15
       Top = 59
       Width = 547
       Height = 71
       TabOrder = 1
+      TabStop = True
       object btn_pro_add_pdv: TSpeedButton
         Left = 147
         Top = 42
@@ -386,7 +464,7 @@
           FFFFFFFFFF00}
         ParentFont = False
       end
-      object Label1: TLabel
+      object lbl_buscarporbarras_pdv: TLabel
         Left = 2
         Top = 0
         Width = 102
@@ -399,7 +477,7 @@
         Font.Style = []
         ParentFont = False
       end
-      object Label3: TLabel
+      object lbl_qtd_pdv: TLabel
         Left = 444
         Top = 0
         Width = 25
@@ -412,12 +490,12 @@
         Font.Style = []
         ParentFont = False
       end
-      object Label7: TLabel
+      object lbl_buscarpornome_pdv: TLabel
         Left = 177
         Top = 0
-        Width = 98
+        Width = 174
         Height = 16
-        Caption = 'Buscar por Nome'
+        Caption = 'Buscar produto por Nome (F2)'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -428,9 +506,9 @@
       object btn_iten_remove_pdv: TSpeedButton
         Left = 245
         Top = 42
-        Width = 120
+        Width = 92
         Height = 23
-        Caption = 'Remover Item'
+        Caption = 'Remover '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -524,7 +602,7 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 2
+        TabOrder = 4
       end
       object edt_pro_preco_pdv: TCurrencyEdit
         Left = 4
@@ -544,7 +622,7 @@
         Left = 444
         Top = 18
         Width = 73
-        Height = 21
+        Height = 24
         DisplayFormat = '0'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -553,16 +631,17 @@
         Font.Style = []
         MinValue = 1.000000000000000000
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 2
         Value = 1.000000000000000000
       end
     end
-    object panel_btn_iniciar_venda_pdv: TPanel
+    object pn_btn_iniciar_venda_pdv: TPanel
       Left = 12
       Top = 4
       Width = 185
       Height = 49
       TabOrder = 2
+      TabStop = True
       object btn_iniciar_venda_pdv: TSpeedButton
         Left = 16
         Top = 5
@@ -652,12 +731,13 @@
         ParentFont = False
       end
     end
-    object panel_btns_grv_can_fec_vendas_pdv: TPanel
-      Left = 568
-      Top = 12
+    object pn_btns_grv_can_fec_vendas_pdv: TPanel
+      Left = 720
+      Top = 4
       Width = 152
       Height = 112
       TabOrder = 3
+      TabStop = True
       object btn_venda_cancelar_pdv: TSpeedButton
         Left = 10
         Top = 73
@@ -827,9 +907,9 @@
   end
   object dbg_lançamento_pdv: TDBGrid
     Left = -3
-    Top = 136
-    Width = 856
-    Height = 177
+    Top = 139
+    Width = 859
+    Height = 174
     TabOrder = 4
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -840,7 +920,7 @@
   object DBGrid1: TDBGrid
     Left = 384
     Top = 312
-    Width = 469
+    Width = 472
     Height = 82
     TabOrder = 5
     TitleFont.Charset = DEFAULT_CHARSET
