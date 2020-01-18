@@ -11,7 +11,7 @@ uses
 type
   TF_PDV = class(TForm)
     stb_pdv: TStatusBar;
-    panel_pdv_baixo: TPanel;
+    pn_pdv_baixo: TPanel;
     dbg_lançamento_pdv: TDBGrid;
     edt_pro_barras_pdv: TEdit;
     edt_pro_nome_pdv: TEdit;
@@ -30,16 +30,27 @@ type
     btn_iten_remove_pdv: TSpeedButton;
     edt_cli_codigo_pdv: TEdit;
     edt_cli_nome_pdv: TEdit;
-    Image1: TImage;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label7: TLabel;
+    lbl_buscarporbarras_pdv: TLabel;
+    lbl_buscar_clientes_pdv: TLabel;
+    lbl_qtd_pdv: TLabel;
+    lbl_buscarpornome_pdv: TLabel;
     btn_iniciar_venda_pdv: TSpeedButton;
     btn_venda_sair_pdv: TSpeedButton;
-    panel_btns_venda: TPanel;
+    pn_btns_iconis_pdv: TPanel;
+    pn_principal: TPanel;
+    pn_buscar_clientes: TPanel;
+    pn_buscar_barras_nome_pdv: TPanel;
+    pn_btn_iniciar_venda_pdv: TPanel;
+    pn_btns_grv_can_fec_vendas_pdv: TPanel;
+    DBGrid1: TDBGrid;
+    lbl_cod_cliente: TLabel;
+    lbl_cpf_cnpj_cli_pdv: TLabel;
+    lbl_cel_cli_pdv: TLabel;
+    ldb_resut_cpf_cnpj_cli_pdv: TLabel;
+    ldb_result_cel_cli_pdv: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
+    procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -51,7 +62,36 @@ var
 
 implementation
 
+uses
+  U_clientes, u_DM;
+
 {$R *.dfm}
+
+procedure TF_PDV.edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
+begin
+    if Key = #13 then
+    with dm.SQL_clientes do
+      begin
+        Close;
+        SQL.Clear;
+        SQL.Add('select * from clientes');
+        SQL.Add('where cli_id = :id');
+        ParamByName('id').Value:= edt_cli_codigo_pdv.Text;
+        Open;
+              begin
+                if RecordCount = 0 then
+                ShowMessage('Cliente não encontrato!')
+                edt_cli_codigo_pdv.Text
+                else
+                if RecordCount = 1 then
+                edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
+                ldb_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
+                ldb_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
+                end;
+
+
+      end;
+end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin

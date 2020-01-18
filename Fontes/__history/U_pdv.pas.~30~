@@ -80,11 +80,12 @@ begin
         Open;
              begin
                 if RecordCount = 0 then
-                ShowMessage('Cliente não encontrato!')
-                edt_cli_codigo_pdv.Clear
-                edt_cli_nome_pdv.Clear
+                ShowMessage('Cliente não encontrato!') ;
+                edt_cli_codigo_pdv.Clear ;
+                edt_cli_nome_pdv.Clear;
                 else
               begin
+
                 edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
                 ldb_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
                 ldb_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
