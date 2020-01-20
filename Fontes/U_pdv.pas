@@ -18,7 +18,7 @@ type
     edt_pro_preco_pdv: TCurrencyEdit;
     edt_pro_prazo_pdv: TCurrencyEdit;
     edt_pro_qtd_pdv: TCurrencyEdit;
-    btn_pro_add_pdv: TSpeedButton;
+    btn_pro_iten_add_pdv: TSpeedButton;
     edt_total_pdv: TCurrencyEdit;
     edt_total_prazo_pdv: TCurrencyEdit;
     lbl_total_pn_baixo_pdv: TLabel;
@@ -27,7 +27,7 @@ type
     btn_venda_fechar_pdv: TSpeedButton;
     btn_venda_gravar_pdv: TSpeedButton;
     btn_venda_cancelar_pdv: TSpeedButton;
-    btn_iten_remove_pdv: TSpeedButton;
+    btn_pro_iten_remove_pdv: TSpeedButton;
     edt_cli_codigo_pdv: TEdit;
     edt_cli_nome_pdv: TEdit;
     lbl_buscarporbarras_pdv: TLabel;
@@ -61,12 +61,19 @@ type
     procedure edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure ProcedureBuscaProduto;
+    procedure ProcedureBloqueiacampos;
+    procedure ProcedureDesbloqueiaCampos;
     procedure edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure edt_cli_codigo_pdvKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edt_cli_codigo_pdvChange(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btn_iniciar_venda_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -82,6 +89,32 @@ uses
   U_clientes, u_DM, U_PesquisarProduto, U_funcoes, U_PesquisarCliente;
 
 {$R *.dfm}
+
+procedure TF_PDV.ProcedureBloqueiacampos;
+begin
+   edt_cli_codigo_pdv.Visible:=False;
+   edt_cli_nome_pdv.Visible:=False;
+   edt_pro_nome_pdv.Visible:=False;
+   edt_pro_barras_pdv.Visible:=false;
+   edt_pro_qtd_pdv.Visible:=False;
+   dbg_lançamento_pdv.Visible:=False;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
+   btn_pro_iten_add_pdv.Visible:=False;
+   btn_pro_iten_remove_pdv.Visible:=false
+end;
+
+ procedure TF_PDV.ProcedureDesbloqueiaCampos;
+begin
+   edt_cli_codigo_pdv.Visible:=True;
+   edt_cli_nome_pdv.Visible:=True;
+   edt_pro_nome_pdv.Visible:=True;
+   edt_pro_barras_pdv.Visible:=True;
+   edt_pro_qtd_pdv.Visible:=True;
+   dbg_lançamento_pdv.Visible:=True;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=True;
+   btn_pro_iten_add_pdv.Visible:=True;
+   btn_pro_iten_remove_pdv.Visible:=True
+end;
 
 procedure TF_PDV.ProcedureBuscaProduto;
 begin
@@ -114,6 +147,25 @@ begin
     end;
 
 
+end;
+
+procedure TF_PDV.edt_cli_codigo_pdvChange(Sender: TObject);
+begin
+  edt_cli_codigo_pdv.SelectAll;
+end;
+
+procedure TF_PDV.edt_cli_codigo_pdvKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+     case Key of
+      VK_F2:
+          begin
+            F_pdv_clientes_listar := TF_pdv_clientes_listar.Create(self);
+            F_pdv_clientes_listar.ShowModal;
+
+          end;
+
+      end;
 end;
 
 procedure TF_PDV.edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -340,6 +392,17 @@ end;
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     F_PDV:= nil;
+end;
+
+procedure TF_PDV.FormCreate(Sender: TObject);
+begin
+   ProcedureBloqueiacampos;
+end;
+
+procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
+begin
+ ProcedureDesbloqueiaCampos;
+ edt_cli_codigo_pdv.SetFocus;
 end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);

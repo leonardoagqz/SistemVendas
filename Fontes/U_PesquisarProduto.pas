@@ -18,11 +18,13 @@ type
     btn_ok_pesquisa_pro: TSpeedButton;
     pn_pesquisa_pro_alto: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure edt_pesquisar_pro_pdvChange(Sender: TObject);
     procedure dbg_pesquisar_produtoKeyPress(Sender: TObject; var Key: Char);
     procedure dbg_pesquisar_produtoDblClick(Sender: TObject);
     procedure btn_ok_pesquisa_proClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure dbg_pesquisar_produtoKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure edt_pesquisar_pro_pdvKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -58,6 +60,13 @@ begin
 
 end;
 
+procedure TF_pdv_produtos_listar.dbg_pesquisar_produtoKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+    if Key = VK_ESCAPE then
+    edt_pesquisar_pro_pdv.SetFocus
+end;
+
 procedure TF_pdv_produtos_listar.dbg_pesquisar_produtoKeyPress(Sender: TObject;
   var Key: Char);
 begin
@@ -65,10 +74,11 @@ begin
     btn_ok_pesquisa_pro.Click;
 end;
 
-procedure TF_pdv_produtos_listar.edt_pesquisar_pro_pdvChange(Sender: TObject);
+procedure TF_pdv_produtos_listar.edt_pesquisar_pro_pdvKeyPress(Sender: TObject;
+  var Key: Char);
 begin
-
-        with dm.SQL_produtos do
+  if Key = #13 then
+    with dm.SQL_produtos do
          begin
            Close;
            SQL.Clear;
@@ -80,10 +90,14 @@ begin
            if RecordCount = 0 then
            ShowMessage('Produto não encontrado!');
            edt_pesquisar_pro_pdv.SetFocus;
+           edt_pesquisar_pro_pdv.SelectAll;
+
+            if RecordCount = 1 then
+            dbg_pesquisar_produto.SetFocus;
+
+
 
          end;
-
-
 end;
 
 procedure TF_pdv_produtos_listar.FormClose(Sender: TObject;

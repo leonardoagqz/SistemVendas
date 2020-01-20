@@ -23,7 +23,7 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Width = 425
     Height = 217
     DataSource = dm.ds_produtos
-    Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -31,6 +31,7 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
     OnDblClick = dbg_pesquisar_produtoDblClick
+    OnKeyDown = dbg_pesquisar_produtoKeyDown
     OnKeyPress = dbg_pesquisar_produtoKeyPress
     Columns = <
       item
@@ -88,7 +89,7 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
-        OnChange = edt_pesquisar_pro_pdvChange
+        OnKeyPress = edt_pesquisar_pro_pdvKeyPress
       end
     end
   end

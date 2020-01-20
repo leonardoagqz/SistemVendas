@@ -49,7 +49,7 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
-        OnChange = edt_pesquisar_cli_pdvChange
+        OnKeyPress = edt_pesquisar_cli_pdvKeyPress
       end
     end
   end
@@ -59,7 +59,7 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
     Width = 417
     Height = 212
     DataSource = dm.ds_clientes
-    Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

@@ -17,12 +17,12 @@ type
     pn_pesquisar_produto_baixo: TPanel;
     btn_ok_pesquisa_cli: TSpeedButton;
     stb_clientes: TStatusBar;
-    procedure edt_pesquisar_cli_pdvChange(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbg_pesquisar_clienteDblClick(Sender: TObject);
     procedure dbg_pesquisar_clienteKeyPress(Sender: TObject; var Key: Char);
     procedure btn_ok_pesquisa_cliClick(Sender: TObject);
+    procedure edt_pesquisar_cli_pdvKeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -62,9 +62,12 @@ begin
     btn_ok_pesquisa_cli.Click;
 end;
 
-procedure TF_pdv_clientes_listar.edt_pesquisar_cli_pdvChange(Sender: TObject);
+procedure TF_pdv_clientes_listar.edt_pesquisar_cli_pdvKeyPress(Sender: TObject;
+  var Key: Char);
 begin
-    with dm.SQL_clientes do
+    if Key = #13 then
+
+      with dm.SQL_clientes do
          begin
            Close;
            SQL.Clear;
@@ -76,8 +79,12 @@ begin
            if RecordCount = 0 then
            ShowMessage('Cliente não encontrado!');
            edt_pesquisar_cli_pdv.SetFocus;
+           edt_pesquisar_cli_pdv.SelectAll;
 
+            if RecordCount = 1 then
+            dbg_pesquisar_cliente.SetFocus;
          end;
+
 
 end;
 
