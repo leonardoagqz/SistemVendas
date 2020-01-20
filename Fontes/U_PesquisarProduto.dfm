@@ -92,7 +92,7 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
       end
     end
   end
-  object StatusBar1: TStatusBar
+  object stb_produtos: TStatusBar
     Left = 0
     Top = 319
     Width = 417

@@ -12,7 +12,7 @@ type
     dbg_pesquisar_produto: TDBGrid;
     edt_pesquisar_pro_pdv: TEdit;
     pn_pesquisar_produto_alto: TPanel;
-    StatusBar1: TStatusBar;
+    stb_produtos: TStatusBar;
     pn_pesquisar_produto_baixo: TPanel;
     lbl_pesquisa_pro: TLabel;
     btn_ok_pesquisa_pro: TSpeedButton;
