@@ -65,6 +65,8 @@ type
       Shift: TShiftState);
     procedure edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -77,7 +79,7 @@ var
 implementation
 
 uses
-  U_clientes, u_DM, U_PesquisarProduto, U_funcoes;
+  U_clientes, u_DM, U_PesquisarProduto, U_funcoes, U_PesquisarCliente;
 
 {$R *.dfm}
 
@@ -153,6 +155,21 @@ begin
 
 
       end;
+end;
+
+procedure TF_PDV.edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+     case Key of
+      VK_F2:
+          begin
+            F_pdv_clientes_listar := TF_pdv_clientes_listar.Create(self);
+            F_pdv_clientes_listar.ShowModal;
+
+          end;
+
+      end;
+
 end;
 
 procedure TF_PDV.edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);

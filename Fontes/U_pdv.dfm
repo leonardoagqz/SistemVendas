@@ -382,6 +382,7 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
+        OnKeyDown = edt_cli_nome_pdvKeyDown
         OnKeyPress = edt_cli_nome_pdvKeyPress
       end
     end

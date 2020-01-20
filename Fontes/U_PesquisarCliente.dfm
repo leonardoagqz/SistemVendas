@@ -11,6 +11,8 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pn_pesquisar_cliente_alto: TPanel
@@ -45,6 +47,7 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
+        OnChange = edt_pesquisar_cli_pdvChange
       end
     end
   end
@@ -53,7 +56,7 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
     Top = 66
     Width = 407
     Height = 203
-    DataSource = dm.ds_produtos
+    DataSource = dm.ds_clientes
     Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
@@ -61,30 +64,61 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    OnDblClick = dbg_pesquisar_clienteDblClick
+    OnKeyPress = dbg_pesquisar_clienteKeyPress
     Columns = <
       item
         Expanded = False
-        FieldName = 'pro_nome'
-        Title.Caption = 'Nome'
-        Width = 175
+        FieldName = 'cli_nome'
+        Width = 110
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'pro_preco'
-        Title.Caption = 'Pre'#231'o'
+        FieldName = 'cli_rg'
+        Width = 100
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'pro_preco_prazo'
-        Title.Caption = 'Pre'#231'o a Prazo'
+        FieldName = 'cli_cnpj_cpf'
+        Width = 100
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'pro_estoque'
-        Title.Caption = 'Qtd Estoque'
+        FieldName = 'cli_endereco'
+        Width = 100
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cli_numero'
+        Width = 40
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cli_bairro'
+        Width = 70
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cli_cidade'
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cli_fone'
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'cli_celular'
+        Width = 50
         Visible = True
       end>
   end
