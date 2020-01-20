@@ -68,6 +68,7 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = -8
     object pn_pesquisa_pro_alto: TPanel
       Left = 67
       Top = 7
@@ -86,7 +87,6 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
         Top = 22
         Width = 274
         Height = 21
-        CharCase = ecUpperCase
         TabOrder = 0
         OnChange = edt_pesquisar_pro_pdvChange
       end
@@ -98,6 +98,9 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Width = 417
     Height = 19
     Panels = <>
+    ExplicitLeft = 304
+    ExplicitTop = 296
+    ExplicitWidth = 0
   end
   object pn_pesquisar_produto_baixo: TPanel
     Left = 0
@@ -108,6 +111,9 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 3
+    ExplicitLeft = 224
+    ExplicitTop = 272
+    ExplicitWidth = 185
     object btn_ok_pesquisa_pro: TSpeedButton
       Left = 343
       Top = 6

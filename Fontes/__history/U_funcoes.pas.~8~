@@ -10,7 +10,7 @@ uses vcl.dialogs, system.sysutils;
 //, esperado retorno do tipo boolean
 function TestarPermissao (NOME_FORM:STRING):boolean;
 function EAN13 ():string;
-
+function Ret_Numero(key: Char; Texto:string; EhDecimal:Boolean = False): Char;
 
 
 
@@ -64,6 +64,54 @@ End;
 // ------------fim do gera codigo de barras ----------------------
 
 
+function  Ret_Numero(Key: Char; Texto: string; EhDecimal: Boolean = False): Char;
+begin
+  if  not EhDecimal then
 
+    begin
+
+      { Chr(8) = Back Space }
+
+      if  not ( Key in ['0'..'9', Chr(8)] ) then
+
+          Key := #0
+
+
+
+    end
+
+  else
+
+    begin
+
+      if  Key = #46 then
+
+          Key := DecimalSeparator
+
+      ;
+
+
+      if  not ( Key in ['0'..'9', Chr(8), DecimalSeparator] ) then
+
+          Key := #0
+
+      else
+
+        if  ( Key = DecimalSeparator ) and ( Pos( Key, Texto ) > 0 ) then
+
+            Key := #0
+
+        ;
+
+      ;
+
+    end
+
+  ;
+
+
+  Result := Key;
+
+end;
 
 end.

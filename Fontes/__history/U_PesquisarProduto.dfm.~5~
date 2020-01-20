@@ -14,12 +14,11 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object dbg_pesquisar_produto: TDBGrid
     Left = 0
-    Top = 65
+    Top = 64
     Width = 425
     Height = 217
     DataSource = dm.ds_produtos
@@ -68,28 +67,21 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 1
-    object pn_pesquisa_pro_alto: TPanel
-      Left = 67
-      Top = 7
-      Width = 281
-      Height = 53
+    ExplicitWidth = 426
+    object Label1: TLabel
+      Left = 3
+      Top = 12
+      Width = 87
+      Height = 13
+      Caption = 'Pesquisar Produto'
+    end
+    object edt_pesquisar_pro_pdv: TEdit
+      Left = 0
+      Top = 31
+      Width = 313
+      Height = 21
       TabOrder = 0
-      object lbl_pesquisa_pro: TLabel
-        Left = 4
-        Top = 5
-        Width = 87
-        Height = 13
-        Caption = 'Pesquisar Produto'
-      end
-      object edt_pesquisar_pro_pdv: TEdit
-        Left = 3
-        Top = 22
-        Width = 274
-        Height = 21
-        CharCase = ecUpperCase
-        TabOrder = 0
-        OnChange = edt_pesquisar_pro_pdvChange
-      end
+      OnChange = edt_pesquisar_pro_pdvChange
     end
   end
   object StatusBar1: TStatusBar
@@ -98,6 +90,9 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Width = 417
     Height = 19
     Panels = <>
+    ExplicitLeft = 304
+    ExplicitTop = 296
+    ExplicitWidth = 0
   end
   object pn_pesquisar_produto_baixo: TPanel
     Left = 0
@@ -108,9 +103,12 @@ object F_pdv_produtos_listar: TF_pdv_produtos_listar
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 3
+    ExplicitLeft = 224
+    ExplicitTop = 272
+    ExplicitWidth = 185
     object btn_ok_pesquisa_pro: TSpeedButton
       Left = 343
-      Top = 6
+      Top = 5
       Width = 57
       Height = 30
       Caption = 'Selecionar'

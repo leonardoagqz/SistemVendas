@@ -608,6 +608,8 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
+        OnChange = edt_pro_barras_pdvChange
+        OnKeyDown = edt_pro_barras_pdvKeyDown
         OnKeyPress = edt_pro_barras_pdvKeyPress
       end
       object edt_pro_nome_pdv: TEdit
@@ -617,6 +619,7 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
+        OnKeyDown = edt_pro_nome_pdvKeyDown
         OnKeyPress = edt_pro_nome_pdvKeyPress
       end
       object edt_pro_prazo_pdv: TCurrencyEdit

@@ -42,11 +42,6 @@ uses
 procedure TF_pdv_produtos_listar.btn_ok_pesquisa_proClick(Sender: TObject);
 begin
    F_PDV.edt_pro_nome_pdv.Text := dm.SQL_produtospro_nome.AsString;
-   F_PDV.edt_pro_barras_pdv.Text := dm.SQL_produtospro_barra.AsString;
-   F_PDV.edt_pro_preco_pdv.Value := dm.SQL_produtospro_preco.Value;
-   F_PDV.edt_pro_prazo_pdv.Value := dm.SQL_produtospro_preco_prazo.Value;
-   F_PDV.lbl_result_qtd_estoque_prod_pdv.Caption := dm.SQL_produtospro_estoque.AsString;
-   F_PDV.edt_pro_qtd_pdv.SetFocus;
    F_pdv_produtos_listar.Close;
 
 end;

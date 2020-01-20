@@ -33,7 +33,6 @@
     ParentBackground = False
     TabOrder = 1
     TabStop = True
-    ExplicitTop = 400
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -92,18 +91,18 @@
     end
   end
   object pn_btns_iconis_pdv: TPanel
-    Left = 872
-    Top = 139
-    Width = 25
-    Height = 255
+    Left = 864
+    Top = 140
+    Width = 34
+    Height = 254
     ParentBackground = False
     TabOrder = 2
     TabStop = True
     object btn_impressao_pdv: TSpeedButton
-      Left = 3
-      Top = 190
-      Width = 20
-      Height = 20
+      Left = 0
+      Top = 176
+      Width = 33
+      Height = 34
       Hint = 'Imprimir'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -178,10 +177,10 @@
       ShowHint = True
     end
     object btn_venda_sair_pdv: TSpeedButton
-      Left = 3
-      Top = 223
-      Width = 20
-      Height = 20
+      Left = 0
+      Top = 216
+      Width = 33
+      Height = 34
       Hint = 'Sair'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -262,7 +261,6 @@
     ParentBackground = False
     TabOrder = 3
     TabStop = True
-    ExplicitTop = -7
     object pn_buscar_clientes: TPanel
       Left = 203
       Top = 4
@@ -382,7 +380,9 @@
         Top = 22
         Width = 203
         Height = 21
+        CharCase = ecUpperCase
         TabOrder = 1
+        OnKeyPress = edt_cli_nome_pdvKeyPress
       end
     end
     object pn_buscar_barras_nome_pdv: TPanel
@@ -606,6 +606,7 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
+        OnKeyDown = edt_pro_barras_pdvKeyDown
         OnKeyPress = edt_pro_barras_pdvKeyPress
       end
       object edt_pro_nome_pdv: TEdit
@@ -615,13 +616,14 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
+        OnKeyDown = edt_pro_nome_pdvKeyDown
         OnKeyPress = edt_pro_nome_pdvKeyPress
       end
       object edt_pro_prazo_pdv: TCurrencyEdit
         Left = 134
         Top = 50
         Width = 120
-        Height = 24
+        Height = 27
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -635,7 +637,7 @@
         Left = 4
         Top = 49
         Width = 120
-        Height = 25
+        Height = 27
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -935,8 +937,8 @@
   object dbg_lançamento_pdv: TDBGrid
     Left = -3
     Top = 140
-    Width = 875
-    Height = 174
+    Width = 867
+    Height = 175
     TabOrder = 4
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -946,9 +948,9 @@
   end
   object DBGrid1: TDBGrid
     Left = 384
-    Top = 312
-    Width = 488
-    Height = 82
+    Top = 314
+    Width = 480
+    Height = 80
     TabOrder = 5
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

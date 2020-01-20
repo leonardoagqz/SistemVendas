@@ -33,7 +33,6 @@
     ParentBackground = False
     TabOrder = 1
     TabStop = True
-    ExplicitTop = 400
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -262,7 +261,6 @@
     ParentBackground = False
     TabOrder = 3
     TabStop = True
-    ExplicitLeft = -1
     object pn_buscar_clientes: TPanel
       Left = 203
       Top = 4
@@ -608,7 +606,7 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
-        OnChange = edt_pro_barras_pdvChange
+        OnKeyDown = edt_pro_barras_pdvKeyDown
         OnKeyPress = edt_pro_barras_pdvKeyPress
       end
       object edt_pro_nome_pdv: TEdit
@@ -618,7 +616,6 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
-        OnChange = edt_pro_nome_pdvChange
         OnKeyDown = edt_pro_nome_pdvKeyDown
         OnKeyPress = edt_pro_nome_pdvKeyPress
       end
@@ -626,7 +623,7 @@
         Left = 134
         Top = 50
         Width = 120
-        Height = 24
+        Height = 27
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -640,7 +637,7 @@
         Left = 4
         Top = 49
         Width = 120
-        Height = 25
+        Height = 27
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
