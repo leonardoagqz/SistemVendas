@@ -22,6 +22,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure dbg_pesquisar_clienteDblClick(Sender: TObject);
     procedure dbg_pesquisar_clienteKeyPress(Sender: TObject; var Key: Char);
+    procedure btn_ok_pesquisa_cliClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -38,6 +39,17 @@ uses
 
 {$R *.dfm}
 
+procedure TF_pdv_clientes_listar.btn_ok_pesquisa_cliClick(Sender: TObject);
+begin
+    F_PDV.edt_cli_codigo_pdv.Text := dm.SQL_clientescli_id.AsString;
+    F_PDV.edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
+    F_PDV.lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
+    F_PDV.lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
+    F_PDV.lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
+    F_PDV.edt_cli_nome_pdv.SelectAll;
+    F_pdv_clientes_listar.Close;
+end;
+
 procedure TF_pdv_clientes_listar.dbg_pesquisar_clienteDblClick(Sender: TObject);
 begin
     btn_ok_pesquisa_cli.Click;
@@ -52,7 +64,7 @@ end;
 
 procedure TF_pdv_clientes_listar.edt_pesquisar_cli_pdvChange(Sender: TObject);
 begin
-    with dm.SQL_produtos do
+    with dm.SQL_clientes do
          begin
            Close;
            SQL.Clear;
@@ -62,7 +74,7 @@ begin
            Open;
 
            if RecordCount = 0 then
-           ShowMessage('Produto não encontrado!');
+           ShowMessage('Cliente não encontrado!');
            edt_pesquisar_cli_pdv.SetFocus;
 
          end;
