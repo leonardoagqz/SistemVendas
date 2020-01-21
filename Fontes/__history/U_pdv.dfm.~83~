@@ -14,6 +14,7 @@
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object stb_pdv: TStatusBar
@@ -266,7 +267,7 @@
       Top = 4
       Width = 511
       Height = 49
-      TabOrder = 0
+      TabOrder = 1
       object lbl_buscar_clientes_pdv: TLabel
         Left = 67
         Top = 5
@@ -373,6 +374,8 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 0
+        OnChange = edt_cli_codigo_pdvChange
+        OnKeyDown = edt_cli_codigo_pdvKeyDown
         OnKeyPress = edt_cli_codigo_pdvKeyPress
       end
       object edt_cli_nome_pdv: TEdit
@@ -382,6 +385,7 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
+        OnKeyDown = edt_cli_nome_pdvKeyDown
         OnKeyPress = edt_cli_nome_pdvKeyPress
       end
     end
@@ -390,9 +394,9 @@
       Top = 59
       Width = 634
       Height = 78
-      TabOrder = 1
+      TabOrder = 0
       TabStop = True
-      object btn_pro_add_pdv: TSpeedButton
+      object btn_pro_iten_add_pdv: TSpeedButton
         Left = 258
         Top = 48
         Width = 31
@@ -487,7 +491,7 @@
         Font.Style = []
         ParentFont = False
       end
-      object btn_iten_remove_pdv: TSpeedButton
+      object btn_pro_iten_remove_pdv: TSpeedButton
         Left = 295
         Top = 48
         Width = 34
@@ -758,6 +762,7 @@
           1269121212121212121212121212121212121212121212121212121212121212
           121212121269}
         ParentFont = False
+        OnClick = btn_iniciar_venda_pdvClick
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel

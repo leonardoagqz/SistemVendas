@@ -263,8 +263,8 @@
     TabOrder = 3
     TabStop = True
     object pn_buscar_clientes: TPanel
-      Left = 203
-      Top = 4
+      Left = 10
+      Top = 6
       Width = 511
       Height = 49
       TabOrder = 1
@@ -385,12 +385,13 @@
         Height = 21
         CharCase = ecUpperCase
         TabOrder = 1
+        OnChange = edt_cli_nome_pdvChange
         OnKeyDown = edt_cli_nome_pdvKeyDown
         OnKeyPress = edt_cli_nome_pdvKeyPress
       end
     end
     object pn_buscar_barras_nome_pdv: TPanel
-      Left = 15
+      Left = 6
       Top = 59
       Width = 634
       Height = 78
@@ -669,14 +670,14 @@
       end
     end
     object pn_btn_iniciar_venda_pdv: TPanel
-      Left = 12
+      Left = 536
       Top = 4
-      Width = 185
+      Width = 171
       Height = 49
       TabOrder = 2
       TabStop = True
       object btn_iniciar_venda_pdv: TSpeedButton
-        Left = 16
+        Left = 12
         Top = 5
         Width = 145
         Height = 38
@@ -940,16 +941,58 @@
     end
   end
   object dbg_lançamento_pdv: TDBGrid
-    Left = -3
-    Top = 140
+    Left = -9
+    Top = 141
     Width = 867
     Height = 175
+    DataSource = ds_pedidos
     TabOrder = 4
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ped_id'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_date'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_codigo'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_cliente'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_usuario'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_forma_pag'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_fechado'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_faturado'
+        Visible = True
+      end>
   end
   object DBGrid1: TDBGrid
     Left = 384
@@ -962,5 +1005,70 @@
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+  end
+  object SQL_verifica_venda: TFDQuery
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from pedidos')
+    Left = 656
+    Top = 176
+  end
+  object TB_pedidos: TFDTable
+    IndexFieldNames = 'ped_id'
+    Connection = dm.conexao
+    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
+    TableName = 'aguiarsvendasbd.pedidos'
+    Left = 664
+    Top = 232
+    object TB_pedidosped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object TB_pedidosped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object TB_pedidosped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object TB_pedidosped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object TB_pedidosped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object TB_pedidosped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object TB_pedidosped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      FixedChar = True
+      Size = 7
+    end
+    object TB_pedidosped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      FixedChar = True
+      Size = 7
+    end
+  end
+  object ds_pedidos: TDataSource
+    DataSet = TB_pedidos
+    Left = 480
+    Top = 216
   end
 end
