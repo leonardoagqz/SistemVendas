@@ -1075,6 +1075,7 @@
     Top = 272
   end
   object SQL_itens_add: TFDQuery
+    Connection = dm.conexao
     Left = 648
     Top = 168
   end

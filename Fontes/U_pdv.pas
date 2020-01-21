@@ -140,10 +140,10 @@ begin
                   begin
                       Close;
                       SQL.Clear;
-                      SQL.Add('insert into itens');
-                      SQL.Add('where iten_produto = :produto');
-                      SQL.Add('(iten_produto, iten_qtd, iten_preco, iten_preco_prazo)');
-                      SQL.Add('values (:produto,:qtd,:pedido,:preco,:preco_prazo)');
+                      SQL.Add('insert into itens ');
+                      SQL.Add('(iten_produto, iten_qtd, iten_pedido, iten_preco, iten_preco_prazo)');
+                      SQL.Add('values( :produto,:qtd,:pedido,:preco, :preco_prazo)');
+                      //SQL.Add('where iten_produto = produto');
                       ParamByName('produto').Value := produto;
                       ParamByName('qtd').Value := qtd;
                       ParamByName('pedido').Value :=  codigo_venda;
@@ -201,7 +201,8 @@ begin
    dbg_lançamento_pdv.Visible:=False;
    pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
    btn_pro_iten_add_pdv.Visible:=False;
-   btn_pro_iten_remove_pdv.Visible:=false
+   btn_pro_iten_remove_pdv.Visible:=false;
+   edt_cli_codigo_pdv.Visible:=False;
 end;
 
  procedure TF_PDV.ProcedureDesbloqueiaCampos;
@@ -252,6 +253,8 @@ end;
 
 procedure TF_PDV.edt_cli_codigo_pdvChange(Sender: TObject);
 begin
+   if edt_cli_codigo_pdv.Text <> ' ' then
+   btn_iniciar_venda_pdv.Visible := true;
   edt_cli_codigo_pdv.SelectAll;
 end;
 
