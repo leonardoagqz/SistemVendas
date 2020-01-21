@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Data.DB, Vcl.StdCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit,
-  Vcl.Buttons;
+  Vcl.Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TF_PDV = class(TForm)
@@ -18,7 +20,7 @@ type
     edt_pro_preco_pdv: TCurrencyEdit;
     edt_pro_prazo_pdv: TCurrencyEdit;
     edt_pro_qtd_pdv: TCurrencyEdit;
-    btn_pro_add_pdv: TSpeedButton;
+    btn_pro_iten_add_pdv: TSpeedButton;
     edt_total_pdv: TCurrencyEdit;
     edt_total_prazo_pdv: TCurrencyEdit;
     lbl_total_pn_baixo_pdv: TLabel;
@@ -27,7 +29,7 @@ type
     btn_venda_fechar_pdv: TSpeedButton;
     btn_venda_gravar_pdv: TSpeedButton;
     btn_venda_cancelar_pdv: TSpeedButton;
-    btn_iten_remove_pdv: TSpeedButton;
+    btn_pro_iten_remove_pdv: TSpeedButton;
     edt_cli_codigo_pdv: TEdit;
     edt_cli_nome_pdv: TEdit;
     lbl_buscarporbarras_pdv: TLabel;
@@ -54,6 +56,18 @@ type
     lbl_result_qtd_estoque_prod_pdv: TLabel;
     lbl_total_pro_pdv: TLabel;
     lbl_total_prazo_pro_pdv: TLabel;
+    SQL_verifica_venda: TFDQuery;
+    TB_pedidos: TFDTable;
+    ds_pedidos: TDataSource;
+    TB_pedidosped_id: TFDAutoIncField;
+    TB_pedidosped_date: TDateField;
+    TB_pedidosped_codigo: TStringField;
+    TB_pedidosped_cliente: TIntegerField;
+    TB_pedidosped_usuario: TIntegerField;
+    TB_pedidosped_forma_pag: TIntegerField;
+    TB_pedidosped_fechado: TStringField;
+    TB_pedidosped_faturado: TStringField;
+    SQL_itens_add: TFDQuery;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -62,6 +76,9 @@ type
     procedure edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure ProcedureBuscaProduto;
     procedure ProcedureBloqueiacampos;
+    procedure ProcedureDesbloqueiaCampos;
+    procedure ProcedureIniciaVenda;
+    procedure ProcedureProdutosAdd;
     procedure edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -70,13 +87,17 @@ type
       Shift: TShiftState);
     procedure edt_cli_codigo_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure FormShow(Sender: TObject);
     procedure edt_cli_codigo_pdvChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure btn_iniciar_venda_pdvClick(Sender: TObject);
+    procedure edt_cli_nome_pdvChange(Sender: TObject);
+    procedure edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
+    procedure btn_pro_iten_add_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+  codigo_venda : string;
   end;
 
 var
@@ -89,11 +110,111 @@ uses
 
 {$R *.dfm}
 
+procedure TF_PDV.ProcedureProdutosAdd;
+var produto, qtd :Integer;
+var preco, preco_prazo :Double;
+begin
+    produto     := dm.SQL_produtospro_id.Value;
+    qtd         := edt_pro_qtd_pdv.Value;
+    preco       := dm.SQL_produtospro_preco.Value;
+    preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
+    with SQL_itens_add do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('select * from itens');
+        SQL.Add('where iten_produto = :produto');
+        SQL.Add('and iten_pedido = :pedido');
+        ParamByName('produto').Value  := produto;
+        ParamByName('pedido').Value   := codigo_venda;
+        Open;
+
+        if SQL_itens_add.RecordCount > 0 then
+        begin
+
+        end
+
+            else
+            begin
+                 with SQL_itens_add do
+                  begin
+                      Close;
+                      SQL.Clear;
+                      SQL.Add('insert into itens');
+                      SQL.Add('where iten_produto = :produto');
+                      SQL.Add('(iten_produto, iten_qtd, iten_preco, iten_preco_prazo)');
+                      SQL.Add('values (:produto,:qtd,:pedido,:preco,:preco_prazo)');
+                      ParamByName('produto').Value := produto;
+                      ParamByName('qtd').Value := qtd;
+                      ParamByName('pedido').Value :=  codigo_venda;
+                      ParamByName('preco').Value := preco;
+                      ParamByName('preco_prazo').Value :=  preco_prazo;
+                      ExecSQL;
+                  end;
+            end;
+
+    end;
+
+
+end;
+procedure TF_PDV.ProcedureIniciaVenda;
+begin
+   ProcedureDesbloqueiaCampos;
+   if codigo_venda = '' then
+   begin
+   codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
+   end;
+
+   F_PDV.Caption := 'Pedido '+ codigo_venda;
+   with SQL_verifica_venda do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from pedidos');
+   SQL.Add('where ped_codigo = :codigo');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+
+   end;
+
+   if SQL_verifica_venda.RecordCount = 0 then
+   begin
+      TB_pedidos.Active := True;
+      TB_pedidos.Append;
+      TB_pedidosped_date.Value := Date;
+      TB_pedidosped_codigo.AsString := codigo_venda;
+      TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
+      TB_pedidosped_usuario.Value := 1;
+      TB_pedidosped_fechado.AsString := 'NAO';
+      TB_pedidosped_faturado.AsString:= 'NAO';
+      TB_pedidos.Post;
+   end;
+
+
+end;
 procedure TF_PDV.ProcedureBloqueiacampos;
 begin
-   edt_pro_nome_pdv.Enabled:=False;
-   edt_pro_barras_pdv.Enabled:=false;
-   edt_pro_qtd_pdv.Enabled:=False;
+   btn_iniciar_venda_pdv.Visible:= False;
+   edt_pro_nome_pdv.Visible:=False;
+   edt_pro_barras_pdv.Visible:=false;
+   edt_pro_qtd_pdv.Visible:=False;
+   dbg_lançamento_pdv.Visible:=False;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
+   btn_pro_iten_add_pdv.Visible:=False;
+   btn_pro_iten_remove_pdv.Visible:=false
+end;
+
+ procedure TF_PDV.ProcedureDesbloqueiaCampos;
+begin
+   edt_cli_codigo_pdv.Visible:=True;
+   edt_cli_nome_pdv.Visible:=True;
+   edt_pro_nome_pdv.Visible:=True;
+   edt_pro_barras_pdv.Visible:=True;
+   edt_pro_qtd_pdv.Visible:=True;
+   dbg_lançamento_pdv.Visible:=True;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=True;
+   btn_pro_iten_add_pdv.Visible:=True;
+   btn_pro_iten_remove_pdv.Visible:=True
 end;
 
 procedure TF_PDV.ProcedureBuscaProduto;
@@ -187,6 +308,12 @@ begin
 
 
       end;
+end;
+
+procedure TF_PDV.edt_cli_nome_pdvChange(Sender: TObject);
+begin
+     if edt_cli_nome_pdv.Text <> ' ' then
+   btn_iniciar_venda_pdv.Visible := true;
 end;
 
 procedure TF_PDV.edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -369,6 +496,12 @@ begin
           end;
 end;
 
+procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  btn_pro_iten_add_pdv.Click;
+end;
+
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     F_PDV:= nil;
@@ -377,11 +510,20 @@ end;
 procedure TF_PDV.FormCreate(Sender: TObject);
 begin
    ProcedureBloqueiacampos;
+
+
+
 end;
 
-procedure TF_PDV.FormShow(Sender: TObject);
+procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
-    edt_cli_codigo_pdv.SetFocus;
+  ProcedureIniciavenda;
+  edt_cli_codigo_pdv.SetFocus;
+end;
+
+procedure TF_PDV.btn_pro_iten_add_pdvClick(Sender: TObject);
+begin
+  procedure
 end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);

@@ -6,7 +6,9 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Data.DB, Vcl.StdCtrls,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit,
-  Vcl.Buttons;
+  Vcl.Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TF_PDV = class(TForm)
@@ -54,6 +56,17 @@ type
     lbl_result_qtd_estoque_prod_pdv: TLabel;
     lbl_total_pro_pdv: TLabel;
     lbl_total_prazo_pro_pdv: TLabel;
+    SQL_verifica_venda: TFDQuery;
+    TB_pedidos: TFDTable;
+    ds_pedidos: TDataSource;
+    TB_pedidosped_id: TFDAutoIncField;
+    TB_pedidosped_date: TDateField;
+    TB_pedidosped_codigo: TStringField;
+    TB_pedidosped_cliente: TIntegerField;
+    TB_pedidosped_usuario: TIntegerField;
+    TB_pedidosped_forma_pag: TIntegerField;
+    TB_pedidosped_fechado: TStringField;
+    TB_pedidosped_faturado: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -63,6 +76,7 @@ type
     procedure ProcedureBuscaProduto;
     procedure ProcedureBloqueiacampos;
     procedure ProcedureDesbloqueiaCampos;
+    procedure ProcedureIniciaVenda;
     procedure edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -74,10 +88,12 @@ type
     procedure edt_cli_codigo_pdvChange(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btn_iniciar_venda_pdvClick(Sender: TObject);
+    procedure edt_cli_nome_pdvChange(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+  codigo_venda : string;
   end;
 
 var
@@ -89,11 +105,44 @@ uses
   U_clientes, u_DM, U_PesquisarProduto, U_funcoes, U_PesquisarCliente;
 
 {$R *.dfm}
+procedure TF_PDV.ProcedureIniciaVenda;
+begin
+   ProcedureDesbloqueiaCampos;
+   if codigo_venda = '' then
+   begin
+   codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
+   end;
 
+   F_PDV.Caption := 'Pedido '+ codigo_venda;
+   with SQL_verifica_venda do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from pedidos');
+   SQL.Add('where ped_codigo = :codigo');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+
+   end;
+
+   if SQL_verifica_venda.RecordCount = 0 then
+   begin
+      TB_pedidos.Active := True;
+      TB_pedidos.Append;
+      TB_pedidosped_date.Value := Date;
+      TB_pedidosped_codigo.AsString := codigo_venda;
+      TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
+      TB_pedidosped_usuario.Value := 1;
+      TB_pedidosped_fechado.AsString := 'NAO';
+      TB_pedidosped_faturado.AsString:= 'NAO';
+      TB_pedidos.Post;
+   end;
+
+
+end;
 procedure TF_PDV.ProcedureBloqueiacampos;
 begin
-   edt_cli_codigo_pdv.Visible:=False;
-   edt_cli_nome_pdv.Visible:=False;
+   btn_iniciar_venda_pdv.Visible:= False;
    edt_pro_nome_pdv.Visible:=False;
    edt_pro_barras_pdv.Visible:=false;
    edt_pro_qtd_pdv.Visible:=False;
@@ -207,6 +256,12 @@ begin
 
 
       end;
+end;
+
+procedure TF_PDV.edt_cli_nome_pdvChange(Sender: TObject);
+begin
+     if edt_cli_nome_pdv.Text <> ' ' then
+   btn_iniciar_venda_pdv.Visible := true;
 end;
 
 procedure TF_PDV.edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -397,12 +452,15 @@ end;
 procedure TF_PDV.FormCreate(Sender: TObject);
 begin
    ProcedureBloqueiacampos;
+
+
+
 end;
 
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
- ProcedureDesbloqueiaCampos;
- edt_cli_codigo_pdv.SetFocus;
+  ProcedureIniciavenda;
+  edt_cli_codigo_pdv.SetFocus;
 end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);

@@ -452,6 +452,7 @@
         ParentFont = False
         ParentShowHint = False
         ShowHint = True
+        OnClick = btn_pro_iten_add_pdvClick
       end
       object lbl_buscarporbarras_pdv: TLabel
         Left = 2
@@ -667,6 +668,7 @@
         ParentFont = False
         TabOrder = 2
         Value = 1.000000000000000000
+        OnKeyPress = edt_pro_qtd_pdvKeyPress
       end
     end
     object pn_btn_iniciar_venda_pdv: TPanel
@@ -1010,20 +1012,21 @@
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos')
-    Left = 656
-    Top = 176
+    Left = 760
+    Top = 160
   end
   object TB_pedidos: TFDTable
     IndexFieldNames = 'ped_id'
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 664
-    Top = 232
+    Left = 752
+    Top = 216
     object TB_pedidosped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object TB_pedidosped_date: TDateField
       AutoGenerateValue = arDefault
@@ -1068,7 +1071,11 @@
   end
   object ds_pedidos: TDataSource
     DataSet = TB_pedidos
-    Left = 480
-    Top = 216
+    Left = 752
+    Top = 272
+  end
+  object SQL_itens_add: TFDQuery
+    Left = 648
+    Top = 168
   end
 end
