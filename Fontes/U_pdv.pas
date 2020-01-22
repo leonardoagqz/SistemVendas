@@ -20,24 +20,16 @@ type
     edt_pro_preco_pdv: TCurrencyEdit;
     edt_pro_prazo_pdv: TCurrencyEdit;
     edt_pro_qtd_pdv: TCurrencyEdit;
-    btn_pro_iten_add_pdv: TSpeedButton;
     edt_total_pdv: TCurrencyEdit;
     edt_total_prazo_pdv: TCurrencyEdit;
     lbl_total_pn_baixo_pdv: TLabel;
     ldb_total_prazol_pn_baixo_pdv: TLabel;
-    btn_impressao_pdv: TSpeedButton;
-    btn_venda_fechar_pdv: TSpeedButton;
-    btn_venda_gravar_pdv: TSpeedButton;
-    btn_venda_cancelar_pdv: TSpeedButton;
-    btn_pro_iten_remove_pdv: TSpeedButton;
     edt_cli_codigo_pdv: TEdit;
     edt_cli_nome_pdv: TEdit;
     lbl_buscarporbarras_pdv: TLabel;
     lbl_buscar_clientes_pdv: TLabel;
     lbl_qtd_pdv: TLabel;
     lbl_buscarpornome_pdv: TLabel;
-    btn_iniciar_venda_pdv: TSpeedButton;
-    btn_venda_sair_pdv: TSpeedButton;
     pn_btns_iconis_pdv: TPanel;
     pn_principal: TPanel;
     pn_buscar_clientes: TPanel;
@@ -68,8 +60,15 @@ type
     TB_pedidosped_fechado: TStringField;
     TB_pedidosped_faturado: TStringField;
     SQL_itens_add: TFDQuery;
+    btn_iniciar_venda_pdv: TBitBtn;
+    btn_pro_iten_add_pdv: TBitBtn;
+    btn_pro_iten_remove_pdv: TBitBtn;
+    btn_venda_gravar_pdv: TBitBtn;
+    btn_venda_fechar_pdv: TBitBtn;
+    btn_venda_cancelar_pdv: TBitBtn;
+    btn_impressao_pdv: TBitBtn;
+    btn_venda_sair_pdv: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -93,6 +92,10 @@ type
     procedure edt_cli_nome_pdvChange(Sender: TObject);
     procedure edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure btn_pro_iten_add_pdvClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btn_iniciar_venda_pdv2Click(Sender: TObject);
+    procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
+    procedure btn_venda_sair_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -143,6 +146,7 @@ begin
                       SQL.Add('insert into itens ');
                       SQL.Add('(iten_produto, iten_qtd, iten_pedido, iten_preco, iten_preco_prazo)');
                       SQL.Add('values( :produto,:qtd,:pedido,:preco, :preco_prazo)');
+                      //SQL.Add('select * from itens');
                       //SQL.Add('where iten_produto = produto');
                       ParamByName('produto').Value := produto;
                       ParamByName('qtd').Value := qtd;
@@ -199,7 +203,10 @@ begin
    edt_pro_barras_pdv.Visible:=false;
    edt_pro_qtd_pdv.Visible:=False;
    dbg_lançamento_pdv.Visible:=False;
-   pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
+   //pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
+   btn_venda_gravar_pdv.Visible:=False;
+   btn_venda_fechar_pdv.Visible:=False;
+   btn_venda_cancelar_pdv.Visible:=False;
    btn_pro_iten_add_pdv.Visible:=False;
    btn_pro_iten_remove_pdv.Visible:=false;
    edt_cli_codigo_pdv.Visible:=False;
@@ -213,7 +220,10 @@ begin
    edt_pro_barras_pdv.Visible:=True;
    edt_pro_qtd_pdv.Visible:=True;
    dbg_lançamento_pdv.Visible:=True;
-   pn_btns_grv_can_fec_vendas_pdv.Visible:=True;
+   //pn_btns_grv_can_fec_vendas_pdv.Visible:=True;
+   btn_venda_gravar_pdv.Visible:=True;
+   btn_venda_fechar_pdv.Visible:=True;
+   btn_venda_cancelar_pdv.Visible:=True;
    btn_pro_iten_add_pdv.Visible:=True;
    btn_pro_iten_remove_pdv.Visible:=True
 end;
@@ -291,6 +301,7 @@ begin
                     ShowMessage('Cliente não encontrato!');
                     edt_cli_codigo_pdv.Clear;
                     edt_cli_nome_pdv.Clear;
+                    btn_iniciar_venda_pdv.Visible:=False;
 
                   end;
 
@@ -315,8 +326,9 @@ end;
 
 procedure TF_PDV.edt_cli_nome_pdvChange(Sender: TObject);
 begin
-     if edt_cli_nome_pdv.Text <> ' ' then
-   btn_iniciar_venda_pdv.Visible := true;
+     if dm.SQL_clientes.RecordCount = 1 then
+     btn_iniciar_venda_pdv.Visible := true;
+     edt_cli_codigo_pdv.SelectAll;
 end;
 
 procedure TF_PDV.edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -331,6 +343,8 @@ begin
           end;
 
       end;
+
+    
 
 end;
 
@@ -355,17 +369,17 @@ begin
                         ShowMessage('Cliente não encontrado!');
                         edt_cli_nome_pdv.Clear;
                         edt_cli_codigo_pdv.Clear;
+                        btn_iniciar_venda_pdv.Visible:=False;
                    end;
 
                    begin
                      if RecordCount = 1 then
-                     edt_cli_nome_pdv.SelectAll;
                      edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
                      edt_cli_codigo_pdv.Text := dm.SQL_clientescli_id.AsString;
                      lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
                      lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
                      lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
-                     edt_cli_codigo_pdv.SelectAll;
+                     edt_cli_nome_pdv.SelectAll;
 
                    end;
 
@@ -515,10 +529,26 @@ begin
    ProcedureBloqueiacampos;
 end;
 
+procedure TF_PDV.FormShow(Sender: TObject);
+begin
+   edt_cli_nome_pdv.SetFocus;
+end;
+
+procedure TF_PDV.btn_iniciar_venda_pdv2Click(Sender: TObject);
+begin
+  ProcedureIniciavenda;
+  edt_pro_nome_pdv.SetFocus;
+end;
+
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
   ProcedureIniciavenda;
   edt_cli_codigo_pdv.SetFocus;
+end;
+
+procedure TF_PDV.btn_pro_iten_add_pdv2Click(Sender: TObject);
+begin
+  ProcedureProdutosAdd;
 end;
 
 procedure TF_PDV.btn_pro_iten_add_pdvClick(Sender: TObject);
@@ -526,10 +556,12 @@ begin
   ProcedureProdutosAdd;
 end;
 
+
+
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);
 begin
-    Close;
-    F_PDV := nil;
+   Close;
+   F_PDV := nil;
 end;
 
 end.
