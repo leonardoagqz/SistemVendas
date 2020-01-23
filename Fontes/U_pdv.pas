@@ -68,6 +68,31 @@ type
     btn_venda_cancelar_pdv: TBitBtn;
     btn_impressao_pdv: TBitBtn;
     btn_venda_sair_pdv: TBitBtn;
+    SQL_listar_pedidos_dbglançamento: TFDQuery;
+    SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField;
+    SQL_listar_pedidos_dbglançamentoped_date: TDateField;
+    SQL_listar_pedidos_dbglançamentoped_codigo: TStringField;
+    SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_forma_pag: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_fechado: TStringField;
+    SQL_listar_pedidos_dbglançamentoped_faturado: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentopro_nome: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_barra: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_ref: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_custo: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_preco: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_preco_prazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_estoque: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_produto: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_qtd: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_pedido: TStringField;
+    SQL_listar_pedidos_dbglançamentoiten_preco: TFloatField;
+    SQL_listar_pedidos_dbglançamentoiten_preco_prazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentosubTotal: TFloatField;
+    SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -96,6 +121,7 @@ type
     procedure btn_iniciar_venda_pdv2Click(Sender: TObject);
     procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
+    procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -161,6 +187,15 @@ begin
 
 
 end;
+procedure TF_PDV.SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
+begin
+    SQL_listar_pedidos_dbglançamentosubTotal.Value :=
+    SQL_listar_pedidos_dbglançamentopro_preco.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+
+    SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value :=
+    SQL_listar_pedidos_dbglançamentopro_preco_prazo.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+end;
+
 procedure TF_PDV.ProcedureIniciaVenda;
 begin
    ProcedureDesbloqueiaCampos;

@@ -876,9 +876,9 @@
     end
   end
   object dbg_lançamento_pdv: TDBGrid
-    Left = 0
+    Left = -5
     Top = 141
-    Width = 862
+    Width = 863
     Height = 175
     DataSource = ds_pedidos
     TabOrder = 2
@@ -890,42 +890,84 @@
     Columns = <
       item
         Expanded = False
-        FieldName = 'ped_id'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ped_date'
-        Visible = True
-      end
-      item
-        Expanded = False
         FieldName = 'ped_codigo'
+        Width = 94
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ped_cliente'
+        Width = 23
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_usuario'
+        FieldName = 'pro_id'
+        Width = 31
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_forma_pag'
+        FieldName = 'pro_nome'
+        Width = 91
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_fechado'
+        FieldName = 'pro_barra'
+        Width = 100
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_faturado'
+        FieldName = 'pro_ref'
+        Width = 93
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'pro_preco'
+        Width = 55
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'pro_preco_prazo'
+        Width = 51
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'pro_estoque'
+        Width = 33
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'iten_id'
+        Width = 31
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'iten_produto'
+        Width = 36
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'iten_qtd'
+        Width = 32
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'subTotal'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'subTotalPrazo'
         Visible = True
       end>
   end
@@ -945,16 +987,17 @@
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos')
-    Left = 760
-    Top = 160
+    Left = 672
+    Top = 112
   end
   object TB_pedidos: TFDTable
+    Active = True
     IndexFieldNames = 'ped_id'
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 752
-    Top = 216
+    Left = 592
+    Top = 400
     object TB_pedidosped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
@@ -992,24 +1035,193 @@
       FieldName = 'ped_fechado'
       Origin = 'ped_fechado'
       FixedChar = True
-      Size = 7
+      Size = 3
     end
     object TB_pedidosped_faturado: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ped_faturado'
       Origin = 'ped_faturado'
       FixedChar = True
-      Size = 7
+      Size = 3
     end
   end
   object ds_pedidos: TDataSource
-    DataSet = TB_pedidos
-    Left = 752
-    Top = 272
+    DataSet = SQL_listar_pedidos_dbglançamento
+    Left = 480
+    Top = 408
   end
   object SQL_itens_add: TFDQuery
     Connection = dm.conexao
-    Left = 648
-    Top = 168
+    Left = 664
+    Top = 72
+  end
+  object SQL_listar_pedidos_dbglançamento: TFDQuery
+    Active = True
+    OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from pedidos, produtos, itens'
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+    Left = 360
+    Top = 400
+    object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object SQL_listar_pedidos_dbglançamentoped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object SQL_listar_pedidos_dbglançamentoped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object SQL_listar_pedidos_dbglançamentopro_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentopro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentopro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentopro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentopro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentopro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object SQL_listar_pedidos_dbglançamentopro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object SQL_listar_pedidos_dbglançamentopro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_id'
+      Origin = 'iten_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_produto'
+      Origin = 'iten_produto'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_qtd: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_qtd'
+      Origin = 'iten_qtd'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_pedido: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_pedido'
+      Origin = 'iten_pedido'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco'
+      Origin = 'iten_preco'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco_prazo'
+      Origin = 'iten_preco_prazo'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentosubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotal'
+      DisplayFormat = ',0.00;-,0.00'
+      Calculated = True
+    end
+    object SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotalPrazo'
+      DisplayFormat = ',0.00;-,0.00'
+      Calculated = True
+    end
   end
 end
