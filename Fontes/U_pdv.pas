@@ -49,16 +49,7 @@ type
     lbl_total_pro_pdv: TLabel;
     lbl_total_prazo_pro_pdv: TLabel;
     SQL_verifica_venda: TFDQuery;
-    TB_pedidos: TFDTable;
     ds_pedidos: TDataSource;
-    TB_pedidosped_id: TFDAutoIncField;
-    TB_pedidosped_date: TDateField;
-    TB_pedidosped_codigo: TStringField;
-    TB_pedidosped_cliente: TIntegerField;
-    TB_pedidosped_usuario: TIntegerField;
-    TB_pedidosped_forma_pag: TIntegerField;
-    TB_pedidosped_fechado: TStringField;
-    TB_pedidosped_faturado: TStringField;
     SQL_itens_add: TFDQuery;
     btn_iniciar_venda_pdv: TBitBtn;
     btn_pro_iten_add_pdv: TBitBtn;
@@ -93,6 +84,17 @@ type
     SQL_listar_pedidos_dbglançamentoiten_preco_prazo: TFloatField;
     SQL_listar_pedidos_dbglançamentosubTotal: TFloatField;
     SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField;
+    SQL_Listar_Pedidos_dbg2: TFDQuery;
+    ds_pedidos2: TDataSource;
+    TB_pedidos: TFDTable;
+    TB_pedidosped_id: TFDAutoIncField;
+    TB_pedidosped_date: TDateField;
+    TB_pedidosped_codigo: TStringField;
+    TB_pedidosped_cliente: TIntegerField;
+    TB_pedidosped_usuario: TIntegerField;
+    TB_pedidosped_forma_pag: TIntegerField;
+    TB_pedidosped_fechado: TStringField;
+    TB_pedidosped_faturado: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -218,7 +220,7 @@ begin
 
    if SQL_verifica_venda.RecordCount = 0 then
    begin
-      TB_pedidos.Active := True;
+
       TB_pedidos.Append;
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;

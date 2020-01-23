@@ -3,7 +3,7 @@
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Venda'
-  ClientHeight = 472
+  ClientHeight = 534
   ClientWidth = 898
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,14 +20,15 @@
   TextHeight = 13
   object stb_pdv: TStatusBar
     Left = 0
-    Top = 453
+    Top = 515
     Width = 898
     Height = 19
     Panels = <>
+    ExplicitTop = 453
   end
   object pn_pdv_baixo: TPanel
     Left = 0
-    Top = 394
+    Top = 456
     Width = 898
     Height = 59
     Align = alBottom
@@ -35,6 +36,7 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
+    ExplicitTop = 394
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -96,87 +98,13 @@
     Left = 864
     Top = 140
     Width = 34
-    Height = 254
+    Height = 317
     ParentBackground = False
     TabOrder = 1
     TabStop = True
-    object btn_venda_sair_pdv: TSpeedButton
-      Left = 4
-      Top = 214
-      Width = 33
-      Height = 34
-      Hint = 'Sair'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'Tahoma'
-      Font.Style = []
-      Glyph.Data = {
-        0A070000424D0A07000000000000360000002800000019000000170000000100
-        180000000000D4060000120B0000120B00000000000000000000FFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFF1F7F19ED2B2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF77C99F54BE88B8DFC8FFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF80C8A06CD6A0A9
-        F9D160C391CFE4D2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFF8FCEAB6AD29D58ECA152E89CBDF5D95ABF8AE6EEE6FFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFA0D4B661CB9668EEAA25E0814EE6999DF3C8AFEFCF
-        5FBF8EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB4DBC35AC58E70EEAE2BE285
-        2FE1874AE59790EFBF9FF5C9A5E9C668C293FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC5E1CD
-        54C08976EEB12DE28633E28930E18746E59591EFC08DEFBDA3F6CC95E0BA76C7
-        9BFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFD7E7D954BF897BEDB32FE38832E28934E28A30E18845E5948FEF
-        BE8FEEBE84EBB7A5F4CC84D6AD8FCDAAFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE6EEE651BD8578EAB02EE3882BE18533E2
-        8935E28A30E18843E3928CEDBC8BECBA84E9B67AE6AFA2F1C96DCC9CAAD7BBFF
-        FFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE9F3EB5AC18C99EF
-        C465EFA959EBA15DEDA438E38D31E18829DE823EDF8E84EAB681E8B48EEBBDA1
-        F0C899EEC3C6F9DF6DCB9CC5E4D2FFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFF5DBB8A3CB87868CB9861C79364C69460C4916DE7A925DD8021D97C3B
-        DD8B77E6AE7EE7B298E2BC65C49371CB9C70CB9C62C5923EB176D7EFE200FFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5F4ECE8F2EAEAF0EAEAF0EAECF0EC66
-        BE926BE0A41FDA7B19D5773ADA896AE2A57DE8B275D3A2FFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFF7ECCA460DE9E14D47313D2713FDA8B5DE09D79E8B0
-        6CCD9CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00E4E8E579C09C55BA86A2
-        CEB7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF61C59152DF980CD06D
-        15D27245DB8F4EDD957FE9B465C594FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FF0082C19F45CD8863ECA73DBF7DBBD9C5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        CAE3D15DC99235DB880FD06E1ED47844DB8F44DC8F7FE3B171C79BFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFF007DBF9C4CD38E3AE99160E9A446BB7FCEE3D3
-        FFFFFFFFFFFFFFFFFFFFFFFF60BF8E68DEA311D27013D17128D67E38D88757E2
-        9C6CD19DB3DCC3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00DEE5E04DBE84
-        54E79D29E0835DE39F4DC28792D1AFCEE6D6C6E2CF6DC4966DD8A22CD98110D1
-        6F18D2742AD67F2AD77F7AE4AE5BBF8CFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFF00FFFFFFA4CDB644C7843EE39018D77749DF9457D39450C88A59CB
-        9067DDA22DD9820ED06E16D2731AD37617D2745EE4A157C48DC3E1CDFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00F0F0F0FFFFFF70BE944CCF8C2FDC
-        8507CF6A1BD5772FDA842CD98213D27210D17017D27311D1700CD16D50E1985E
-        CC948DCEACFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFF
-        FFFFFFFFFFFFFF6ABE9248CB893DDD8D14D47309D06B0BD06C0ED06E0DD06E0D
-        D16E29D98062E2A156C68D87CDA8FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFFFFFF90CFAF45C08150D4914B
-        DD9344DE9043DE8F4EDF965FDD9E64D29A5BC28DB9DEC7FFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00FFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFE2EFE58FD1B065C79560C69266C89769C89777CA9FAADAC0FFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE5EDE5DEEADE
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-        FFFFFFFFFFFFFFFFFFFFFFFFFF00}
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      OnClick = btn_venda_sair_pdvClick
-    end
     object btn_impressao_pdv: TBitBtn
       Left = 0
-      Top = 104
+      Top = 176
       Width = 33
       Height = 34
       Glyph.Data = {
@@ -244,9 +172,9 @@
         FFFFFFFFFF00}
       TabOrder = 0
     end
-    object btn_venda_sai_pdv: TBitBtn
+    object btn_venda_sair_pdv: TBitBtn
       Left = 0
-      Top = 160
+      Top = 216
       Width = 33
       Height = 34
       Glyph.Data = {
@@ -308,7 +236,7 @@
         FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFFFFFFFFFFFFFFFFFF00}
       TabOrder = 1
-      OnClick = btn_venda_sai_pdvClick
+      OnClick = btn_venda_sair_pdvClick
     end
   end
   object pn_principal: TPanel
@@ -950,10 +878,10 @@
     end
   end
   object dbg_lançamento_pdv: TDBGrid
-    Left = 0
+    Left = -3
     Top = 141
-    Width = 862
-    Height = 175
+    Width = 863
+    Height = 213
     DataSource = ds_pedidos
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
@@ -964,76 +892,357 @@
     Columns = <
       item
         Expanded = False
-        FieldName = 'ped_id'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ped_date'
-        Visible = True
-      end
-      item
-        Expanded = False
         FieldName = 'ped_codigo'
+        Title.Caption = 'N'#186' Pedido'
+        Width = 88
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_cliente'
+        FieldName = 'pro_id'
+        Title.Caption = 'Cod. Prod.'
+        Width = 57
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_usuario'
+        FieldName = 'pro_nome'
+        Title.Caption = 'Descri'#231#227'o do Produto'
+        Width = 119
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_forma_pag'
+        FieldName = 'pro_barra'
+        Title.Caption = 'Cod. Barras'
+        Width = 100
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_fechado'
+        FieldName = 'pro_ref'
+        Title.Caption = 'Ref. Produto'
+        Width = 103
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'ped_faturado'
+        FieldName = 'pro_preco'
+        Title.Caption = 'Valor'
+        Width = 55
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'pro_preco_prazo'
+        Title.Caption = '$ Valor a Prazo'
+        Width = 78
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'pro_estoque'
+        Title.Caption = 'Estoque'
+        Width = 43
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'iten_qtd'
+        Title.Caption = 'Qtd'
+        Width = 34
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'subTotal'
+        Title.Caption = 'Sub Total'
+        Width = 57
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'subTotalPrazo'
+        Title.Caption = 'Sub Total a Prazo'
+        Width = 83
         Visible = True
       end>
   end
   object DBGrid1: TDBGrid
-    Left = 384
-    Top = 314
-    Width = 478
-    Height = 80
+    Left = 378
+    Top = 353
+    Width = 482
+    Height = 104
+    DataSource = ds_pedidos2
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ped_date'
+        Title.Caption = 'Data'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_cliente'
+        Title.Caption = 'Cod. Cliente'
+        Width = 61
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_usuario'
+        Title.Caption = 'Usu'#225'rio'
+        Width = 47
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_forma_pag'
+        Title.Caption = 'Forma Pag.'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_fechado'
+        Title.Caption = 'Fechado'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_faturado'
+        Title.Caption = 'Faturado'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'iten_id'
+        Title.Caption = 'Item'
+        Width = 41
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end>
   end
   object SQL_verifica_venda: TFDQuery
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos')
-    Left = 760
-    Top = 160
+    Left = 672
+    Top = 24
+  end
+  object ds_pedidos: TDataSource
+    DataSet = SQL_listar_pedidos_dbglançamento
+    Left = 232
+    Top = 272
+  end
+  object SQL_itens_add: TFDQuery
+    Connection = dm.conexao
+    Left = 672
+    Top = 80
+  end
+  object SQL_listar_pedidos_dbglançamento: TFDQuery
+    Active = True
+    OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from pedidos, produtos, itens'
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+    Left = 112
+    Top = 272
+    object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object SQL_listar_pedidos_dbglançamentoped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object SQL_listar_pedidos_dbglançamentoped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object SQL_listar_pedidos_dbglançamentoped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object SQL_listar_pedidos_dbglançamentopro_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentopro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentopro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentopro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentopro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentopro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object SQL_listar_pedidos_dbglançamentopro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object SQL_listar_pedidos_dbglançamentopro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_id'
+      Origin = 'iten_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_produto'
+      Origin = 'iten_produto'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_qtd: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_qtd'
+      Origin = 'iten_qtd'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_pedido: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_pedido'
+      Origin = 'iten_pedido'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco'
+      Origin = 'iten_preco'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoiten_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco_prazo'
+      Origin = 'iten_preco_prazo'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentosubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotal'
+      DisplayFormat = ',0.00;-,0.00'
+      Calculated = True
+    end
+    object SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotalPrazo'
+      DisplayFormat = ',0.00;-,0.00'
+      Calculated = True
+    end
+  end
+  object SQL_Listar_Pedidos_dbg2: TFDQuery
+    Active = True
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from pedidos, produtos, itens'
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+    Left = 432
+    Top = 384
+  end
+  object ds_pedidos2: TDataSource
+    DataSet = SQL_Listar_Pedidos_dbg2
+    Left = 544
+    Top = 384
   end
   object TB_pedidos: TFDTable
+    Active = True
     IndexFieldNames = 'ped_id'
     Connection = dm.conexao
-    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
-    TableName = 'aguiarsvendasbd.pedidos'
-    Left = 752
-    Top = 216
+    UpdateOptions.UpdateTableName = 'pedidos'
+    TableName = 'pedidos'
+    Left = 344
+    Top = 274
     object TB_pedidosped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object TB_pedidosped_date: TDateField
       AutoGenerateValue = arDefault
@@ -1065,25 +1274,13 @@
       AutoGenerateValue = arDefault
       FieldName = 'ped_fechado'
       Origin = 'ped_fechado'
-      FixedChar = True
-      Size = 7
+      Size = 3
     end
     object TB_pedidosped_faturado: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ped_faturado'
       Origin = 'ped_faturado'
-      FixedChar = True
-      Size = 7
+      Size = 3
     end
-  end
-  object ds_pedidos: TDataSource
-    DataSet = TB_pedidos
-    Left = 752
-    Top = 272
-  end
-  object SQL_itens_add: TFDQuery
-    Connection = dm.conexao
-    Left = 648
-    Top = 168
   end
 end
