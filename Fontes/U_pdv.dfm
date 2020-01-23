@@ -36,7 +36,8 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
-    ExplicitTop = 394
+    ExplicitLeft = 40
+    ExplicitTop = 450
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -53,7 +54,7 @@
       ParentFont = False
     end
     object ldb_total_prazol_pn_baixo_pdv: TLabel
-      Left = 159
+      Left = 213
       Top = -1
       Width = 98
       Height = 21
@@ -68,7 +69,7 @@
     object edt_total_pdv: TCurrencyEdit
       Left = 32
       Top = 22
-      Width = 81
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -80,9 +81,9 @@
       TabOrder = 0
     end
     object edt_total_prazo_pdv: TCurrencyEdit
-      Left = 159
+      Left = 213
       Top = 22
-      Width = 82
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET

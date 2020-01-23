@@ -105,6 +105,7 @@ type
     procedure ProcedureDesbloqueiaCampos;
     procedure ProcedureIniciaVenda;
     procedure ProcedureProdutosAdd;
+    procedure ProcedureAtualizaDBGridLançamentos;
     procedure edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -129,6 +130,7 @@ type
   public
     { Public declarations }
   codigo_venda : string;
+  total_pedido, total_pedido_prazo : Double;
   end;
 
 var
@@ -140,6 +142,29 @@ uses
   U_clientes, u_DM, U_PesquisarProduto, U_funcoes, U_PesquisarCliente;
 
 {$R *.dfm}
+
+procedure TF_PDV.ProcedureAtualizaDBGridLançamentos;
+begin
+   SQL_listar_pedidos_dbglançamento.Close;
+   SQL_listar_pedidos_dbglançamento.Open;
+
+
+   SQL_listar_pedidos_dbglançamento.First;
+   total_pedido :=0;
+   total_pedido_prazo :=0;
+   while not SQL_listar_pedidos_dbglançamento.Eof do //enquanto não terminar os registros
+   begin
+   total_pedido := total_pedido + SQL_listar_pedidos_dbglançamentosubTotal.Value;
+   total_pedido_prazo := total_pedido_prazo + SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
+
+   SQL_listar_pedidos_dbglançamento.Next;
+   end;
+
+   edt_total_pdv.Value := total_pedido;
+   edt_total_prazo_pdv.Value := total_pedido_prazo;
+
+end;
+
 
 procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
@@ -182,9 +207,12 @@ begin
                       ParamByName('preco').Value := preco;
                       ParamByName('preco_prazo').Value :=  preco_prazo;
                       ExecSQL;
+
+                      ShowMessage('Produto Adiocionado!');
                   end;
             end;
 
+            ProcedureAtualizaDBGridLançamentos;
     end;
 
 
