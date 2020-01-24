@@ -24,7 +24,6 @@
     Width = 898
     Height = 19
     Panels = <>
-    ExplicitTop = 453
   end
   object pn_pdv_baixo: TPanel
     Left = 0
@@ -36,8 +35,6 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
-    ExplicitLeft = 40
-    ExplicitTop = 450
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -102,7 +99,6 @@
     Height = 317
     ParentBackground = False
     TabOrder = 1
-    TabStop = True
     object btn_impressao_pdv: TBitBtn
       Left = 0
       Top = 176
@@ -491,6 +487,7 @@
         Top = 50
         Width = 120
         Height = 27
+        TabStop = False
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -498,7 +495,7 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
       end
       object edt_pro_preco_pdv: TCurrencyEdit
         Left = 4
@@ -513,7 +510,7 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 6
       end
       object edt_pro_qtd_pdv: TCurrencyEdit
         Left = 444
@@ -530,6 +527,7 @@
         ParentFont = False
         TabOrder = 2
         Value = 1.000000000000000000
+        OnKeyDown = edt_pro_qtd_pdvKeyDown
         OnKeyPress = edt_pro_qtd_pdvKeyPress
       end
       object btn_pro_iten_add_pdv: TBitBtn
@@ -578,8 +576,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 5
-        TabStop = False
+        TabOrder = 3
         OnClick = btn_pro_iten_add_pdvClick
       end
       object btn_pro_iten_remove_pdv: TBitBtn
@@ -628,8 +625,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 6
-        TabStop = False
+        TabOrder = 4
       end
     end
     object pn_btn_iniciar_venda_pdv: TPanel
@@ -729,7 +725,6 @@
       Width = 152
       Height = 112
       TabOrder = 3
-      TabStop = True
       object btn_venda_cancelar_pdv: TBitBtn
         Left = 19
         Top = 76
@@ -1058,6 +1053,7 @@
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_listar_pedidos_dbglançamentoped_date: TDateField
       AutoGenerateValue = arDefault

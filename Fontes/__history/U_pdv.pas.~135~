@@ -124,6 +124,8 @@ type
     procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
+    procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -169,6 +171,12 @@ procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
 var preco, preco_prazo :Double;
 begin
+    if edt_pro_qtd_pdv.Value < 0 then
+     begin
+       ShowMessage('Quantidade Incorreta!');
+       Exit;
+     end;
+
     if (edt_pro_barras_pdv.Text = '') and (edt_pro_nome_pdv.Text = '') then
     begin
       ShowMessage('Precisa informar os dados do produto!');
@@ -201,10 +209,13 @@ begin
                    if RecordCount = 1 then
 
                    begin
-                       produto     := dm.SQL_produtospro_id.Value;
+                      produto     := dm.SQL_produtospro_id.Value;
                       qtd         := StrToInt(edt_pro_qtd_pdv.Text);
                       preco       := dm.SQL_produtospro_preco.Value;
                       preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
+
+
+
                       with SQL_itens_add do
                       begin
                       Close;
@@ -218,7 +229,18 @@ begin
 
                         if SQL_itens_add.RecordCount > 0 then
                           begin
-
+                          //
+                            with SQL_itens_add do
+                            begin
+                            Close;
+                            SQL.Clear;
+                            SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
+                            SQL.Add('where iten_produto = :produto and iten_pedido = :pedido');
+                            ParamByName('pedido').Value := codigo_venda;
+                            ParamByName('produto').Value := produto;
+                            ParamByName('qtd').Value := qtd;
+                            ExecSQL;
+                            end;
                           end
 
                         else
@@ -250,15 +272,12 @@ begin
 
 
                    end;
+
                 end;
 
         end;
 
-
-
-
-
- end;
+end;
 
 
 
@@ -527,6 +546,8 @@ end;
 
 procedure TF_PDV.edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
+
     If Key = #13  then
 
         with dm.SQL_produtos do
@@ -594,6 +615,7 @@ end;
 
 procedure TF_PDV.edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
     if Key = #13 then
       begin
          if edt_pro_nome_pdv.Text = '' then
@@ -640,10 +662,20 @@ begin
                 end;
 end;
 
+procedure TF_PDV.edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if Key = VK_TAB then
+    btn_pro_iten_add_pdv.SetFocus;
+end;
+
 procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
   if Key = #13 then
   btn_pro_iten_add_pdv.Click;
+
+
 end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -680,7 +712,6 @@ end;
 procedure TF_PDV.btn_pro_iten_add_pdvClick(Sender: TObject);
 begin
   ProcedureProdutosAdd;
-
 end;
 
 

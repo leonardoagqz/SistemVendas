@@ -126,6 +126,7 @@ type
     procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
     procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btn_pro_iten_remove_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -171,6 +172,12 @@ procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
 var preco, preco_prazo :Double;
 begin
+    if edt_pro_qtd_pdv.Value < 0 then
+     begin
+       ShowMessage('Quantidade Incorreta!');
+       Exit;
+     end;
+
     if (edt_pro_barras_pdv.Text = '') and (edt_pro_nome_pdv.Text = '') then
     begin
       ShowMessage('Precisa informar os dados do produto!');
@@ -203,10 +210,11 @@ begin
                    if RecordCount = 1 then
 
                    begin
-                       produto     := dm.SQL_produtospro_id.Value;
+                      produto     := dm.SQL_produtospro_id.Value;
                       qtd         := StrToInt(edt_pro_qtd_pdv.Text);
                       preco       := dm.SQL_produtospro_preco.Value;
                       preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
+
                       with SQL_itens_add do
                       begin
                       Close;
@@ -220,7 +228,18 @@ begin
 
                         if SQL_itens_add.RecordCount > 0 then
                           begin
-
+                          //
+                            with SQL_itens_add do
+                            begin
+                            Close;
+                            SQL.Clear;
+                            SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
+                            SQL.Add('where iten_produto = :produto and iten_pedido = :pedido');
+                            ParamByName('pedido').Value := codigo_venda;
+                            ParamByName('produto').Value := produto;
+                            ParamByName('qtd').Value := qtd;
+                            ExecSQL;
+                            end;
                           end
 
                         else
@@ -252,15 +271,12 @@ begin
 
 
                    end;
+
                 end;
 
         end;
 
-
-
-
-
- end;
+end;
 
 
 
@@ -529,6 +545,8 @@ end;
 
 procedure TF_PDV.edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
+
     If Key = #13  then
 
         with dm.SQL_produtos do
@@ -570,7 +588,7 @@ begin
 
 
        begin
-        //não permitir digitar letras no código de barras
+        //permitir digitar somente números positivos no código de barras
         if not (Key in['0'..'9',Chr(8)]) then
         Key:= #0
         end;
@@ -596,6 +614,7 @@ end;
 
 procedure TF_PDV.edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
     if Key = #13 then
       begin
          if edt_pro_nome_pdv.Text = '' then
@@ -651,8 +670,17 @@ end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
   if Key = #13 then
   btn_pro_iten_add_pdv.Click;
+
+   begin
+        //permitir digitar somente números positivos no código de barras
+        if not (Key in['0'..'9',Chr(8)]) then
+        Key:= #0
+        end;
+
+
 end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -689,10 +717,34 @@ end;
 procedure TF_PDV.btn_pro_iten_add_pdvClick(Sender: TObject);
 begin
   ProcedureProdutosAdd;
-
 end;
 
 
+
+procedure TF_PDV.btn_pro_iten_remove_pdvClick(Sender: TObject);
+var produto, qtd : Integer;
+begin
+    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+    qtd := 1;
+
+   with SQL_itens_add do
+    begin
+    //remove a quantidade da do campo QTD
+     Close;
+     SQL.Clear;
+     SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
+     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+     ParamByName('pedido').Value := codigo_venda;
+     ParamByName('produto').Value := produto;
+     ParamByName('qtd').Value := qtd;
+     ExecSQL;
+
+    end;
+
+   
+
+    ProcedureAtualizaDBGridLançamentos;
+end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);
 begin

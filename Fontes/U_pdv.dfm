@@ -394,7 +394,7 @@
         ParentFont = False
       end
       object lbl_qtd_pdv: TLabel
-        Left = 444
+        Left = 449
         Top = 0
         Width = 25
         Height = 16
@@ -513,10 +513,10 @@
         TabOrder = 6
       end
       object edt_pro_qtd_pdv: TCurrencyEdit
-        Left = 444
+        Left = 448
         Top = 15
-        Width = 73
-        Height = 24
+        Width = 53
+        Height = 21
         DisplayFormat = '0'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -626,6 +626,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
         TabOrder = 4
+        OnClick = btn_pro_iten_remove_pdvClick
       end
     end
     object pn_btn_iniciar_venda_pdv: TPanel

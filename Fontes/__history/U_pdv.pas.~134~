@@ -121,10 +121,11 @@ type
     procedure edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure btn_pro_iten_add_pdvClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btn_iniciar_venda_pdv2Click(Sender: TObject);
     procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
+    procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -170,53 +171,114 @@ procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
 var preco, preco_prazo :Double;
 begin
-    produto     := dm.SQL_produtospro_id.Value;
-    qtd         := StrToInt(edt_pro_qtd_pdv.Text);
-    preco       := dm.SQL_produtospro_preco.Value;
-    preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
-    with SQL_itens_add do
+    if (edt_pro_barras_pdv.Text = '') and (edt_pro_nome_pdv.Text = '') then
     begin
-        Close;
-        SQL.Clear;
-        SQL.Add('select * from itens');
-        SQL.Add('where iten_produto = :produto');
-        SQL.Add('and iten_pedido = :pedido');
-        ParamByName('produto').Value  := produto;
-        ParamByName('pedido').Value   := codigo_venda;
-        Open;
-
-        if SQL_itens_add.RecordCount > 0 then
-        begin
-
-        end
-
-            else
-            begin
-                 with SQL_itens_add do
-                  begin
-                      Close;
-                      SQL.Clear;
-                      SQL.Add('insert into itens ');
-                      SQL.Add('(iten_produto, iten_qtd, iten_pedido, iten_preco, iten_preco_prazo)');
-                      SQL.Add('values( :produto,:qtd,:pedido,:preco, :preco_prazo)');
-                      //SQL.Add('select * from itens');
-                      //SQL.Add('where iten_produto = produto');
-                      ParamByName('produto').Value := produto;
-                      ParamByName('qtd').Value := qtd;
-                      ParamByName('pedido').Value :=  codigo_venda;
-                      ParamByName('preco').Value := preco;
-                      ParamByName('preco_prazo').Value :=  preco_prazo;
-                      ExecSQL;
-
-                      ShowMessage('Produto Adiocionado!');
-                  end;
-            end;
-
-            ProcedureAtualizaDBGridLançamentos;
+      ShowMessage('Precisa informar os dados do produto!');
+      edt_pro_nome_pdv.SetFocus;
+      Exit;
     end;
 
 
-end;
+       with dm.SQL_produtos do
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Add('select * from produtos');
+          SQL.Add('where pro_nome = :nome');
+          SQL.Add('and pro_barra = :barra');
+          ParamByName('barra').Value := edt_pro_barras_pdv.Text;
+          ParamByName('nome').Value := edt_pro_nome_pdv.Text;
+          Open;
+              begin
+                  if RecordCount = 0 then
+                   ShowMessage('Produto não encontrado!');
+                   edt_pro_barras_pdv.Clear ;
+                   edt_pro_nome_pdv.Clear;
+                   edt_pro_preco_pdv.Clear;
+                   edt_pro_prazo_pdv.Clear;
+                   edt_pro_nome_pdv.SetFocus ;
+               end;
+
+                begin
+                   if RecordCount = 1 then
+
+                   begin
+                      produto     := dm.SQL_produtospro_id.Value;
+                      qtd         := StrToInt(edt_pro_qtd_pdv.Text);
+                      preco       := dm.SQL_produtospro_preco.Value;
+                      preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
+
+                    
+
+
+                      with SQL_itens_add do
+                      begin
+                      Close;
+                      SQL.Clear;
+                      SQL.Add('select * from itens');
+                      SQL.Add('where iten_produto = :produto');
+                      SQL.Add('and iten_pedido = :pedido');
+                      ParamByName('produto').Value  := produto;
+                      ParamByName('pedido').Value   := codigo_venda;
+                      Open;
+
+                        if SQL_itens_add.RecordCount > 0 then
+                          begin
+                          //
+                            with SQL_itens_add do
+                            begin
+                            Close;
+                            SQL.Clear;
+                            SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
+                            SQL.Add('where iten_produto = :produto and iten_pedido = :pedido');
+                            ParamByName('pedido').Value := codigo_venda;
+                            ParamByName('produto').Value := produto;
+                            ParamByName('qtd').Value := qtd;
+                            ExecSQL;
+                            end;
+                          end
+
+                        else
+                              begin
+                                   with SQL_itens_add do
+                                    begin
+                                        Close;
+                                        SQL.Clear;
+                                        SQL.Add('insert into itens ');
+                                        SQL.Add('(iten_produto, iten_qtd, iten_pedido, iten_preco, iten_preco_prazo)');
+                                        SQL.Add('values( :produto,:qtd,:pedido,:preco, :preco_prazo)');
+                                        //SQL.Add('select * from itens');
+                                        //SQL.Add('where iten_produto = produto');
+                                        ParamByName('produto').Value := produto;
+                                        ParamByName('qtd').Value := qtd;
+                                        ParamByName('pedido').Value :=  codigo_venda;
+                                        ParamByName('preco').Value := preco;
+                                        ParamByName('preco_prazo').Value :=  preco_prazo;
+                                        ExecSQL;
+
+                                        ShowMessage('Produto Adiocionado!');
+                                        edt_pro_nome_pdv.SetFocus;
+                                    end;
+                              end;
+
+                               edt_pro_qtd_pdv.Value := 1;
+                              ProcedureAtualizaDBGridLançamentos;
+                      end;
+
+
+                   end;
+                end;
+
+        end;
+
+
+
+
+
+ end;
+
+
+
 procedure TF_PDV.SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
 begin
     SQL_listar_pedidos_dbglançamentosubTotal.Value :=
@@ -259,12 +321,13 @@ begin
       TB_pedidos.Post;
    end;
 
-   with SQL_listar_pedidos_dbglançamento do
+  with SQL_listar_pedidos_dbglançamento do
    begin
    Close;
-   SQL.Add('select * from pedidos, produtos, itens');
+   SQL.Clear;
+   SQL.Add('select* from view_listar_pedidos');
    SQL.Add('where ped_codigo = :codigo');
-   ParamByName('codigo').Values := codigo_venda;
+   ParamByName('codigo').Value := codigo_venda;
    Open;
 
    end;
@@ -481,6 +544,8 @@ end;
 
 procedure TF_PDV.edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+edt_pro_qtd_pdv.Value :=1;
+
     If Key = #13  then
 
         with dm.SQL_produtos do
@@ -522,8 +587,9 @@ begin
 
 
        begin
-        if not ( Key in['0'..'9',',', #8] ) then
-        Key := #0;
+        //não permitir digitar letras no código de barras
+        if not (Key in['0'..'9',Chr(8)]) then
+        Key:= #0
         end;
 
 
@@ -547,6 +613,7 @@ end;
 
 procedure TF_PDV.edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+edt_pro_qtd_pdv.value :=1;
     if Key = #13 then
       begin
          if edt_pro_nome_pdv.Text = '' then
@@ -585,16 +652,35 @@ begin
 
 
           end;
+
+           begin
+                  //não digitar números na pesquisa por nome do produto
+                 if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
+                 Key:= #0
+                end;
+end;
+
+procedure TF_PDV.edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if Key = VK_TAB then
+    btn_pro_iten_add_pdv.SetFocus;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
+
   if Key = #13 then
   btn_pro_iten_add_pdv.Click;
+
+
 end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+    SQL_listar_pedidos_dbglançamento.Close;
+    codigo_venda := '';
+    dm.SQL_produtos.Close;
     F_PDV:= nil;
 end;
 
@@ -608,16 +694,12 @@ begin
    edt_cli_nome_pdv.SetFocus;
 end;
 
-procedure TF_PDV.btn_iniciar_venda_pdv2Click(Sender: TObject);
-begin
-  ProcedureIniciavenda;
-  edt_pro_nome_pdv.SetFocus;
-end;
+
 
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
   ProcedureIniciavenda;
-  edt_cli_codigo_pdv.SetFocus;
+  edt_pro_nome_pdv.SetFocus;
 end;
 
 procedure TF_PDV.btn_pro_iten_add_pdv2Click(Sender: TObject);
