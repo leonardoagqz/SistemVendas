@@ -741,7 +741,16 @@ begin
 
     end;
 
-   
+     with SQL_itens_add do
+    begin
+    //deleta o iten se a QTD = 0
+     Close;
+     SQL.Clear;
+     SQL.Add('delete from itens');
+     SQL.Add('where iten_qtd = 0');
+     ExecSQL;
+
+    end;
 
     ProcedureAtualizaDBGridLançamentos;
 end;
