@@ -124,6 +124,8 @@ type
     procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
+    procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -638,6 +640,13 @@ begin
                  if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
                  Key:= #0
                 end;
+end;
+
+procedure TF_PDV.edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+    if Key = VK_TAB then
+    btn_pro_iten_add_pdv.SetFocus;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);

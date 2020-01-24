@@ -36,7 +36,8 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
-    ExplicitTop = 394
+    ExplicitLeft = 40
+    ExplicitTop = 450
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -53,7 +54,7 @@
       ParentFont = False
     end
     object ldb_total_prazol_pn_baixo_pdv: TLabel
-      Left = 159
+      Left = 213
       Top = -1
       Width = 98
       Height = 21
@@ -68,7 +69,7 @@
     object edt_total_pdv: TCurrencyEdit
       Left = 32
       Top = 22
-      Width = 81
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -80,9 +81,9 @@
       TabOrder = 0
     end
     object edt_total_prazo_pdv: TCurrencyEdit
-      Left = 159
+      Left = 213
       Top = 22
-      Width = 82
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -380,7 +381,7 @@
     object pn_buscar_barras_nome_pdv: TPanel
       Left = 6
       Top = 59
-      Width = 634
+      Width = 619
       Height = 78
       TabOrder = 2
       object lbl_buscarporbarras_pdv: TLabel
@@ -442,12 +443,14 @@
         Top = 0
         Width = 3
         Height = 13
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9247509
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object lbl_total_prazo_pro_pdv: TLabel
         Left = 135
@@ -717,7 +720,7 @@
           1269121212121212121212121212121212121212121212121212121212121212
           121212121269}
         TabOrder = 0
-        OnClick = btn_iniciar_venda_pdv2Click
+        OnClick = btn_iniciar_venda_pdvClick
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel
@@ -1023,13 +1026,6 @@
       end
       item
         Expanded = False
-        FieldName = 'iten_id'
-        Title.Caption = 'Item'
-        Width = 41
-        Visible = True
-      end
-      item
-        Expanded = False
         Visible = True
       end>
   end
@@ -1051,12 +1047,11 @@
     Top = 80
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
-    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'
-      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto ')
     Left = 112
     Top = 272
     object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
@@ -1220,7 +1215,6 @@
     end
   end
   object SQL_Listar_Pedidos_dbg2: TFDQuery
-    Active = True
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'

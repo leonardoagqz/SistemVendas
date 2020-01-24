@@ -24,7 +24,6 @@
     Width = 898
     Height = 19
     Panels = <>
-    ExplicitTop = 453
   end
   object pn_pdv_baixo: TPanel
     Left = 0
@@ -36,7 +35,6 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
-    ExplicitTop = 394
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -53,7 +51,7 @@
       ParentFont = False
     end
     object ldb_total_prazol_pn_baixo_pdv: TLabel
-      Left = 159
+      Left = 213
       Top = -1
       Width = 98
       Height = 21
@@ -68,7 +66,7 @@
     object edt_total_pdv: TCurrencyEdit
       Left = 32
       Top = 22
-      Width = 81
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -80,9 +78,9 @@
       TabOrder = 0
     end
     object edt_total_prazo_pdv: TCurrencyEdit
-      Left = 159
+      Left = 213
       Top = 22
-      Width = 82
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -380,7 +378,7 @@
     object pn_buscar_barras_nome_pdv: TPanel
       Left = 6
       Top = 59
-      Width = 634
+      Width = 619
       Height = 78
       TabOrder = 2
       object lbl_buscarporbarras_pdv: TLabel
@@ -497,14 +495,13 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
       end
       object edt_pro_preco_pdv: TCurrencyEdit
         Left = 4
         Top = 49
         Width = 120
         Height = 27
-        TabStop = False
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -512,7 +509,7 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 6
       end
       object edt_pro_qtd_pdv: TCurrencyEdit
         Left = 444
@@ -577,7 +574,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 5
+        TabOrder = 3
         TabStop = False
         OnClick = btn_pro_iten_add_pdvClick
       end
@@ -627,7 +624,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 6
+        TabOrder = 4
         TabStop = False
       end
     end
@@ -719,7 +716,7 @@
           1269121212121212121212121212121212121212121212121212121212121212
           121212121269}
         TabOrder = 0
-        OnClick = btn_iniciar_venda_pdv2Click
+        OnClick = btn_iniciar_venda_pdvClick
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel
@@ -728,7 +725,6 @@
       Width = 152
       Height = 112
       TabOrder = 3
-      TabStop = True
       object btn_venda_cancelar_pdv: TBitBtn
         Left = 19
         Top = 76
@@ -1025,13 +1021,6 @@
       end
       item
         Expanded = False
-        FieldName = 'iten_id'
-        Title.Caption = 'Item'
-        Width = 41
-        Visible = True
-      end
-      item
-        Expanded = False
         Visible = True
       end>
   end
@@ -1053,18 +1042,18 @@
     Top = 80
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
-    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'
-      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto ')
     Left = 112
     Top = 272
     object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_listar_pedidos_dbglançamentoped_date: TDateField
       AutoGenerateValue = arDefault
@@ -1222,7 +1211,6 @@
     end
   end
   object SQL_Listar_Pedidos_dbg2: TFDQuery
-    Active = True
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'

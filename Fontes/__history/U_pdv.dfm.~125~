@@ -24,7 +24,6 @@
     Width = 898
     Height = 19
     Panels = <>
-    ExplicitTop = 453
   end
   object pn_pdv_baixo: TPanel
     Left = 0
@@ -36,8 +35,6 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
-    ExplicitLeft = 40
-    ExplicitTop = 450
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -491,6 +488,7 @@
         Top = 50
         Width = 120
         Height = 27
+        TabStop = False
         Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -498,7 +496,7 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 4
+        TabOrder = 5
       end
       object edt_pro_preco_pdv: TCurrencyEdit
         Left = 4
@@ -513,7 +511,7 @@
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
-        TabOrder = 3
+        TabOrder = 6
       end
       object edt_pro_qtd_pdv: TCurrencyEdit
         Left = 444
@@ -530,11 +528,12 @@
         ParentFont = False
         TabOrder = 2
         Value = 1.000000000000000000
+        OnKeyDown = edt_pro_qtd_pdvKeyDown
         OnKeyPress = edt_pro_qtd_pdvKeyPress
       end
       object btn_pro_iten_add_pdv: TBitBtn
-        Left = 263
-        Top = 50
+        Left = 523
+        Top = 19
         Width = 31
         Height = 26
         Glyph.Data = {
@@ -578,7 +577,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFEFEFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 5
+        TabOrder = 3
         TabStop = False
         OnClick = btn_pro_iten_add_pdvClick
       end
@@ -628,7 +627,7 @@
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
-        TabOrder = 6
+        TabOrder = 4
         TabStop = False
       end
     end
@@ -720,7 +719,7 @@
           1269121212121212121212121212121212121212121212121212121212121212
           121212121269}
         TabOrder = 0
-        OnClick = btn_iniciar_venda_pdv2Click
+        OnClick = btn_iniciar_venda_pdvClick
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel
@@ -800,6 +799,7 @@
           FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFDFDFDF9F9F9CFCFD0D4D4D4FEFEFEFF
           FFFFFEFEFE00}
         TabOrder = 2
+        TabStop = False
       end
       object btn_venda_fechar_pdv: TBitBtn
         Left = 19
@@ -808,6 +808,7 @@
         Height = 27
         Caption = 'Fechar Venda'
         TabOrder = 1
+        TabStop = False
       end
       object btn_venda_gravar_pdv: TBitBtn
         Left = 19
@@ -879,6 +880,7 @@
           FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFDFDFDF9F9F9CFCFD0D4D4D4FEFEFEFF
           FFFFFEFEFE00}
         TabOrder = 0
+        TabStop = False
       end
     end
   end
@@ -1051,13 +1053,14 @@
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'
-      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto ')
     Left = 112
     Top = 272
     object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_listar_pedidos_dbglançamentoped_date: TDateField
       AutoGenerateValue = arDefault
