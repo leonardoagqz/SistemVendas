@@ -121,7 +121,6 @@ type
     procedure edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure btn_pro_iten_add_pdvClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btn_iniciar_venda_pdv2Click(Sender: TObject);
     procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
     procedure btn_venda_sair_pdvClick(Sender: TObject);
     procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
@@ -212,6 +211,7 @@ begin
                   end;
             end;
 
+
             ProcedureAtualizaDBGridLançamentos;
     end;
 
@@ -248,7 +248,7 @@ begin
 
    if SQL_verifica_venda.RecordCount = 0 then
    begin
-
+      TB_pedidos.Active;
       TB_pedidos.Append;
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;
@@ -259,6 +259,16 @@ begin
       TB_pedidos.Post;
    end;
 
+   with SQL_listar_pedidos_dbglançamento do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from pedidos, produtos, itens');
+   SQL.Add('where ped_codigo = :codigo');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+
+   end;
 
 end;
 procedure TF_PDV.ProcedureBloqueiacampos;
@@ -599,11 +609,7 @@ begin
    edt_cli_nome_pdv.SetFocus;
 end;
 
-procedure TF_PDV.btn_iniciar_venda_pdv2Click(Sender: TObject);
-begin
-  ProcedureIniciavenda;
-  edt_pro_nome_pdv.SetFocus;
-end;
+
 
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
