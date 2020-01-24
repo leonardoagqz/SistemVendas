@@ -1051,7 +1051,7 @@
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'
-      '  where ped_codigo = iten_pedido and pro_id = iten_produto  ')
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto ')
     Left = 112
     Top = 272
     object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField

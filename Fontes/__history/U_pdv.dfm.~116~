@@ -3,7 +3,7 @@
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Venda'
-  ClientHeight = 472
+  ClientHeight = 534
   ClientWidth = 898
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,14 +20,15 @@
   TextHeight = 13
   object stb_pdv: TStatusBar
     Left = 0
-    Top = 453
+    Top = 515
     Width = 898
     Height = 19
     Panels = <>
+    ExplicitTop = 453
   end
   object pn_pdv_baixo: TPanel
     Left = 0
-    Top = 394
+    Top = 456
     Width = 898
     Height = 59
     Align = alBottom
@@ -35,6 +36,8 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
+    ExplicitLeft = 40
+    ExplicitTop = 450
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -51,7 +54,7 @@
       ParentFont = False
     end
     object ldb_total_prazol_pn_baixo_pdv: TLabel
-      Left = 159
+      Left = 213
       Top = -1
       Width = 98
       Height = 21
@@ -66,7 +69,7 @@
     object edt_total_pdv: TCurrencyEdit
       Left = 32
       Top = 22
-      Width = 81
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -78,9 +81,9 @@
       TabOrder = 0
     end
     object edt_total_prazo_pdv: TCurrencyEdit
-      Left = 159
+      Left = 213
       Top = 22
-      Width = 82
+      Width = 150
       Height = 32
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -96,7 +99,7 @@
     Left = 864
     Top = 140
     Width = 34
-    Height = 254
+    Height = 317
     ParentBackground = False
     TabOrder = 1
     TabStop = True
@@ -378,7 +381,7 @@
     object pn_buscar_barras_nome_pdv: TPanel
       Left = 6
       Top = 59
-      Width = 634
+      Width = 619
       Height = 78
       TabOrder = 2
       object lbl_buscarporbarras_pdv: TLabel
@@ -426,24 +429,28 @@
         Width = 75
         Height = 13
         Caption = ' em Estoque: '
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9247509
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
+        Visible = False
       end
       object lbl_result_qtd_estoque_prod_pdv: TLabel
         Left = 600
         Top = 0
         Width = 3
         Height = 13
+        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = 9247509
         Font.Height = -11
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object lbl_total_prazo_pro_pdv: TLabel
         Left = 135
@@ -713,7 +720,7 @@
           1269121212121212121212121212121212121212121212121212121212121212
           121212121269}
         TabOrder = 0
-        OnClick = btn_iniciar_venda_pdv2Click
+        OnClick = btn_iniciar_venda_pdvClick
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel
@@ -876,10 +883,10 @@
     end
   end
   object dbg_lançamento_pdv: TDBGrid
-    Left = -5
+    Left = -3
     Top = 141
     Width = 863
-    Height = 175
+    Height = 213
     DataSource = ds_pedidos
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
@@ -891,166 +898,162 @@
       item
         Expanded = False
         FieldName = 'ped_codigo'
-        Width = 94
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ped_cliente'
-        Width = 23
+        Title.Caption = 'N'#186' Pedido'
+        Width = 88
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_id'
-        Width = 31
+        Title.Caption = 'Cod. Prod.'
+        Width = 57
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_nome'
-        Width = 91
+        Title.Caption = 'Descri'#231#227'o do Produto'
+        Width = 119
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_barra'
+        Title.Caption = 'Cod. Barras'
         Width = 100
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_ref'
-        Width = 93
+        Title.Caption = 'Ref. Produto'
+        Width = 103
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_preco'
-        Width = 49
+        Title.Caption = 'Valor'
+        Width = 55
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_preco_prazo'
-        Width = 48
+        Title.Caption = '$ Valor a Prazo'
+        Width = 78
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'pro_estoque'
-        Width = 33
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'iten_id'
-        Width = 31
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'iten_produto'
+        Title.Caption = 'Estoque'
+        Width = 43
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'iten_qtd'
+        Title.Caption = 'Qtd'
+        Width = 34
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'subTotal'
+        Title.Caption = 'Sub Total'
+        Width = 57
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'subTotalPrazo'
+        Title.Caption = 'Sub Total a Prazo'
+        Width = 83
         Visible = True
       end>
   end
   object DBGrid1: TDBGrid
-    Left = 384
-    Top = 314
-    Width = 478
-    Height = 80
+    Left = 378
+    Top = 353
+    Width = 482
+    Height = 104
+    DataSource = ds_pedidos2
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ped_date'
+        Title.Caption = 'Data'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_cliente'
+        Title.Caption = 'Cod. Cliente'
+        Width = 61
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_usuario'
+        Title.Caption = 'Usu'#225'rio'
+        Width = 47
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_forma_pag'
+        Title.Caption = 'Forma Pag.'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_fechado'
+        Title.Caption = 'Fechado'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ped_faturado'
+        Title.Caption = 'Faturado'
+        Visible = True
+      end
+      item
+        Expanded = False
+        Visible = True
+      end>
   end
   object SQL_verifica_venda: TFDQuery
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos')
-    Left = 808
-    Top = 120
-  end
-  object TB_pedidos: TFDTable
-    Active = True
-    IndexFieldNames = 'ped_id'
-    Connection = dm.conexao
-    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
-    TableName = 'aguiarsvendasbd.pedidos'
-    Left = 680
-    Top = 264
-    object TB_pedidosped_id: TFDAutoIncField
-      FieldName = 'ped_id'
-      Origin = 'ped_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-    end
-    object TB_pedidosped_date: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_date'
-      Origin = 'ped_date'
-    end
-    object TB_pedidosped_codigo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_codigo'
-      Origin = 'ped_codigo'
-      Size = 50
-    end
-    object TB_pedidosped_cliente: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_cliente'
-      Origin = 'ped_cliente'
-    end
-    object TB_pedidosped_usuario: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_usuario'
-      Origin = 'ped_usuario'
-    end
-    object TB_pedidosped_forma_pag: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_forma_pag'
-      Origin = 'ped_forma_pag'
-    end
-    object TB_pedidosped_fechado: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_fechado'
-      Origin = 'ped_fechado'
-      FixedChar = True
-      Size = 3
-    end
-    object TB_pedidosped_faturado: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_faturado'
-      Origin = 'ped_faturado'
-      FixedChar = True
-      Size = 3
-    end
+    Left = 672
+    Top = 24
   end
   object ds_pedidos: TDataSource
     DataSet = SQL_listar_pedidos_dbglançamento
-    Left = 680
-    Top = 216
+    Left = 232
+    Top = 272
   end
   object SQL_itens_add: TFDQuery
     Connection = dm.conexao
-    Left = 736
-    Top = 120
+    Left = 672
+    Top = 80
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
-    Active = True
+    OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos, produtos, itens'
-      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
-    Left = 680
-    Top = 160
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto  ')
+    Left = 112
+    Top = 272
     object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
@@ -1138,6 +1141,7 @@
       Origin = 'pro_preco'
       ProviderFlags = []
       ReadOnly = True
+      DisplayFormat = ',0.00;-,0.00'
     end
     object SQL_listar_pedidos_dbglançamentopro_preco_prazo: TFloatField
       AutoGenerateValue = arDefault
@@ -1145,6 +1149,7 @@
       Origin = 'pro_preco_prazo'
       ProviderFlags = []
       ReadOnly = True
+      DisplayFormat = ',0.00;-,0.00'
     end
     object SQL_listar_pedidos_dbglançamentopro_estoque: TIntegerField
       AutoGenerateValue = arDefault
@@ -1195,6 +1200,83 @@
       Origin = 'iten_preco_prazo'
       ProviderFlags = []
       ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentosubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotal'
+      DisplayFormat = ',0.00;-,0.00'
+      Calculated = True
+    end
+    object SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotalPrazo'
+      DisplayFormat = ',0.00;-,0.00'
+      Calculated = True
+    end
+  end
+  object SQL_Listar_Pedidos_dbg2: TFDQuery
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from pedidos, produtos, itens'
+      '  where ped_codigo = iten_pedido and pro_id = iten_produto')
+    Left = 432
+    Top = 384
+  end
+  object ds_pedidos2: TDataSource
+    DataSet = SQL_Listar_Pedidos_dbg2
+    Left = 544
+    Top = 384
+  end
+  object TB_pedidos: TFDTable
+    Active = True
+    IndexFieldNames = 'ped_id'
+    Connection = dm.conexao
+    UpdateOptions.UpdateTableName = 'pedidos'
+    TableName = 'pedidos'
+    Left = 344
+    Top = 274
+    object TB_pedidosped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object TB_pedidosped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object TB_pedidosped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object TB_pedidosped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object TB_pedidosped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object TB_pedidosped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object TB_pedidosped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object TB_pedidosped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
     end
   end
 end

@@ -169,6 +169,39 @@ procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
 var preco, preco_prazo :Double;
 begin
+    if (edt_pro_barras_pdv.Text = '') or (edt_pro_nome_pdv.Text = '') then
+    begin
+      ShowMessage('Precisa informar os dados do produto!');
+      Exit;
+    end;
+
+    with dm.SQL_produtos do
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Add('select * from produtos');
+          SQL.Add('where pro_barra = :barra');
+          ParamByName('barra').Value := edt_pro_barras_pdv.Text;
+          Open;
+          begin
+
+
+              begin
+                  if RecordCount = 0 then
+                   ShowMessage('Produto não encontrado!');
+                   edt_pro_barras_pdv.Clear ;
+                   edt_pro_nome_pdv.Clear;
+                   edt_pro_preco_pdv.Clear;
+                   edt_pro_prazo_pdv.Clear;
+                   edt_pro_barras_pdv.SetFocus ;
+
+                    exit
+                 end;
+
+            end;
+
+          end;
+
     produto     := dm.SQL_produtospro_id.Value;
     qtd         := StrToInt(edt_pro_qtd_pdv.Text);
     preco       := dm.SQL_produtospro_preco.Value;
@@ -211,7 +244,7 @@ begin
                   end;
             end;
 
-
+             edt_pro_qtd_pdv.Value := 1;
             ProcedureAtualizaDBGridLançamentos;
     end;
 
@@ -259,11 +292,11 @@ begin
       TB_pedidos.Post;
    end;
 
-   with SQL_listar_pedidos_dbglançamento do
+  with SQL_listar_pedidos_dbglançamento do
    begin
    Close;
    SQL.Clear;
-   SQL.Add('select * from pedidos, produtos, itens');
+   SQL.Add('select* from view_listar_pedidos');
    SQL.Add('where ped_codigo = :codigo');
    ParamByName('codigo').Value := codigo_venda;
    Open;
@@ -523,8 +556,9 @@ begin
 
 
        begin
-        if not ( Key in['0'..'9',',', #8] ) then
-        Key := #0;
+        //não permitir digitar letras no código de barras
+        if not (Key in['0'..'9',Chr(8)]) then
+        Key:= #0
         end;
 
 
@@ -586,6 +620,12 @@ begin
 
 
           end;
+
+           begin
+                  //não digitar números na pesquisa por nome do produto
+                 if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
+                 Key:= #0
+                end;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -596,6 +636,9 @@ end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+    SQL_listar_pedidos_dbglançamento.Close;
+    codigo_venda := '';
+    dm.SQL_produtos.Close;
     F_PDV:= nil;
 end;
 
@@ -625,6 +668,7 @@ end;
 procedure TF_PDV.btn_pro_iten_add_pdvClick(Sender: TObject);
 begin
   ProcedureProdutosAdd;
+
 end;
 
 

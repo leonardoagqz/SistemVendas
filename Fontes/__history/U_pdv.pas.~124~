@@ -49,16 +49,7 @@ type
     lbl_total_pro_pdv: TLabel;
     lbl_total_prazo_pro_pdv: TLabel;
     SQL_verifica_venda: TFDQuery;
-    TB_pedidos: TFDTable;
     ds_pedidos: TDataSource;
-    TB_pedidosped_id: TFDAutoIncField;
-    TB_pedidosped_date: TDateField;
-    TB_pedidosped_codigo: TStringField;
-    TB_pedidosped_cliente: TIntegerField;
-    TB_pedidosped_usuario: TIntegerField;
-    TB_pedidosped_forma_pag: TIntegerField;
-    TB_pedidosped_fechado: TStringField;
-    TB_pedidosped_faturado: TStringField;
     SQL_itens_add: TFDQuery;
     btn_iniciar_venda_pdv: TBitBtn;
     btn_pro_iten_add_pdv: TBitBtn;
@@ -68,6 +59,42 @@ type
     btn_venda_cancelar_pdv: TBitBtn;
     btn_impressao_pdv: TBitBtn;
     btn_venda_sair_pdv: TBitBtn;
+    SQL_listar_pedidos_dbglançamento: TFDQuery;
+    SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField;
+    SQL_listar_pedidos_dbglançamentoped_date: TDateField;
+    SQL_listar_pedidos_dbglançamentoped_codigo: TStringField;
+    SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_forma_pag: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_fechado: TStringField;
+    SQL_listar_pedidos_dbglançamentoped_faturado: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentopro_nome: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_barra: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_ref: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_custo: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_preco: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_preco_prazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_estoque: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_produto: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_qtd: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_pedido: TStringField;
+    SQL_listar_pedidos_dbglançamentoiten_preco: TFloatField;
+    SQL_listar_pedidos_dbglançamentoiten_preco_prazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentosubTotal: TFloatField;
+    SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField;
+    SQL_Listar_Pedidos_dbg2: TFDQuery;
+    ds_pedidos2: TDataSource;
+    TB_pedidos: TFDTable;
+    TB_pedidosped_id: TFDAutoIncField;
+    TB_pedidosped_date: TDateField;
+    TB_pedidosped_codigo: TStringField;
+    TB_pedidosped_cliente: TIntegerField;
+    TB_pedidosped_usuario: TIntegerField;
+    TB_pedidosped_forma_pag: TIntegerField;
+    TB_pedidosped_fechado: TStringField;
+    TB_pedidosped_faturado: TStringField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -78,6 +105,7 @@ type
     procedure ProcedureDesbloqueiaCampos;
     procedure ProcedureIniciaVenda;
     procedure ProcedureProdutosAdd;
+    procedure ProcedureAtualizaDBGridLançamentos;
     procedure edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -93,14 +121,15 @@ type
     procedure edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure btn_pro_iten_add_pdvClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure btn_iniciar_venda_pdv2Click(Sender: TObject);
     procedure btn_pro_iten_add_pdv2Click(Sender: TObject);
-    procedure btn_venda_sai_pdvClick(Sender: TObject);
+    procedure btn_venda_sair_pdvClick(Sender: TObject);
+    procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
     { Public declarations }
   codigo_venda : string;
+  total_pedido, total_pedido_prazo : Double;
   end;
 
 var
@@ -113,10 +142,66 @@ uses
 
 {$R *.dfm}
 
+procedure TF_PDV.ProcedureAtualizaDBGridLançamentos;
+begin
+   SQL_listar_pedidos_dbglançamento.Close;
+   SQL_listar_pedidos_dbglançamento.Open;
+
+
+   SQL_listar_pedidos_dbglançamento.First;
+   total_pedido :=0;
+   total_pedido_prazo :=0;
+   while not SQL_listar_pedidos_dbglançamento.Eof do //enquanto não terminar os registros
+   begin
+   total_pedido := total_pedido + SQL_listar_pedidos_dbglançamentosubTotal.Value;
+   total_pedido_prazo := total_pedido_prazo + SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
+
+   SQL_listar_pedidos_dbglançamento.Next;
+   end;
+
+   edt_total_pdv.Value := total_pedido;
+   edt_total_prazo_pdv.Value := total_pedido_prazo;
+
+end;
+
+
 procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
 var preco, preco_prazo :Double;
 begin
+    if (edt_pro_barras_pdv.Text = '') or (edt_pro_nome_pdv.Text = '') then
+    begin
+      ShowMessage('Precisa informar os dados do produto!');
+      Exit;
+    end;
+
+    with dm.SQL_produtos do
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Add('select * from produtos');
+          SQL.Add('where pro_barra = :barra');
+          ParamByName('barra').Value := edt_pro_barras_pdv.Text;
+          Open;
+          begin
+
+
+              begin
+                  if RecordCount = 0 then
+                   ShowMessage('Produto não encontrado!');
+                   edt_pro_barras_pdv.Clear ;
+                   edt_pro_nome_pdv.Clear;
+                   edt_pro_preco_pdv.Clear;
+                   edt_pro_prazo_pdv.Clear;
+                   edt_pro_barras_pdv.SetFocus ;
+
+                    exit
+                 end;
+
+            end;
+
+          end;
+
     produto     := dm.SQL_produtospro_id.Value;
     qtd         := StrToInt(edt_pro_qtd_pdv.Text);
     preco       := dm.SQL_produtospro_preco.Value;
@@ -154,13 +239,26 @@ begin
                       ParamByName('preco').Value := preco;
                       ParamByName('preco_prazo').Value :=  preco_prazo;
                       ExecSQL;
+
+                      ShowMessage('Produto Adiocionado!');
                   end;
             end;
 
+             edt_pro_qtd_pdv.Value := 1;
+            ProcedureAtualizaDBGridLançamentos;
     end;
 
 
 end;
+procedure TF_PDV.SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
+begin
+    SQL_listar_pedidos_dbglançamentosubTotal.Value :=
+    SQL_listar_pedidos_dbglançamentopro_preco.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+
+    SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value :=
+    SQL_listar_pedidos_dbglançamentopro_preco_prazo.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+end;
+
 procedure TF_PDV.ProcedureIniciaVenda;
 begin
    ProcedureDesbloqueiaCampos;
@@ -183,7 +281,7 @@ begin
 
    if SQL_verifica_venda.RecordCount = 0 then
    begin
-      TB_pedidos.Active := True;
+      TB_pedidos.Active;
       TB_pedidos.Append;
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;
@@ -194,6 +292,16 @@ begin
       TB_pedidos.Post;
    end;
 
+  with SQL_listar_pedidos_dbglançamento do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select* from view_listar_pedidos');
+   SQL.Add('where ped_codigo = :codigo');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+
+   end;
 
 end;
 procedure TF_PDV.ProcedureBloqueiacampos;
@@ -511,6 +619,12 @@ begin
 
 
           end;
+
+           begin
+                  //não digitar números na pesquisa por nome do produto
+                 if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
+                 Key:= #0
+                end;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -521,6 +635,9 @@ end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+    SQL_listar_pedidos_dbglançamento.Close;
+    codigo_venda := '';
+    dm.SQL_produtos.Close;
     F_PDV:= nil;
 end;
 
@@ -534,11 +651,7 @@ begin
    edt_cli_nome_pdv.SetFocus;
 end;
 
-procedure TF_PDV.btn_iniciar_venda_pdv2Click(Sender: TObject);
-begin
-  ProcedureIniciavenda;
-  edt_pro_nome_pdv.SetFocus;
-end;
+
 
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
@@ -554,11 +667,15 @@ end;
 procedure TF_PDV.btn_pro_iten_add_pdvClick(Sender: TObject);
 begin
   ProcedureProdutosAdd;
+
 end;
+
+
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);
 begin
-
+   Close;
+   F_PDV := nil;
 end;
 
 end.
