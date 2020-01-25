@@ -655,10 +655,10 @@ begin
           end;
 
            begin
-                  //não digitar números na pesquisa por nome do produto
-                 if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
-                 Key:= #0
-                end;
+           //não digitar números na pesquisa por nome do produto
+           if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
+           Key:= #0
+           end;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -729,16 +729,29 @@ begin
 
    with SQL_itens_add do
     begin
+    //remove a quantidade da do campo QTD
      Close;
      SQL.Clear;
      SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
-     SQL.Add('where iten_produto = :produto and iten_pedido = :pedido');
+     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
      ParamByName('pedido').Value := codigo_venda;
      ParamByName('produto').Value := produto;
      ParamByName('qtd').Value := qtd;
      ExecSQL;
 
     end;
+
+       with SQL_itens_add do
+      begin
+      //deleta o iten se a QTD = 0
+       Close;
+       SQL.Clear;
+       SQL.Add('delete from itens');
+       SQL.Add('where iten_qtd = 0');
+       ExecSQL;
+
+      end;
+
     ProcedureAtualizaDBGridLançamentos;
 end;
 

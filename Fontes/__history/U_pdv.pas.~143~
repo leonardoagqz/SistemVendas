@@ -741,16 +741,13 @@ begin
 
     end;
 
-    with SQL_itens_add do
+     with SQL_itens_add do
     begin
-    //remove a quantidade da do campo QTD
+    //deleta o iten se a QTD = 0
      Close;
      SQL.Clear;
-     SQL.Add('delete itens set iten_qtd = iten_qtd - :qtd');
-     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
-     ParamByName('pedido').Value := codigo_venda;
-     ParamByName('produto').Value := produto;
-     ParamByName('qtd').Value := qtd;
+     SQL.Add('delete from itens');
+     SQL.Add('where iten_qtd = 0');
      ExecSQL;
 
     end;

@@ -95,6 +95,10 @@ type
     TB_pedidosped_forma_pag: TIntegerField;
     TB_pedidosped_fechado: TStringField;
     TB_pedidosped_faturado: TStringField;
+    btn_rm1_qtd_pdv: TBitBtn;
+    btn_editar_qtd_pdv: TBitBtn;
+    btn_add1_qtd_pdv: TBitBtn;
+    pn_btns_add1_edt_removT_remov1_pdv: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -127,6 +131,9 @@ type
     procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btn_pro_iten_remove_pdvClick(Sender: TObject);
+    procedure btn_rm1_qtd_pdvClick(Sender: TObject);
+    procedure btn_editar_qtd_pdvClick(Sender: TObject);
+    procedure btn_add1_qtd_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -655,10 +662,10 @@ begin
           end;
 
            begin
-                  //não digitar números na pesquisa por nome do produto
-                 if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
-                 Key:= #0
-                end;
+           //não digitar números na pesquisa por nome do produto
+           if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
+           Key:= #0
+           end;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -703,6 +710,97 @@ end;
 
 
 
+procedure TF_PDV.btn_rm1_qtd_pdvClick(Sender: TObject);
+var produto, qtd, qtd_existente : Integer;
+begin
+    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+    qtd := 1;
+
+   with SQL_itens_add do
+    begin
+    //remove a quantidade da do campo QTD
+     Close;
+     SQL.Clear;
+     SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
+     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+     ParamByName('pedido').Value := codigo_venda;
+     ParamByName('produto').Value := produto;
+     ParamByName('qtd').Value := qtd;
+     ExecSQL;
+
+    end;
+
+       with SQL_itens_add do
+      begin
+      //deleta o iten se a QTD = 0
+       Close;
+       SQL.Clear;
+       SQL.Add('delete from itens');
+       SQL.Add('where iten_qtd = 0');
+       ExecSQL;
+
+      end;
+
+    ProcedureAtualizaDBGridLançamentos;
+end;
+
+procedure TF_PDV.btn_editar_qtd_pdvClick(Sender: TObject);
+var produto, qtd, qtd_existente : Integer;
+begin
+    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+    qtd_existente := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+
+    if qtd_existente >= 1 then
+    begin
+      qtd:= StrToInt(InputBox('Digite a quantidade','Qual a quantidade correta?','1'));
+    end;
+
+    //qtd := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+
+   with SQL_itens_add do
+    begin
+    //remove a quantidade da do campo QTD
+     Close;
+     SQL.Clear;
+     SQL.Add('update itens set iten_qtd =  :qtd');
+     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+     ParamByName('pedido').Value := codigo_venda;
+     ParamByName('produto').Value := produto;
+     ParamByName('qtd').Value := qtd;
+     ExecSQL;
+
+    end;
+
+    
+
+    ProcedureAtualizaDBGridLançamentos;
+end;
+
+procedure TF_PDV.btn_add1_qtd_pdvClick(Sender: TObject);
+var produto, qtd, qtd_existente : Integer;
+begin
+    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+    qtd := 1;
+
+   with SQL_itens_add do
+    begin
+    //remove a quantidade da do campo QTD
+     Close;
+     SQL.Clear;
+     SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
+     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+     ParamByName('pedido').Value := codigo_venda;
+     ParamByName('produto').Value := produto;
+     ParamByName('qtd').Value := qtd;
+     ExecSQL;
+
+    end;
+
+    
+
+    ProcedureAtualizaDBGridLançamentos;
+end;
+
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
   ProcedureIniciavenda;
@@ -722,10 +820,11 @@ end;
 
 
 procedure TF_PDV.btn_pro_iten_remove_pdvClick(Sender: TObject);
-var produto, qtd : Integer;
+var produto, qtd, qtd_existente : Integer;
 begin
     produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
-    qtd := 1;
+    qtd_existente := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+    qtd := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
    with SQL_itens_add do
     begin
@@ -741,16 +840,16 @@ begin
 
     end;
 
-     with SQL_itens_add do
-    begin
-    //deleta o iten se a QTD = 0
-     Close;
-     SQL.Clear;
-     SQL.Add('delete from itens');
-     SQL.Add('where iten_qtd = 0');
-     ExecSQL;
+       with SQL_itens_add do
+      begin
+      //deleta o iten se a QTD = 0
+       Close;
+       SQL.Clear;
+       SQL.Add('delete from itens');
+       SQL.Add('where iten_qtd = 0');
+       ExecSQL;
 
-    end;
+      end;
 
     ProcedureAtualizaDBGridLançamentos;
 end;

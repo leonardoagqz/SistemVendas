@@ -126,6 +126,7 @@ type
     procedure SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
     procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure btn_pro_iten_remove_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -213,8 +214,6 @@ begin
                       qtd         := StrToInt(edt_pro_qtd_pdv.Text);
                       preco       := dm.SQL_produtospro_preco.Value;
                       preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
-
-
 
                       with SQL_itens_add do
                       begin
@@ -589,7 +588,7 @@ begin
 
 
        begin
-        //não permitir digitar letras no código de barras
+        //permitir digitar somente números positivos no código de barras
         if not (Key in['0'..'9',Chr(8)]) then
         Key:= #0
         end;
@@ -656,10 +655,10 @@ begin
           end;
 
            begin
-                  //não digitar números na pesquisa por nome do produto
-                 if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
-                 Key:= #0
-                end;
+           //não digitar números na pesquisa por nome do produto
+           if not (Key in['a'..'z','A'..'Z',Chr(8)]) then
+           Key:= #0
+           end;
 end;
 
 procedure TF_PDV.edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -674,6 +673,12 @@ begin
 
   if Key = #13 then
   btn_pro_iten_add_pdv.Click;
+
+   begin
+        //permitir digitar somente números positivos no código de barras
+        if not (Key in['0'..'9',Chr(8)]) then
+        Key:= #0
+        end;
 
 
 end;
@@ -715,6 +720,46 @@ begin
 end;
 
 
+
+procedure TF_PDV.btn_pro_iten_remove_pdvClick(Sender: TObject);
+var produto, qtd, qtd_existente : Integer;
+begin
+    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+    qtd_existente := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+
+    if qtd_existente > 1 then
+    begin
+      qtd:= StrToInt(InputBox('Digite a quantidade','Informe a quantidade correta','1'))
+    end;
+    qtd := 1;
+
+   with SQL_itens_add do
+    begin
+    //remove a quantidade da do campo QTD
+     Close;
+     SQL.Clear;
+     SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
+     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+     ParamByName('pedido').Value := codigo_venda;
+     ParamByName('produto').Value := produto;
+     ParamByName('qtd').Value := qtd;
+     ExecSQL;
+
+    end;
+
+       with SQL_itens_add do
+      begin
+      //deleta o iten se a QTD = 0
+       Close;
+       SQL.Clear;
+       SQL.Add('delete from itens');
+       SQL.Add('where iten_qtd = 0');
+       ExecSQL;
+
+      end;
+
+    ProcedureAtualizaDBGridLançamentos;
+end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);
 begin
