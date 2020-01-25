@@ -633,15 +633,15 @@
       object pn_btns_add1_edt_removT_remov1_pdv: TPanel
         Left = 274
         Top = 42
-        Width = 142
+        Width = 127
         Height = 34
         Color = clGradientInactiveCaption
         ParentBackground = False
         TabOrder = 7
         object btn_rm1_qtd_pdv: TBitBtn
-          Left = 94
+          Left = 88
           Top = 5
-          Width = 39
+          Width = 32
           Height = 25
           Caption = '- 1'
           TabOrder = 2
@@ -721,7 +721,7 @@
         object btn_add1_qtd_pdv: TBitBtn
           Left = 49
           Top = 5
-          Width = 39
+          Width = 32
           Height = 25
           Caption = '+ 1'
           TabOrder = 1

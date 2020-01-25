@@ -355,6 +355,11 @@ begin
    btn_pro_iten_add_pdv.Visible:=False;
    btn_pro_iten_remove_pdv.Visible:=false;
    edt_cli_codigo_pdv.Visible:=False;
+   btn_rm1_qtd_pdv.Visible:=False;
+   btn_add1_qtd_pdv.Visible:=False;
+   btn_editar_qtd_pdv.Visible:=False;
+   pn_btns_add1_edt_removT_remov1_pdv.Visible:=False;
+   btn_impressao_pdv.Visible:=False;
 end;
 
  procedure TF_PDV.ProcedureDesbloqueiaCampos;
@@ -370,7 +375,12 @@ begin
    btn_venda_fechar_pdv.Visible:=True;
    btn_venda_cancelar_pdv.Visible:=True;
    btn_pro_iten_add_pdv.Visible:=True;
-   btn_pro_iten_remove_pdv.Visible:=True
+   btn_pro_iten_remove_pdv.Visible:=True;
+   btn_rm1_qtd_pdv.Visible:=True;
+   btn_add1_qtd_pdv.Visible:=True;
+   btn_editar_qtd_pdv.Visible:=True;
+   pn_btns_add1_edt_removT_remov1_pdv.Visible:=True;
+   btn_impressao_pdv.Visible:=True;
 end;
 
 procedure TF_PDV.ProcedureBuscaProduto;
@@ -484,7 +494,6 @@ begin
           begin
             F_pdv_clientes_listar := TF_pdv_clientes_listar.Create(self);
             F_pdv_clientes_listar.ShowModal;
-
           end;
 
       end;
@@ -745,15 +754,24 @@ begin
 end;
 
 procedure TF_PDV.btn_editar_qtd_pdvClick(Sender: TObject);
-var produto, qtd, qtd_existente : Integer;
+var produto, qtd, qtd_existente: Integer;
 begin
     produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
     qtd_existente := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
     if qtd_existente >= 1 then
     begin
-      qtd:= StrToInt(InputBox('Digite a quantidade','Qual a quantidade correta?','1'));
+    try
+     qtd:= StrToInt(InputBox ('Digite a quantidade','Qual a quantidade correta?','1'));
+     qtd := qtd*-1;
+    except
+    ShowMessage('Valor Invalido!');
+    Exit;
     end;
+
+
+    end;
+
 
     //qtd := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
@@ -771,7 +789,7 @@ begin
 
     end;
 
-    
+
 
     ProcedureAtualizaDBGridLançamentos;
 end;
