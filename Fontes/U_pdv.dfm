@@ -896,6 +896,7 @@
           FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFDFDFDF9F9F9CFCFD0D4D4D4FEFEFEFF
           FFFFFEFEFE00}
         TabOrder = 2
+        OnClick = btn_venda_cancelar_pdvClick
       end
       object btn_venda_finalizar_pdv: TBitBtn
         Left = 19
@@ -1132,8 +1133,8 @@
     Connection = dm.conexao
     SQL.Strings = (
       'select * from pedidos')
-    Left = 672
-    Top = 24
+    Left = 784
+    Top = 176
   end
   object ds_pedidos: TDataSource
     DataSet = SQL_listar_pedidos_dbglançamento
@@ -1142,8 +1143,8 @@
   end
   object SQL_itens_add: TFDQuery
     Connection = dm.conexao
-    Left = 672
-    Top = 80
+    Left = 784
+    Top = 232
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
@@ -1379,5 +1380,10 @@
       Origin = 'ped_faturado'
       Size = 3
     end
+  end
+  object SQL_cancela_venda: TFDQuery
+    Connection = dm.conexao
+    Left = 792
+    Top = 296
   end
 end

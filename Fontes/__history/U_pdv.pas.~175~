@@ -300,9 +300,11 @@ end;
 procedure TF_PDV.ProcedureIniciaVenda;
 begin
    ProcedureDesbloqueiaCampos;
-   if codigo_venda = '' then
+
+   //if codigo_venda = '' then
    begin
    codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
+
    end;
 
    F_PDV.Caption := 'Pedido '+ codigo_venda;
@@ -319,7 +321,7 @@ begin
 
    if SQL_verifica_venda.RecordCount = 0 then
    begin
-      TB_pedidos.Active;
+      TB_pedidos.Active:=True;
       TB_pedidos.Append;
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;
@@ -340,6 +342,8 @@ begin
    Open;
 
    end;
+
+
 
 end;
 procedure TF_PDV.ProcedureBloqueiacampos;
@@ -702,6 +706,18 @@ end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+
+    //verificar se existem itens listados
+    ProcedureAtualizaDBGridLançamentos;
+
+    if SQL_listar_pedidos_dbglançamento.RecordCount > 0 then
+    begin
+      ShowMessage('Existem itens lançados! Para sair: Finalize ou Cancele a Venda, ou Remova o Item.');
+      Action := caNone;
+      Exit;
+    end;
+
+
     SQL_listar_pedidos_dbglançamento.Close;
     codigo_venda := '';
     dm.SQL_produtos.Close;
@@ -898,11 +914,10 @@ begin
       ShowMessage('Pedido Finalizado com sucesso!');
       SQL_listar_pedidos_dbglançamento.Close;
       SQL_listar_pedidos_dbglançamento.SQL.Clear;
-      F_PDV:= nil;
-      edt_pro_nome_pdv.Text := '';
-      dm.SQL_produtos.Close;
-      codigo_venda := '';
+      F_PDV.Caption:= 'Venda';
       ProcedureBloqueiacampos;
+      edt_cli_nome_pdv.SetFocus;
+      edt_cli_nome_pdv.SelectAll;
    end;
 
 

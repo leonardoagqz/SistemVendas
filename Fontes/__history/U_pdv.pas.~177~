@@ -99,6 +99,7 @@ type
     btn_editar_qtd_pdv: TBitBtn;
     btn_add1_qtd_pdv: TBitBtn;
     pn_btns_add1_edt_removT_remov1_pdv: TPanel;
+    SQL_cancela_venda: TFDQuery;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -135,6 +136,7 @@ type
     procedure btn_editar_qtd_pdvClick(Sender: TObject);
     procedure btn_add1_qtd_pdvClick(Sender: TObject);
     procedure btn_venda_finalizar_pdvClick(Sender: TObject);
+    procedure btn_venda_cancelar_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -706,6 +708,20 @@ end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+
+    //verificar se existem itens listados
+    ProcedureAtualizaDBGridLançamentos;
+
+    codigo_venda := 'Venda';
+
+    if SQL_listar_pedidos_dbglançamento.RecordCount > 0 then
+    begin
+      ShowMessage('Existem itens lançados! Para sair: Finalize ou Cancele a Venda, ou Remova o Item.');
+      Action := caNone;
+      Exit;
+    end;
+
+
     SQL_listar_pedidos_dbglançamento.Close;
     codigo_venda := '';
     dm.SQL_produtos.Close;
@@ -877,6 +893,40 @@ begin
     ProcedureAtualizaDBGridLançamentos;
 end;
 
+procedure TF_PDV.btn_venda_cancelar_pdvClick(Sender: TObject);
+begin
+
+    with SQL_cancela_venda do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('delete from itens');
+      SQL.Add('where iten_pedido = :pedido');
+      ParamByName('pedido').Value := codigo_venda;
+      ExecSQL;
+    end;
+
+    with SQL_cancela_venda do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('delete from pedidos');
+      SQL.Add('where ped_codigo = :pedido');
+      ParamByName('pedido').Value := codigo_venda;
+      ExecSQL;
+    end;
+
+      ShowMessage('Pedido cancelado!');
+      SQL_listar_pedidos_dbglançamento.Close;
+      SQL_listar_pedidos_dbglançamento.SQL.Clear;
+      F_PDV.Caption:= 'Venda';
+      ProcedureBloqueiacampos;
+      edt_cli_nome_pdv.SetFocus;
+      edt_cli_nome_pdv.SelectAll;
+
+
+end;
+
 procedure TF_PDV.btn_venda_finalizar_pdvClick(Sender: TObject);
 begin
    ProcedureAtualizaDBGridLançamentos;
@@ -900,14 +950,12 @@ begin
       TB_pedidosped_faturado.AsString:= 'NAO';
       TB_pedidos.Post;
       ShowMessage('Pedido Finalizado com sucesso!');
-      codigo_venda := '';
-      TB_pedidos.Active:=False;
       SQL_listar_pedidos_dbglançamento.Close;
       SQL_listar_pedidos_dbglançamento.SQL.Clear;
       F_PDV.Caption:= 'Venda';
-      edt_pro_nome_pdv.Text := '';
-      dm.SQL_produtos.Close;
       ProcedureBloqueiacampos;
+      edt_cli_nome_pdv.SetFocus;
+      edt_cli_nome_pdv.SelectAll;
    end;
 
 
