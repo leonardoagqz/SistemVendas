@@ -55,7 +55,7 @@ type
     btn_pro_iten_add_pdv: TBitBtn;
     btn_pro_iten_remove_pdv: TBitBtn;
     btn_venda_gravar_pdv: TBitBtn;
-    btn_venda_fechar_pdv: TBitBtn;
+    btn_venda_finalizar_pdv: TBitBtn;
     btn_venda_cancelar_pdv: TBitBtn;
     btn_impressao_pdv: TBitBtn;
     btn_venda_sair_pdv: TBitBtn;
@@ -95,9 +95,10 @@ type
     TB_pedidosped_forma_pag: TIntegerField;
     TB_pedidosped_fechado: TStringField;
     TB_pedidosped_faturado: TStringField;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
-    BitBtn3: TBitBtn;
+    btn_rm1_qtd_pdv: TBitBtn;
+    btn_editar_qtd_pdv: TBitBtn;
+    btn_add1_qtd_pdv: TBitBtn;
+    pn_btns_add1_edt_removT_remov1_pdv: TPanel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -130,9 +131,10 @@ type
     procedure edt_pro_qtd_pdvKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btn_pro_iten_remove_pdvClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
-    procedure BitBtn3Click(Sender: TObject);
+    procedure btn_rm1_qtd_pdvClick(Sender: TObject);
+    procedure btn_editar_qtd_pdvClick(Sender: TObject);
+    procedure btn_add1_qtd_pdvClick(Sender: TObject);
+    procedure btn_venda_finalizar_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -298,9 +300,11 @@ end;
 procedure TF_PDV.ProcedureIniciaVenda;
 begin
    ProcedureDesbloqueiaCampos;
-   if codigo_venda = '' then
+
+   //if codigo_venda = '' then
    begin
    codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
+
    end;
 
    F_PDV.Caption := 'Pedido '+ codigo_venda;
@@ -317,7 +321,7 @@ begin
 
    if SQL_verifica_venda.RecordCount = 0 then
    begin
-      TB_pedidos.Active;
+      TB_pedidos.Active:=True;
       TB_pedidos.Append;
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;
@@ -339,6 +343,8 @@ begin
 
    end;
 
+
+
 end;
 procedure TF_PDV.ProcedureBloqueiacampos;
 begin
@@ -349,11 +355,16 @@ begin
    dbg_lançamento_pdv.Visible:=False;
    //pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
    btn_venda_gravar_pdv.Visible:=False;
-   btn_venda_fechar_pdv.Visible:=False;
+   btn_venda_finalizar_pdv.Visible:=False;
    btn_venda_cancelar_pdv.Visible:=False;
    btn_pro_iten_add_pdv.Visible:=False;
    btn_pro_iten_remove_pdv.Visible:=false;
    edt_cli_codigo_pdv.Visible:=False;
+   btn_rm1_qtd_pdv.Visible:=False;
+   btn_add1_qtd_pdv.Visible:=False;
+   btn_editar_qtd_pdv.Visible:=False;
+   pn_btns_add1_edt_removT_remov1_pdv.Visible:=False;
+   btn_impressao_pdv.Visible:=False;
 end;
 
  procedure TF_PDV.ProcedureDesbloqueiaCampos;
@@ -366,10 +377,15 @@ begin
    dbg_lançamento_pdv.Visible:=True;
    //pn_btns_grv_can_fec_vendas_pdv.Visible:=True;
    btn_venda_gravar_pdv.Visible:=True;
-   btn_venda_fechar_pdv.Visible:=True;
+   btn_venda_finalizar_pdv.Visible:=True;
    btn_venda_cancelar_pdv.Visible:=True;
    btn_pro_iten_add_pdv.Visible:=True;
-   btn_pro_iten_remove_pdv.Visible:=True
+   btn_pro_iten_remove_pdv.Visible:=True;
+   btn_rm1_qtd_pdv.Visible:=True;
+   btn_add1_qtd_pdv.Visible:=True;
+   btn_editar_qtd_pdv.Visible:=True;
+   pn_btns_add1_edt_removT_remov1_pdv.Visible:=True;
+   btn_impressao_pdv.Visible:=True;
 end;
 
 procedure TF_PDV.ProcedureBuscaProduto;
@@ -483,7 +499,6 @@ begin
           begin
             F_pdv_clientes_listar := TF_pdv_clientes_listar.Create(self);
             F_pdv_clientes_listar.ShowModal;
-
           end;
 
       end;
@@ -691,6 +706,18 @@ end;
 
 procedure TF_PDV.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+
+    //verificar se existem itens listados
+    ProcedureAtualizaDBGridLançamentos;
+
+    if SQL_listar_pedidos_dbglançamento.RecordCount > 0 then
+    begin
+      ShowMessage('Existem itens lançados, para Sair, Finalize ou  Cancele a Venda. ');
+      Action := caNone;
+      Exit;
+    end;
+
+
     SQL_listar_pedidos_dbglançamento.Close;
     codigo_venda := '';
     dm.SQL_produtos.Close;
@@ -709,7 +736,7 @@ end;
 
 
 
-procedure TF_PDV.BitBtn1Click(Sender: TObject);
+procedure TF_PDV.btn_rm1_qtd_pdvClick(Sender: TObject);
 var produto, qtd, qtd_existente : Integer;
 begin
     produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
@@ -743,16 +770,25 @@ begin
     ProcedureAtualizaDBGridLançamentos;
 end;
 
-procedure TF_PDV.BitBtn2Click(Sender: TObject);
-var produto, qtd, qtd_existente : Integer;
+procedure TF_PDV.btn_editar_qtd_pdvClick(Sender: TObject);
+var produto, qtd, qtd_existente: Integer;
 begin
     produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
     qtd_existente := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
-    if qtd_existente > 1 then
+    if qtd_existente >= 1 then
     begin
-      qtd:= StrToInt(InputBox('Digite a quantidade','Qual a quantidade correta?','1'));
+    try
+     qtd:= StrToInt(InputBox ('Digite a quantidade','Qual a quantidade correta?','1'));
+     qtd := qtd*-1;
+    except
+    ShowMessage('Valor Invalido!');
+    Exit;
     end;
+
+
+    end;
+
 
     //qtd := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
@@ -770,21 +806,12 @@ begin
 
     end;
 
-       with SQL_itens_add do
-      begin
-      //deleta o iten se a QTD = 0
-       Close;
-       SQL.Clear;
-       SQL.Add('delete from itens');
-       SQL.Add('where iten_qtd = 0');
-       ExecSQL;
 
-      end;
 
     ProcedureAtualizaDBGridLançamentos;
 end;
 
-procedure TF_PDV.BitBtn3Click(Sender: TObject);
+procedure TF_PDV.btn_add1_qtd_pdvClick(Sender: TObject);
 var produto, qtd, qtd_existente : Integer;
 begin
     produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
@@ -860,6 +887,40 @@ begin
       end;
 
     ProcedureAtualizaDBGridLançamentos;
+end;
+
+procedure TF_PDV.btn_venda_finalizar_pdvClick(Sender: TObject);
+begin
+   ProcedureAtualizaDBGridLançamentos;
+
+   if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
+   begin
+     ShowMessage('Não existe itens no pedido!');
+     Exit;
+   end;
+
+    if SQL_verifica_venda.RecordCount = 0 then
+   begin
+      TB_pedidos.Active:=True;
+      TB_pedidos.Locate('ped_codigo', codigo_venda,[]);
+      TB_pedidos.Edit;
+      TB_pedidosped_date.Value := Date;
+      TB_pedidosped_codigo.AsString := codigo_venda;
+      TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
+      TB_pedidosped_usuario.Value := 1;
+      TB_pedidosped_fechado.AsString := 'SIM';
+      TB_pedidosped_faturado.AsString:= 'NAO';
+      TB_pedidos.Post;
+      ShowMessage('Pedido Finalizado com sucesso!');
+      SQL_listar_pedidos_dbglançamento.Close;
+      SQL_listar_pedidos_dbglançamento.SQL.Clear;
+      F_PDV.Caption:= 'Venda';
+      ProcedureBloqueiacampos;
+      edt_cli_nome_pdv.SetFocus;
+      edt_cli_nome_pdv.SelectAll;
+   end;
+
+
 end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);

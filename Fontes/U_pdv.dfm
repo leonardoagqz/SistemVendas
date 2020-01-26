@@ -897,13 +897,14 @@
           FFFFFEFEFE00}
         TabOrder = 2
       end
-      object btn_venda_fechar_pdv: TBitBtn
+      object btn_venda_finalizar_pdv: TBitBtn
         Left = 19
         Top = 43
         Width = 121
         Height = 27
-        Caption = 'Fechar Venda'
+        Caption = 'Finalizar Venda'
         TabOrder = 1
+        OnClick = btn_venda_finalizar_pdvClick
       end
       object btn_venda_gravar_pdv: TBitBtn
         Left = 19
