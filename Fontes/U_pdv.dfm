@@ -631,7 +631,7 @@
         OnClick = btn_pro_iten_remove_pdvClick
       end
       object pn_btns_add1_edt_removT_remov1_pdv: TPanel
-        Left = 274
+        Left = 463
         Top = 42
         Width = 127
         Height = 34
@@ -1329,7 +1329,6 @@
     Top = 384
   end
   object TB_pedidos: TFDTable
-    Active = True
     IndexFieldNames = 'ped_id'
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'pedidos'
