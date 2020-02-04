@@ -8,7 +8,9 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.MySQL,
   FireDAC.Phys.MySQLDef, Data.DB, FireDAC.Comp.Client, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.UI;
+  FireDAC.Comp.DataSet, FireDAC.Comp.UI, ppComm, ppRelatv, ppDB, ppDBPipe,
+  ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer, ppParameter,
+  ppProd, ppReport;
 
 type
   Tdm = class(TDataModule)
@@ -61,6 +63,15 @@ type
     SQL_clientescli_cnpj_cpf: TStringField;
     SQL_clientescli_profissao: TStringField;
     SQL_clientescli_data_nasc: TDateField;
+    ppDB_Recibo_Pedido: TppDBPipeline;
+    Report_reciboPedido: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppImage1: TppImage;
   private
     { Private declarations }
   public
@@ -71,6 +82,9 @@ var
   dm: Tdm;
 
 implementation
+
+uses
+  U_pdv;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 

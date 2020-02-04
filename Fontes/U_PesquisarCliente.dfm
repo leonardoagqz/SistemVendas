@@ -26,9 +26,6 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 0
-    ExplicitLeft = 24
-    ExplicitTop = 32
-    ExplicitWidth = 514
     object pn_pesquisa_cli_alto: TPanel
       Left = 67
       Top = 7
@@ -142,8 +139,6 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
     Color = clGradientInactiveCaption
     ParentBackground = False
     TabOrder = 2
-    ExplicitTop = 264
-    ExplicitWidth = 399
     object btn_ok_pesquisa_cli: TSpeedButton
       Left = 343
       Top = 6
@@ -159,8 +154,5 @@ object F_pdv_clientes_listar: TF_pdv_clientes_listar
     Width = 417
     Height = 19
     Panels = <>
-    ExplicitLeft = 24
-    ExplicitTop = 375
-    ExplicitWidth = 514
   end
 end

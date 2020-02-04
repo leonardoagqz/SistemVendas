@@ -168,6 +168,7 @@
         FFFEFEFEFDFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         FFFFFFFFFF00}
       TabOrder = 0
+      OnClick = btn_impressao_pdvClick
     end
     object btn_venda_sair_pdv: TBitBtn
       Left = 0
@@ -1147,6 +1148,7 @@
     Top = 232
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
+    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (

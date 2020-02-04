@@ -137,6 +137,7 @@ type
     procedure btn_add1_qtd_pdvClick(Sender: TObject);
     procedure btn_venda_finalizar_pdvClick(Sender: TObject);
     procedure btn_venda_cancelar_pdvClick(Sender: TObject);
+    procedure btn_impressao_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -836,6 +837,11 @@ begin
     
 
     ProcedureAtualizaDBGridLançamentos;
+end;
+
+procedure TF_PDV.btn_impressao_pdvClick(Sender: TObject);
+begin
+    dm.Report_reciboPedido.PrintReport;
 end;
 
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);

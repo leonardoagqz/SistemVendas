@@ -299,4 +299,321 @@ object dm: Tdm
     Left = 112
     Top = 120
   end
+  object ppDB_Recibo_Pedido: TppDBPipeline
+    DataSource = F_PDV.ds_pedidos
+    UserName = 'DB_Recibo_Pedido'
+    Left = 32
+    Top = 184
+    object ppDB_Recibo_PedidoppField1: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_id'
+      FieldName = 'ped_id'
+      FieldLength = 0
+      DataType = dtLongint
+      DisplayWidth = 0
+      Position = 0
+    end
+    object ppDB_Recibo_PedidoppField2: TppField
+      FieldAlias = 'ped_date'
+      FieldName = 'ped_date'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 1
+    end
+    object ppDB_Recibo_PedidoppField3: TppField
+      FieldAlias = 'ped_codigo'
+      FieldName = 'ped_codigo'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 2
+    end
+    object ppDB_Recibo_PedidoppField4: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_cliente'
+      FieldName = 'ped_cliente'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 3
+    end
+    object ppDB_Recibo_PedidoppField5: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_usuario'
+      FieldName = 'ped_usuario'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 4
+    end
+    object ppDB_Recibo_PedidoppField6: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_forma_pag'
+      FieldName = 'ped_forma_pag'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 5
+    end
+    object ppDB_Recibo_PedidoppField7: TppField
+      FieldAlias = 'ped_fechado'
+      FieldName = 'ped_fechado'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 6
+    end
+    object ppDB_Recibo_PedidoppField8: TppField
+      FieldAlias = 'ped_faturado'
+      FieldName = 'ped_faturado'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 7
+    end
+    object ppDB_Recibo_PedidoppField9: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_id'
+      FieldName = 'pro_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 8
+    end
+    object ppDB_Recibo_PedidoppField10: TppField
+      FieldAlias = 'pro_nome'
+      FieldName = 'pro_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 9
+    end
+    object ppDB_Recibo_PedidoppField11: TppField
+      FieldAlias = 'pro_barra'
+      FieldName = 'pro_barra'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 10
+    end
+    object ppDB_Recibo_PedidoppField12: TppField
+      FieldAlias = 'pro_ref'
+      FieldName = 'pro_ref'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 11
+    end
+    object ppDB_Recibo_PedidoppField13: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_custo'
+      FieldName = 'pro_custo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 12
+    end
+    object ppDB_Recibo_PedidoppField14: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_preco'
+      FieldName = 'pro_preco'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 13
+    end
+    object ppDB_Recibo_PedidoppField15: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_preco_prazo'
+      FieldName = 'pro_preco_prazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 14
+    end
+    object ppDB_Recibo_PedidoppField16: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_estoque'
+      FieldName = 'pro_estoque'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 15
+    end
+    object ppDB_Recibo_PedidoppField17: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_id'
+      FieldName = 'iten_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 16
+    end
+    object ppDB_Recibo_PedidoppField18: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_produto'
+      FieldName = 'iten_produto'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 17
+    end
+    object ppDB_Recibo_PedidoppField19: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_qtd'
+      FieldName = 'iten_qtd'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 18
+    end
+    object ppDB_Recibo_PedidoppField20: TppField
+      FieldAlias = 'iten_pedido'
+      FieldName = 'iten_pedido'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 19
+    end
+    object ppDB_Recibo_PedidoppField21: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_preco'
+      FieldName = 'iten_preco'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 20
+    end
+    object ppDB_Recibo_PedidoppField22: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_preco_prazo'
+      FieldName = 'iten_preco_prazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 21
+    end
+    object ppDB_Recibo_PedidoppField23: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'subTotal'
+      FieldName = 'subTotal'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 22
+    end
+    object ppDB_Recibo_PedidoppField24: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'subTotalPrazo'
+      FieldName = 'subTotalPrazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 23
+    end
+  end
+  object Report_reciboPedido: TppReport
+    AutoStop = False
+    DataPipeline = ppDB_Recibo_Pedido
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    PreviewFormSettings.WindowState = wsMaximized
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<Texto a localizar>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 144
+    Top = 184
+    Version = '20.01'
+    mmColumnWidth = 0
+    DataPipelineName = 'ppDB_Recibo_Pedido'
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 13229
+      mmPrintPosition = 0
+      object ppImage1: TppImage
+        DesignLayer = ppDesignLayer1
+        UserName = 'Image1'
+        AlignHorizontal = ahCenter
+        AlignVertical = avCenter
+        MaintainAspectRatio = False
+        Border.mmPadding = 0
+        mmHeight = 9790
+        mmLeft = 3440
+        mmTop = 2117
+        mmWidth = 11906
+        BandType = 0
+        LayerName = Foreground
+      end
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 31485
+      mmPrintPosition = 0
+    end
+    object ppFooterBand1: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 48154
+      mmPrintPosition = 0
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
+  end
 end
