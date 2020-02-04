@@ -71,7 +71,23 @@ type
     ppHeaderBand1: TppHeaderBand;
     ppDetailBand1: TppDetailBand;
     ppFooterBand1: TppFooterBand;
-    ppImage1: TppImage;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppDBText1: TppDBText;
+    ppDBText2: TppDBText;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLabel7: TppLabel;
+    ppLine2: TppLine;
+    ppLine3: TppLine;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppLabel8: TppLabel;
+    ppLabel9: TppLabel;
   private
     { Private declarations }
   public
