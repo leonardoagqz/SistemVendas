@@ -731,14 +731,21 @@
       end
     end
     object pn_btn_iniciar_venda_pdv: TPanel
-      Left = 536
-      Top = 4
-      Width = 171
+      Left = 527
+      Top = 6
+      Width = 346
       Height = 49
       TabOrder = 1
-      object btn_iniciar_venda_pdv: TBitBtn
-        Left = 15
+      object lbl_formapag_pdv: TLabel
+        Left = 11
         Top = 5
+        Width = 107
+        Height = 13
+        Caption = 'Forma de Pagamento'
+      end
+      object btn_iniciar_venda_pdv: TBitBtn
+        Left = 189
+        Top = 4
         Width = 141
         Height = 39
         Caption = 'Iniciar Venda'
@@ -817,20 +824,30 @@
           1212121212121212121212121212121212121212121212121212121212121212
           1269121212121212121212121212121212121212121212121212121212121212
           121212121269}
-        TabOrder = 0
+        TabOrder = 1
         OnClick = btn_iniciar_venda_pdvClick
+      end
+      object lkcbox_formapag_pdv: TRxDBLookupCombo
+        Left = 11
+        Top = 21
+        Width = 167
+        Height = 21
+        DropDownCount = 8
+        LookupField = 'forma_nome'
+        LookupSource = dm.ds_formapag
+        TabOrder = 0
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel
-      Left = 720
-      Top = 4
-      Width = 152
-      Height = 112
+      Left = 635
+      Top = 57
+      Width = 238
+      Height = 78
       TabOrder = 3
       object btn_venda_cancelar_pdv: TBitBtn
-        Left = 19
-        Top = 76
-        Width = 121
+        Left = 5
+        Top = 41
+        Width = 111
         Height = 27
         Caption = 'Cancelar Venda'
         Glyph.Data = {
@@ -900,18 +917,18 @@
         OnClick = btn_venda_cancelar_pdvClick
       end
       object btn_venda_finalizar_pdv: TBitBtn
-        Left = 19
-        Top = 43
-        Width = 121
+        Left = 122
+        Top = 8
+        Width = 111
         Height = 27
         Caption = 'Finalizar Venda'
         TabOrder = 1
         OnClick = btn_venda_finalizar_pdvClick
       end
       object btn_venda_gravar_pdv: TBitBtn
-        Left = 19
+        Left = 5
         Top = 8
-        Width = 121
+        Width = 111
         Height = 27
         Caption = '  Gravar Venda'
         Glyph.Data = {
@@ -1148,7 +1165,6 @@
     Top = 232
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
-    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (

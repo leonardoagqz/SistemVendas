@@ -8,7 +8,8 @@ uses
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit,
   Vcl.Buttons, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  RxLookup;
 
 type
   TF_PDV = class(TForm)
@@ -100,6 +101,8 @@ type
     btn_add1_qtd_pdv: TBitBtn;
     pn_btns_add1_edt_removT_remov1_pdv: TPanel;
     SQL_cancela_venda: TFDQuery;
+    lkcbox_formapag_pdv: TRxDBLookupCombo;
+    lbl_formapag_pdv: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -368,6 +371,10 @@ begin
    btn_editar_qtd_pdv.Visible:=False;
    pn_btns_add1_edt_removT_remov1_pdv.Visible:=False;
    btn_impressao_pdv.Visible:=False;
+   pn_btn_iniciar_venda_pdv.Visible:=False;
+   pn_buscar_barras_nome_pdv.Visible:=False;
+   lbl_cod_cliente.Visible:=False;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
 end;
 
  procedure TF_PDV.ProcedureDesbloqueiaCampos;
@@ -389,6 +396,8 @@ begin
    btn_editar_qtd_pdv.Visible:=True;
    pn_btns_add1_edt_removT_remov1_pdv.Visible:=True;
    btn_impressao_pdv.Visible:=True;
+   pn_buscar_barras_nome_pdv.Visible:=True;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=True;
 end;
 
 procedure TF_PDV.ProcedureBuscaProduto;
@@ -489,9 +498,15 @@ end;
 
 procedure TF_PDV.edt_cli_nome_pdvChange(Sender: TObject);
 begin
-     if dm.SQL_clientes.RecordCount = 1 then
-     btn_iniciar_venda_pdv.Visible := true;
-     edt_cli_codigo_pdv.SelectAll;
+  if dm.SQL_clientes.RecordCount = 1 then
+  begin
+    pn_btn_iniciar_venda_pdv.Visible:=True;
+    btn_iniciar_venda_pdv.Visible := True;
+
+    lbl_cod_cliente.Visible:=True;
+    edt_cli_codigo_pdv.SelectAll;
+  end;
+
 end;
 
 procedure TF_PDV.edt_cli_nome_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -729,14 +744,14 @@ end;
 
 procedure TF_PDV.FormCreate(Sender: TObject);
 begin
-   ProcedureBloqueiacampos;
+  ProcedureBloqueiacampos;
+  dm.SQL_formapag.Active:=True;
 end;
 
 procedure TF_PDV.FormShow(Sender: TObject);
 begin
-   edt_cli_nome_pdv.SetFocus;
+  edt_cli_nome_pdv.SetFocus;
 end;
-
 
 
 procedure TF_PDV.btn_rm1_qtd_pdvClick(Sender: TObject);
@@ -747,7 +762,7 @@ begin
 
    with SQL_itens_add do
     begin
-    //remove a quantidade da do campo QTD
+    //remove a quantidade  do campo QTD
      Close;
      SQL.Clear;
      SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
@@ -767,7 +782,6 @@ begin
        SQL.Add('delete from itens');
        SQL.Add('where iten_qtd = 0');
        ExecSQL;
-
       end;
 
     ProcedureAtualizaDBGridLançamentos;
@@ -783,7 +797,7 @@ begin
     begin
     try
      qtd:= StrToInt(InputBox ('Digite a quantidade','Qual a quantidade correta?','1'));
-     qtd := qtd*-1;
+     qtd := qtd*1;
     except
     ShowMessage('Valor Invalido!');
     Exit;
@@ -949,7 +963,7 @@ begin
      Exit;
    end;
 
-    if SQL_verifica_venda.RecordCount = 0 then
+    if SQL_verifica_venda.RecordCount >= 0 then
    begin
       TB_pedidos.Active:=True;
       TB_pedidos.Locate('ped_codigo', codigo_venda,[]);
@@ -975,8 +989,8 @@ end;
 
 procedure TF_PDV.btn_venda_sair_pdvClick(Sender: TObject);
 begin
-   Close;
-   F_PDV := nil;
+  F_PDV := nil;
+  Close;
 end;
 
 end.

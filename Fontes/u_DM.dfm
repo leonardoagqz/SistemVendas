@@ -216,7 +216,6 @@ object dm: Tdm
     end
   end
   object TB_clientes: TFDTable
-    Active = True
     IndexFieldNames = 'cli_id'
     Connection = conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.clientes'
@@ -303,22 +302,23 @@ object dm: Tdm
     DataSource = F_PDV.ds_pedidos
     UserName = 'DB_Recibo_Pedido'
     Left = 32
-    Top = 184
+    Top = 248
     object ppDB_Recibo_PedidoppField1: TppField
-      Alignment = taRightJustify
       FieldAlias = 'ped_id'
       FieldName = 'ped_id'
       FieldLength = 0
-      DataType = dtLongint
+      DataType = dtNotKnown
       DisplayWidth = 0
       Position = 0
+      Searchable = False
+      Sortable = False
     end
     object ppDB_Recibo_PedidoppField2: TppField
       FieldAlias = 'ped_date'
       FieldName = 'ped_date'
       FieldLength = 0
       DataType = dtDate
-      DisplayWidth = 10
+      DisplayWidth = 0
       Position = 1
     end
     object ppDB_Recibo_PedidoppField3: TppField
@@ -566,7 +566,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 144
-    Top = 184
+    Top = 248
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Pedido'
@@ -574,28 +574,8 @@ object dm: Tdm
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 28310
+      mmHeight = 24606
       mmPrintPosition = 0
-      object ppLabel1: TppLabel
-        DesignLayer = ppDesignLayer1
-        UserName = 'Label1'
-        Border.mmPadding = 0
-        Caption = 'Recibo'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 18
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 7144
-        mmLeft = 2117
-        mmTop = 794
-        mmWidth = 19579
-        BandType = 0
-        LayerName = Foreground
-      end
       object ppLabel2: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label2'
@@ -610,7 +590,7 @@ object dm: Tdm
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 5821
-        mmLeft = 85990
+        mmLeft = 147902
         mmTop = 2117
         mmWidth = 49477
         BandType = 0
@@ -620,20 +600,20 @@ object dm: Tdm
         DesignLayer = ppDesignLayer1
         UserName = 'Label3'
         Border.mmPadding = 0
-        Caption = 'Empresa xpto'
+        Caption = 'Minha  Loja'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Name = 'Arial'
-        Font.Size = 14
+        Font.Size = 20
         Font.Style = []
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         TextAlignment = taRightJustified
         Transparent = True
-        mmHeight = 5821
-        mmLeft = 43921
-        mmTop = 2117
-        mmWidth = 31221
+        mmHeight = 8467
+        mmLeft = 1058
+        mmTop = -529
+        mmWidth = 37306
         BandType = 0
         LayerName = Foreground
       end
@@ -643,7 +623,7 @@ object dm: Tdm
         Border.mmPadding = 0
         Caption = 'Produto'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clBlue
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -653,7 +633,7 @@ object dm: Tdm
         Transparent = True
         mmHeight = 4763
         mmLeft = 794
-        mmTop = 23283
+        mmTop = 15875
         mmWidth = 14552
         BandType = 0
         LayerName = Foreground
@@ -664,7 +644,7 @@ object dm: Tdm
         Border.mmPadding = 0
         Caption = 'Valor R$ '
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clBlue
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -674,7 +654,7 @@ object dm: Tdm
         Transparent = True
         mmHeight = 4763
         mmLeft = 76729
-        mmTop = 23283
+        mmTop = 15875
         mmWidth = 17198
         BandType = 0
         LayerName = Foreground
@@ -685,7 +665,7 @@ object dm: Tdm
         Border.mmPadding = 0
         Caption = 'Prazo R$ '
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clBlue
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -695,8 +675,8 @@ object dm: Tdm
         Transparent = True
         mmHeight = 4763
         mmLeft = 103452
-        mmTop = 23283
-        mmWidth = 18256
+        mmTop = 15875
+        mmWidth = 18257
         BandType = 0
         LayerName = Foreground
       end
@@ -706,7 +686,7 @@ object dm: Tdm
         Border.mmPadding = 0
         Caption = 'Qtd'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clBlue
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -715,9 +695,9 @@ object dm: Tdm
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4763
-        mmLeft = 129894
-        mmTop = 23283
-        mmWidth = 6615
+        mmLeft = 129911
+        mmTop = 15875
+        mmWidth = 6614
         BandType = 0
         LayerName = Foreground
       end
@@ -728,7 +708,7 @@ object dm: Tdm
         Weight = 0.750000000000000000
         mmHeight = 3969
         mmLeft = 993
-        mmTop = 27529
+        mmTop = 20626
         mmWidth = 196609
         BandType = 0
         LayerName = Foreground
@@ -751,7 +731,7 @@ object dm: Tdm
         Border.mmPadding = 0
         Caption = 'Sub Total R$ '
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clBlue
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -761,7 +741,7 @@ object dm: Tdm
         Transparent = True
         mmHeight = 4763
         mmLeft = 139965
-        mmTop = 23285
+        mmTop = 15875
         mmWidth = 24871
         BandType = 0
         LayerName = Foreground
@@ -772,7 +752,7 @@ object dm: Tdm
         Border.mmPadding = 0
         Caption = 'Sub Prazo R$ '
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
+        Font.Color = clBlue
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -781,9 +761,21 @@ object dm: Tdm
         TextAlignment = taRightJustified
         Transparent = True
         mmHeight = 4763
-        mmLeft = 166434
-        mmTop = 23283
+        mmLeft = 166423
+        mmTop = 15875
         mmWidth = 26723
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLine4: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line4'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 1058
+        mmTop = 11642
+        mmWidth = 196586
         BandType = 0
         LayerName = Foreground
       end
@@ -928,8 +920,109 @@ object dm: Tdm
       Background.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 48154
+      mmHeight = 15875
       mmPrintPosition = 0
+    end
+    object ppSummaryBand1: TppSummaryBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 33867
+      mmPrintPosition = 0
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 794
+        mmTop = 794
+        mmWidth = 196586
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label10'
+        Border.mmPadding = 0
+        Caption = 'Total a Vista'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 141817
+        mmTop = 2370
+        mmWidth = 23019
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppLabel11: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label101'
+        Border.mmPadding = 0
+        Caption = 'Total a Prazo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 173042
+        mmTop = 2370
+        mmWidth = 24342
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppDBCalc1: TppDBCalc
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBCalc1'
+        Border.mmPadding = 0
+        DataField = 'subTotal'
+        DataPipeline = ppDB_Recibo_Pedido
+        DisplayFormat = '0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDB_Recibo_Pedido'
+        mmHeight = 4498
+        mmLeft = 143419
+        mmTop = 8720
+        mmWidth = 30427
+        BandType = 7
+        LayerName = Foreground
+      end
+      object ppDBCalc2: TppDBCalc
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBCalc2'
+        Border.mmPadding = 0
+        DataField = 'subTotalPrazo'
+        DataPipeline = ppDB_Recibo_Pedido
+        DisplayFormat = '0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDB_Recibo_Pedido'
+        mmHeight = 4498
+        mmLeft = 174635
+        mmTop = 8720
+        mmWidth = 25929
+        BandType = 7
+        LayerName = Foreground
+      end
     end
     object ppDesignLayers1: TppDesignLayers
       object ppDesignLayer1: TppDesignLayer
@@ -940,5 +1033,28 @@ object dm: Tdm
     end
     object ppParameterList1: TppParameterList
     end
+  end
+  object SQL_formapag: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from forma_pagamento')
+    Left = 32
+    Top = 178
+    object SQL_formapagforma_id: TFDAutoIncField
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object SQL_formapagforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      Size = 40
+    end
+  end
+  object ds_formapag: TDataSource
+    DataSet = SQL_formapag
+    Left = 112
+    Top = 179
   end
 end

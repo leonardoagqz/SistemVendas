@@ -71,7 +71,6 @@ type
     ppHeaderBand1: TppHeaderBand;
     ppDetailBand1: TppDetailBand;
     ppFooterBand1: TppFooterBand;
-    ppLabel1: TppLabel;
     ppLabel2: TppLabel;
     ppDBText1: TppDBText;
     ppDBText2: TppDBText;
@@ -88,6 +87,17 @@ type
     ppDBText6: TppDBText;
     ppLabel8: TppLabel;
     ppLabel9: TppLabel;
+    ppSummaryBand1: TppSummaryBand;
+    ppLine1: TppLine;
+    ppLabel10: TppLabel;
+    ppLabel11: TppLabel;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    ppLine4: TppLine;
+    SQL_formapag: TFDQuery;
+    ds_formapag: TDataSource;
+    SQL_formapagforma_id: TFDAutoIncField;
+    SQL_formapagforma_nome: TStringField;
   private
     { Private declarations }
   public
