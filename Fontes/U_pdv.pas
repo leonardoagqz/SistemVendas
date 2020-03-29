@@ -141,6 +141,7 @@ type
     procedure btn_venda_finalizar_pdvClick(Sender: TObject);
     procedure btn_venda_cancelar_pdvClick(Sender: TObject);
     procedure btn_impressao_pdvClick(Sender: TObject);
+    procedure lkcbox_formapag_pdvClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -335,6 +336,7 @@ begin
       TB_pedidosped_usuario.Value := 1;
       TB_pedidosped_fechado.AsString := 'NAO';
       TB_pedidosped_faturado.AsString:= 'NAO';
+      TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
       TB_pedidos.Post;
    end;
 
@@ -354,7 +356,8 @@ begin
 end;
 procedure TF_PDV.ProcedureBloqueiacampos;
 begin
-   btn_iniciar_venda_pdv.Visible:= False;
+   btn_iniciar_venda_pdv.Enabled:= False;
+   lkcbox_formapag_pdv.Enabled:=False;
    edt_pro_nome_pdv.Visible:=False;
    edt_pro_barras_pdv.Visible:=false;
    edt_pro_qtd_pdv.Visible:=False;
@@ -371,10 +374,10 @@ begin
    btn_editar_qtd_pdv.Visible:=False;
    pn_btns_add1_edt_removT_remov1_pdv.Visible:=False;
    btn_impressao_pdv.Visible:=False;
-   pn_btn_iniciar_venda_pdv.Visible:=False;
+   {pn_btn_iniciar_venda_pdv.Visible:=False;
    pn_buscar_barras_nome_pdv.Visible:=False;
    lbl_cod_cliente.Visible:=False;
-   pn_btns_grv_can_fec_vendas_pdv.Visible:=False;
+   pn_btns_grv_can_fec_vendas_pdv.Visible:=False; }
 end;
 
  procedure TF_PDV.ProcedureDesbloqueiaCampos;
@@ -498,14 +501,16 @@ end;
 
 procedure TF_PDV.edt_cli_nome_pdvChange(Sender: TObject);
 begin
-  if dm.SQL_clientes.RecordCount = 1 then
-  begin
-    pn_btn_iniciar_venda_pdv.Visible:=True;
-    btn_iniciar_venda_pdv.Visible := True;
-
-    lbl_cod_cliente.Visible:=True;
-    edt_cli_codigo_pdv.SelectAll;
-  end;
+  {if edt_cli_nome_pdv.Text = dm.SQL_clientescli_nome.AsString then
+    begin
+      pn_btn_iniciar_venda_pdv.Visible:=True;
+      btn_iniciar_venda_pdv.Visible := True;
+      btn_iniciar_venda_pdv.Enabled:=True;
+      lkcbox_formapag_pdv.Enabled:=True;
+      lbl_cod_cliente.Visible:=True;
+      lkcbox_formapag_pdv.SetFocus;
+      edt_cli_codigo_pdv.SelectAll;
+    end; }
 
 end;
 
@@ -521,50 +526,67 @@ begin
 
       end;
 
-    
-
 end;
 
 procedure TF_PDV.edt_cli_nome_pdvKeyPress(Sender: TObject; var Key: Char);
 begin
-     if Key = #13 then
-      begin
-         if edt_cli_nome_pdv.Text = '' then
-                ShowMessage('Campo vazio!')
-              else
-              begin
-                    with dm.SQL_clientes do
-                 begin
-                   Close;
-                   SQL.Clear;
-                   SQL.Add('select * from clientes');
-                   SQL.Add('where cli_nome like :nome');
-                   ParamByName('nome').Value := edt_cli_nome_pdv.Text + '%';
-                   Open;
-                   begin
-                       if RecordCount = 0 then
-                        ShowMessage('Cliente não encontrado!');
-                        edt_cli_nome_pdv.Clear;
-                        edt_cli_codigo_pdv.Clear;
-                        btn_iniciar_venda_pdv.Visible:=False;
-                   end;
-
-                   begin
-                     if RecordCount = 1 then
-                     edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
-                     edt_cli_codigo_pdv.Text := dm.SQL_clientescli_id.AsString;
-                     lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
-                     lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
-                     lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
-                     edt_cli_nome_pdv.SelectAll;
-
-                   end;
-
-               end;
+  if Key = #13 then
+    begin
+      if edt_cli_nome_pdv.Text = '' then
+        begin
+          ShowMessage('Campo vazio!');
+          edt_cli_nome_pdv.SetFocus;
+        end
+        else
+          begin
+            with dm.SQL_clientes do
+            begin
+              Close;
+              SQL.Clear;
+              SQL.Add('select * from clientes');
+              SQL.Add('where cli_nome like :nome');
+              ParamByName('nome').Value := edt_cli_nome_pdv.Text + '%';
+              Open;
+              if RecordCount = 0 then
+                begin
+                  ShowMessage('Cliente não encontrado!');
+                  edt_cli_nome_pdv.Clear;
+                  edt_cli_codigo_pdv.Clear;
+                  lkcbox_formapag_pdv.Enabled:=False;
+                  btn_iniciar_venda_pdv.Enabled:=False;
+                end
+                else
+                if RecordCount = 1 then
+                  begin
+                  edt_cli_nome_pdv.Text := dm.SQL_clientescli_nome.AsString;
+                  edt_cli_codigo_pdv.Text := dm.SQL_clientescli_id.AsString;
+                  lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
+                  lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
+                  lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
+                  edt_cli_nome_pdv.SelectAll;
+                  lkcbox_formapag_pdv.Enabled:=True;
+                  lkcbox_formapag_pdv.SetFocus;
+                  end;
               end;
 
+            end;
 
           end;
+
+
+
+
+  {if Key = #8 then
+    //if edt_cli_nome_pdv.Text = dm.SQL_clientescli_nome.AsString then
+      begin
+        btn_iniciar_venda_pdv.Enabled:=false;
+        lkcbox_formapag_pdv.Enabled:=false;
+        edt_cli_nome_pdv.SetFocus;
+      end;}
+
+
+
+
 end;
 
 procedure TF_PDV.edt_pro_barras_pdvKeyDown(Sender: TObject; var Key: Word;
@@ -754,35 +776,39 @@ begin
 end;
 
 
+procedure TF_PDV.lkcbox_formapag_pdvClick(Sender: TObject);
+begin
+  btn_iniciar_venda_pdv.Enabled:=True;
+end;
+
 procedure TF_PDV.btn_rm1_qtd_pdvClick(Sender: TObject);
 var produto, qtd, qtd_existente : Integer;
 begin
-    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
-    qtd := 1;
+  produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+  qtd := 1;
 
-   with SQL_itens_add do
+  with SQL_itens_add do
     begin
-    //remove a quantidade  do campo QTD
-     Close;
-     SQL.Clear;
-     SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
-     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
-     ParamByName('pedido').Value := codigo_venda;
-     ParamByName('produto').Value := produto;
-     ParamByName('qtd').Value := qtd;
-     ExecSQL;
-
+      //remove a quantidade  do campo QTD
+      Close;
+      SQL.Clear;
+      SQL.Add('update itens set iten_qtd = iten_qtd - :qtd');
+      SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+      ParamByName('pedido').Value := codigo_venda;
+      ParamByName('produto').Value := produto;
+      ParamByName('qtd').Value := qtd;
+      ExecSQL;
     end;
 
-       with SQL_itens_add do
-      begin
+  with SQL_itens_add do
+    begin
       //deleta o iten se a QTD = 0
-       Close;
-       SQL.Clear;
-       SQL.Add('delete from itens');
-       SQL.Add('where iten_qtd = 0');
-       ExecSQL;
-      end;
+      Close;
+      SQL.Clear;
+      SQL.Add('delete from itens');
+      SQL.Add('where iten_qtd = 0');
+      ExecSQL;
+    end;
 
     ProcedureAtualizaDBGridLançamentos;
 end;
@@ -860,6 +886,20 @@ end;
 
 procedure TF_PDV.btn_iniciar_venda_pdvClick(Sender: TObject);
 begin
+  dm.SQL_clientes.SQL.Text := 'select * from clientes where cli_nome = :cli_nome';
+  dm.SQL_clientes.ParamByName('cli_nome').AsString := edt_cli_nome_pdv.Text;
+  dm.SQL_clientes.Open;
+  if dm.SQL_clientes.RecordCount = 0 then
+    begin
+      ShowMessage('Informe o cliente para iniciar a venda.');
+      Exit
+    end;
+
+  if lkcbox_formapag_pdv.Text = '' then
+    begin
+      ShowMessage('Selecione a forma de pagamento!');
+    end;
+
   ProcedureIniciavenda;
   edt_pro_nome_pdv.SetFocus;
 end;
@@ -974,6 +1014,7 @@ begin
       TB_pedidosped_usuario.Value := 1;
       TB_pedidosped_fechado.AsString := 'SIM';
       TB_pedidosped_faturado.AsString:= 'NAO';
+      TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
       TB_pedidos.Post;
       ShowMessage('Pedido Finalizado com sucesso!');
       SQL_listar_pedidos_dbglançamento.Close;

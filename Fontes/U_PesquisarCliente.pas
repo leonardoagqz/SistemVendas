@@ -46,7 +46,9 @@ begin
     F_PDV.lbl_resut_cpf_cnpj_cli_pdv.Caption := dm.SQL_clientescli_cnpj_cpf.AsString;
     F_PDV.lbl_result_cel_cli_pdv.Caption := dm.SQL_clientescli_celular.AsString;
     F_PDV.lbl_result_end_cli_pdv.Caption := dm.SQL_clientescli_endereco.AsString +'  Nº '+ dm.SQL_clientescli_numero.AsString + ' '+ dm.SQL_clientescli_bairro.AsString;
-    F_PDV.edt_cli_nome_pdv.SelectAll;
+    //F_PDV.edt_cli_nome_pdv.SelectAll;
+    F_PDV.lkcbox_formapag_pdv.Enabled:=True;
+    F_PDV.lkcbox_formapag_pdv.SetFocus;
     F_pdv_clientes_listar.Close;
 end;
 

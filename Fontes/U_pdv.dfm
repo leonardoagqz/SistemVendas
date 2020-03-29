@@ -268,10 +268,16 @@
       end
       object lbl_cod_cliente: TLabel
         Left = 2
-        Top = 8
-        Width = 55
-        Height = 13
-        Caption = 'Cod Cliente'
+        Top = 5
+        Width = 40
+        Height = 16
+        Caption = 'Cod Cli'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        ParentFont = False
       end
       object lbl_cpf_cnpj_cli_pdv: TLabel
         Left = 274
@@ -739,7 +745,7 @@
       object lbl_formapag_pdv: TLabel
         Left = 11
         Top = 5
-        Width = 107
+        Width = 102
         Height = 13
         Caption = 'Forma de Pagamento'
       end
@@ -833,9 +839,11 @@
         Width = 167
         Height = 21
         DropDownCount = 8
-        LookupField = 'forma_nome'
+        LookupField = 'forma_id'
+        LookupDisplay = 'forma_nome'
         LookupSource = dm.ds_formapag
         TabOrder = 0
+        OnClick = lkcbox_formapag_pdvClick
       end
     end
     object pn_btns_grv_can_fec_vendas_pdv: TPanel

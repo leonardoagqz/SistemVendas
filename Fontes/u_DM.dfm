@@ -1044,6 +1044,7 @@ object dm: Tdm
       FieldName = 'forma_id'
       Origin = 'forma_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_formapagforma_nome: TStringField
       AutoGenerateValue = arDefault
