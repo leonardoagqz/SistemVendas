@@ -27,6 +27,7 @@ type
     btn_venda: TSpeedButton;
     Configuraes1: TMenuItem;
     Sair1: TMenuItem;
+    Lanamentos1: TMenuItem;
     procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);
@@ -34,6 +35,7 @@ type
     procedure onclick_menu_sair(Sender: TObject);
     procedure onclick_menu_vendas(Sender: TObject);
     procedure btn_vendasClick(Sender: TObject);
+    procedure Lanamentos1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +49,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos;
 
 //clique do botao clientes
 procedure TF_inicial.btn_clientesClick(Sender: TObject);
@@ -106,6 +108,15 @@ begin
       F_PDV := TF_PDV.Create(Self);
       F_PDV.Show;
    end;
+end;
+
+procedure TF_inicial.Lanamentos1Click(Sender: TObject);
+begin
+  if F_lancamento = nil then
+    begin
+      F_lancamento := TF_lancamento.Create(self);
+      F_lancamento.ShowModal;
+    end;
 end;
 
 procedure TF_inicial.onclick_menu_vendas(Sender: TObject);

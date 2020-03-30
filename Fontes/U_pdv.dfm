@@ -1173,11 +1173,17 @@
     Top = 232
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
+    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (
-      'select * from pedidos, produtos, itens'
-      '  where ped_codigo = iten_pedido and pro_id = iten_produto ')
+      
+        'select * from pedidos d, itens i, produtos p, clientes c, forma_' +
+        'pagamento f, usuarios u '
+      
+        ' where c.cli_id = d.ped_cliente and i.iten_pedido = d.ped_codigo' +
+        ' and d.ped_forma_pag = f.forma_id'
+      '  and i.iten_produto = p.pro_id and d.ped_usuario = u.user_id')
     Left = 112
     Top = 272
     object SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField
@@ -1339,6 +1345,141 @@
       FieldName = 'subTotalPrazo'
       DisplayFormat = ',0.00;-,0.00'
       Calculated = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentocli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentocli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentocli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentocli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_cnpj_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentocli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listar_pedidos_dbglançamentocli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoforma_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentoforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object SQL_listar_pedidos_dbglançamentouser_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_id'
+      Origin = 'user_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listar_pedidos_dbglançamentouser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentouser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listar_pedidos_dbglançamentouser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
     end
   end
   object SQL_Listar_Pedidos_dbg2: TFDQuery

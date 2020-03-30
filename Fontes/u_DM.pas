@@ -98,6 +98,17 @@ type
     ds_formapag: TDataSource;
     SQL_formapagforma_id: TFDAutoIncField;
     SQL_formapagforma_nome: TStringField;
+    ppLabel1: TppLabel;
+    ppDBText7: TppDBText;
+    ppLabel12: TppLabel;
+    ppDBText8: TppDBText;
+    ppLabel13: TppLabel;
+    ppDBText9: TppDBText;
+    ppLabel14: TppLabel;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
   private
     { Private declarations }
   public

@@ -9,7 +9,8 @@ uses
   u_DM in 'Fontes\u_DM.pas' {dm: TDataModule},
   U_pdv in 'Fontes\U_pdv.pas' {F_PDV},
   U_PesquisarProduto in 'Fontes\U_PesquisarProduto.pas' {F_pdv_produtos_listar},
-  U_PesquisarCliente in 'Fontes\U_PesquisarCliente.pas' {F_pdv_clientes_listar};
+  U_PesquisarCliente in 'Fontes\U_PesquisarCliente.pas' {F_pdv_clientes_listar},
+  U_lancamentos in 'Fontes\U_lancamentos.pas' {F_lancamento};
 
 {$R *.res}
 
@@ -18,6 +19,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TF_inicial, F_inicial);
-  Application.CreateForm(TF_pdv_clientes_listar, F_pdv_clientes_listar);
   Application.Run;
 end.
