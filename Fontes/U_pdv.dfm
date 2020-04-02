@@ -1173,7 +1173,6 @@
     Top = 232
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
-    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (
@@ -1545,6 +1544,16 @@
       FieldName = 'ped_faturado'
       Origin = 'ped_faturado'
       Size = 3
+    end
+    object TB_pedidosped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object TB_pedidosped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
     end
   end
   object SQL_cancela_venda: TFDQuery

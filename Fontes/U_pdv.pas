@@ -121,6 +121,8 @@ type
     SQL_listar_pedidos_dbglançamentouser_nome: TStringField;
     SQL_listar_pedidos_dbglançamentouser_nome_completo: TStringField;
     SQL_listar_pedidos_dbglançamentouser_senha: TStringField;
+    TB_pedidosped_subtotal: TFloatField;
+    TB_pedidosped_subtotalprazo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -1033,6 +1035,8 @@ begin
       TB_pedidosped_fechado.AsString := 'SIM';
       TB_pedidosped_faturado.AsString:= 'NAO';
       TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+      TB_pedidosped_subtotal.AsFloat := StrToFloat(edt_total_pdv.Text);
+      TB_pedidosped_subtotalprazo.AsFloat := StrToFloat(edt_total_prazo_pdv.Text);
       TB_pedidos.Post;
       ShowMessage('Pedido Finalizado com sucesso!');
       SQL_listar_pedidos_dbglançamento.Close;

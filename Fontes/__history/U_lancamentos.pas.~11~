@@ -1,0 +1,162 @@
+unit U_lancamentos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls;
+
+type
+  TF_lancamento = class(TForm)
+    Panel1: TPanel;
+    dbg_listarlancamentos: TDBGrid;
+    SQL_listarancamentos: TFDQuery;
+    ds_listarlancamentos: TDataSource;
+    SQL_listarancamentosped_id: TIntegerField;
+    SQL_listarancamentosped_date: TDateField;
+    SQL_listarancamentosped_codigo: TStringField;
+    SQL_listarancamentosped_cliente: TIntegerField;
+    SQL_listarancamentosped_usuario: TIntegerField;
+    SQL_listarancamentosped_forma_pag: TIntegerField;
+    SQL_listarancamentosped_fechado: TStringField;
+    SQL_listarancamentosped_faturado: TStringField;
+    SQL_listarancamentositen_id: TIntegerField;
+    SQL_listarancamentositen_produto: TIntegerField;
+    SQL_listarancamentositen_qtd: TIntegerField;
+    SQL_listarancamentositen_pedido: TStringField;
+    SQL_listarancamentositen_preco: TFloatField;
+    SQL_listarancamentositen_preco_prazo: TFloatField;
+    SQL_listarancamentospro_id: TIntegerField;
+    SQL_listarancamentospro_nome: TStringField;
+    SQL_listarancamentospro_barra: TStringField;
+    SQL_listarancamentospro_ref: TStringField;
+    SQL_listarancamentospro_custo: TFloatField;
+    SQL_listarancamentospro_preco: TFloatField;
+    SQL_listarancamentospro_preco_prazo: TFloatField;
+    SQL_listarancamentospro_estoque: TIntegerField;
+    SQL_listarancamentoscli_id: TIntegerField;
+    SQL_listarancamentoscli_nome: TStringField;
+    SQL_listarancamentoscli_endereco: TStringField;
+    SQL_listarancamentoscli_numero: TStringField;
+    SQL_listarancamentoscli_bairro: TStringField;
+    SQL_listarancamentoscli_cidade: TStringField;
+    SQL_listarancamentoscli_fone: TStringField;
+    SQL_listarancamentoscli_celular: TStringField;
+    SQL_listarancamentoscli_rg: TStringField;
+    SQL_listarancamentoscli_cnpj_cpf: TStringField;
+    SQL_listarancamentoscli_profissao: TStringField;
+    SQL_listarancamentoscli_data_nasc: TDateField;
+    SQL_listarancamentosforma_id: TIntegerField;
+    SQL_listarancamentosforma_nome: TStringField;
+    SQL_listarancamentosuser_id: TIntegerField;
+    SQL_listarancamentosuser_nome: TStringField;
+    SQL_listarancamentosuser_nome_completo: TStringField;
+    SQL_listarancamentosuser_senha: TStringField;
+    SQL_listar_pedidos_dbglançamento: TFDQuery;
+    SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField;
+    SQL_listar_pedidos_dbglançamentoped_date: TDateField;
+    SQL_listar_pedidos_dbglançamentoped_codigo: TStringField;
+    SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_forma_pag: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoped_fechado: TStringField;
+    SQL_listar_pedidos_dbglançamentoped_faturado: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentopro_nome: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_barra: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_ref: TStringField;
+    SQL_listar_pedidos_dbglançamentopro_custo: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_preco: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_preco_prazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentopro_estoque: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_produto: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_qtd: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoiten_pedido: TStringField;
+    SQL_listar_pedidos_dbglançamentoiten_preco: TFloatField;
+    SQL_listar_pedidos_dbglançamentoiten_preco_prazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentosubTotal: TFloatField;
+    SQL_listar_pedidos_dbglançamentosubTotalPrazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentocli_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentocli_nome: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_endereco: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_numero: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_bairro: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_cidade: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_fone: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_celular: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_rg: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_cnpj_cpf: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_profissao: TStringField;
+    SQL_listar_pedidos_dbglançamentocli_data_nasc: TDateField;
+    SQL_listar_pedidos_dbglançamentoforma_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentoforma_nome: TStringField;
+    SQL_listar_pedidos_dbglançamentouser_id: TIntegerField;
+    SQL_listar_pedidos_dbglançamentouser_nome: TStringField;
+    SQL_listar_pedidos_dbglançamentouser_nome_completo: TStringField;
+    SQL_listar_pedidos_dbglançamentouser_senha: TStringField;
+    SQL_listarancamentossubTotal: TFloatField;
+    SQL_listarancamentossubTotalPrazo: TFloatField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure procedureMostrarPedido;
+
+  private
+    { Private declarations }
+
+  var total_vista, total_prazo : Double;
+  var codigo_venda : string;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  F_lancamento: TF_lancamento;
+
+implementation
+
+uses
+  u_DM, U_pdv;
+
+{$R *.dfm}
+
+
+procedure TF_lancamento.procedureMostrarPedido;
+begin
+  //mostrar pedido selecionado
+  total_vista := 0;
+  total_prazo := 0;
+  codigo_venda := SQL_listarancamentosped_codigo.AsString;
+
+  //executo a sql listar lançamentos para filtrar atual
+  with SQL_listarancamentos do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select* from view_listar_pedidos');
+   SQL.Add('where ped_codigo = :codigo');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+
+   end;
+
+   SQL_listarancamentos.First;
+
+   while not SQL_listarancamentos.Eof do
+   begin
+     total_vista := total_vista + SQL_listarancamentoss
+   end;
+
+
+end;
+
+procedure TF_lancamento.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  F_lancamento := nil;
+end;
+
+end.
