@@ -109,6 +109,93 @@ type
     ppDBText11: TppDBText;
     ppDBText12: TppDBText;
     ppDBText13: TppDBText;
+    ppDB_Recibo_Lancamento: TppDBPipeline;
+    Report_reciboPedidoLancamento1: TppReport;
+    ppHeaderBand2: TppHeaderBand;
+    ppLabel15: TppLabel;
+    ppLabel16: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel18: TppLabel;
+    ppLabel19: TppLabel;
+    ppLabel20: TppLabel;
+    ppLine5: TppLine;
+    ppLine6: TppLine;
+    ppLabel21: TppLabel;
+    ppLabel22: TppLabel;
+    ppLine7: TppLine;
+    ppLabel23: TppLabel;
+    ppLabel24: TppLabel;
+    ppDBText15: TppDBText;
+    ppLabel25: TppLabel;
+    ppDBText16: TppDBText;
+    ppDBText17: TppDBText;
+    ppDBText18: TppDBText;
+    ppDBText19: TppDBText;
+    ppDetailBand2: TppDetailBand;
+    ppFooterBand2: TppFooterBand;
+    ppSummaryBand2: TppSummaryBand;
+    ppLine8: TppLine;
+    ppLabel26: TppLabel;
+    ppLabel27: TppLabel;
+    ppDBCalc3: TppDBCalc;
+    ppDBCalc4: TppDBCalc;
+    ppLabel28: TppLabel;
+    ppDBText26: TppDBText;
+    ppDesignLayers2: TppDesignLayers;
+    ppDesignLayer2: TppDesignLayer;
+    ppParameterList2: TppParameterList;
+    ppLabel29: TppLabel;
+    ppDBText27: TppDBText;
+    ppLabel30: TppLabel;
+    ppDBText28: TppDBText;
+    ppLabel31: TppLabel;
+    ppDBText29: TppDBText;
+    ppLabel32: TppLabel;
+    ppDBText30: TppDBText;
+    ppDBText14: TppDBText;
+    Report_reciboPedidoLancamento: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppLabel33: TppLabel;
+    ppLabel34: TppLabel;
+    ppLabel35: TppLabel;
+    ppLabel36: TppLabel;
+    ppLabel37: TppLabel;
+    ppLabel38: TppLabel;
+    ppLine9: TppLine;
+    ppLine10: TppLine;
+    ppLine11: TppLine;
+    ppLabel41: TppLabel;
+    ppDBText20: TppDBText;
+    ppLabel42: TppLabel;
+    ppDBText21: TppDBText;
+    ppLabel43: TppLabel;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBText24: TppDBText;
+    ppDBText25: TppDBText;
+    ppDetailBand3: TppDetailBand;
+    ppDBText31: TppDBText;
+    ppDBText32: TppDBText;
+    ppDBText33: TppDBText;
+    ppDBText34: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppSummaryBand3: TppSummaryBand;
+    ppLine12: TppLine;
+    ppLabel44: TppLabel;
+    ppLabel45: TppLabel;
+    ppLabel46: TppLabel;
+    ppDBText37: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    ppDBText38: TppDBText;
+    ppDBText39: TppDBText;
+    ppLabel47: TppLabel;
+    ppLabel48: TppLabel;
+    ppLabel49: TppLabel;
+    ppDBText35: TppDBText;
+    ppDBText36: TppDBText;
+    ppDBText40: TppDBText;
   private
     { Private declarations }
   public
@@ -121,7 +208,7 @@ var
 implementation
 
 uses
-  U_pdv;
+  U_pdv, U_lancamentos;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 

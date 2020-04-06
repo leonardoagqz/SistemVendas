@@ -81,7 +81,7 @@ var
 implementation
 
 uses
-  u_DM, U_funcoes;
+  u_DM, U_funcoes, U_PesquisarProduto;
 
 {$R *.dfm}
 
@@ -142,43 +142,38 @@ end;
 
 procedure TF_produtos.edt_buscaKeyPress(Sender: TObject; var Key: Char);
 begin
-
   if Key = #13 then
-      begin
-         if edt_busca.Text = '' then
-                ShowMessage('Campo vazio!')
-              else
-              begin
-                  with dm.SQL_produtos do
-               begin
-                 Close;
-                 SQL.Clear;
-                 SQL.Add('select * from produtos');
-                    case rg_buscar.ItemIndex of
-                    0 : SQL.Add('where pro_nome like :nome');
-                    1 : SQL.Add('where pro_barra like :nome');
-
-                    end;
-
-                 ParamByName('nome').Value := edt_busca.Text + '%';
-                 Open;
-
-                 if RecordCount = 0 then
-                 ShowMessage('Produto não encontrado!');
-
-               end;
+    begin
+      if edt_busca.Text = '' then
+        ShowMessage('Campo vazio!')
+      else
+        begin
+          with dm.SQL_produtos do
+            begin
+              Close;
+              SQL.Clear;
+              SQL.Add('select * from produtos');
+              case rg_buscar.ItemIndex of
+              0 : SQL.Add('where pro_nome like :nome');
+              1 : SQL.Add('where pro_barra like :nome');
               end;
 
+              ParamByName('nome').Value := edt_busca.Text + '%';
+              Open;
 
-          end;
+              if RecordCount = 0 then
+              ShowMessage('Produto não encontrado!');
 
+            end;
+        end;
+
+    end;
 
 end;
 
 procedure TF_produtos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   F_produtos := nil;
-
 end;
 
 procedure TF_produtos.FormCreate(Sender: TObject);
@@ -186,7 +181,6 @@ begin
   //dm.SQL_produtos.Open;
    dm.TB_produtos.Active:=True;
    page_produtos.ActivePage := tab_consultar;
-
 end;
 
 procedure TF_produtos.btn_gravar_cad_prodClick(Sender: TObject);
@@ -200,37 +194,34 @@ end;
 
 procedure TF_produtos.img_buscarprodutosClick(Sender: TObject);
 begin
-   with dm.SQL_produtos do
-           begin
-              if edt_busca.Text = '' then
-                ShowMessage('Campo vazio!')
-              else
-                      begin
-                        Close;
-                        SQL.Clear;
-                        SQL.Add('select * from produtos');
-                            case rg_buscar.ItemIndex of
-                              0 : SQL.Add('where pro_nome like :nome');
-                              1 : SQL.Add('where pro_barra like :nome');
+  with dm.SQL_produtos do
+    begin
+      if edt_busca.Text = '' then
+        ShowMessage('Campo vazio!')
+      else
+        begin
+          Close;
+          SQL.Clear;
+          SQL.Add('select * from produtos');
+          case rg_buscar.ItemIndex of
+            0 : SQL.Add('where pro_nome like :nome');
+            1 : SQL.Add('where pro_barra like :nome');
+          end;
 
-                             end;
+          ParamByName('nome').Value := edt_busca.Text + '%';
+          Open;
+          if RecordCount = 0 then
+            ShowMessage('Produto não encontrado!');
 
-                        ParamByName('nome').Value := edt_busca.Text + '%';
-                        Open;
-
-                       if RecordCount = 0 then
-                       ShowMessage('Produto não encontrado!');
-
-                       if edt_busca.Text = '' then
-                       ShowMessage('Campo vazio!');
-
-                   end;
-           end;
+          if edt_busca.Text = '' then
+            ShowMessage('Campo vazio!');
+        end;
+    end;
 end;
 
 procedure TF_produtos.SpeedButton1Click(Sender: TObject);
 begin
-    edt_cod_barras.Text := EAN13;
+  edt_cod_barras.Text := EAN13;
 end;
 
 procedure TF_produtos.tab_cadastrarShow(Sender: TObject);
@@ -241,30 +232,30 @@ end;
 procedure TF_produtos.btn_buscarprodutosClick(Sender: TObject);
 begin
   with dm.SQL_produtos do
-           begin
-              if edt_busca.Text = '' then
-              ShowMessage('Campo vazio!')
+    begin
+      if edt_busca.Text = '' then
+        begin
+          //ShowMessage('Campo vazio!')
+          edt_busca.Text := '%%';
+          btn_buscarprodutos.Click;
+          edt_busca.Text := '';
+        end
+        else
+          begin
+            Close;
+            SQL.Clear;
+            SQL.Add('select * from produtos');
+            case rg_buscar.ItemIndex of
+              0 : SQL.Add('where pro_nome like :nome');
+              1 : SQL.Add('where pro_barra like :nome');
+            end;
 
-              else
-                      begin
-                         Close;
-                            SQL.Clear;
-                            SQL.Add('select * from produtos');
-                              case rg_buscar.ItemIndex of
-                                0 : SQL.Add('where pro_nome like :nome');
-                                1 : SQL.Add('where pro_barra like :nome');
-
-                               end;
-
-                            ParamByName('nome').Value := edt_busca.Text + '%';
-                            Open;
-
-                         if RecordCount = 0 then
-                         ShowMessage('Produto não encontrado!');
-                     end
-
-
-           end;
+            ParamByName('nome').Value := edt_busca.Text + '%';
+            Open;
+            if RecordCount = 0 then
+              ShowMessage('Produto não encontrado!');
+          end
+    end;
 end;
 
 end.

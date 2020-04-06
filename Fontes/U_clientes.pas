@@ -83,7 +83,7 @@ var
 implementation
 
 uses
-  u_DM, U_funcoes;
+  u_DM, U_funcoes, U_PesquisarCliente;
 
 {$R *.dfm}
 
@@ -97,30 +97,32 @@ end;
 
 procedure TF_clientes.btn_buscarclientesClick(Sender: TObject);
 begin
-    with dm.SQL_clientes do
-      begin
-          if edt_buscar_cli.Text = '' then
-          ShowMessage('Campo vazio!')
+  with dm.SQL_clientes do
+    begin
+      if edt_buscar_cli.Text = '' then
+        begin
+          //ShowMessage('Campo vazio!')
+          edt_buscar_cli.Text := '%%';
+          btn_buscarclientes.Click;
+          edt_buscar_cli.Text := '';
+        end
+        else
+          begin
+            Close;
+            SQL.Clear;
+            SQL.Add('select * from clientes');
+            case rg_buscar_cli.ItemIndex of
+              0 : SQL.Add('where cli_nome like :nome');
+              1 : SQL.Add('where cli_cnpj_cpf like :nome');
+            end;
 
-          else
-            begin
-              Close;
-              SQL.Clear;
-              SQL.Add('select * from clientes');
-                          case rg_buscar_cli.ItemIndex of
-                            0 : SQL.Add('where cli_nome like :nome');
-                            1 : SQL.Add('where cli_cnpj_cpf like :nome');
+            ParamByName('nome').Value := edt_buscar_cli.Text + '%';
+            Open;
 
-                           end;
-
-                        ParamByName('nome').Value := edt_buscar_cli.Text + '%';
-                        Open;
-
-                     if RecordCount = 0 then
-                     ShowMessage('Cliente não encontrado!');
-              end
-
-      end;
+            if RecordCount = 0 then
+              ShowMessage('Cliente não encontrado!');
+          end
+    end;
 end;
 
 procedure TF_clientes.btn_cadastrar_cad_cliClick(Sender: TObject);
@@ -162,10 +164,10 @@ end;
 
 procedure TF_clientes.edt_buscar_cliKeyPress(Sender: TObject; var Key: Char);
 begin
-    if Key = #13 then
-        begin
-          btn_buscarclientes.Click;
-        end;
+  if Key = #13 then
+    begin
+      btn_buscarclientes.Click;
+    end;
 end;
 
 procedure TF_clientes.FormClose(Sender: TObject; var Action: TCloseAction);

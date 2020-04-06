@@ -681,16 +681,14 @@ procedure TF_PDV.edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   case Key of
-  VK_F2:
-  begin
-    F_pdv_produtos_listar := TF_pdv_produtos_listar.Create(self);
-    F_pdv_produtos_listar.ShowModal;
-    edt_pro_qtd_pdv.SetFocus;
-  end;
+    VK_F2:
+    begin
+      F_pdv_produtos_listar := TF_pdv_produtos_listar.Create(self);
+      F_pdv_produtos_listar.ShowModal;
+      edt_pro_qtd_pdv.SetFocus;
+    end;
 
   end;
-
-
 end;
 
 procedure TF_PDV.edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);

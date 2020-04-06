@@ -22,7 +22,7 @@ object F_clientes: TF_clientes
     Top = 0
     Width = 994
     Height = 422
-    ActivePage = tab_cadastrar
+    ActivePage = tab_consultar
     Align = alClient
     TabOrder = 0
     object tab_consultar: TTabSheet
@@ -441,7 +441,10 @@ object F_clientes: TF_clientes
         Top = 40
         Width = 222
         Height = 21
+        Hint = '%%  para buscar todos'
         CharCase = ecUpperCase
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 1
         OnKeyPress = edt_buscar_cliKeyPress
       end

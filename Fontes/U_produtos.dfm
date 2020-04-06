@@ -427,7 +427,6 @@ object F_produtos: TF_produtos
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
@@ -439,14 +438,12 @@ object F_produtos: TF_produtos
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
-            Width = 64
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'pro_estoque'
             Title.Caption = 'Qtd Estoque'
-            Width = 64
             Visible = True
           end>
       end
@@ -455,6 +452,7 @@ object F_produtos: TF_produtos
         Top = 40
         Width = 222
         Height = 22
+        Hint = '%%  para buscar todos'
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -462,6 +460,8 @@ object F_produtos: TF_produtos
         CharCase = ecUpperCase
         Ctl3D = True
         ParentCtl3D = False
+        ParentShowHint = False
+        ShowHint = True
         TabOrder = 0
         OnChange = edt_buscaChange
         OnKeyPress = edt_buscaKeyPress
