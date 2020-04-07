@@ -110,11 +110,21 @@ type
     SQL_listarlancamento_relatuser_senha: TStringField;
     btn_listaritensdopedido_lanc: TSpeedButton;
     DBGrid1: TDBGrid;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Label3: TLabel;
+    Panel5: TPanel;
+    edt_buscarClientelanc: TEdit;
+    edt_buscarCodVendalanc: TEdit;
+    lbl_buscarclientelanc: TLabel;
+    lbl_buscarcodvendalanc: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
     procedure SpeedButton1Click(Sender: TObject);
     procedure btn_listaritensdopedido_lancClick(Sender: TObject);
+    procedure edt_buscarClientelancKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -184,7 +194,7 @@ procedure TF_lancamento.SpeedButton1Click(Sender: TObject);
 begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
-  //executo a sql listar lançamentos para filtrar atual
+  //executo a sql listar o pedido em lançamentos para filtrar atual
   with SQL_listarlancamento_relat do
    begin
    Close;
@@ -220,6 +230,31 @@ procedure TF_lancamento.dbg_listarlancamentosCellClick(Column: TColumn);
 begin
  procedureMostrarPedido;
 
+end;
+
+procedure TF_lancamento.edt_buscarClientelancKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+    begin
+     SQL_ListarLancamentos.Close;
+     SQL_ListarLancamentos.SQL.Clear;
+     SQL_ListarLancamentos.SQL.Text := 'select * from view_listar_pedidos';
+     SQL_ListarLancamentos.SQL.Text := 'where cli_nome like :nome';
+     SQL_ListarLancamentos.SQL.Text := 'group by ped_codigo';
+     SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
+     SQL_ListarLancamentos.Open;
+     if SQL_ListarLancamentos.RecordCount = 0 then
+       begin
+         ShowMessage('Cliente não Encontrado');
+         SQL_ListarLancamentos.Close;
+         SQL_ListarLancamentos.SQL.Clear;
+         SQL_ListarLancamentos.SQL.Text := 'select * from view_listar_pedidos';
+         SQL_ListarLancamentos.SQL.Text := 'group by ped_codigo';
+         SQL_ListarLancamentos.Open;
+
+       end;
+    end;
 end;
 
 procedure TF_lancamento.FormClose(Sender: TObject; var Action: TCloseAction);
