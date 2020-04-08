@@ -10,7 +10,8 @@ uses
   U_pdv in 'Fontes\U_pdv.pas' {F_PDV},
   U_PesquisarProduto in 'Fontes\U_PesquisarProduto.pas' {F_pdv_produtos_listar},
   U_PesquisarCliente in 'Fontes\U_PesquisarCliente.pas' {F_pdv_clientes_listar},
-  U_lancamentos in 'Fontes\U_lancamentos.pas' {F_lancamento};
+  U_lancamentos in 'Fontes\U_lancamentos.pas' {F_lancamento},
+  U_GerarParcelas in 'Fontes\U_GerarParcelas.pas' {F_gerarparcelas};
 
 {$R *.res}
 

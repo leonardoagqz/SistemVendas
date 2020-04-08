@@ -8,7 +8,8 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
-  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons;
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons,
+  RxLookup;
 
 type
   TF_lancamento = class(TForm)
@@ -58,8 +59,8 @@ type
     SQL_ListarLancamentosuser_senha: TStringField;
     edt_valorprazo_lancamento: TCurrencyEdit;
     edt_valoravista_lancamento: TCurrencyEdit;
-    Label1: TLabel;
-    Label2: TLabel;
+    lbl_totalvistalanc: TLabel;
+    lbl_totalprazolanc: TLabel;
     SQL_ListarLancamentosped_subtotal: TFloatField;
     SQL_ListarLancamentosped_subtotalprazo: TFloatField;
     SQL_lanc: TFDQuery;
@@ -119,6 +120,21 @@ type
     edt_buscarCodVendalanc: TEdit;
     lbl_buscarclientelanc: TLabel;
     lbl_buscarcodvendalanc: TLabel;
+    btn_mostrarTodoslanc: TBitBtn;
+    lk_formapaglanc: TRxDBLookupCombo;
+    lbl_formapaglanc: TLabel;
+    btn_fecharpedido: TBitBtn;
+    TB_faturarpedido: TFDTable;
+    TB_faturarpedidoped_id: TFDAutoIncField;
+    TB_faturarpedidoped_date: TDateField;
+    TB_faturarpedidoped_codigo: TStringField;
+    TB_faturarpedidoped_cliente: TIntegerField;
+    TB_faturarpedidoped_usuario: TIntegerField;
+    TB_faturarpedidoped_forma_pag: TIntegerField;
+    TB_faturarpedidoped_fechado: TStringField;
+    TB_faturarpedidoped_faturado: TStringField;
+    TB_faturarpedidoped_subtotal: TFloatField;
+    TB_faturarpedidoped_subtotalprazo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -126,6 +142,9 @@ type
     procedure btn_listaritensdopedido_lancClick(Sender: TObject);
     procedure edt_buscarClientelancKeyPress(Sender: TObject; var Key: Char);
     procedure edt_buscarCodVendalancKeyPress(Sender: TObject; var Key: Char);
+    procedure btn_mostrarTodoslancClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btn_fecharpedidoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -208,6 +227,36 @@ begin
   dm.Report_reciboPedidoLancamento.PrintReport;
 end;
 
+procedure TF_lancamento.btn_fecharpedidoClick(Sender: TObject);
+begin
+  if lk_formapaglanc.Text = '' then
+    begin
+      ShowMessage('Escolha a forma de Pagamento');
+      lk_formapaglanc.SetFocus;
+      Exit
+    end;
+
+  if SQL_ListarLancamentosped_faturado.Value = 'SIM' then
+    begin
+      ShowMessage('Pedido já esta Faturado.');
+    end;
+
+
+  TB_faturarpedido.Active := True;
+  TB_faturarpedido.Locate('ped_codigo',SQL_ListarLancamentosped_codigo.AsString);
+  TB_faturarpedido.Edit;
+  TB_faturarpedidoped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+  TB_faturarpedidoped_faturado.Value := 'SIM';
+  TB_faturarpedido.Post;
+
+  ShowMessage('Pedido faturado com Sucesso!');
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.Open;
+
+
+end;
+
 procedure TF_lancamento.btn_listaritensdopedido_lancClick(Sender: TObject);
 begin
   
@@ -225,6 +274,15 @@ begin
    end;
 
 
+end;
+
+procedure TF_lancamento.btn_mostrarTodoslancClick(Sender: TObject);
+begin
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.Open;
 end;
 
 procedure TF_lancamento.dbg_listarlancamentosCellClick(Column: TColumn);
@@ -286,6 +344,11 @@ end;
 procedure TF_lancamento.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   F_lancamento := nil;
+end;
+
+procedure TF_lancamento.FormCreate(Sender: TObject);
+begin
+  dm.SQL_formapag.Active:=True;
 end;
 
 end.
