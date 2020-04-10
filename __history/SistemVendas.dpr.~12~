@@ -20,6 +20,5 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TF_inicial, F_inicial);
-  Application.CreateForm(TF_gerarparcelas, F_gerarparcelas);
   Application.Run;
 end.

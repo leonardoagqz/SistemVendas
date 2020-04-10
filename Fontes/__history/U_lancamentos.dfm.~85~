@@ -14,9 +14,10 @@ object F_lancamento: TF_lancamento
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object lbl_totalvistalanc: TLabel
     Left = 4
     Top = 454
     Width = 86
@@ -29,12 +30,12 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object lbl_totalprazolanc: TLabel
     Left = 140
     Top = 454
-    Width = 102
+    Width = 93
     Height = 19
-    Caption = 'Totoal a prazo'
+    Caption = 'Total a prazo'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -42,21 +43,34 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object SpeedButton1: TSpeedButton
+  object btn_imprimerecibo: TSpeedButton
     Left = 604
     Top = 458
     Width = 106
     Height = 25
     Caption = 'Imprimir Selecionado'
-    OnClick = SpeedButton1Click
+    OnClick = btn_imprimereciboClick
   end
   object btn_listaritensdopedido_lanc: TSpeedButton
-    Left = 512
-    Top = 487
+    Left = 672
+    Top = 489
     Width = 33
     Height = 19
     Visible = False
     OnClick = btn_listaritensdopedido_lancClick
+  end
+  object lbl_formapaglanc: TLabel
+    Left = 276
+    Top = 454
+    Width = 151
+    Height = 19
+    Caption = 'Forma de Pagamento'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
   end
   object Panel1: TPanel
     Left = 0
@@ -324,6 +338,27 @@ object F_lancamento: TF_lancamento
       TabOrder = 2
       OnClick = btn_mostrarTodoslancClick
     end
+  end
+  object lk_formapaglanc: TRxDBLookupCombo
+    Left = 276
+    Top = 473
+    Width = 153
+    Height = 27
+    DropDownCount = 8
+    EmptyStrIsNull = False
+    LookupField = 'forma_id'
+    LookupDisplay = 'forma_nome'
+    LookupSource = dm.ds_formapag
+    TabOrder = 9
+  end
+  object btn_fecharpedido: TBitBtn
+    Left = 454
+    Top = 474
+    Width = 97
+    Height = 25
+    Caption = 'Fechar e Faturar'
+    TabOrder = 10
+    OnClick = btn_fecharpedidoClick
   end
   object SQL_ListarLancamentos: TFDQuery
     Connection = dm.conexao
@@ -957,5 +992,65 @@ object F_lancamento: TF_lancamento
     DataSet = SQL_listarlancamento_relat
     Left = 544
     Top = 320
+  end
+  object TB_faturarpedido: TFDTable
+    IndexFieldNames = 'ped_id'
+    Connection = dm.conexao
+    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
+    TableName = 'aguiarsvendasbd.pedidos'
+    Left = 504
+    object TB_faturarpedidoped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object TB_faturarpedidoped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object TB_faturarpedidoped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object TB_faturarpedidoped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object TB_faturarpedidoped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object TB_faturarpedidoped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object TB_faturarpedidoped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object TB_faturarpedidoped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object TB_faturarpedidoped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object TB_faturarpedidoped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
+    end
   end
 end

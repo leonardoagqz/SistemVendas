@@ -1,4 +1,4 @@
-unit U_lancamentos;
+unit U_GerarParcelas;
 
 interface
 
@@ -64,7 +64,6 @@ type
     SQL_ListarLancamentosped_subtotal: TFloatField;
     SQL_ListarLancamentosped_subtotalprazo: TFloatField;
     SQL_lanc: TFDQuery;
-    btn_imprimerecibo: TSpeedButton;
     SQL_listarlancamento_relat: TFDQuery;
     ds_listarlancamento_relat: TDataSource;
     SQL_listarlancamento_relatped_id: TFDAutoIncField;
@@ -110,7 +109,7 @@ type
     SQL_listarlancamento_relatuser_nome_completo: TStringField;
     SQL_listarlancamento_relatuser_senha: TStringField;
     btn_listaritensdopedido_lanc: TSpeedButton;
-    DBGrid1: TDBGrid;
+    dbg_listarParcelas: TDBGrid;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -123,7 +122,6 @@ type
     btn_mostrarTodoslanc: TBitBtn;
     lk_formapaglanc: TRxDBLookupCombo;
     lbl_formapaglanc: TLabel;
-    btn_fecharpedido: TBitBtn;
     TB_faturarpedido: TFDTable;
     TB_faturarpedidoped_id: TFDAutoIncField;
     TB_faturarpedidoped_date: TDateField;
@@ -135,6 +133,8 @@ type
     TB_faturarpedidoped_faturado: TStringField;
     TB_faturarpedidoped_subtotal: TFloatField;
     TB_faturarpedidoped_subtotalprazo: TFloatField;
+    btn_fecharpedido: TBitBtn;
+    btn_imprimerecibo: TSpeedButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);

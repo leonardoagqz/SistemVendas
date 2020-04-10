@@ -286,10 +286,6 @@ begin
   SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
   SQL_ListarLancamentos.Open;
-  if SQL_ListarLancamentos.RecordCount = 0 then
-    begin
-      ShowMessage('Não existem pedidos para serem faturados!');
-    end;
 end;
 
 procedure TF_lancamento.dbg_listarlancamentosCellClick(Column: TColumn);

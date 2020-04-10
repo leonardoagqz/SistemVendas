@@ -43,14 +43,6 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object btn_imprimerecibo: TSpeedButton
-    Left = 604
-    Top = 458
-    Width = 106
-    Height = 25
-    Caption = 'Imprimir Selecionado'
-    OnClick = btn_imprimereciboClick
-  end
   object btn_listaritensdopedido_lanc: TSpeedButton
     Left = 672
     Top = 489
@@ -181,10 +173,10 @@ object F_lancamento: TF_lancamento
     ParentFont = False
     TabOrder = 3
   end
-  object DBGrid1: TDBGrid
-    Left = 0
+  object dbg_listarParcelas: TDBGrid
+    Left = 152
     Top = 286
-    Width = 718
+    Width = 457
     Height = 154
     DataSource = ds_listarlancamento_relat
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -311,6 +303,14 @@ object F_lancamento: TF_lancamento
       Height = 13
       Caption = 'Buscar Cod. Venda'
     end
+    object btn_imprimerecibo: TSpeedButton
+      Left = 599
+      Top = 17
+      Width = 106
+      Height = 25
+      Caption = 'Imprimir Selecionado'
+      OnClick = btn_imprimereciboClick
+    end
     object edt_buscarClientelanc: TEdit
       Left = 11
       Top = 21
@@ -373,8 +373,8 @@ object F_lancamento: TF_lancamento
       ' group by d.ped_codigo'
       ' order by ped_date desc'
       '')
-    Left = 632
-    Top = 96
+    Left = 544
+    Top = 136
     object SQL_ListarLancamentosped_id: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'ped_id'
@@ -671,12 +671,13 @@ object F_lancamento: TF_lancamento
   end
   object ds_listarlancamentos: TDataSource
     DataSet = SQL_ListarLancamentos
-    Left = 632
-    Top = 144
+    Left = 664
+    Top = 128
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
-    Left = 664
+    Left = 576
+    Top = 456
   end
   object SQL_listarlancamento_relat: TFDQuery
     Connection = dm.conexao
@@ -691,8 +692,8 @@ object F_lancamento: TF_lancamento
       '  '
       ' '
       '')
-    Left = 544
-    Top = 264
+    Left = 360
+    Top = 376
     object SQL_listarlancamento_relatped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
@@ -989,15 +990,15 @@ object F_lancamento: TF_lancamento
   end
   object ds_listarlancamento_relat: TDataSource
     DataSet = SQL_listarlancamento_relat
-    Left = 544
-    Top = 320
+    Left = 528
+    Top = 376
   end
   object TB_faturarpedido: TFDTable
     IndexFieldNames = 'ped_id'
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 584
+    Left = 504
     object TB_faturarpedidoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'

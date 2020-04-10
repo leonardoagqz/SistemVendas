@@ -1,4 +1,4 @@
-unit U_lancamentos;
+unit U_GerarParcelas;
 
 interface
 
@@ -123,7 +123,6 @@ type
     btn_mostrarTodoslanc: TBitBtn;
     lk_formapaglanc: TRxDBLookupCombo;
     lbl_formapaglanc: TLabel;
-    btn_fecharpedido: TBitBtn;
     TB_faturarpedido: TFDTable;
     TB_faturarpedidoped_id: TFDAutoIncField;
     TB_faturarpedidoped_date: TDateField;
@@ -135,6 +134,7 @@ type
     TB_faturarpedidoped_faturado: TStringField;
     TB_faturarpedidoped_subtotal: TFloatField;
     TB_faturarpedidoped_subtotalprazo: TFloatField;
+    btn_fecharpedido: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);

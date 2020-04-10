@@ -64,7 +64,7 @@ type
     SQL_ListarLancamentosped_subtotal: TFloatField;
     SQL_ListarLancamentosped_subtotalprazo: TFloatField;
     SQL_lanc: TFDQuery;
-    btn_imprimerecibo: TSpeedButton;
+    SpeedButton1: TSpeedButton;
     SQL_listarlancamento_relat: TFDQuery;
     ds_listarlancamento_relat: TDataSource;
     SQL_listarlancamento_relatped_id: TFDAutoIncField;
@@ -138,7 +138,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
-    procedure btn_imprimereciboClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
     procedure btn_listaritensdopedido_lancClick(Sender: TObject);
     procedure edt_buscarClientelancKeyPress(Sender: TObject; var Key: Char);
     procedure edt_buscarCodVendalancKeyPress(Sender: TObject; var Key: Char);
@@ -210,7 +210,7 @@ begin
    btn_listaritensdopedido_lanc.Click;
 end;
 
-procedure TF_lancamento.btn_imprimereciboClick(Sender: TObject);
+procedure TF_lancamento.SpeedButton1Click(Sender: TObject);
 begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
@@ -251,8 +251,6 @@ begin
 
   ShowMessage('Pedido faturado com Sucesso!');
 
-  btn_imprimerecibo.Click;
-
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.Open;
 
@@ -286,10 +284,6 @@ begin
   SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
   SQL_ListarLancamentos.Open;
-  if SQL_ListarLancamentos.RecordCount = 0 then
-    begin
-      ShowMessage('Não existem pedidos para serem faturados!');
-    end;
 end;
 
 procedure TF_lancamento.dbg_listarlancamentosCellClick(Column: TColumn);
@@ -307,7 +301,6 @@ begin
      SQL_ListarLancamentos.SQL.Clear;
      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
      SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
-     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
      SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
      SQL_ListarLancamentos.Open;
@@ -317,7 +310,6 @@ begin
          SQL_ListarLancamentos.Close;
          SQL_ListarLancamentos.SQL.Clear;
          SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
-         SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "NAO"');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
 
@@ -334,7 +326,6 @@ begin
      SQL_ListarLancamentos.SQL.Clear;
      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
      SQL_ListarLancamentos.SQL.Add ('where ped_codigo like :cod');
-     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
      SQL_ListarLancamentos.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
      SQL_ListarLancamentos.Open;
@@ -344,7 +335,6 @@ begin
          SQL_ListarLancamentos.Close;
          SQL_ListarLancamentos.SQL.Clear;
          SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
-         SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "NAO"');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
 

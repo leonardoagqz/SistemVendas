@@ -266,6 +266,12 @@ object F_inicial: TF_inicial
         Caption = 'Lan'#231'amentos'
         OnClick = Lanamentos1Click
       end
+      object Parcelas1: TMenuItem
+        Caption = 'Parcelas'
+        object GerarParcelas1: TMenuItem
+          Caption = 'Gerar Parcelas'
+        end
+      end
       object menu_vendas: TMenuItem
         Caption = 'Venda'
         OnClick = onclick_menu_vendas

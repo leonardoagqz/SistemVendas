@@ -43,13 +43,13 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object btn_imprimerecibo: TSpeedButton
+  object SpeedButton1: TSpeedButton
     Left = 604
     Top = 458
     Width = 106
     Height = 25
     Caption = 'Imprimir Selecionado'
-    OnClick = btn_imprimereciboClick
+    OnClick = SpeedButton1Click
   end
   object btn_listaritensdopedido_lanc: TSpeedButton
     Left = 672
@@ -676,7 +676,8 @@ object F_lancamento: TF_lancamento
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
-    Left = 664
+    Left = 328
+    Top = 400
   end
   object SQL_listarlancamento_relat: TFDQuery
     Connection = dm.conexao
@@ -997,12 +998,11 @@ object F_lancamento: TF_lancamento
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 584
+    Left = 504
     object TB_faturarpedidoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
     object TB_faturarpedidoped_date: TDateField
       AutoGenerateValue = arDefault

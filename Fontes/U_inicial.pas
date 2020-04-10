@@ -28,6 +28,8 @@ type
     Configuraes1: TMenuItem;
     Sair1: TMenuItem;
     Lanamentos1: TMenuItem;
+    Parcelas1: TMenuItem;
+    GerarParcelas1: TMenuItem;
     procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);

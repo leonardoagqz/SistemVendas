@@ -124,6 +124,17 @@ type
     lk_formapaglanc: TRxDBLookupCombo;
     lbl_formapaglanc: TLabel;
     btn_fecharpedido: TBitBtn;
+    TB_faturarpedido: TFDTable;
+    TB_faturarpedidoped_id: TFDAutoIncField;
+    TB_faturarpedidoped_date: TDateField;
+    TB_faturarpedidoped_codigo: TStringField;
+    TB_faturarpedidoped_cliente: TIntegerField;
+    TB_faturarpedidoped_usuario: TIntegerField;
+    TB_faturarpedidoped_forma_pag: TIntegerField;
+    TB_faturarpedidoped_fechado: TStringField;
+    TB_faturarpedidoped_faturado: TStringField;
+    TB_faturarpedidoped_subtotal: TFloatField;
+    TB_faturarpedidoped_subtotalprazo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -221,7 +232,28 @@ begin
   if lk_formapaglanc.Text = '' then
     begin
       ShowMessage('Escolha a forma de Pagamento');
+      lk_formapaglanc.SetFocus;
+      Exit
     end;
+
+  if SQL_ListarLancamentosped_faturado.Value = 'SIM' then
+    begin
+      ShowMessage('Pedido já esta Faturado.');
+    end;
+
+
+  TB_faturarpedido.Active := True;
+  TB_faturarpedido.Locate('ped_codigo',SQL_ListarLancamentosped_codigo.AsString);
+  TB_faturarpedido.Edit;
+  TB_faturarpedidoped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+  TB_faturarpedidoped_faturado.Value := 'SIM';
+  TB_faturarpedido.Post;
+
+  ShowMessage('Pedido faturado com Sucesso!');
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.Open;
+
 
 end;
 
@@ -249,6 +281,7 @@ begin
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.SQL.Clear;
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
   SQL_ListarLancamentos.Open;
 end;
@@ -268,6 +301,7 @@ begin
      SQL_ListarLancamentos.SQL.Clear;
      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
      SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
+     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
      SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
      SQL_ListarLancamentos.Open;
@@ -293,6 +327,7 @@ begin
      SQL_ListarLancamentos.SQL.Clear;
      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
      SQL_ListarLancamentos.SQL.Add ('where ped_codigo like :cod');
+     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
      SQL_ListarLancamentos.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
      SQL_ListarLancamentos.Open;
