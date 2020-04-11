@@ -2,7 +2,7 @@ object F_gerarparcelas: TF_gerarparcelas
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'Lan'#231'amentos'
+  Caption = 'Parcelamento'
   ClientHeight = 507
   ClientWidth = 718
   Color = clBtnFace
@@ -45,7 +45,7 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object lbl_qtdparcelas: TLabel
     Left = 544
-    Top = 285
+    Top = 288
     Width = 64
     Height = 13
     Caption = 'QTD Parcelas'
@@ -329,7 +329,7 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object btn_lancarParcelas: TBitBtn
     Left = 450
-    Top = 293
+    Top = 296
     Width = 87
     Height = 25
     Caption = 'Gerar Parcelas'
@@ -338,7 +338,7 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object edt_parcelasQtd: TDBCurrencyEdit
     Left = 550
-    Top = 297
+    Top = 300
     Width = 46
     Height = 21
     Align = alCustom
@@ -994,65 +994,49 @@ object F_gerarparcelas: TF_gerarparcelas
     Left = 672
     Top = 368
   end
-  object TB_faturarpedido: TFDTable
-    IndexFieldNames = 'ped_id'
+  object TB_gerarParcelas: TFDTable
+    IndexFieldNames = 'parc_id'
     Connection = dm.conexao
-    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
-    TableName = 'aguiarsvendasbd.pedidos'
+    UpdateOptions.UpdateTableName = 'parcelas'
+    TableName = 'parcelas'
     Left = 504
-    object TB_faturarpedidoped_id: TFDAutoIncField
-      FieldName = 'ped_id'
-      Origin = 'ped_id'
+    object TB_gerarParcelasparc_id: TFDAutoIncField
+      FieldName = 'parc_id'
+      Origin = 'parc_id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
-    object TB_faturarpedidoped_date: TDateField
+    object TB_gerarParcelasparc_cod_carne: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_date'
-      Origin = 'ped_date'
-    end
-    object TB_faturarpedidoped_codigo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_codigo'
-      Origin = 'ped_codigo'
+      FieldName = 'parc_cod_carne'
+      Origin = 'parc_cod_carne'
       Size = 50
     end
-    object TB_faturarpedidoped_cliente: TIntegerField
+    object TB_gerarParcelasparc_numero: TIntegerField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_cliente'
-      Origin = 'ped_cliente'
+      FieldName = 'parc_numero'
+      Origin = 'parc_numero'
     end
-    object TB_faturarpedidoped_usuario: TIntegerField
+    object TB_gerarParcelasparc_valor: TFloatField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_usuario'
-      Origin = 'ped_usuario'
+      FieldName = 'parc_valor'
+      Origin = 'parc_valor'
     end
-    object TB_faturarpedidoped_forma_pag: TIntegerField
+    object TB_gerarParcelasparc_data_venc: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_forma_pag'
-      Origin = 'ped_forma_pag'
+      FieldName = 'parc_data_venc'
+      Origin = 'parc_data_venc'
     end
-    object TB_faturarpedidoped_fechado: TStringField
+    object TB_gerarParcelasparc_pago: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_fechado'
-      Origin = 'ped_fechado'
+      FieldName = 'parc_pago'
+      Origin = 'parc_pago'
+      FixedChar = True
       Size = 3
     end
-    object TB_faturarpedidoped_faturado: TStringField
+    object TB_gerarParcelasparc_data_pago: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_faturado'
-      Origin = 'ped_faturado'
-      Size = 3
-    end
-    object TB_faturarpedidoped_subtotal: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotal'
-      Origin = 'ped_subtotal'
-    end
-    object TB_faturarpedidoped_subtotalprazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotalprazo'
-      Origin = 'ped_subtotalprazo'
+      FieldName = 'parc_data_pago'
+      Origin = 'parc_data_pago'
     end
   end
 end

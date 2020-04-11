@@ -119,23 +119,20 @@ type
     lbl_buscarclientelanc: TLabel;
     lbl_buscarcodvendalanc: TLabel;
     btn_mostrarTodoslanc: TBitBtn;
-    TB_faturarpedido: TFDTable;
-    TB_faturarpedidoped_id: TFDAutoIncField;
-    TB_faturarpedidoped_date: TDateField;
-    TB_faturarpedidoped_codigo: TStringField;
-    TB_faturarpedidoped_cliente: TIntegerField;
-    TB_faturarpedidoped_usuario: TIntegerField;
-    TB_faturarpedidoped_forma_pag: TIntegerField;
-    TB_faturarpedidoped_fechado: TStringField;
-    TB_faturarpedidoped_faturado: TStringField;
-    TB_faturarpedidoped_subtotal: TFloatField;
-    TB_faturarpedidoped_subtotalprazo: TFloatField;
+    TB_gerarParcelas: TFDTable;
     btn_imprimerecibo: TSpeedButton;
     btn_lancarParcelas: TBitBtn;
     edt_parcelasQtd: TDBCurrencyEdit;
     lbl_qtdparcelas: TLabel;
     btn_parcelasapagar: TBitBtn;
     btn_parcelasimpimir: TBitBtn;
+    TB_gerarParcelasparc_id: TFDAutoIncField;
+    TB_gerarParcelasparc_cod_carne: TStringField;
+    TB_gerarParcelasparc_numero: TIntegerField;
+    TB_gerarParcelasparc_valor: TFloatField;
+    TB_gerarParcelasparc_data_venc: TDateField;
+    TB_gerarParcelasparc_pago: TStringField;
+    TB_gerarParcelasparc_data_pago: TDateField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -209,7 +206,7 @@ begin
 
 
    end;}
-   btn_listaritensdopedido_lanc.Click;
+   //btn_listaritensdopedido_lanc.Click;
 end;
 
 procedure TF_gerarparcelas.btn_imprimereciboClick(Sender: TObject);
@@ -231,7 +228,8 @@ end;
 
 procedure TF_gerarparcelas.btn_fecharpedidoClick(Sender: TObject);
 begin
-  if lk_formapaglanc.Text = '' then
+
+  {if lk_formapaglanc.Text = '' then
     begin
       ShowMessage('Escolha a forma de Pagamento');
       lk_formapaglanc.SetFocus;
@@ -256,12 +254,13 @@ begin
   btn_imprimerecibo.Click;
 
   SQL_ListarLancamentos.Close;
-  SQL_ListarLancamentos.Open;
+  SQL_ListarLancamentos.Open; }
 
 
 end;
 
 procedure TF_gerarparcelas.btn_lancarParcelasClick(Sender: TObject);
+var total_parcelas, atual_parcela : Integer;
 begin
   if edt_parcelasQtd.Value < 1 then
     begin
@@ -270,6 +269,28 @@ begin
       edt_parcelasQtd.Color := clYellow;
       Exit;
     end;
+
+  total_parcelas := StrToInt(edt_parcelasQtd.Text);
+  atual_parcela := 0;
+
+  TB_gerarParcelas.Active := True;
+
+  while atual_parcela < total_parcelas do
+  begin
+    atual_parcela := atual_parcela + 1;
+    TB_gerarParcelas.Insert;
+    TB_gerarParcelasparc_cod_carne.Value := SQL_ListarLancamentosped_codigo.Value;               {}
+    TB_gerarParcelasparc_numero.Value := atual_parcela;
+    TB_gerarParcelasparc_valor.Value := edt_valorprazo_lancamento.Value / total_parcelas;
+    TB_gerarParcelasparc_data_venc.Value := IncMonth(Date,atual_parcela);{incrementa mes em mes, incrementa um mesm no date no meu parametro atual_parcela}
+    TB_gerarParcelasparc_pago.Value := 'NAO';
+    TB_gerarParcelas.Post;
+
+
+  end;
+
+  ShowMessage('Parcelas geradas com Sucesso!');
+
 end;
 
 procedure TF_gerarparcelas.btn_listaritensdopedido_lancClick(Sender: TObject);
@@ -296,7 +317,7 @@ begin
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.SQL.Clear;
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
-  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" and ped_forma_pag = 2 ');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
   SQL_ListarLancamentos.Open;
   if SQL_ListarLancamentos.RecordCount = 0 then
@@ -320,7 +341,7 @@ begin
      SQL_ListarLancamentos.SQL.Clear;
      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
      SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
-     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
+     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "SIM" and ped_forma_pag = 2');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
      SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
      SQL_ListarLancamentos.Open;
@@ -330,7 +351,7 @@ begin
          SQL_ListarLancamentos.Close;
          SQL_ListarLancamentos.SQL.Clear;
          SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
-         SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "NAO"');
+         SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "SIM" and ped_forma_pag = 2');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
 
@@ -347,7 +368,7 @@ begin
      SQL_ListarLancamentos.SQL.Clear;
      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
      SQL_ListarLancamentos.SQL.Add ('where ped_codigo like :cod');
-     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
+     SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "SIM" and ped_forma_pag = 2');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
      SQL_ListarLancamentos.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
      SQL_ListarLancamentos.Open;
@@ -357,7 +378,7 @@ begin
          SQL_ListarLancamentos.Close;
          SQL_ListarLancamentos.SQL.Clear;
          SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
-         SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "NAO"');
+         SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "SIM" and ped_forma_pag = 2');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
 

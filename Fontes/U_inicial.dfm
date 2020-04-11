@@ -270,6 +270,7 @@ object F_inicial: TF_inicial
         Caption = 'Parcelas'
         object GerarParcelas1: TMenuItem
           Caption = 'Gerar Parcelas'
+          OnClick = GerarParcelas1Click
         end
       end
       object menu_vendas: TMenuItem

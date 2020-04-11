@@ -38,6 +38,7 @@ type
     procedure onclick_menu_vendas(Sender: TObject);
     procedure btn_vendasClick(Sender: TObject);
     procedure Lanamentos1Click(Sender: TObject);
+    procedure GerarParcelas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +52,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas;
 
 //clique do botao clientes
 procedure TF_inicial.btn_clientesClick(Sender: TObject);
@@ -110,6 +111,15 @@ begin
       F_PDV := TF_PDV.Create(Self);
       F_PDV.Show;
    end;
+end;
+
+procedure TF_inicial.GerarParcelas1Click(Sender: TObject);
+begin
+  if F_gerarparcelas = nil then
+    begin
+      F_gerarparcelas := TF_gerarparcelas.Create(self);
+      F_gerarparcelas.ShowModal;
+    end;
 end;
 
 procedure TF_inicial.Lanamentos1Click(Sender: TObject);
