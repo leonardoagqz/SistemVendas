@@ -2,7 +2,7 @@ object F_gerarparcelas: TF_gerarparcelas
   Left = 0
   Top = 0
   BorderStyle = bsDialog
-  Caption = 'Lan'#231'amentos'
+  Caption = 'Parcelamento'
   ClientHeight = 507
   ClientWidth = 718
   Color = clBtnFace
@@ -43,26 +43,12 @@ object F_gerarparcelas: TF_gerarparcelas
     Font.Style = []
     ParentFont = False
   end
-  object btn_listaritensdopedido_lanc: TSpeedButton
-    Left = 672
-    Top = 489
-    Width = 33
-    Height = 19
-    Visible = False
-    OnClick = btn_listaritensdopedido_lancClick
-  end
-  object lbl_formapaglanc: TLabel
-    Left = 276
-    Top = 454
-    Width = 151
-    Height = 19
-    Caption = 'Forma de Pagamento'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
+  object lbl_qtdparcelas: TLabel
+    Left = 544
+    Top = 288
+    Width = 64
+    Height = 13
+    Caption = 'QTD Parcelas'
   end
   object Panel1: TPanel
     Left = 0
@@ -152,6 +138,7 @@ object F_gerarparcelas: TF_gerarparcelas
     Top = 473
     Width = 121
     Height = 27
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -165,6 +152,7 @@ object F_gerarparcelas: TF_gerarparcelas
     Top = 473
     Width = 121
     Height = 27
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -174,10 +162,10 @@ object F_gerarparcelas: TF_gerarparcelas
     TabOrder = 3
   end
   object dbg_listarParcelas: TDBGrid
-    Left = 152
+    Left = -1
     Top = 286
-    Width = 457
-    Height = 154
+    Width = 445
+    Height = 155
     DataSource = ds_listarlancamento_relat
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
@@ -339,26 +327,39 @@ object F_gerarparcelas: TF_gerarparcelas
       OnClick = btn_mostrarTodoslancClick
     end
   end
-  object lk_formapaglanc: TRxDBLookupCombo
-    Left = 276
-    Top = 473
-    Width = 153
-    Height = 27
-    DropDownCount = 8
-    EmptyStrIsNull = False
-    LookupField = 'forma_id'
-    LookupDisplay = 'forma_nome'
-    LookupSource = dm.ds_formapag
-    TabOrder = 9
-  end
-  object btn_fecharpedido: TBitBtn
-    Left = 454
-    Top = 474
-    Width = 97
+  object btn_lancarParcelas: TBitBtn
+    Left = 450
+    Top = 296
+    Width = 87
     Height = 25
-    Caption = 'Fechar e Faturar'
+    Caption = 'Gerar Parcelas'
+    TabOrder = 9
+    OnClick = btn_lancarParcelasClick
+  end
+  object edt_parcelasQtd: TDBCurrencyEdit
+    Left = 550
+    Top = 300
+    Width = 46
+    Height = 21
+    Align = alCustom
+    DisplayFormat = '0'
     TabOrder = 10
-    OnClick = btn_fecharpedidoClick
+  end
+  object btn_parcelasapagar: TBitBtn
+    Left = 450
+    Top = 377
+    Width = 87
+    Height = 25
+    Caption = 'Cancelar'
+    TabOrder = 11
+  end
+  object btn_parcelasimpimir: TBitBtn
+    Left = 450
+    Top = 408
+    Width = 87
+    Height = 25
+    Caption = 'Imprimir Carn'#234
+    TabOrder = 12
   end
   object SQL_ListarLancamentos: TFDQuery
     Connection = dm.conexao
@@ -692,8 +693,8 @@ object F_gerarparcelas: TF_gerarparcelas
       '  '
       ' '
       '')
-    Left = 360
-    Top = 376
+    Left = 672
+    Top = 304
     object SQL_listarlancamento_relatped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
@@ -990,68 +991,52 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object ds_listarlancamento_relat: TDataSource
     DataSet = SQL_listarlancamento_relat
-    Left = 528
-    Top = 376
+    Left = 672
+    Top = 368
   end
-  object TB_faturarpedido: TFDTable
-    IndexFieldNames = 'ped_id'
+  object TB_gerarParcelas: TFDTable
+    IndexFieldNames = 'parc_id'
     Connection = dm.conexao
-    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
-    TableName = 'aguiarsvendasbd.pedidos'
+    UpdateOptions.UpdateTableName = 'parcelas'
+    TableName = 'parcelas'
     Left = 504
-    object TB_faturarpedidoped_id: TFDAutoIncField
-      FieldName = 'ped_id'
-      Origin = 'ped_id'
+    object TB_gerarParcelasparc_id: TFDAutoIncField
+      FieldName = 'parc_id'
+      Origin = 'parc_id'
       ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
     end
-    object TB_faturarpedidoped_date: TDateField
+    object TB_gerarParcelasparc_cod_carne: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_date'
-      Origin = 'ped_date'
-    end
-    object TB_faturarpedidoped_codigo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_codigo'
-      Origin = 'ped_codigo'
+      FieldName = 'parc_cod_carne'
+      Origin = 'parc_cod_carne'
       Size = 50
     end
-    object TB_faturarpedidoped_cliente: TIntegerField
+    object TB_gerarParcelasparc_numero: TIntegerField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_cliente'
-      Origin = 'ped_cliente'
+      FieldName = 'parc_numero'
+      Origin = 'parc_numero'
     end
-    object TB_faturarpedidoped_usuario: TIntegerField
+    object TB_gerarParcelasparc_valor: TFloatField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_usuario'
-      Origin = 'ped_usuario'
+      FieldName = 'parc_valor'
+      Origin = 'parc_valor'
     end
-    object TB_faturarpedidoped_forma_pag: TIntegerField
+    object TB_gerarParcelasparc_data_venc: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_forma_pag'
-      Origin = 'ped_forma_pag'
+      FieldName = 'parc_data_venc'
+      Origin = 'parc_data_venc'
     end
-    object TB_faturarpedidoped_fechado: TStringField
+    object TB_gerarParcelasparc_pago: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_fechado'
-      Origin = 'ped_fechado'
+      FieldName = 'parc_pago'
+      Origin = 'parc_pago'
+      FixedChar = True
       Size = 3
     end
-    object TB_faturarpedidoped_faturado: TStringField
+    object TB_gerarParcelasparc_data_pago: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_faturado'
-      Origin = 'ped_faturado'
-      Size = 3
-    end
-    object TB_faturarpedidoped_subtotal: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotal'
-      Origin = 'ped_subtotal'
-    end
-    object TB_faturarpedidoped_subtotalprazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotalprazo'
-      Origin = 'ped_subtotalprazo'
+      FieldName = 'parc_data_pago'
+      Origin = 'parc_data_pago'
     end
   end
 end

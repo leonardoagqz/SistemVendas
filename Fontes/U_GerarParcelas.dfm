@@ -166,7 +166,7 @@ object F_gerarparcelas: TF_gerarparcelas
     Top = 286
     Width = 445
     Height = 155
-    DataSource = ds_listarlancamento_relat
+    DataSource = ds_parcelasprontas
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
@@ -177,56 +177,39 @@ object F_gerarparcelas: TF_gerarparcelas
     Columns = <
       item
         Expanded = False
-        FieldName = 'pro_nome'
-        Title.Caption = 'Produto'
-        Width = 150
+        FieldName = 'parc_cod_carne'
+        Title.Caption = 'Carn'#234
+        Width = 105
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'iten_qtd'
-        Title.Caption = 'QTD'
-        Width = 30
+        FieldName = 'parc_numero'
+        Title.Caption = 'N'#186' Parc'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'iten_preco'
-        Title.Caption = 'Pre'#231'o Vista'
+        FieldName = 'parc_valor'
+        Title.Caption = '$ Valor'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'iten_preco_prazo'
-        Title.Caption = 'Pre'#231'o Prazo'
+        FieldName = 'parc_data_venc'
+        Title.Caption = 'Vencimento'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'forma_nome'
-        Title.Caption = 'Forma Pagamento'
-        Width = 90
+        FieldName = 'parc_pago'
+        Title.Caption = 'Pago'
         Visible = True
       end
       item
         Expanded = False
-        FieldName = 'pro_ref'
-        Title.Caption = 'Ref. Prod'
-        Width = 150
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'pro_barra'
-        Title.Caption = 'C'#243'digo de Barras Prod'
-        Width = 150
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'ped_codigo'
-        Title.Caption = 'C'#243'digo Pedido'
-        Width = 100
+        FieldName = 'parc_data_pago'
+        Title.Caption = 'Data Pag'
         Visible = True
       end>
   end
@@ -680,317 +663,119 @@ object F_gerarparcelas: TF_gerarparcelas
     Left = 576
     Top = 456
   end
-  object SQL_listarlancamento_relat: TFDQuery
+  object SQL_parcelasProntas: TFDQuery
     Connection = dm.conexao
     SQL.Strings = (
-      
-        'select * from pedidos d, itens i, produtos p, clientes c, forma_' +
-        'pagamento f, usuarios u '
-      
-        ' where c.cli_id = d.ped_cliente and i.iten_pedido = d.ped_codigo' +
-        ' and d.ped_forma_pag = f.forma_id'
-      '  and i.iten_produto = p.pro_id and d.ped_usuario = u.user_id'
+      'select * from view_parcelas_prontas'
       '  '
       ' '
       '')
     Left = 672
     Top = 304
-    object SQL_listarlancamento_relatped_id: TFDAutoIncField
-      FieldName = 'ped_id'
-      Origin = 'ped_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
+    object SQL_parcelasProntasparc_id: TFDAutoIncField
+      FieldName = 'parc_id'
+      Origin = 'parc_id'
     end
-    object SQL_listarlancamento_relatped_date: TDateField
+    object SQL_parcelasProntasparc_cod_carne: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_date'
-      Origin = 'ped_date'
-    end
-    object SQL_listarlancamento_relatped_codigo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_codigo'
-      Origin = 'ped_codigo'
+      FieldName = 'parc_cod_carne'
+      Origin = 'parc_cod_carne'
       Size = 50
     end
-    object SQL_listarlancamento_relatped_cliente: TIntegerField
+    object SQL_parcelasProntasparc_numero: TIntegerField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_cliente'
-      Origin = 'ped_cliente'
+      FieldName = 'parc_numero'
+      Origin = 'parc_numero'
     end
-    object SQL_listarlancamento_relatped_usuario: TIntegerField
+    object SQL_parcelasProntasparc_valor: TFloatField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_usuario'
-      Origin = 'ped_usuario'
+      FieldName = 'parc_valor'
+      Origin = 'parc_valor'
     end
-    object SQL_listarlancamento_relatped_forma_pag: TIntegerField
+    object SQL_parcelasProntasparc_data_venc: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_forma_pag'
-      Origin = 'ped_forma_pag'
+      FieldName = 'parc_data_venc'
+      Origin = 'parc_data_venc'
     end
-    object SQL_listarlancamento_relatped_fechado: TStringField
+    object SQL_parcelasProntasparc_pago: TStringField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_fechado'
-      Origin = 'ped_fechado'
+      FieldName = 'parc_pago'
+      Origin = 'parc_pago'
+      FixedChar = True
       Size = 3
     end
-    object SQL_listarlancamento_relatped_faturado: TStringField
+    object SQL_parcelasProntasparc_data_pago: TDateField
       AutoGenerateValue = arDefault
-      FieldName = 'ped_faturado'
-      Origin = 'ped_faturado'
-      Size = 3
+      FieldName = 'parc_data_pago'
+      Origin = 'parc_data_pago'
     end
-    object SQL_listarlancamento_relatped_subtotal: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotal'
-      Origin = 'ped_subtotal'
-    end
-    object SQL_listarlancamento_relatped_subtotalprazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotalprazo'
-      Origin = 'ped_subtotalprazo'
-    end
-    object SQL_listarlancamento_relatiten_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_id'
-      Origin = 'iten_id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatiten_produto: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_produto'
-      Origin = 'iten_produto'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatiten_qtd: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_qtd'
-      Origin = 'iten_qtd'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatiten_pedido: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_pedido'
-      Origin = 'iten_pedido'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 50
-    end
-    object SQL_listarlancamento_relatiten_preco: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_preco'
-      Origin = 'iten_preco'
-      ProviderFlags = []
-      ReadOnly = True
-      DisplayFormat = '0.00'
-    end
-    object SQL_listarlancamento_relatiten_preco_prazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_preco_prazo'
-      Origin = 'iten_preco_prazo'
-      ProviderFlags = []
-      ReadOnly = True
-      DisplayFormat = '0.00'
-    end
-    object SQL_listarlancamento_relatpro_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_id'
-      Origin = 'pro_id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatpro_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_nome'
-      Origin = 'pro_nome'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
-    end
-    object SQL_listarlancamento_relatpro_barra: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_barra'
-      Origin = 'pro_barra'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
-    end
-    object SQL_listarlancamento_relatpro_ref: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_ref'
-      Origin = 'pro_ref'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
-    end
-    object SQL_listarlancamento_relatpro_custo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_custo'
-      Origin = 'pro_custo'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatpro_preco: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_preco'
-      Origin = 'pro_preco'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatpro_preco_prazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_preco_prazo'
-      Origin = 'pro_preco_prazo'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatpro_estoque: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_estoque'
-      Origin = 'pro_estoque'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatcli_id: TIntegerField
-      AutoGenerateValue = arDefault
+    object SQL_parcelasProntascli_id: TFDAutoIncField
       FieldName = 'cli_id'
       Origin = 'cli_id'
-      ProviderFlags = []
-      ReadOnly = True
     end
-    object SQL_listarlancamento_relatcli_nome: TStringField
+    object SQL_parcelasProntascli_nome: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_nome'
       Origin = 'cli_nome'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 100
     end
-    object SQL_listarlancamento_relatcli_endereco: TStringField
+    object SQL_parcelasProntascli_endereco: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_endereco'
       Origin = 'cli_endereco'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 100
     end
-    object SQL_listarlancamento_relatcli_numero: TStringField
+    object SQL_parcelasProntascli_numero: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_numero'
       Origin = 'cli_numero'
-      ProviderFlags = []
-      ReadOnly = True
     end
-    object SQL_listarlancamento_relatcli_bairro: TStringField
+    object SQL_parcelasProntascli_bairro: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_bairro'
       Origin = 'cli_bairro'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 50
     end
-    object SQL_listarlancamento_relatcli_cidade: TStringField
+    object SQL_parcelasProntascli_cidade: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_cidade'
       Origin = 'cli_cidade'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 50
     end
-    object SQL_listarlancamento_relatcli_fone: TStringField
+    object SQL_parcelasProntascli_fone: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_fone'
       Origin = 'cli_fone'
-      ProviderFlags = []
-      ReadOnly = True
     end
-    object SQL_listarlancamento_relatcli_celular: TStringField
+    object SQL_parcelasProntascli_celular: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_celular'
       Origin = 'cli_celular'
-      ProviderFlags = []
-      ReadOnly = True
     end
-    object SQL_listarlancamento_relatcli_rg: TStringField
+    object SQL_parcelasProntascli_rg: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_rg'
       Origin = 'cli_rg'
-      ProviderFlags = []
-      ReadOnly = True
     end
-    object SQL_listarlancamento_relatcli_cnpj_cpf: TStringField
+    object SQL_parcelasProntascli_cnpj_cpf: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_cnpj_cpf'
       Origin = 'cli_cnpj_cpf'
-      ProviderFlags = []
-      ReadOnly = True
     end
-    object SQL_listarlancamento_relatcli_profissao: TStringField
+    object SQL_parcelasProntascli_profissao: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'cli_profissao'
       Origin = 'cli_profissao'
-      ProviderFlags = []
-      ReadOnly = True
       Size = 50
     end
-    object SQL_listarlancamento_relatcli_data_nasc: TDateField
+    object SQL_parcelasProntascli_data_nasc: TDateField
       AutoGenerateValue = arDefault
       FieldName = 'cli_data_nasc'
       Origin = 'cli_data_nasc'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatforma_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'forma_id'
-      Origin = 'forma_id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatforma_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'forma_nome'
-      Origin = 'forma_nome'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 40
-    end
-    object SQL_listarlancamento_relatuser_id: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_id'
-      Origin = 'user_id'
-      ProviderFlags = []
-      ReadOnly = True
-    end
-    object SQL_listarlancamento_relatuser_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_nome'
-      Origin = 'user_nome'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
-    end
-    object SQL_listarlancamento_relatuser_nome_completo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_nome_completo'
-      Origin = 'user_nome_completo'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
-    end
-    object SQL_listarlancamento_relatuser_senha: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_senha'
-      Origin = 'user_senha'
-      ProviderFlags = []
-      ReadOnly = True
-      Size = 100
     end
   end
-  object ds_listarlancamento_relat: TDataSource
-    DataSet = SQL_listarlancamento_relat
+  object ds_parcelasprontas: TDataSource
+    DataSet = SQL_parcelasProntas
     Left = 672
     Top = 368
   end
@@ -1004,6 +789,7 @@ object F_gerarparcelas: TF_gerarparcelas
       FieldName = 'parc_id'
       Origin = 'parc_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object TB_gerarParcelasparc_cod_carne: TStringField
       AutoGenerateValue = arDefault
