@@ -9,7 +9,8 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons,
-  RxLookup, RxDBCurrEdit;
+  RxLookup, RxDBCurrEdit, ppProd, ppClass, ppReport, ppComm, ppRelatv, ppDB,
+  ppDBPipe, ppCtrls, ppPrnabl, ppBands, ppCache, ppDesignLayer, ppParameter;
 
 type
   TF_gerarparcelas = class(TForm)
@@ -98,18 +99,82 @@ type
     SQL_parcelasProntasparc_data_venc: TDateField;
     SQL_parcelasProntasparc_pago: TStringField;
     SQL_parcelasProntasparc_data_pago: TDateField;
-    SQL_parcelasProntascli_id: TFDAutoIncField;
-    SQL_parcelasProntascli_nome: TStringField;
-    SQL_parcelasProntascli_endereco: TStringField;
-    SQL_parcelasProntascli_numero: TStringField;
-    SQL_parcelasProntascli_bairro: TStringField;
-    SQL_parcelasProntascli_cidade: TStringField;
-    SQL_parcelasProntascli_fone: TStringField;
-    SQL_parcelasProntascli_celular: TStringField;
-    SQL_parcelasProntascli_rg: TStringField;
-    SQL_parcelasProntascli_cnpj_cpf: TStringField;
-    SQL_parcelasProntascli_profissao: TStringField;
-    SQL_parcelasProntascli_data_nasc: TDateField;
+    ppDBparcelasprontas: TppDBPipeline;
+    report_parcelasProntas: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppLine1: TppLine;
+    ppShape1: TppShape;
+    ppShape2: TppShape;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel2: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppLabel4: TppLabel;
+    ppDBText4: TppDBText;
+    ppLabel5: TppLabel;
+    ppDBText5: TppDBText;
+    ppLabel6: TppLabel;
+    ppDBText6: TppDBText;
+    ppLabel7: TppLabel;
+    ppDBText7: TppDBText;
+    ppLabel8: TppLabel;
+    ppDBText8: TppDBText;
+    SQL_listarlancamento_relat: TFDQuery;
+    SQL_listarlancamento_relatped_id: TFDAutoIncField;
+    SQL_listarlancamento_relatped_date: TDateField;
+    SQL_listarlancamento_relatped_codigo: TStringField;
+    SQL_listarlancamento_relatped_cliente: TIntegerField;
+    SQL_listarlancamento_relatped_usuario: TIntegerField;
+    SQL_listarlancamento_relatped_forma_pag: TIntegerField;
+    SQL_listarlancamento_relatped_fechado: TStringField;
+    SQL_listarlancamento_relatped_faturado: TStringField;
+    SQL_listarlancamento_relatped_subtotal: TFloatField;
+    SQL_listarlancamento_relatped_subtotalprazo: TFloatField;
+    SQL_listarlancamento_relatiten_id: TIntegerField;
+    SQL_listarlancamento_relatiten_produto: TIntegerField;
+    SQL_listarlancamento_relatiten_qtd: TIntegerField;
+    SQL_listarlancamento_relatiten_pedido: TStringField;
+    SQL_listarlancamento_relatiten_preco: TFloatField;
+    SQL_listarlancamento_relatiten_preco_prazo: TFloatField;
+    SQL_listarlancamento_relatpro_id: TIntegerField;
+    SQL_listarlancamento_relatpro_nome: TStringField;
+    SQL_listarlancamento_relatpro_barra: TStringField;
+    SQL_listarlancamento_relatpro_ref: TStringField;
+    SQL_listarlancamento_relatpro_custo: TFloatField;
+    SQL_listarlancamento_relatpro_preco: TFloatField;
+    SQL_listarlancamento_relatpro_preco_prazo: TFloatField;
+    SQL_listarlancamento_relatpro_estoque: TIntegerField;
+    SQL_listarlancamento_relatcli_id: TIntegerField;
+    SQL_listarlancamento_relatcli_nome: TStringField;
+    SQL_listarlancamento_relatcli_endereco: TStringField;
+    SQL_listarlancamento_relatcli_numero: TStringField;
+    SQL_listarlancamento_relatcli_bairro: TStringField;
+    SQL_listarlancamento_relatcli_cidade: TStringField;
+    SQL_listarlancamento_relatcli_fone: TStringField;
+    SQL_listarlancamento_relatcli_celular: TStringField;
+    SQL_listarlancamento_relatcli_rg: TStringField;
+    SQL_listarlancamento_relatcli_cnpj_cpf: TStringField;
+    SQL_listarlancamento_relatcli_profissao: TStringField;
+    SQL_listarlancamento_relatcli_data_nasc: TDateField;
+    SQL_listarlancamento_relatforma_id: TIntegerField;
+    SQL_listarlancamento_relatforma_nome: TStringField;
+    SQL_listarlancamento_relatuser_id: TIntegerField;
+    SQL_listarlancamento_relatuser_nome: TStringField;
+    SQL_listarlancamento_relatuser_nome_completo: TStringField;
+    SQL_listarlancamento_relatuser_senha: TStringField;
+    ds_listarlancamento_relat: TDataSource;
+    ppLine2: TppLine;
+    ppLabel9: TppLabel;
+    ppLabel10: TppLabel;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -121,6 +186,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btn_fecharpedidoClick(Sender: TObject);
     procedure btn_lancarParcelasClick(Sender: TObject);
+    procedure btn_parcelasimpimirClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -191,7 +257,7 @@ begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar o pedido em lançamentos para filtrar atual
- { with SQL_listarlancamento_relat do
+  with SQL_listarlancamento_relat do
    begin
    Close;
    SQL.Clear;
@@ -200,7 +266,7 @@ begin
    ParamByName('codigo').Value := codigo_venda;
    Open;
    end;
-  dm.Report_reciboPedidoLancamento.PrintReport; }
+  dm.Report_reciboPedidoLancamento.PrintReport;
 end;
 
 procedure TF_gerarparcelas.btn_fecharpedidoClick(Sender: TObject);
@@ -239,53 +305,64 @@ end;
 procedure TF_gerarparcelas.btn_lancarParcelasClick(Sender: TObject);
 var total_parcelas, atual_parcela : Integer;
 begin
-   with SQL_parcelasProntas do
-     begin
-       Close;
-       SQL.Clear;
-       SQL.Add('select * from view_parcelas_prontas');
-       SQL.Add('where parc_cod_carne = :cod');
-       ParamByName('cod').Value := codigo_venda;
-       Open;
-       begin
-         if RecordCount > 0 then
-         ShowMessage('Essa parcela já foi gerada!');
-         Exit;
-       end;
-     end;
-
-
-
-  if edt_parcelasQtd.Value < 1 then
+  //verifica se já existe parcela
+  with SQL_parcelasProntas do
     begin
-      ShowMessage('Digite a QTD de parcelas');
-      edt_parcelasQtd.SetFocus;
-      edt_parcelasQtd.Color := clYellow;
-      Exit;
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from view_parcelas_prontas');
+      SQL.Add('where parc_cod_carne = :cod');
+      ParamByName('cod').Value := codigo_venda;
+      Open;
+      if RecordCount > 0 then
+        begin
+          ShowMessage('Essa parcela já foi gerada!');
+          Exit;
+        end
+        else
+        begin
+          if edt_parcelasQtd.Value < 1 then
+            begin
+              ShowMessage('Digite a QTD de parcelas');
+              edt_parcelasQtd.SetFocus;
+              edt_parcelasQtd.Color := clYellow;
+              Exit;
+            end;
+
+          total_parcelas := StrToInt(edt_parcelasQtd.Text);
+          atual_parcela := 0;
+
+          TB_gerarParcelas.Active := True;
+
+          while atual_parcela < total_parcelas do
+          begin
+            atual_parcela := atual_parcela + 1;
+            TB_gerarParcelas.Insert;
+            TB_gerarParcelasparc_cod_carne.Value := SQL_ListarLancamentosped_codigo.Value;               {}
+            TB_gerarParcelasparc_numero.Value := atual_parcela;
+            TB_gerarParcelasparc_valor.Value := edt_valorprazo_lancamento.Value / total_parcelas;
+            TB_gerarParcelasparc_data_venc.Value := IncMonth(Date,atual_parcela);{incrementa mes em mes, incrementa um mesm no date no meu parametro atual_parcela}
+            TB_gerarParcelasparc_pago.Value := 'NAO';
+            TB_gerarParcelas.Post;
+          end;
+
+          with SQL_parcelasProntas do
+            begin
+              Close;
+              SQL.Clear;
+              SQL.Add('select * from view_parcelas_prontas');
+              SQL.Add('where parc_cod_carne = :cod');
+              ParamByName('cod').Value := codigo_venda;
+              Open;
+              ShowMessage('Parcelas geradas com Sucesso!');
+            end;
+        end;
     end;
-
-  total_parcelas := StrToInt(edt_parcelasQtd.Text);
-  atual_parcela := 0;
-
-  TB_gerarParcelas.Active := True;
-
-  while atual_parcela < total_parcelas do
-  begin
-    atual_parcela := atual_parcela + 1;
-    TB_gerarParcelas.Insert;
-    TB_gerarParcelasparc_cod_carne.Value := SQL_ListarLancamentosped_codigo.Value;               {}
-    TB_gerarParcelasparc_numero.Value := atual_parcela;
-    TB_gerarParcelasparc_valor.Value := edt_valorprazo_lancamento.Value / total_parcelas;
-    TB_gerarParcelasparc_data_venc.Value := IncMonth(Date,atual_parcela);{incrementa mes em mes, incrementa um mesm no date no meu parametro atual_parcela}
-    TB_gerarParcelasparc_pago.Value := 'NAO';
-    TB_gerarParcelas.Post;
-
-
-  end;
-
-  ShowMessage('Parcelas geradas com Sucesso!');
-
 end;
+
+
+
+
 
 procedure TF_gerarparcelas.btn_listaritensdopedido_lancClick(Sender: TObject);
 begin
@@ -320,10 +397,25 @@ begin
     end;
 end;
 
+procedure TF_gerarparcelas.btn_parcelasimpimirClick(Sender: TObject);
+begin
+  //lbl_nomelbl_no := SQL_ListarLancamentoscli_nome.AsString;
+  report_parcelasProntas.PrintReport;
+end;
+
 procedure TF_gerarparcelas.dbg_listarlancamentosCellClick(Column: TColumn);
 begin
- procedureMostrarPedido;
+  procedureMostrarPedido;
 
+  with SQL_parcelasProntas do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from view_parcelas_prontas');
+      SQL.Add('where parc_cod_carne = :cod');
+      ParamByName('cod').Value := codigo_venda;
+      Open;
+    end;
 end;
 
 procedure TF_gerarparcelas.edt_buscarClientelancKeyPress(Sender: TObject;

@@ -224,9 +224,9 @@ object F_gerarparcelas: TF_gerarparcelas
     object Label3: TLabel
       Left = 1
       Top = 0
-      Width = 88
+      Width = 48
       Height = 13
-      Caption = 'Itens do Pedido'
+      Caption = 'Parcelas'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -343,6 +343,7 @@ object F_gerarparcelas: TF_gerarparcelas
     Height = 25
     Caption = 'Imprimir Carn'#234
     TabOrder = 12
+    OnClick = btn_parcelasimpimirClick
   end
   object SQL_ListarLancamentos: TFDQuery
     Connection = dm.conexao
@@ -655,8 +656,8 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object ds_listarlancamentos: TDataSource
     DataSet = SQL_ListarLancamentos
-    Left = 664
-    Top = 128
+    Left = 544
+    Top = 184
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
@@ -667,14 +668,16 @@ object F_gerarparcelas: TF_gerarparcelas
     Connection = dm.conexao
     SQL.Strings = (
       'select * from view_parcelas_prontas'
+      ''
       '  '
       ' '
       '')
-    Left = 672
-    Top = 304
+    Left = 648
+    Top = 320
     object SQL_parcelasProntasparc_id: TFDAutoIncField
       FieldName = 'parc_id'
       Origin = 'parc_id'
+      ReadOnly = True
     end
     object SQL_parcelasProntasparc_cod_carne: TStringField
       AutoGenerateValue = arDefault
@@ -709,74 +712,10 @@ object F_gerarparcelas: TF_gerarparcelas
       FieldName = 'parc_data_pago'
       Origin = 'parc_data_pago'
     end
-    object SQL_parcelasProntascli_id: TFDAutoIncField
-      FieldName = 'cli_id'
-      Origin = 'cli_id'
-    end
-    object SQL_parcelasProntascli_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_nome'
-      Origin = 'cli_nome'
-      Size = 100
-    end
-    object SQL_parcelasProntascli_endereco: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_endereco'
-      Origin = 'cli_endereco'
-      Size = 100
-    end
-    object SQL_parcelasProntascli_numero: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_numero'
-      Origin = 'cli_numero'
-    end
-    object SQL_parcelasProntascli_bairro: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_bairro'
-      Origin = 'cli_bairro'
-      Size = 50
-    end
-    object SQL_parcelasProntascli_cidade: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_cidade'
-      Origin = 'cli_cidade'
-      Size = 50
-    end
-    object SQL_parcelasProntascli_fone: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_fone'
-      Origin = 'cli_fone'
-    end
-    object SQL_parcelasProntascli_celular: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_celular'
-      Origin = 'cli_celular'
-    end
-    object SQL_parcelasProntascli_rg: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_rg'
-      Origin = 'cli_rg'
-    end
-    object SQL_parcelasProntascli_cnpj_cpf: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_cnpj_cpf'
-      Origin = 'cli_cnpj_cpf'
-    end
-    object SQL_parcelasProntascli_profissao: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_profissao'
-      Origin = 'cli_profissao'
-      Size = 50
-    end
-    object SQL_parcelasProntascli_data_nasc: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_data_nasc'
-      Origin = 'cli_data_nasc'
-    end
   end
   object ds_parcelasprontas: TDataSource
     DataSet = SQL_parcelasProntas
-    Left = 672
+    Left = 648
     Top = 368
   end
   object TB_gerarParcelas: TFDTable
@@ -824,5 +763,879 @@ object F_gerarparcelas: TF_gerarparcelas
       FieldName = 'parc_data_pago'
       Origin = 'parc_data_pago'
     end
+  end
+  object ppDBparcelasprontas: TppDBPipeline
+    DataSource = ds_parcelasprontas
+    UserName = 'DBparcelasprontas'
+    Left = 320
+    Top = 456
+  end
+  object report_parcelasProntas: TppReport
+    AutoStop = False
+    DataPipeline = ppDBparcelasprontas
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    PreviewFormSettings.WindowState = wsMinimized
+    PreviewFormSettings.ZoomSetting = zsPercentage
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<Texto a localizar>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 448
+    Top = 456
+    Version = '20.01'
+    mmColumnWidth = 0
+    DataPipelineName = 'ppDBparcelasprontas'
+    object ppHeaderBand1: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppDetailBand1: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 53181
+      mmPrintPosition = 0
+      object ppLine1: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line1'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 265
+        mmTop = 51595
+        mmWidth = 197909
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape1: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape1'
+        Brush.Style = bsClear
+        mmHeight = 49213
+        mmLeft = 1323
+        mmTop = 529
+        mmWidth = 57150
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape2: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape2'
+        Brush.Style = bsClear
+        mmHeight = 49213
+        mmLeft = 55563
+        mmTop = 529
+        mmWidth = 136525
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel1: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label1'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Valor R$'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 155575
+        mmTop = 35719
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText1: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText1'
+        Border.mmPadding = 0
+        DataField = 'parc_valor'
+        DataPipeline = ppDBparcelasprontas
+        DisplayFormat = '#,0.00;-#,0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 155575
+        mmTop = 41010
+        mmWidth = 32808
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel2: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label2'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'N parcela'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 60325
+        mmTop = 35719
+        mmWidth = 25400
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText2: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText2'
+        Border.mmPadding = 0
+        DataField = 'parc_numero'
+        DataPipeline = ppDBparcelasprontas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 60325
+        mmTop = 41010
+        mmWidth = 10319
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label3'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Vencimento'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 155575
+        mmTop = 2646
+        mmWidth = 30692
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText3: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText3'
+        Border.mmPadding = 0
+        DataField = 'parc_data_venc'
+        DataPipeline = ppDBparcelasprontas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 155575
+        mmTop = 8202
+        mmWidth = 32808
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel4: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label4'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Cod Carn'#234
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 155575
+        mmTop = 16669
+        mmWidth = 31221
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText4: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText4'
+        Border.mmPadding = 0
+        DataField = 'parc_cod_carne'
+        DataPipeline = ppDBparcelasprontas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 155575
+        mmTop = 22225
+        mmWidth = 36248
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel5: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label5'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'N parcela'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 2910
+        mmTop = 13758
+        mmWidth = 23813
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText5: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText5'
+        Border.mmPadding = 0
+        DataField = 'parc_numero'
+        DataPipeline = ppDBparcelasprontas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 41010
+        mmTop = 13758
+        mmWidth = 12700
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel6: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label6'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Valor R$'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 2910
+        mmTop = 26194
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText6: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText6'
+        Border.mmPadding = 0
+        DataField = 'parc_valor'
+        DataPipeline = ppDBparcelasprontas
+        DisplayFormat = '#,0.00;-#,0.00'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 33338
+        mmTop = 26194
+        mmWidth = 20373
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel7: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label7'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Vencimento'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 2910
+        mmTop = 19844
+        mmWidth = 23813
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText7: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText7'
+        Border.mmPadding = 0
+        DataField = 'parc_data_venc'
+        DataPipeline = ppDBparcelasprontas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 29898
+        mmTop = 19844
+        mmWidth = 23813
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel8: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label8'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Cod Carn'#234
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 2910
+        mmTop = 1588
+        mmWidth = 31221
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText8: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText8'
+        Border.mmPadding = 0
+        DataField = 'parc_cod_carne'
+        DataPipeline = ppDBparcelasprontas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDBparcelasprontas'
+        mmHeight = 4763
+        mmLeft = 2910
+        mmTop = 7144
+        mmWidth = 50800
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLine2: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line2'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 2910
+        mmTop = 41010
+        mmWidth = 49477
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel9: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label9'
+        Border.mmPadding = 0
+        Caption = 'Ass. Recebi'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 10
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4234
+        mmLeft = 16936
+        mmTop = 42064
+        mmWidth = 18785
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lbl_minhaLoja'
+        Border.mmPadding = 0
+        Caption = 'Minha Loja - (85) 3232-3232'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4762
+        mmLeft = 61383
+        mmTop = 4498
+        mmWidth = 52388
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel11: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label10'
+        Border.mmPadding = 0
+        Caption = 'Cliente:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 61383
+        mmTop = 13758
+        mmWidth = 14023
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel12: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'lbl_nomeCliente'
+        Border.mmPadding = 0
+        Caption = 'lbl_nomeCliente'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 76729
+        mmTop = 13758
+        mmWidth = 29633
+        BandType = 4
+        LayerName = Foreground
+      end
+    end
+    object ppFooterBand1: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 0
+      mmPrintPosition = 0
+    end
+    object ppDesignLayers1: TppDesignLayers
+      object ppDesignLayer1: TppDesignLayer
+        UserName = 'Foreground'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList1: TppParameterList
+    end
+  end
+  object SQL_listarlancamento_relat: TFDQuery
+    Active = True
+    Connection = dm.conexao
+    SQL.Strings = (
+      
+        'select * from pedidos d, itens i, produtos p, clientes c, forma_' +
+        'pagamento f, usuarios u '
+      
+        ' where c.cli_id = d.ped_cliente and i.iten_pedido = d.ped_codigo' +
+        ' and d.ped_forma_pag = f.forma_id'
+      '  and i.iten_produto = p.pro_id and d.ped_usuario = u.user_id'
+      '  '
+      ' '
+      '')
+    Left = 184
+    Top = 144
+    object SQL_listarlancamento_relatped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object SQL_listarlancamento_relatped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object SQL_listarlancamento_relatped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object SQL_listarlancamento_relatped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object SQL_listarlancamento_relatped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object SQL_listarlancamento_relatped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object SQL_listarlancamento_relatped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object SQL_listarlancamento_relatped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object SQL_listarlancamento_relatped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
+    end
+    object SQL_listarlancamento_relatiten_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_id'
+      Origin = 'iten_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatiten_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_produto'
+      Origin = 'iten_produto'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatiten_qtd: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_qtd'
+      Origin = 'iten_qtd'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatiten_pedido: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_pedido'
+      Origin = 'iten_pedido'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listarlancamento_relatiten_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco'
+      Origin = 'iten_preco'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = '0.00'
+    end
+    object SQL_listarlancamento_relatiten_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco_prazo'
+      Origin = 'iten_preco_prazo'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = '0.00'
+    end
+    object SQL_listarlancamento_relatpro_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatpro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatpro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatpro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatpro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatpro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatpro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatpro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatcli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatcli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listarlancamento_relatcli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listarlancamento_relatcli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_cnpj_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatcli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 50
+    end
+    object SQL_listarlancamento_relatcli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatforma_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 40
+    end
+    object SQL_listarlancamento_relatuser_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_id'
+      Origin = 'user_id'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object SQL_listarlancamento_relatuser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatuser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+    object SQL_listarlancamento_relatuser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      ProviderFlags = []
+      ReadOnly = True
+      Size = 100
+    end
+  end
+  object ds_listarlancamento_relat: TDataSource
+    DataSet = SQL_listarlancamento_relat
+    Left = 184
+    Top = 200
   end
 end
