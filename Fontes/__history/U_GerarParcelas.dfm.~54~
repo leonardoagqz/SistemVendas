@@ -224,9 +224,9 @@ object F_gerarparcelas: TF_gerarparcelas
     object Label3: TLabel
       Left = 1
       Top = 0
-      Width = 88
+      Width = 48
       Height = 13
-      Caption = 'Itens do Pedido'
+      Caption = 'Parcelas'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -656,8 +656,8 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object ds_listarlancamentos: TDataSource
     DataSet = SQL_ListarLancamentos
-    Left = 664
-    Top = 128
+    Left = 544
+    Top = 184
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
@@ -665,9 +665,11 @@ object F_gerarparcelas: TF_gerarparcelas
     Top = 456
   end
   object SQL_parcelasProntas: TFDQuery
+    Active = True
     Connection = dm.conexao
     SQL.Strings = (
       'select * from view_parcelas_prontas'
+      ''
       '  '
       ' '
       '')
@@ -768,6 +770,63 @@ object F_gerarparcelas: TF_gerarparcelas
     UserName = 'DBparcelasprontas'
     Left = 320
     Top = 456
+    object ppDBparcelasprontasppField1: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'parc_id'
+      FieldName = 'parc_id'
+      FieldLength = 0
+      DataType = dtLongint
+      DisplayWidth = 0
+      Position = 0
+    end
+    object ppDBparcelasprontasppField2: TppField
+      FieldAlias = 'parc_cod_carne'
+      FieldName = 'parc_cod_carne'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 1
+    end
+    object ppDBparcelasprontasppField3: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'parc_numero'
+      FieldName = 'parc_numero'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 2
+    end
+    object ppDBparcelasprontasppField4: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'parc_valor'
+      FieldName = 'parc_valor'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 3
+    end
+    object ppDBparcelasprontasppField5: TppField
+      FieldAlias = 'parc_data_venc'
+      FieldName = 'parc_data_venc'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 4
+    end
+    object ppDBparcelasprontasppField6: TppField
+      FieldAlias = 'parc_pago'
+      FieldName = 'parc_pago'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 5
+    end
+    object ppDBparcelasprontasppField7: TppField
+      FieldAlias = 'parc_data_pago'
+      FieldName = 'parc_data_pago'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 6
+    end
   end
   object report_parcelasProntas: TppReport
     AutoStop = False
@@ -854,9 +913,9 @@ object F_gerarparcelas: TF_gerarparcelas
         Border.mmPadding = 0
         Weight = 0.750000000000000000
         mmHeight = 3969
-        mmLeft = 265
+        mmLeft = 1325
         mmTop = 51595
-        mmWidth = 197909
+        mmWidth = 190754
         BandType = 4
         LayerName = Foreground
       end
@@ -909,6 +968,7 @@ object F_gerarparcelas: TF_gerarparcelas
         Border.mmPadding = 0
         DataField = 'parc_valor'
         DataPipeline = ppDBparcelasprontas
+        DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -938,8 +998,8 @@ object F_gerarparcelas: TF_gerarparcelas
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4763
-        mmLeft = 59267
-        mmTop = 43127
+        mmLeft = 60325
+        mmTop = 35719
         mmWidth = 25400
         BandType = 4
         LayerName = Foreground
@@ -958,8 +1018,8 @@ object F_gerarparcelas: TF_gerarparcelas
         Transparent = True
         DataPipelineName = 'ppDBparcelasprontas'
         mmHeight = 4763
-        mmLeft = 92075
-        mmTop = 43127
+        mmLeft = 60325
+        mmTop = 41010
         mmWidth = 10319
         BandType = 4
         LayerName = Foreground
@@ -979,8 +1039,8 @@ object F_gerarparcelas: TF_gerarparcelas
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4763
-        mmLeft = 155575
-        mmTop = 23813
+        mmLeft = 101600
+        mmTop = 35719
         mmWidth = 30692
         BandType = 4
         LayerName = Foreground
@@ -999,8 +1059,8 @@ object F_gerarparcelas: TF_gerarparcelas
         Transparent = True
         DataPipelineName = 'ppDBparcelasprontas'
         mmHeight = 4763
-        mmLeft = 155575
-        mmTop = 29369
+        mmLeft = 101600
+        mmTop = 41275
         mmWidth = 32808
         BandType = 4
         LayerName = Foreground
@@ -1020,8 +1080,8 @@ object F_gerarparcelas: TF_gerarparcelas
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4763
-        mmLeft = 149225
-        mmTop = 1588
+        mmLeft = 153988
+        mmTop = 4498
         mmWidth = 31221
         BandType = 4
         LayerName = Foreground
@@ -1040,8 +1100,8 @@ object F_gerarparcelas: TF_gerarparcelas
         Transparent = True
         DataPipelineName = 'ppDBparcelasprontas'
         mmHeight = 4763
-        mmLeft = 149225
-        mmTop = 7144
+        mmLeft = 153988
+        mmTop = 10054
         mmWidth = 36248
         BandType = 4
         LayerName = Foreground
@@ -1062,7 +1122,7 @@ object F_gerarparcelas: TF_gerarparcelas
         Transparent = True
         mmHeight = 4763
         mmLeft = 2910
-        mmTop = 30692
+        mmTop = 13758
         mmWidth = 23813
         BandType = 4
         LayerName = Foreground
@@ -1082,7 +1142,7 @@ object F_gerarparcelas: TF_gerarparcelas
         DataPipelineName = 'ppDBparcelasprontas'
         mmHeight = 4763
         mmLeft = 41010
-        mmTop = 30692
+        mmTop = 13758
         mmWidth = 12700
         BandType = 4
         LayerName = Foreground
@@ -1103,7 +1163,7 @@ object F_gerarparcelas: TF_gerarparcelas
         Transparent = True
         mmHeight = 4763
         mmLeft = 2910
-        mmTop = 43127
+        mmTop = 26194
         mmWidth = 20373
         BandType = 4
         LayerName = Foreground
@@ -1114,6 +1174,7 @@ object F_gerarparcelas: TF_gerarparcelas
         Border.mmPadding = 0
         DataField = 'parc_valor'
         DataPipeline = ppDBparcelasprontas
+        DisplayFormat = '#,0.00;-#,0.00'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Name = 'Arial'
@@ -1123,7 +1184,7 @@ object F_gerarparcelas: TF_gerarparcelas
         DataPipelineName = 'ppDBparcelasprontas'
         mmHeight = 4763
         mmLeft = 33338
-        mmTop = 43127
+        mmTop = 26194
         mmWidth = 20373
         BandType = 4
         LayerName = Foreground
@@ -1144,7 +1205,7 @@ object F_gerarparcelas: TF_gerarparcelas
         Transparent = True
         mmHeight = 4763
         mmLeft = 2910
-        mmTop = 36777
+        mmTop = 19844
         mmWidth = 23813
         BandType = 4
         LayerName = Foreground
@@ -1164,7 +1225,7 @@ object F_gerarparcelas: TF_gerarparcelas
         DataPipelineName = 'ppDBparcelasprontas'
         mmHeight = 4763
         mmLeft = 29898
-        mmTop = 36777
+        mmTop = 19844
         mmWidth = 23813
         BandType = 4
         LayerName = Foreground
@@ -1210,56 +1271,65 @@ object F_gerarparcelas: TF_gerarparcelas
         BandType = 4
         LayerName = Foreground
       end
+      object ppLine2: TppLine
+        DesignLayer = ppDesignLayer1
+        UserName = 'Line2'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 2910
+        mmTop = 41010
+        mmWidth = 49477
+        BandType = 4
+        LayerName = Foreground
+      end
       object ppLabel9: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label9'
-        AutoSize = False
         Border.mmPadding = 0
-        Caption = 'cli_nome'
+        Caption = 'Ass. Recebi'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlack
         Font.Name = 'Arial'
-        Font.Size = 12
+        Font.Size = 10
         Font.Style = []
         FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        mmHeight = 4763
-        mmLeft = 59267
-        mmTop = 3175
-        mmWidth = 17727
-        BandType = 4
-        LayerName = Foreground
-      end
-      object ppDBText9: TppDBText
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBText9'
-        Border.mmPadding = 0
-        DataField = 'cli_nome'
-        DataPipeline = dm.ppDB_Recibo_Lancamento
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        ParentDataPipeline = False
-        Transparent = True
-        DataPipelineName = 'ppDB_Recibo_Lancamento'
-        mmHeight = 4763
-        mmLeft = 78052
-        mmTop = 3175
-        mmWidth = 66146
+        mmHeight = 4234
+        mmLeft = 16936
+        mmTop = 42064
+        mmWidth = 18785
         BandType = 4
         LayerName = Foreground
       end
       object ppLabel10: TppLabel
         DesignLayer = ppDesignLayer1
-        UserName = 'Label10'
-        AutoSize = False
+        UserName = 'lbl_minhaLoja'
         Border.mmPadding = 0
-        Caption = 'pro_nome'
+        Caption = 'Minha Loja - (85) 3232-3232'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4762
+        mmLeft = 61383
+        mmTop = 4498
+        mmWidth = 52388
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel11: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label10'
+        Border.mmPadding = 0
+        Caption = 'Cliente:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
@@ -1267,30 +1337,125 @@ object F_gerarparcelas: TF_gerarparcelas
         FormFieldSettings.FormFieldType = fftNone
         Transparent = True
         mmHeight = 4763
-        mmLeft = 60854
-        mmTop = 13758
-        mmWidth = 19844
+        mmLeft = 61383
+        mmTop = 17992
+        mmWidth = 14023
         BandType = 4
         LayerName = Foreground
       end
-      object ppDBText10: TppDBText
+      object lbl_nomeCliente: TppLabel
         DesignLayer = ppDesignLayer1
-        UserName = 'DBText10'
+        UserName = 'lbl_nomeCliente'
         Border.mmPadding = 0
-        DataField = 'pro_nome'
-        DataPipeline = dm.ppDB_Recibo_Lancamento
+        Caption = 'lbl_nomeCliente'
         Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
+        Font.Color = clBlack
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
-        ParentDataPipeline = False
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
         Transparent = True
-        DataPipelineName = 'ppDB_Recibo_Lancamento'
         mmHeight = 4763
-        mmLeft = 81756
-        mmTop = 13758
-        mmWidth = 76200
+        mmLeft = 76729
+        mmTop = 17992
+        mmWidth = 29633
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape3: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape3'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 13229
+        mmLeft = 59002
+        mmTop = 34131
+        mmWidth = 31221
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape4: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape4'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 13229
+        mmLeft = 99748
+        mmTop = 34131
+        mmWidth = 37571
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape5: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape5'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 13229
+        mmLeft = 152665
+        mmTop = 34131
+        mmWidth = 37571
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape6: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape6'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 13229
+        mmLeft = 152665
+        mmTop = 3440
+        mmWidth = 37571
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape7: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape7'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 8467
+        mmLeft = 59002
+        mmTop = 3440
+        mmWidth = 78581
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape8: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape8'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 8467
+        mmLeft = 59002
+        mmTop = 16140
+        mmWidth = 78581
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape9: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape9'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 10319
+        mmLeft = 2383
+        mmTop = 1588
+        mmWidth = 51328
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppShape10: TppShape
+        DesignLayer = ppDesignLayer1
+        UserName = 'Shape10'
+        Brush.Style = bsClear
+        Shape = stRoundRect
+        mmHeight = 19050
+        mmLeft = 2379
+        mmTop = 13759
+        mmWidth = 51329
         BandType = 4
         LayerName = Foreground
       end

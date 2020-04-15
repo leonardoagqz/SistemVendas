@@ -174,7 +174,7 @@ type
     ppLabel9: TppLabel;
     ppLabel10: TppLabel;
     ppLabel11: TppLabel;
-    ppLabel12: TppLabel;
+    lbl_nomeCliente: TppLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -399,15 +399,23 @@ end;
 
 procedure TF_gerarparcelas.btn_parcelasimpimirClick(Sender: TObject);
 begin
-  //lbl_nomelbl_no := SQL_ListarLancamentoscli_nome.AsString;
+  lbl_nomeCliente.Caption := SQL_ListarLancamentoscli_nome.AsString;
   report_parcelasProntas.PrintReport;
 end;
 
 procedure TF_gerarparcelas.dbg_listarlancamentosCellClick(Column: TColumn);
 begin
+  procedureMostrarPedido;
 
- procedureMostrarPedido;
-
+  with SQL_parcelasProntas do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from view_parcelas_prontas');
+      SQL.Add('where parc_cod_carne = :cod');
+      ParamByName('cod').Value := codigo_venda;
+      Open;
+    end;
 end;
 
 procedure TF_gerarparcelas.edt_buscarClientelancKeyPress(Sender: TObject;
@@ -467,6 +475,7 @@ end;
 procedure TF_gerarparcelas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   F_gerarparcelas := nil;
+  TB_gerarParcelas.Active := False;
 end;
 
 procedure TF_gerarparcelas.FormCreate(Sender: TObject);

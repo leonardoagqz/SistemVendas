@@ -224,9 +224,9 @@ object F_gerarparcelas: TF_gerarparcelas
     object Label3: TLabel
       Left = 1
       Top = 0
-      Width = 88
+      Width = 48
       Height = 13
-      Caption = 'Itens do Pedido'
+      Caption = 'Parcelas'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -656,8 +656,8 @@ object F_gerarparcelas: TF_gerarparcelas
   end
   object ds_listarlancamentos: TDataSource
     DataSet = SQL_ListarLancamentos
-    Left = 664
-    Top = 128
+    Left = 544
+    Top = 184
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
@@ -1285,7 +1285,7 @@ object F_gerarparcelas: TF_gerarparcelas
         BandType = 4
         LayerName = Foreground
       end
-      object ppLabel12: TppLabel
+      object lbl_nomeCliente: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'lbl_nomeCliente'
         Border.mmPadding = 0
