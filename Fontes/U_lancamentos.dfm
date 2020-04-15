@@ -181,7 +181,7 @@ object F_lancamento: TF_lancamento
     ParentFont = False
     TabOrder = 3
   end
-  object DBGrid1: TDBGrid
+  object dbg_listarItensPedido: TDBGrid
     Left = 0
     Top = 286
     Width = 718

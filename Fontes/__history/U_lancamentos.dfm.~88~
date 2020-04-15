@@ -43,13 +43,13 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object SpeedButton1: TSpeedButton
+  object btn_imprimerecibo: TSpeedButton
     Left = 604
     Top = 458
     Width = 106
     Height = 25
     Caption = 'Imprimir Selecionado'
-    OnClick = SpeedButton1Click
+    OnClick = btn_imprimereciboClick
   end
   object btn_listaritensdopedido_lanc: TSpeedButton
     Left = 672
@@ -59,12 +59,12 @@ object F_lancamento: TF_lancamento
     Visible = False
     OnClick = btn_listaritensdopedido_lancClick
   end
-  object lk_formapaglanc: TLabel
+  object lbl_formapaglanc: TLabel
     Left = 276
     Top = 454
-    Width = 102
+    Width = 151
     Height = 19
-    Caption = 'Totoal a prazo'
+    Caption = 'Forma de Pagamento'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -339,12 +339,16 @@ object F_lancamento: TF_lancamento
       OnClick = btn_mostrarTodoslancClick
     end
   end
-  object RxDBLookupCombo1: TRxDBLookupCombo
+  object lk_formapaglanc: TRxDBLookupCombo
     Left = 276
     Top = 473
     Width = 153
     Height = 27
     DropDownCount = 8
+    EmptyStrIsNull = False
+    LookupField = 'forma_id'
+    LookupDisplay = 'forma_nome'
+    LookupSource = dm.ds_formapag
     TabOrder = 9
   end
   object btn_fecharpedido: TBitBtn
@@ -354,6 +358,7 @@ object F_lancamento: TF_lancamento
     Height = 25
     Caption = 'Fechar e Faturar'
     TabOrder = 10
+    OnClick = btn_fecharpedidoClick
   end
   object SQL_ListarLancamentos: TFDQuery
     Connection = dm.conexao
@@ -671,8 +676,7 @@ object F_lancamento: TF_lancamento
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
-    Left = 328
-    Top = 400
+    Left = 664
   end
   object SQL_listarlancamento_relat: TFDQuery
     Connection = dm.conexao
@@ -987,5 +991,66 @@ object F_lancamento: TF_lancamento
     DataSet = SQL_listarlancamento_relat
     Left = 544
     Top = 320
+  end
+  object TB_faturarpedido: TFDTable
+    IndexFieldNames = 'ped_id'
+    Connection = dm.conexao
+    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
+    TableName = 'aguiarsvendasbd.pedidos'
+    Left = 584
+    object TB_faturarpedidoped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object TB_faturarpedidoped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object TB_faturarpedidoped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object TB_faturarpedidoped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object TB_faturarpedidoped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object TB_faturarpedidoped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object TB_faturarpedidoped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object TB_faturarpedidoped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object TB_faturarpedidoped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object TB_faturarpedidoped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
+    end
   end
 end

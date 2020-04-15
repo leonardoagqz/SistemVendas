@@ -183,6 +183,7 @@ type
     ppShape8: TppShape;
     ppShape9: TppShape;
     ppShape10: TppShape;
+    SQL_cancelaParcela: TFDQuery;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -195,6 +196,7 @@ type
     procedure btn_fecharpedidoClick(Sender: TObject);
     procedure btn_lancarParcelasClick(Sender: TObject);
     procedure btn_parcelasimpimirClick(Sender: TObject);
+    procedure btn_parcelasapagarClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -212,7 +214,7 @@ var
 implementation
 
 uses
-  u_DM, U_pdv;
+  u_DM, U_pdv, U_lancamentos;
 
 {$R *.dfm}
 
@@ -262,7 +264,7 @@ end;
 
 procedure TF_gerarparcelas.btn_imprimereciboClick(Sender: TObject);
 begin
-  codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
+  {codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar o pedido em lançamentos para filtrar atual
   with SQL_listarlancamento_relat do
@@ -273,7 +275,8 @@ begin
    SQL.Add('where  ped_codigo = :codigo ');
    ParamByName('codigo').Value := codigo_venda;
    Open;
-   end;
+   end; }
+
   dm.Report_reciboPedidoLancamento.PrintReport;
 end;
 
@@ -354,7 +357,8 @@ begin
             TB_gerarParcelas.Post;
           end;
 
-          with SQL_parcelasProntas do
+          //refresh na dbg listar parcelas
+          {with SQL_parcelasProntas do
             begin
               Close;
               SQL.Clear;
@@ -363,7 +367,13 @@ begin
               ParamByName('cod').Value := codigo_venda;
               Open;
               ShowMessage('Parcelas geradas com Sucesso!');
-            end;
+            end; }
+
+            //refresh na dbg listar parcelas
+            ShowMessage('Parcelas geradas com Sucesso!');
+            SQL_parcelasProntas.Close;
+            SQL_parcelasProntas.Open;
+
         end;
     end;
 end;
@@ -403,6 +413,23 @@ begin
     begin
       ShowMessage('Não existem pedidos para serem faturados!');
     end;
+end;
+
+procedure TF_gerarparcelas.btn_parcelasapagarClick(Sender: TObject);
+begin
+  with SQL_cancelaParcela do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('delete from parcelas');
+    SQL.Add('where parc_cod_carne = :cod');
+    ParamByName('cod').Value := codigo_venda;
+    ExecSQL;
+    ShowMessage('Parcelas Canceladas com Sucesso!');
+    SQL_parcelasProntas.Close;
+    SQL_parcelasProntas.Open;
+
+  end;
 end;
 
 procedure TF_gerarparcelas.btn_parcelasimpimirClick(Sender: TObject);

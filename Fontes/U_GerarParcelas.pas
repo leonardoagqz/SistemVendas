@@ -126,50 +126,50 @@ type
     ppDBText7: TppDBText;
     ppLabel8: TppLabel;
     ppDBText8: TppDBText;
-    SQL_listarlancamento_relat: TFDQuery;
-    SQL_listarlancamento_relatped_id: TFDAutoIncField;
-    SQL_listarlancamento_relatped_date: TDateField;
-    SQL_listarlancamento_relatped_codigo: TStringField;
-    SQL_listarlancamento_relatped_cliente: TIntegerField;
-    SQL_listarlancamento_relatped_usuario: TIntegerField;
-    SQL_listarlancamento_relatped_forma_pag: TIntegerField;
-    SQL_listarlancamento_relatped_fechado: TStringField;
-    SQL_listarlancamento_relatped_faturado: TStringField;
-    SQL_listarlancamento_relatped_subtotal: TFloatField;
-    SQL_listarlancamento_relatped_subtotalprazo: TFloatField;
-    SQL_listarlancamento_relatiten_id: TIntegerField;
-    SQL_listarlancamento_relatiten_produto: TIntegerField;
-    SQL_listarlancamento_relatiten_qtd: TIntegerField;
-    SQL_listarlancamento_relatiten_pedido: TStringField;
-    SQL_listarlancamento_relatiten_preco: TFloatField;
-    SQL_listarlancamento_relatiten_preco_prazo: TFloatField;
-    SQL_listarlancamento_relatpro_id: TIntegerField;
-    SQL_listarlancamento_relatpro_nome: TStringField;
-    SQL_listarlancamento_relatpro_barra: TStringField;
-    SQL_listarlancamento_relatpro_ref: TStringField;
-    SQL_listarlancamento_relatpro_custo: TFloatField;
-    SQL_listarlancamento_relatpro_preco: TFloatField;
-    SQL_listarlancamento_relatpro_preco_prazo: TFloatField;
-    SQL_listarlancamento_relatpro_estoque: TIntegerField;
-    SQL_listarlancamento_relatcli_id: TIntegerField;
-    SQL_listarlancamento_relatcli_nome: TStringField;
-    SQL_listarlancamento_relatcli_endereco: TStringField;
-    SQL_listarlancamento_relatcli_numero: TStringField;
-    SQL_listarlancamento_relatcli_bairro: TStringField;
-    SQL_listarlancamento_relatcli_cidade: TStringField;
-    SQL_listarlancamento_relatcli_fone: TStringField;
-    SQL_listarlancamento_relatcli_celular: TStringField;
-    SQL_listarlancamento_relatcli_rg: TStringField;
-    SQL_listarlancamento_relatcli_cnpj_cpf: TStringField;
-    SQL_listarlancamento_relatcli_profissao: TStringField;
-    SQL_listarlancamento_relatcli_data_nasc: TDateField;
-    SQL_listarlancamento_relatforma_id: TIntegerField;
-    SQL_listarlancamento_relatforma_nome: TStringField;
-    SQL_listarlancamento_relatuser_id: TIntegerField;
-    SQL_listarlancamento_relatuser_nome: TStringField;
-    SQL_listarlancamento_relatuser_nome_completo: TStringField;
-    SQL_listarlancamento_relatuser_senha: TStringField;
-    ds_listarlancamento_relat: TDataSource;
+    SQL_listarProdutos: TFDQuery;
+    SQL_listarProdutosped_id: TFDAutoIncField;
+    SQL_listarProdutosped_date: TDateField;
+    SQL_listarProdutosped_codigo: TStringField;
+    SQL_listarProdutosped_cliente: TIntegerField;
+    SQL_listarProdutosped_usuario: TIntegerField;
+    SQL_listarProdutosped_forma_pag: TIntegerField;
+    SQL_listarProdutosped_fechado: TStringField;
+    SQL_listarProdutosped_faturado: TStringField;
+    SQL_listarProdutosped_subtotal: TFloatField;
+    SQL_listarProdutosped_subtotalprazo: TFloatField;
+    SQL_listarProdutositen_id: TIntegerField;
+    SQL_listarProdutositen_produto: TIntegerField;
+    SQL_listarProdutositen_qtd: TIntegerField;
+    SQL_listarProdutositen_pedido: TStringField;
+    SQL_listarProdutositen_preco: TFloatField;
+    SQL_listarProdutositen_preco_prazo: TFloatField;
+    SQL_listarProdutospro_id: TIntegerField;
+    SQL_listarProdutospro_nome: TStringField;
+    SQL_listarProdutospro_barra: TStringField;
+    SQL_listarProdutospro_ref: TStringField;
+    SQL_listarProdutospro_custo: TFloatField;
+    SQL_listarProdutospro_preco: TFloatField;
+    SQL_listarProdutospro_preco_prazo: TFloatField;
+    SQL_listarProdutospro_estoque: TIntegerField;
+    SQL_listarProdutoscli_id: TIntegerField;
+    SQL_listarProdutoscli_nome: TStringField;
+    SQL_listarProdutoscli_endereco: TStringField;
+    SQL_listarProdutoscli_numero: TStringField;
+    SQL_listarProdutoscli_bairro: TStringField;
+    SQL_listarProdutoscli_cidade: TStringField;
+    SQL_listarProdutoscli_fone: TStringField;
+    SQL_listarProdutoscli_celular: TStringField;
+    SQL_listarProdutoscli_rg: TStringField;
+    SQL_listarProdutoscli_cnpj_cpf: TStringField;
+    SQL_listarProdutoscli_profissao: TStringField;
+    SQL_listarProdutoscli_data_nasc: TDateField;
+    SQL_listarProdutosforma_id: TIntegerField;
+    SQL_listarProdutosforma_nome: TStringField;
+    SQL_listarProdutosuser_id: TIntegerField;
+    SQL_listarProdutosuser_nome: TStringField;
+    SQL_listarProdutosuser_nome_completo: TStringField;
+    SQL_listarProdutosuser_senha: TStringField;
+    ds_listarProdutos: TDataSource;
     ppLine2: TppLine;
     ppLabel9: TppLabel;
     ppLabel10: TppLabel;
@@ -184,6 +184,50 @@ type
     ppShape9: TppShape;
     ppShape10: TppShape;
     SQL_cancelaParcela: TFDQuery;
+    ppDBListarProdutos: TppDBPipeline;
+    Report_ListagemProdutos: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppLabel33: TppLabel;
+    ppLabel34: TppLabel;
+    ppLabel35: TppLabel;
+    ppLabel36: TppLabel;
+    ppLabel37: TppLabel;
+    ppLabel38: TppLabel;
+    ppLine9: TppLine;
+    ppLine10: TppLine;
+    ppLabel41: TppLabel;
+    ppDBText20: TppDBText;
+    ppLabel42: TppLabel;
+    ppDBText21: TppDBText;
+    ppLabel43: TppLabel;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBText24: TppDBText;
+    ppDBText25: TppDBText;
+    ppLabel47: TppLabel;
+    ppLabel48: TppLabel;
+    ppLabel49: TppLabel;
+    ppLine11: TppLine;
+    ppDBText35: TppDBText;
+    ppDetailBand3: TppDetailBand;
+    ppDBText31: TppDBText;
+    ppDBText32: TppDBText;
+    ppDBText33: TppDBText;
+    ppDBText34: TppDBText;
+    ppDBText36: TppDBText;
+    ppDBText40: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppSummaryBand3: TppSummaryBand;
+    ppLine12: TppLine;
+    ppLabel44: TppLabel;
+    ppLabel45: TppLabel;
+    ppLabel46: TppLabel;
+    ppDBText37: TppDBText;
+    ppDBText38: TppDBText;
+    ppDBText39: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -214,7 +258,7 @@ var
 implementation
 
 uses
-  u_DM, U_pdv;
+  u_DM, U_pdv, U_lancamentos;
 
 {$R *.dfm}
 
@@ -267,7 +311,7 @@ begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar o pedido em lançamentos para filtrar atual
-  with SQL_listarlancamento_relat do
+  with SQL_listarProdutos do
    begin
    Close;
    SQL.Clear;
@@ -276,7 +320,8 @@ begin
    ParamByName('codigo').Value := codigo_venda;
    Open;
    end;
-  dm.Report_reciboPedidoLancamento.PrintReport;
+
+  Report_ListagemProdutos.PrintReport;
 end;
 
 procedure TF_gerarparcelas.btn_fecharpedidoClick(Sender: TObject);

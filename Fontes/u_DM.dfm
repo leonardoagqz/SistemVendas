@@ -1,6 +1,6 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 400
+  Height = 461
   Width = 527
   object conexao: TFDConnection
     Params.Strings = (
@@ -301,8 +301,342 @@ object dm: Tdm
   object ppDB_Recibo_Pedido: TppDBPipeline
     DataSource = F_PDV.ds_pedidos
     UserName = 'DB_Recibo_Pedido'
-    Left = 64
-    Top = 272
+    Left = 48
+    Top = 248
+    object ppDB_Recibo_PedidoppField1: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_id'
+      FieldName = 'ped_id'
+      FieldLength = 0
+      DataType = dtLongint
+      DisplayWidth = 10
+      Position = 0
+    end
+    object ppDB_Recibo_PedidoppField2: TppField
+      FieldAlias = 'ped_date'
+      FieldName = 'ped_date'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 1
+    end
+    object ppDB_Recibo_PedidoppField3: TppField
+      FieldAlias = 'ped_codigo'
+      FieldName = 'ped_codigo'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 2
+    end
+    object ppDB_Recibo_PedidoppField4: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_cliente'
+      FieldName = 'ped_cliente'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 3
+    end
+    object ppDB_Recibo_PedidoppField5: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_usuario'
+      FieldName = 'ped_usuario'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 4
+    end
+    object ppDB_Recibo_PedidoppField6: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_forma_pag'
+      FieldName = 'ped_forma_pag'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 5
+    end
+    object ppDB_Recibo_PedidoppField7: TppField
+      FieldAlias = 'ped_fechado'
+      FieldName = 'ped_fechado'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 6
+    end
+    object ppDB_Recibo_PedidoppField8: TppField
+      FieldAlias = 'ped_faturado'
+      FieldName = 'ped_faturado'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 7
+    end
+    object ppDB_Recibo_PedidoppField9: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_id'
+      FieldName = 'pro_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 8
+    end
+    object ppDB_Recibo_PedidoppField10: TppField
+      FieldAlias = 'pro_nome'
+      FieldName = 'pro_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 9
+    end
+    object ppDB_Recibo_PedidoppField11: TppField
+      FieldAlias = 'pro_barra'
+      FieldName = 'pro_barra'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 10
+    end
+    object ppDB_Recibo_PedidoppField12: TppField
+      FieldAlias = 'pro_ref'
+      FieldName = 'pro_ref'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 11
+    end
+    object ppDB_Recibo_PedidoppField13: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_custo'
+      FieldName = 'pro_custo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 12
+    end
+    object ppDB_Recibo_PedidoppField14: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_preco'
+      FieldName = 'pro_preco'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 13
+    end
+    object ppDB_Recibo_PedidoppField15: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_preco_prazo'
+      FieldName = 'pro_preco_prazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 14
+    end
+    object ppDB_Recibo_PedidoppField16: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_estoque'
+      FieldName = 'pro_estoque'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 15
+    end
+    object ppDB_Recibo_PedidoppField17: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_id'
+      FieldName = 'iten_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 16
+    end
+    object ppDB_Recibo_PedidoppField18: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_produto'
+      FieldName = 'iten_produto'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 17
+    end
+    object ppDB_Recibo_PedidoppField19: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_qtd'
+      FieldName = 'iten_qtd'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 18
+    end
+    object ppDB_Recibo_PedidoppField20: TppField
+      FieldAlias = 'iten_pedido'
+      FieldName = 'iten_pedido'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 19
+    end
+    object ppDB_Recibo_PedidoppField21: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_preco'
+      FieldName = 'iten_preco'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 20
+    end
+    object ppDB_Recibo_PedidoppField22: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_preco_prazo'
+      FieldName = 'iten_preco_prazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 21
+    end
+    object ppDB_Recibo_PedidoppField23: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'subTotal'
+      FieldName = 'subTotal'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 22
+    end
+    object ppDB_Recibo_PedidoppField24: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'subTotalPrazo'
+      FieldName = 'subTotalPrazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 23
+    end
+    object ppDB_Recibo_PedidoppField25: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'cli_id'
+      FieldName = 'cli_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 24
+    end
+    object ppDB_Recibo_PedidoppField26: TppField
+      FieldAlias = 'cli_nome'
+      FieldName = 'cli_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 25
+    end
+    object ppDB_Recibo_PedidoppField27: TppField
+      FieldAlias = 'cli_endereco'
+      FieldName = 'cli_endereco'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 26
+    end
+    object ppDB_Recibo_PedidoppField28: TppField
+      FieldAlias = 'cli_numero'
+      FieldName = 'cli_numero'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 27
+    end
+    object ppDB_Recibo_PedidoppField29: TppField
+      FieldAlias = 'cli_bairro'
+      FieldName = 'cli_bairro'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 28
+    end
+    object ppDB_Recibo_PedidoppField30: TppField
+      FieldAlias = 'cli_cidade'
+      FieldName = 'cli_cidade'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 29
+    end
+    object ppDB_Recibo_PedidoppField31: TppField
+      FieldAlias = 'cli_fone'
+      FieldName = 'cli_fone'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 30
+    end
+    object ppDB_Recibo_PedidoppField32: TppField
+      FieldAlias = 'cli_celular'
+      FieldName = 'cli_celular'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 31
+    end
+    object ppDB_Recibo_PedidoppField33: TppField
+      FieldAlias = 'cli_rg'
+      FieldName = 'cli_rg'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 32
+    end
+    object ppDB_Recibo_PedidoppField34: TppField
+      FieldAlias = 'cli_cnpj_cpf'
+      FieldName = 'cli_cnpj_cpf'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 33
+    end
+    object ppDB_Recibo_PedidoppField35: TppField
+      FieldAlias = 'cli_profissao'
+      FieldName = 'cli_profissao'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 34
+    end
+    object ppDB_Recibo_PedidoppField36: TppField
+      FieldAlias = 'cli_data_nasc'
+      FieldName = 'cli_data_nasc'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 35
+    end
+    object ppDB_Recibo_PedidoppField37: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'forma_id'
+      FieldName = 'forma_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 36
+    end
+    object ppDB_Recibo_PedidoppField38: TppField
+      FieldAlias = 'forma_nome'
+      FieldName = 'forma_nome'
+      FieldLength = 40
+      DisplayWidth = 40
+      Position = 37
+    end
+    object ppDB_Recibo_PedidoppField39: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'user_id'
+      FieldName = 'user_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 38
+    end
+    object ppDB_Recibo_PedidoppField40: TppField
+      FieldAlias = 'user_nome'
+      FieldName = 'user_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 39
+    end
+    object ppDB_Recibo_PedidoppField41: TppField
+      FieldAlias = 'user_nome_completo'
+      FieldName = 'user_nome_completo'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 40
+    end
+    object ppDB_Recibo_PedidoppField42: TppField
+      FieldAlias = 'user_senha'
+      FieldName = 'user_senha'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 41
+    end
   end
   object Report_reciboPedido: TppReport
     AutoStop = False
@@ -363,8 +697,8 @@ object dm: Tdm
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 232
-    Top = 272
+    Left = 200
+    Top = 248
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Pedido'
@@ -1083,8 +1417,342 @@ object dm: Tdm
   object ppDB_Recibo_Lancamento: TppDBPipeline
     DataSource = F_lancamento.ds_listarlancamento_relat
     UserName = 'DB_Recibo_Lancamento'
-    Left = 64
-    Top = 321
+    Left = 56
+    Top = 305
+    object ppDB_Recibo_LancamentoppField1: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_id'
+      FieldName = 'ped_id'
+      FieldLength = 0
+      DataType = dtLongint
+      DisplayWidth = 0
+      Position = 0
+    end
+    object ppDB_Recibo_LancamentoppField2: TppField
+      FieldAlias = 'ped_date'
+      FieldName = 'ped_date'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 1
+    end
+    object ppDB_Recibo_LancamentoppField3: TppField
+      FieldAlias = 'ped_codigo'
+      FieldName = 'ped_codigo'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 2
+    end
+    object ppDB_Recibo_LancamentoppField4: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_cliente'
+      FieldName = 'ped_cliente'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 3
+    end
+    object ppDB_Recibo_LancamentoppField5: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_usuario'
+      FieldName = 'ped_usuario'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 4
+    end
+    object ppDB_Recibo_LancamentoppField6: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_forma_pag'
+      FieldName = 'ped_forma_pag'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 5
+    end
+    object ppDB_Recibo_LancamentoppField7: TppField
+      FieldAlias = 'ped_fechado'
+      FieldName = 'ped_fechado'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 6
+    end
+    object ppDB_Recibo_LancamentoppField8: TppField
+      FieldAlias = 'ped_faturado'
+      FieldName = 'ped_faturado'
+      FieldLength = 3
+      DisplayWidth = 3
+      Position = 7
+    end
+    object ppDB_Recibo_LancamentoppField9: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_subtotal'
+      FieldName = 'ped_subtotal'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 8
+    end
+    object ppDB_Recibo_LancamentoppField10: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'ped_subtotalprazo'
+      FieldName = 'ped_subtotalprazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 9
+    end
+    object ppDB_Recibo_LancamentoppField11: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_id'
+      FieldName = 'iten_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 10
+    end
+    object ppDB_Recibo_LancamentoppField12: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_produto'
+      FieldName = 'iten_produto'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 11
+    end
+    object ppDB_Recibo_LancamentoppField13: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_qtd'
+      FieldName = 'iten_qtd'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 12
+    end
+    object ppDB_Recibo_LancamentoppField14: TppField
+      FieldAlias = 'iten_pedido'
+      FieldName = 'iten_pedido'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 13
+    end
+    object ppDB_Recibo_LancamentoppField15: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_preco'
+      FieldName = 'iten_preco'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 14
+    end
+    object ppDB_Recibo_LancamentoppField16: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'iten_preco_prazo'
+      FieldName = 'iten_preco_prazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 15
+    end
+    object ppDB_Recibo_LancamentoppField17: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_id'
+      FieldName = 'pro_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 16
+    end
+    object ppDB_Recibo_LancamentoppField18: TppField
+      FieldAlias = 'pro_nome'
+      FieldName = 'pro_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 17
+    end
+    object ppDB_Recibo_LancamentoppField19: TppField
+      FieldAlias = 'pro_barra'
+      FieldName = 'pro_barra'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 18
+    end
+    object ppDB_Recibo_LancamentoppField20: TppField
+      FieldAlias = 'pro_ref'
+      FieldName = 'pro_ref'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 19
+    end
+    object ppDB_Recibo_LancamentoppField21: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_custo'
+      FieldName = 'pro_custo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 20
+    end
+    object ppDB_Recibo_LancamentoppField22: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_preco'
+      FieldName = 'pro_preco'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 21
+    end
+    object ppDB_Recibo_LancamentoppField23: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_preco_prazo'
+      FieldName = 'pro_preco_prazo'
+      FieldLength = 0
+      DataType = dtDouble
+      DisplayWidth = 10
+      Position = 22
+    end
+    object ppDB_Recibo_LancamentoppField24: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'pro_estoque'
+      FieldName = 'pro_estoque'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 23
+    end
+    object ppDB_Recibo_LancamentoppField25: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'cli_id'
+      FieldName = 'cli_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 24
+    end
+    object ppDB_Recibo_LancamentoppField26: TppField
+      FieldAlias = 'cli_nome'
+      FieldName = 'cli_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 25
+    end
+    object ppDB_Recibo_LancamentoppField27: TppField
+      FieldAlias = 'cli_endereco'
+      FieldName = 'cli_endereco'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 26
+    end
+    object ppDB_Recibo_LancamentoppField28: TppField
+      FieldAlias = 'cli_numero'
+      FieldName = 'cli_numero'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 27
+    end
+    object ppDB_Recibo_LancamentoppField29: TppField
+      FieldAlias = 'cli_bairro'
+      FieldName = 'cli_bairro'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 28
+    end
+    object ppDB_Recibo_LancamentoppField30: TppField
+      FieldAlias = 'cli_cidade'
+      FieldName = 'cli_cidade'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 29
+    end
+    object ppDB_Recibo_LancamentoppField31: TppField
+      FieldAlias = 'cli_fone'
+      FieldName = 'cli_fone'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 30
+    end
+    object ppDB_Recibo_LancamentoppField32: TppField
+      FieldAlias = 'cli_celular'
+      FieldName = 'cli_celular'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 31
+    end
+    object ppDB_Recibo_LancamentoppField33: TppField
+      FieldAlias = 'cli_rg'
+      FieldName = 'cli_rg'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 32
+    end
+    object ppDB_Recibo_LancamentoppField34: TppField
+      FieldAlias = 'cli_cnpj_cpf'
+      FieldName = 'cli_cnpj_cpf'
+      FieldLength = 20
+      DisplayWidth = 20
+      Position = 33
+    end
+    object ppDB_Recibo_LancamentoppField35: TppField
+      FieldAlias = 'cli_profissao'
+      FieldName = 'cli_profissao'
+      FieldLength = 50
+      DisplayWidth = 50
+      Position = 34
+    end
+    object ppDB_Recibo_LancamentoppField36: TppField
+      FieldAlias = 'cli_data_nasc'
+      FieldName = 'cli_data_nasc'
+      FieldLength = 0
+      DataType = dtDate
+      DisplayWidth = 10
+      Position = 35
+    end
+    object ppDB_Recibo_LancamentoppField37: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'forma_id'
+      FieldName = 'forma_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 36
+    end
+    object ppDB_Recibo_LancamentoppField38: TppField
+      FieldAlias = 'forma_nome'
+      FieldName = 'forma_nome'
+      FieldLength = 40
+      DisplayWidth = 40
+      Position = 37
+    end
+    object ppDB_Recibo_LancamentoppField39: TppField
+      Alignment = taRightJustify
+      FieldAlias = 'user_id'
+      FieldName = 'user_id'
+      FieldLength = 0
+      DataType = dtInteger
+      DisplayWidth = 10
+      Position = 38
+    end
+    object ppDB_Recibo_LancamentoppField40: TppField
+      FieldAlias = 'user_nome'
+      FieldName = 'user_nome'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 39
+    end
+    object ppDB_Recibo_LancamentoppField41: TppField
+      FieldAlias = 'user_nome_completo'
+      FieldName = 'user_nome_completo'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 40
+    end
+    object ppDB_Recibo_LancamentoppField42: TppField
+      FieldAlias = 'user_senha'
+      FieldName = 'user_senha'
+      FieldLength = 100
+      DisplayWidth = 100
+      Position = 41
+    end
   end
   object Report_reciboPedidoLancamento1: TppReport
     AutoStop = False
@@ -1145,8 +1813,8 @@ object dm: Tdm
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 232
-    Top = 320
+    Left = 216
+    Top = 312
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -1933,7 +2601,7 @@ object dm: Tdm
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 408
+    Left = 400
     Top = 312
     Version = '20.01'
     mmColumnWidth = 0

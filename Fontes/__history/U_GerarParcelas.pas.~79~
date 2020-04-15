@@ -126,50 +126,50 @@ type
     ppDBText7: TppDBText;
     ppLabel8: TppLabel;
     ppDBText8: TppDBText;
-    SQL_listarlancamento_relat: TFDQuery;
-    SQL_listarlancamento_relatped_id: TFDAutoIncField;
-    SQL_listarlancamento_relatped_date: TDateField;
-    SQL_listarlancamento_relatped_codigo: TStringField;
-    SQL_listarlancamento_relatped_cliente: TIntegerField;
-    SQL_listarlancamento_relatped_usuario: TIntegerField;
-    SQL_listarlancamento_relatped_forma_pag: TIntegerField;
-    SQL_listarlancamento_relatped_fechado: TStringField;
-    SQL_listarlancamento_relatped_faturado: TStringField;
-    SQL_listarlancamento_relatped_subtotal: TFloatField;
-    SQL_listarlancamento_relatped_subtotalprazo: TFloatField;
-    SQL_listarlancamento_relatiten_id: TIntegerField;
-    SQL_listarlancamento_relatiten_produto: TIntegerField;
-    SQL_listarlancamento_relatiten_qtd: TIntegerField;
-    SQL_listarlancamento_relatiten_pedido: TStringField;
-    SQL_listarlancamento_relatiten_preco: TFloatField;
-    SQL_listarlancamento_relatiten_preco_prazo: TFloatField;
-    SQL_listarlancamento_relatpro_id: TIntegerField;
-    SQL_listarlancamento_relatpro_nome: TStringField;
-    SQL_listarlancamento_relatpro_barra: TStringField;
-    SQL_listarlancamento_relatpro_ref: TStringField;
-    SQL_listarlancamento_relatpro_custo: TFloatField;
-    SQL_listarlancamento_relatpro_preco: TFloatField;
-    SQL_listarlancamento_relatpro_preco_prazo: TFloatField;
-    SQL_listarlancamento_relatpro_estoque: TIntegerField;
-    SQL_listarlancamento_relatcli_id: TIntegerField;
-    SQL_listarlancamento_relatcli_nome: TStringField;
-    SQL_listarlancamento_relatcli_endereco: TStringField;
-    SQL_listarlancamento_relatcli_numero: TStringField;
-    SQL_listarlancamento_relatcli_bairro: TStringField;
-    SQL_listarlancamento_relatcli_cidade: TStringField;
-    SQL_listarlancamento_relatcli_fone: TStringField;
-    SQL_listarlancamento_relatcli_celular: TStringField;
-    SQL_listarlancamento_relatcli_rg: TStringField;
-    SQL_listarlancamento_relatcli_cnpj_cpf: TStringField;
-    SQL_listarlancamento_relatcli_profissao: TStringField;
-    SQL_listarlancamento_relatcli_data_nasc: TDateField;
-    SQL_listarlancamento_relatforma_id: TIntegerField;
-    SQL_listarlancamento_relatforma_nome: TStringField;
-    SQL_listarlancamento_relatuser_id: TIntegerField;
-    SQL_listarlancamento_relatuser_nome: TStringField;
-    SQL_listarlancamento_relatuser_nome_completo: TStringField;
-    SQL_listarlancamento_relatuser_senha: TStringField;
-    ds_listarlancamento_relat: TDataSource;
+    SQL_listarlancamento_relat_: TFDQuery;
+    SQL_listarlancamento_relat_ped_id: TFDAutoIncField;
+    SQL_listarlancamento_relat_ped_date: TDateField;
+    SQL_listarlancamento_relat_ped_codigo: TStringField;
+    SQL_listarlancamento_relat_ped_cliente: TIntegerField;
+    SQL_listarlancamento_relat_ped_usuario: TIntegerField;
+    SQL_listarlancamento_relat_ped_forma_pag: TIntegerField;
+    SQL_listarlancamento_relat_ped_fechado: TStringField;
+    SQL_listarlancamento_relat_ped_faturado: TStringField;
+    SQL_listarlancamento_relat_ped_subtotal: TFloatField;
+    SQL_listarlancamento_relat_ped_subtotalprazo: TFloatField;
+    SQL_listarlancamento_relat_iten_id: TIntegerField;
+    SQL_listarlancamento_relat_iten_produto: TIntegerField;
+    SQL_listarlancamento_relat_iten_qtd: TIntegerField;
+    SQL_listarlancamento_relat_iten_pedido: TStringField;
+    SQL_listarlancamento_relat_iten_preco: TFloatField;
+    SQL_listarlancamento_relat_iten_preco_prazo: TFloatField;
+    SQL_listarlancamento_relat_pro_id: TIntegerField;
+    SQL_listarlancamento_relat_pro_nome: TStringField;
+    SQL_listarlancamento_relat_pro_barra: TStringField;
+    SQL_listarlancamento_relat_pro_ref: TStringField;
+    SQL_listarlancamento_relat_pro_custo: TFloatField;
+    SQL_listarlancamento_relat_pro_preco: TFloatField;
+    SQL_listarlancamento_relat_pro_preco_prazo: TFloatField;
+    SQL_listarlancamento_relat_pro_estoque: TIntegerField;
+    SQL_listarlancamento_relat_cli_id: TIntegerField;
+    SQL_listarlancamento_relat_cli_nome: TStringField;
+    SQL_listarlancamento_relat_cli_endereco: TStringField;
+    SQL_listarlancamento_relat_cli_numero: TStringField;
+    SQL_listarlancamento_relat_cli_bairro: TStringField;
+    SQL_listarlancamento_relat_cli_cidade: TStringField;
+    SQL_listarlancamento_relat_cli_fone: TStringField;
+    SQL_listarlancamento_relat_cli_celular: TStringField;
+    SQL_listarlancamento_relat_cli_rg: TStringField;
+    SQL_listarlancamento_relat_cli_cnpj_cpf: TStringField;
+    SQL_listarlancamento_relat_cli_profissao: TStringField;
+    SQL_listarlancamento_relat_cli_data_nasc: TDateField;
+    SQL_listarlancamento_relat_forma_id: TIntegerField;
+    SQL_listarlancamento_relat_forma_nome: TStringField;
+    SQL_listarlancamento_relat_user_id: TIntegerField;
+    SQL_listarlancamento_relat_user_nome: TStringField;
+    SQL_listarlancamento_relat_user_nome_completo: TStringField;
+    SQL_listarlancamento_relat_user_senha: TStringField;
+    ds_listarlancamento_relat_: TDataSource;
     ppLine2: TppLine;
     ppLabel9: TppLabel;
     ppLabel10: TppLabel;
@@ -214,7 +214,7 @@ var
 implementation
 
 uses
-  u_DM, U_pdv;
+  u_DM, U_pdv, U_lancamentos;
 
 {$R *.dfm}
 
@@ -267,7 +267,7 @@ begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar o pedido em lançamentos para filtrar atual
-  with SQL_listarlancamento_relat do
+  with SQL_listarlancamento_relat_ do
    begin
    Close;
    SQL.Clear;
@@ -356,6 +356,7 @@ begin
             TB_gerarParcelas.Post;
           end;
 
+          //refresh na dbg listar parcelas
           {with SQL_parcelasProntas do
             begin
               Close;
@@ -367,6 +368,7 @@ begin
               ShowMessage('Parcelas geradas com Sucesso!');
             end; }
 
+            //refresh na dbg listar parcelas
             ShowMessage('Parcelas geradas com Sucesso!');
             SQL_parcelasProntas.Close;
             SQL_parcelasProntas.Open;

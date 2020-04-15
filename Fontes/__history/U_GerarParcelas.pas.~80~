@@ -214,7 +214,7 @@ var
 implementation
 
 uses
-  u_DM, U_pdv;
+  u_DM, U_pdv, U_lancamentos;
 
 {$R *.dfm}
 
@@ -267,7 +267,7 @@ begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar o pedido em lançamentos para filtrar atual
-  with SQL_listarlancamento_relat do
+  with SQL_listarlancamento_relat_ do
    begin
    Close;
    SQL.Clear;
@@ -356,7 +356,8 @@ begin
             TB_gerarParcelas.Post;
           end;
 
-          with SQL_parcelasProntas do
+          //refresh na dbg listar parcelas
+          {with SQL_parcelasProntas do
             begin
               Close;
               SQL.Clear;
@@ -365,7 +366,13 @@ begin
               ParamByName('cod').Value := codigo_venda;
               Open;
               ShowMessage('Parcelas geradas com Sucesso!');
-            end;
+            end; }
+
+            //refresh na dbg listar parcelas
+            ShowMessage('Parcelas geradas com Sucesso!');
+            SQL_parcelasProntas.Close;
+            SQL_parcelasProntas.Open;
+
         end;
     end;
 end;

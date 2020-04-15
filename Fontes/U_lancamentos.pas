@@ -110,7 +110,7 @@ type
     SQL_listarlancamento_relatuser_nome_completo: TStringField;
     SQL_listarlancamento_relatuser_senha: TStringField;
     btn_listaritensdopedido_lanc: TSpeedButton;
-    DBGrid1: TDBGrid;
+    dbg_listarItensPedido: TDBGrid;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
