@@ -30,6 +30,7 @@ type
     Lanamentos1: TMenuItem;
     Parcelas1: TMenuItem;
     GerarParcelas1: TMenuItem;
+    BaixarParcelas1: TMenuItem;
     procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);
@@ -39,6 +40,7 @@ type
     procedure btn_vendasClick(Sender: TObject);
     procedure Lanamentos1Click(Sender: TObject);
     procedure GerarParcelas1Click(Sender: TObject);
+    procedure BaixarParcelas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -52,9 +54,18 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas;
 
 //clique do botao clientes
+procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
+begin
+
+      if F_baixarparcelas = nil then
+      F_baixarparcelas := TF_baixarparcelas.Create(self);
+      F_baixarparcelas.Show;
+
+end;
+
 procedure TF_inicial.btn_clientesClick(Sender: TObject);
 begin
       if TestarPermissao('F_clientes') = false then
@@ -80,7 +91,7 @@ end;
 
 procedure TF_inicial.onclick_menu_clientes(Sender: TObject);
 begin
-   
+
   begin
       if F_clientes = nil then
       F_clientes := TF_clientes.Create(self);

@@ -272,6 +272,10 @@ object F_inicial: TF_inicial
           Caption = 'Gerar Parcelas'
           OnClick = GerarParcelas1Click
         end
+        object BaixarParcelas1: TMenuItem
+          Caption = 'Baixar Parcelas'
+          OnClick = BaixarParcelas1Click
+        end
       end
       object menu_vendas: TMenuItem
         Caption = 'Venda'

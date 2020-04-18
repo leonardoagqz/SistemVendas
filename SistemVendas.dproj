@@ -90,41 +90,35 @@
         </DelphiCompile>
         <DCCReference Include="Fontes\U_inicial.pas">
             <Form>F_inicial</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\U_clientes.pas">
             <Form>F_clientes</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\U_funcoes.pas"/>
         <DCCReference Include="Fontes\U_produtos.pas">
             <Form>F_produtos</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\u_DM.pas">
             <Form>dm</Form>
-            <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
         <DCCReference Include="Fontes\U_pdv.pas">
             <Form>F_PDV</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\U_PesquisarProduto.pas">
             <Form>F_pdv_produtos_listar</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\U_PesquisarCliente.pas">
             <Form>F_pdv_clientes_listar</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\U_lancamentos.pas">
             <Form>F_lancamento</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Fontes\U_GerarParcelas.pas">
             <Form>F_gerarparcelas</Form>
-            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="Fontes\U_BaixarParcelas.pas">
+            <Form>F_baixarparcelas</Form>
         </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
@@ -540,8 +534,8 @@
                 <ProjectRoot Platform="Android" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="Win32" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSDevice64" Name="$(PROJECTNAME).app"/>
-                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="OSX32" Name="$(PROJECTNAME).app"/>
+                <ProjectRoot Platform="Win64" Name="$(PROJECTNAME)"/>
                 <ProjectRoot Platform="iOSSimulator" Name="$(PROJECTNAME).app"/>
             </Deployment>
             <Platforms>

@@ -1,0 +1,561 @@
+unit U_BaixarParcelas;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons,
+  RxLookup, RxDBCurrEdit, ppProd, ppClass, ppReport, ppComm, ppRelatv, ppDB,
+  ppDBPipe, ppCtrls, ppPrnabl, ppBands, ppCache, ppDesignLayer, ppParameter;
+
+type
+  TF_baixarparcelas = class(TForm)
+    Panel1: TPanel;
+    dbg_listarlancamentos: TDBGrid;
+    SQL_ListarLancamentos: TFDQuery;
+    ds_listarlancamentos: TDataSource;
+    edt_valorprazo_lancamento: TCurrencyEdit;
+    edt_valoravista_lancamento: TCurrencyEdit;
+    lbl_totalvistalanc: TLabel;
+    lbl_totalprazolanc: TLabel;
+    SQL_lanc: TFDQuery;
+    SQL_parcelasProntas: TFDQuery;
+    ds_parcelasprontas: TDataSource;
+    dbg_listarParcelas: TDBGrid;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Label3: TLabel;
+    Panel5: TPanel;
+    edt_buscarClientelanc: TEdit;
+    edt_buscarCodVendalanc: TEdit;
+    lbl_buscarclientelanc: TLabel;
+    lbl_buscarcodvendalanc: TLabel;
+    btn_mostrarTodoslanc: TBitBtn;
+    TB_baixarParcelas: TFDTable;
+    btn_imprimerecibo: TSpeedButton;
+    btn_lancarParcelas: TBitBtn;
+    edt_parcelasQtd: TDBCurrencyEdit;
+    lbl_qtdparcelas: TLabel;
+    btn_parcelasapagar: TBitBtn;
+    btn_parcelasimpimir: TBitBtn;
+    TB_baixarParcelasparc_id: TFDAutoIncField;
+    TB_baixarParcelasparc_cod_carne: TStringField;
+    TB_baixarParcelasparc_numero: TIntegerField;
+    TB_baixarParcelasparc_valor: TFloatField;
+    TB_baixarParcelasparc_data_venc: TDateField;
+    TB_baixarParcelasparc_pago: TStringField;
+    TB_baixarParcelasparc_data_pago: TDateField;
+    SQL_parcelasProntasparc_id: TFDAutoIncField;
+    SQL_parcelasProntasparc_cod_carne: TStringField;
+    SQL_parcelasProntasparc_numero: TIntegerField;
+    SQL_parcelasProntasparc_valor: TFloatField;
+    SQL_parcelasProntasparc_data_venc: TDateField;
+    SQL_parcelasProntasparc_pago: TStringField;
+    SQL_parcelasProntasparc_data_pago: TDateField;
+    ppDBparcelasprontas: TppDBPipeline;
+    report_parcelasProntas: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppLine1: TppLine;
+    ppShape1: TppShape;
+    ppShape2: TppShape;
+    ppLabel1: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel2: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel3: TppLabel;
+    ppDBText3: TppDBText;
+    ppLabel4: TppLabel;
+    ppDBText4: TppDBText;
+    ppLabel5: TppLabel;
+    ppDBText5: TppDBText;
+    ppLabel6: TppLabel;
+    ppDBText6: TppDBText;
+    ppLabel7: TppLabel;
+    ppDBText7: TppDBText;
+    ppLabel8: TppLabel;
+    ppDBText8: TppDBText;
+    SQL_listarProdutos: TFDQuery;
+    SQL_listarProdutosped_id: TFDAutoIncField;
+    SQL_listarProdutosped_date: TDateField;
+    SQL_listarProdutosped_codigo: TStringField;
+    SQL_listarProdutosped_cliente: TIntegerField;
+    SQL_listarProdutosped_usuario: TIntegerField;
+    SQL_listarProdutosped_forma_pag: TIntegerField;
+    SQL_listarProdutosped_fechado: TStringField;
+    SQL_listarProdutosped_faturado: TStringField;
+    SQL_listarProdutosped_subtotal: TFloatField;
+    SQL_listarProdutosped_subtotalprazo: TFloatField;
+    SQL_listarProdutositen_id: TIntegerField;
+    SQL_listarProdutositen_produto: TIntegerField;
+    SQL_listarProdutositen_qtd: TIntegerField;
+    SQL_listarProdutositen_pedido: TStringField;
+    SQL_listarProdutositen_preco: TFloatField;
+    SQL_listarProdutositen_preco_prazo: TFloatField;
+    SQL_listarProdutospro_id: TIntegerField;
+    SQL_listarProdutospro_nome: TStringField;
+    SQL_listarProdutospro_barra: TStringField;
+    SQL_listarProdutospro_ref: TStringField;
+    SQL_listarProdutospro_custo: TFloatField;
+    SQL_listarProdutospro_preco: TFloatField;
+    SQL_listarProdutospro_preco_prazo: TFloatField;
+    SQL_listarProdutospro_estoque: TIntegerField;
+    SQL_listarProdutoscli_id: TIntegerField;
+    SQL_listarProdutoscli_nome: TStringField;
+    SQL_listarProdutoscli_endereco: TStringField;
+    SQL_listarProdutoscli_numero: TStringField;
+    SQL_listarProdutoscli_bairro: TStringField;
+    SQL_listarProdutoscli_cidade: TStringField;
+    SQL_listarProdutoscli_fone: TStringField;
+    SQL_listarProdutoscli_celular: TStringField;
+    SQL_listarProdutoscli_rg: TStringField;
+    SQL_listarProdutoscli_cnpj_cpf: TStringField;
+    SQL_listarProdutoscli_profissao: TStringField;
+    SQL_listarProdutoscli_data_nasc: TDateField;
+    SQL_listarProdutosforma_id: TIntegerField;
+    SQL_listarProdutosforma_nome: TStringField;
+    SQL_listarProdutosuser_id: TIntegerField;
+    SQL_listarProdutosuser_nome: TStringField;
+    SQL_listarProdutosuser_nome_completo: TStringField;
+    SQL_listarProdutosuser_senha: TStringField;
+    ds_listarProdutos: TDataSource;
+    ppLine2: TppLine;
+    ppLabel9: TppLabel;
+    ppLabel10: TppLabel;
+    ppLabel11: TppLabel;
+    lbl_nomeCliente: TppLabel;
+    ppShape3: TppShape;
+    ppShape4: TppShape;
+    ppShape5: TppShape;
+    ppShape6: TppShape;
+    ppShape7: TppShape;
+    ppShape8: TppShape;
+    ppShape9: TppShape;
+    ppShape10: TppShape;
+    SQL_cancelaParcela: TFDQuery;
+    ppDBListarProdutos: TppDBPipeline;
+    Report_ListagemProdutos: TppReport;
+    ppHeaderBand3: TppHeaderBand;
+    ppLabel33: TppLabel;
+    ppLabel34: TppLabel;
+    ppLabel35: TppLabel;
+    ppLabel36: TppLabel;
+    ppLabel37: TppLabel;
+    ppLabel38: TppLabel;
+    ppLine9: TppLine;
+    ppLine10: TppLine;
+    ppLabel41: TppLabel;
+    ppDBText20: TppDBText;
+    ppLabel42: TppLabel;
+    ppDBText21: TppDBText;
+    ppLabel43: TppLabel;
+    ppDBText22: TppDBText;
+    ppDBText23: TppDBText;
+    ppDBText24: TppDBText;
+    ppDBText25: TppDBText;
+    ppLabel47: TppLabel;
+    ppLabel48: TppLabel;
+    ppLabel49: TppLabel;
+    ppLine11: TppLine;
+    ppDBText35: TppDBText;
+    ppDetailBand3: TppDetailBand;
+    ppDBText31: TppDBText;
+    ppDBText32: TppDBText;
+    ppDBText33: TppDBText;
+    ppDBText34: TppDBText;
+    ppDBText36: TppDBText;
+    ppDBText40: TppDBText;
+    ppFooterBand3: TppFooterBand;
+    ppSummaryBand3: TppSummaryBand;
+    ppLine12: TppLine;
+    ppLabel44: TppLabel;
+    ppLabel45: TppLabel;
+    ppLabel46: TppLabel;
+    ppDBText37: TppDBText;
+    ppDBText38: TppDBText;
+    ppDBText39: TppDBText;
+    ppDesignLayers3: TppDesignLayers;
+    ppDesignLayer3: TppDesignLayer;
+    ppParameterList3: TppParameterList;
+    SQL_ListarLancamentoscli_id: TIntegerField;
+    SQL_ListarLancamentoscli_nome: TStringField;
+    SQL_ListarLancamentoscli_endereco: TStringField;
+    SQL_ListarLancamentoscli_numero: TStringField;
+    SQL_ListarLancamentoscli_bairro: TStringField;
+    SQL_ListarLancamentoscli_cidade: TStringField;
+    SQL_ListarLancamentoscli_fone: TStringField;
+    SQL_ListarLancamentoscli_celular: TStringField;
+    SQL_ListarLancamentoscli_rg: TStringField;
+    SQL_ListarLancamentoscli_cnpj_cpf: TStringField;
+    SQL_ListarLancamentoscli_profissao: TStringField;
+    SQL_ListarLancamentoscli_data_nasc: TDateField;
+    SQL_ListarLancamentosped_id: TIntegerField;
+    SQL_ListarLancamentosped_date: TDateField;
+    SQL_ListarLancamentosped_codigo: TStringField;
+    SQL_ListarLancamentosped_cliente: TIntegerField;
+    SQL_ListarLancamentosped_usuario: TIntegerField;
+    SQL_ListarLancamentosped_forma_pag: TIntegerField;
+    SQL_ListarLancamentosped_fechado: TStringField;
+    SQL_ListarLancamentosped_faturado: TStringField;
+    SQL_ListarLancamentosped_subtotal: TFloatField;
+    SQL_ListarLancamentosped_subtotalprazo: TFloatField;
+    SQL_ListarLancamentosparc_id: TIntegerField;
+    SQL_ListarLancamentosparc_cod_carne: TStringField;
+    SQL_ListarLancamentosparc_numero: TIntegerField;
+    SQL_ListarLancamentosparc_valor: TFloatField;
+    SQL_ListarLancamentosparc_data_venc: TDateField;
+    SQL_ListarLancamentosparc_pago: TStringField;
+    SQL_ListarLancamentosparc_data_pago: TDateField;
+    btn_pagarParcela: TBitBtn;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure procedureMostrarPedido;
+    procedure dbg_listarlancamentosCellClick(Column: TColumn);
+    procedure btn_imprimereciboClick(Sender: TObject);
+    procedure btn_listaritensdopedido_lancClick(Sender: TObject);
+    procedure edt_buscarClientelancKeyPress(Sender: TObject; var Key: Char);
+    procedure edt_buscarCodVendalancKeyPress(Sender: TObject; var Key: Char);
+    procedure btn_mostrarTodoslancClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure btn_fecharpedidoClick(Sender: TObject);
+    procedure btn_lancarParcelasClick(Sender: TObject);
+    procedure btn_parcelasimpimirClick(Sender: TObject);
+    procedure btn_parcelasapagarClick(Sender: TObject);
+    procedure btn_pagarParcelaClick(Sender: TObject);
+
+  private
+    { Private declarations }
+
+  var total_vista, total_prazo : Double;
+  var codigo_venda : string;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  F_baixarparcelas: TF_baixarparcelas;
+
+implementation
+
+uses
+  u_DM, U_pdv, U_lancamentos;
+
+{$R *.dfm}
+
+
+procedure TF_baixarparcelas.procedureMostrarPedido;
+begin
+  //mostrar pedido selecionado
+  {total_vista := 0;
+  total_prazo := 0;}
+  codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
+
+  //executo a sql listar lançamentos para filtrar atual
+  with SQL_lanc do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from view_listar_pedidos '); //
+   SQL.Add('where  ped_codigo = :codigo ');
+   SQL.Add('group by ped_codigo');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+   end;
+
+   {SQL_listarancamentos.First;
+
+   while not SQL_listarancamentos.Eof do
+   begin
+     total_vista := total_vista + F_PDV.SQL_listar_pedidos_dbglançamentosubTotal.Value;
+     total_prazo := total_prazo + F_PDV.SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
+     SQL_listarancamentos.Next;
+   end; }
+
+   edt_valoravista_lancamento.Value := SQL_ListarLancamentosped_subtotal.Value;
+   edt_valorprazo_lancamento.Value := SQL_ListarLancamentosped_subtotalprazo.Value;
+
+  {  with SQL_listarancamentos do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from view_listar_pedidos ');
+   Open;
+
+
+   end;}
+   //btn_listaritensdopedido_lanc.Click;
+end;
+
+procedure TF_baixarparcelas.btn_imprimereciboClick(Sender: TObject);
+begin
+  codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
+
+  //executo a sql listar o pedido em lançamentos para filtrar atual
+  with SQL_listarProdutos do
+   begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from view_listar_pedidos '); //
+   SQL.Add('where  ped_codigo = :codigo ');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+   end;
+
+  Report_ListagemProdutos.PrintReport;
+end;
+
+procedure TF_baixarparcelas.btn_fecharpedidoClick(Sender: TObject);
+begin
+
+  {if lk_formapaglanc.Text = '' then
+    begin
+      ShowMessage('Escolha a forma de Pagamento');
+      lk_formapaglanc.SetFocus;
+      Exit
+    end;
+
+  if SQL_ListarLancamentosped_faturado.Value = 'SIM' then
+    begin
+      ShowMessage('Pedido já esta Faturado.');
+    end;
+
+
+  TB_faturarpedido.Active := True;
+  TB_faturarpedido.Locate('ped_codigo',SQL_ListarLancamentosped_codigo.AsString);
+  TB_faturarpedido.Edit;
+  TB_faturarpedidoped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+  TB_faturarpedidoped_faturado.Value := 'SIM';
+  TB_faturarpedido.Post;
+
+  ShowMessage('Pedido faturado com Sucesso!');
+
+  btn_imprimerecibo.Click;
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.Open; }
+
+
+end;
+
+procedure TF_baixarparcelas.btn_lancarParcelasClick(Sender: TObject);
+var total_parcelas, atual_parcela : Integer;
+begin
+  //verifica se já existe parcela
+  {with SQL_parcelasProntas do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from view_parcelas_prontas');
+      SQL.Add('where parc_cod_carne = :cod');
+      ParamByName('cod').Value := codigo_venda;
+      Open;
+      if RecordCount > 0 then
+        begin
+          ShowMessage('Essa parcela já foi gerada!');
+          Exit;
+        end
+        else
+        begin
+          if edt_parcelasQtd.Value < 1 then
+            begin
+              ShowMessage('Digite a QTD de parcelas');
+              edt_parcelasQtd.SetFocus;
+              edt_parcelasQtd.Color := clYellow;
+              Exit;
+            end;
+
+          total_parcelas := StrToInt(edt_parcelasQtd.Text);
+          atual_parcela := 0;
+
+          TB_gerarParcelas.Active := True;
+
+          while atual_parcela < total_parcelas do
+          begin
+            atual_parcela := atual_parcela + 1;
+            TB_gerarParcelas.Insert;
+            TB_gerarParcelasparc_cod_carne.Value := SQL_ListarLancamentosped_codigo.Value;
+            TB_gerarParcelasparc_numero.Value := atual_parcela;
+            TB_gerarParcelasparc_valor.Value := edt_valorprazo_lancamento.Value / total_parcelas;
+            TB_gerarParcelasparc_data_venc.Value := IncMonth(Date,atual_parcela); //incrementa mes em mes, incrementa um mesm no date no meu parametro atual_parcela
+            TB_gerarParcelasparc_pago.Value := 'NAO';
+            TB_gerarParcelas.Post;
+          end;
+
+          //refresh na dbg listar parcelas
+          {with SQL_parcelasProntas do
+            begin
+              Close;
+              SQL.Clear;
+              SQL.Add('select * from view_parcelas_prontas');
+              SQL.Add('where parc_cod_carne = :cod');
+              ParamByName('cod').Value := codigo_venda;
+              Open;
+              ShowMessage('Parcelas geradas com Sucesso!');
+            end;
+
+            //refresh na dbg listar parcelas
+            ShowMessage('Parcelas geradas com Sucesso!');
+            SQL_parcelasProntas.Close;
+            SQL_parcelasProntas.Open;
+
+        end;
+    end;  }
+end;
+
+
+
+
+
+procedure TF_baixarparcelas.btn_listaritensdopedido_lancClick(Sender: TObject);
+begin
+  
+  codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
+
+  //executo a sql listar lançamentos para filtrar atual
+  {with SQL_listarlancamento_relat do
+  begin
+   Close;
+   SQL.Clear;
+   SQL.Add('select * from view_listar_pedidos '); //
+   SQL.Add('where  ped_codigo = :codigo ');
+   ParamByName('codigo').Value := codigo_venda;
+   Open;
+   end;}
+
+
+end;
+
+procedure TF_baixarparcelas.btn_mostrarTodoslancClick(Sender: TObject);
+begin
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_baixar_parcelas');
+  SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      ShowMessage('Não existem pedidos para serem baixados!');
+    end;
+end;
+
+procedure TF_baixarparcelas.btn_pagarParcelaClick(Sender: TObject);
+begin
+  //rotina para baixar a parcela selecionada
+  TB_baixarParcelas.Active := True;
+  TB_baixarParcelas.Locate('parc_id',SQL_parcelasProntasparc_id.Value,[]);
+  TB_baixarParcelas.Edit;
+  TB_baixarParcelasparc_pago.Value := 'SIM';
+  TB_baixarParcelasparc_data_pago.Value := Date;
+  TB_baixarParcelas.Post;
+  SQL_parcelasProntas.Close;
+  SQL_parcelasProntas.Open;
+
+
+end;
+
+procedure TF_baixarparcelas.btn_parcelasapagarClick(Sender: TObject);
+begin
+  with SQL_cancelaParcela do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('delete from parcelas');
+    SQL.Add('where parc_cod_carne = :cod');
+    ParamByName('cod').Value := codigo_venda;
+    ExecSQL;
+    ShowMessage('Parcelas Canceladas com Sucesso!');
+    SQL_parcelasProntas.Close;
+    SQL_parcelasProntas.Open;
+
+  end;
+end;
+
+procedure TF_baixarparcelas.btn_parcelasimpimirClick(Sender: TObject);
+begin
+  lbl_nomeCliente.Caption := SQL_ListarLancamentoscli_nome.AsString;
+  report_parcelasProntas.PrintReport;
+end;
+
+procedure TF_baixarparcelas.dbg_listarlancamentosCellClick(Column: TColumn);
+begin
+  procedureMostrarPedido;
+
+  with SQL_parcelasProntas do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('select * from view_parcelas_prontas');
+      SQL.Add('where parc_cod_carne = :cod');
+      ParamByName('cod').Value := codigo_venda;
+      Open;
+    end;
+end;
+
+procedure TF_baixarparcelas.edt_buscarClientelancKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+    begin
+     SQL_ListarLancamentos.Close;
+     SQL_ListarLancamentos.SQL.Clear;
+     SQL_ListarLancamentos.SQL.Add ('select * from view_baixar_parcelas');
+     SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
+     SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
+     SQL_ListarLancamentos.Open;
+     if SQL_ListarLancamentos.RecordCount = 0 then
+       begin
+         ShowMessage('Cliente não Encontrado');
+         SQL_ListarLancamentos.Close;
+         SQL_ListarLancamentos.SQL.Clear;
+         SQL_ListarLancamentos.SQL.Add ('select * from view_baixar_parcelas');
+         SQL_ListarLancamentos.Open;
+
+       end;
+    end;
+end;
+
+procedure TF_baixarparcelas.edt_buscarCodVendalancKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  if Key = #13 then
+    begin
+     SQL_ListarLancamentos.Close;
+     SQL_ListarLancamentos.SQL.Clear;
+     SQL_ListarLancamentos.SQL.Add ('select * from view_baixar_parcelas');
+     SQL_ListarLancamentos.SQL.Add ('where ped_codigo like :cod');
+     SQL_ListarLancamentos.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
+     SQL_ListarLancamentos.Open;
+     if SQL_ListarLancamentos.RecordCount = 0 then
+       begin
+         ShowMessage('Código não Encontrado');
+         SQL_ListarLancamentos.Close;
+         SQL_ListarLancamentos.SQL.Clear;
+         SQL_ListarLancamentos.SQL.Add ('select * from view_baixar_parcelas');
+         SQL_ListarLancamentos.Open;
+
+       end;
+    end;
+end;
+
+procedure TF_baixarparcelas.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  F_baixarparcelas := nil;
+  TB_baixarParcelas.Active := False;
+end;
+
+procedure TF_baixarparcelas.FormCreate(Sender: TObject);
+begin
+  dm.SQL_formapag.Active:=True;
+  SQL_parcelasProntas.Active:=False;
+
+end;
+
+end.
