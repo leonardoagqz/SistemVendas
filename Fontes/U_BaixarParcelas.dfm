@@ -18,7 +18,7 @@ object F_baixarparcelas: TF_baixarparcelas
   PixelsPerInch = 96
   TextHeight = 13
   object lbl_totalvistalanc: TLabel
-    Left = 4
+    Left = 167
     Top = 454
     Width = 86
     Height = 19
@@ -29,9 +29,10 @@ object F_baixarparcelas: TF_baixarparcelas
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    Visible = False
   end
   object lbl_totalprazolanc: TLabel
-    Left = 140
+    Left = 16
     Top = 454
     Width = 93
     Height = 19
@@ -49,6 +50,7 @@ object F_baixarparcelas: TF_baixarparcelas
     Width = 64
     Height = 13
     Caption = 'QTD Parcelas'
+    Visible = False
   end
   object Panel1: TPanel
     Left = 0
@@ -137,7 +139,7 @@ object F_baixarparcelas: TF_baixarparcelas
       end>
   end
   object edt_valorprazo_lancamento: TCurrencyEdit
-    Left = 140
+    Left = 16
     Top = 473
     Width = 121
     Height = 27
@@ -151,7 +153,7 @@ object F_baixarparcelas: TF_baixarparcelas
     TabOrder = 4
   end
   object edt_valoravista_lancamento: TCurrencyEdit
-    Left = 4
+    Left = 167
     Top = 473
     Width = 121
     Height = 27
@@ -163,6 +165,7 @@ object F_baixarparcelas: TF_baixarparcelas
     Font.Style = []
     ParentFont = False
     TabOrder = 3
+    Visible = False
   end
   object dbg_listarParcelas: TDBGrid
     Left = -1

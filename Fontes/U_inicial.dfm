@@ -262,6 +262,10 @@ object F_inicial: TF_inicial
     end
     object Movimentos1: TMenuItem
       Caption = 'Movimentos'
+      object menu_vendas: TMenuItem
+        Caption = 'Venda'
+        OnClick = onclick_menu_vendas
+      end
       object Lanamentos1: TMenuItem
         Caption = 'Lan'#231'amentos'
         OnClick = Lanamentos1Click
@@ -277,9 +281,9 @@ object F_inicial: TF_inicial
           OnClick = BaixarParcelas1Click
         end
       end
-      object menu_vendas: TMenuItem
-        Caption = 'Venda'
-        OnClick = onclick_menu_vendas
+      object GerarEtiquetas1: TMenuItem
+        Caption = 'Gerar Etiquetas'
+        OnClick = GerarEtiquetas1Click
       end
       object Caixa1: TMenuItem
         Caption = 'Caixa'

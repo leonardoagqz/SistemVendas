@@ -31,6 +31,7 @@ type
     Parcelas1: TMenuItem;
     GerarParcelas1: TMenuItem;
     BaixarParcelas1: TMenuItem;
+    GerarEtiquetas1: TMenuItem;
     procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);
@@ -41,6 +42,7 @@ type
     procedure Lanamentos1Click(Sender: TObject);
     procedure GerarParcelas1Click(Sender: TObject);
     procedure BaixarParcelas1Click(Sender: TObject);
+    procedure GerarEtiquetas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,7 +56,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas;
 
 //clique do botao clientes
 procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
@@ -122,6 +124,15 @@ begin
       F_PDV := TF_PDV.Create(Self);
       F_PDV.Show;
    end;
+end;
+
+procedure TF_inicial.GerarEtiquetas1Click(Sender: TObject);
+begin
+  if F_etiquetas = nil then
+    begin
+      F_etiquetas := TF_etiquetas.Create(self);
+      F_etiquetas.ShowModal;
+    end;
 end;
 
 procedure TF_inicial.GerarParcelas1Click(Sender: TObject);
