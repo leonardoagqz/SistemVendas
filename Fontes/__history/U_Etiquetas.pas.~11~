@@ -7,7 +7,10 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.ExtCtrls,
   Vcl.Imaging.pngimage, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls, Vcl.DBActns,
-  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
+  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet;
 
 type
   TF_etiquetas = class(TForm)
@@ -48,20 +51,30 @@ type
     btn_gravar_cad: TSpeedButton;
     btn_cancelar_cad: TSpeedButton;
     btn_apagar_cad: TSpeedButton;
-    btn_editar_produto: TSpeedButton;
+    btn_gerar_etiqueta: TSpeedButton;
     btn_gravar_cad_prod: TSpeedButton;
     btn_apagar_cad_prod: TSpeedButton;
     btn_cancelar_cad_prod: TSpeedButton;
     btn_cadastrar_cad_prod: TSpeedButton;
     SpeedButton1: TSpeedButton;
     img_ico_cad_prod: TImage;
+    lbl_titulo_gerarEtiquetas: TLabel;
+    DBGrid1: TDBGrid;
+    btn_imprimirEtiqueta: TBitBtn;
+    btn_cancelaretiqueta: TBitBtn;
+    TB_gerarEtiquetas: TFDTable;
+    TB_gerarEtiquetaseti_id: TFDAutoIncField;
+    TB_gerarEtiquetaseti_produto: TIntegerField;
+    SQL_listarEtiquetas: TFDQuery;
+    FDQuery1: TFDQuery;
+    ds_listarEtiquetas: TDataSource;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edt_buscaKeyPress(Sender: TObject; var Key: Char);
     procedure edt_buscaChange(Sender: TObject);
     procedure img_buscarprodutosClick(Sender: TObject);
     procedure btn_buscarprodutosClick(Sender: TObject);
-    procedure btn_editar_produtoClick(Sender: TObject);
+    procedure btn_gerar_etiquetaClick(Sender: TObject);
     procedure dbg_produtosDblClick(Sender: TObject);
     procedure btn_gravar_cad_prodClick(Sender: TObject);
     procedure btn_apagar_cad_prodClick(Sender: TObject);
@@ -110,17 +123,16 @@ begin
   page_produtos.ActivePage := tab_consultar;
 end;
 
-procedure TF_etiquetas.btn_editar_produtoClick(Sender: TObject);
+procedure TF_etiquetas.btn_gerar_etiquetaClick(Sender: TObject);
 begin
-  dm.TB_produtos.Locate('pro_id',dm.SQL_produtospro_id.Value,[]);
-  page_produtos.ActivePage := tab_cadastrar;
+  
   btn_editar_cad.Click;
   btn_novo_cad.Enabled:=True;
 end;
 
 procedure TF_etiquetas.dbg_produtosDblClick(Sender: TObject);
 begin
-btn_editar_produto.Click;
+btn_gerar_etiqueta.Click;
 end;
 
 procedure TF_etiquetas.edt_buscaChange(Sender: TObject);
@@ -173,7 +185,7 @@ end;
 
 procedure TF_etiquetas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  F_produtos := nil;
+  F_etiquetas := nil;
 end;
 
 procedure TF_etiquetas.FormCreate(Sender: TObject);

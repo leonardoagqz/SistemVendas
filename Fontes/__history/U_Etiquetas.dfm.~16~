@@ -1258,26 +1258,12 @@ object F_etiquetas: TF_etiquetas
     Top = 262
     Width = 389
     Height = 123
-    DataSource = ds_listarEtiquetas
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'pro_nome'
-        Width = 154
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'pro_barra'
-        Width = 200
-        Visible = True
-      end>
   end
   object btn_imprimirEtiqueta: TBitBtn
     Left = 407

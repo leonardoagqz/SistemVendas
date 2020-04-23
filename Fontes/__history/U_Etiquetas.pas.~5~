@@ -48,7 +48,7 @@ type
     btn_gravar_cad: TSpeedButton;
     btn_cancelar_cad: TSpeedButton;
     btn_apagar_cad: TSpeedButton;
-    btn_editar_produto: TSpeedButton;
+    btn_gerar_etiqueta: TSpeedButton;
     btn_gravar_cad_prod: TSpeedButton;
     btn_apagar_cad_prod: TSpeedButton;
     btn_cancelar_cad_prod: TSpeedButton;
@@ -61,7 +61,7 @@ type
     procedure edt_buscaChange(Sender: TObject);
     procedure img_buscarprodutosClick(Sender: TObject);
     procedure btn_buscarprodutosClick(Sender: TObject);
-    procedure btn_editar_produtoClick(Sender: TObject);
+    procedure btn_gerar_etiquetaClick(Sender: TObject);
     procedure dbg_produtosDblClick(Sender: TObject);
     procedure btn_gravar_cad_prodClick(Sender: TObject);
     procedure btn_apagar_cad_prodClick(Sender: TObject);
@@ -110,17 +110,16 @@ begin
   page_produtos.ActivePage := tab_consultar;
 end;
 
-procedure TF_etiquetas.btn_editar_produtoClick(Sender: TObject);
+procedure TF_etiquetas.btn_gerar_etiquetaClick(Sender: TObject);
 begin
-  dm.TB_produtos.Locate('pro_id',dm.SQL_produtospro_id.Value,[]);
-  page_produtos.ActivePage := tab_cadastrar;
+  
   btn_editar_cad.Click;
   btn_novo_cad.Enabled:=True;
 end;
 
 procedure TF_etiquetas.dbg_produtosDblClick(Sender: TObject);
 begin
-btn_editar_produto.Click;
+btn_gerar_etiqueta.Click;
 end;
 
 procedure TF_etiquetas.edt_buscaChange(Sender: TObject);

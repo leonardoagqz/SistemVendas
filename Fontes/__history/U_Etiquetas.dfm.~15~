@@ -1258,26 +1258,12 @@ object F_etiquetas: TF_etiquetas
     Top = 262
     Width = 389
     Height = 123
-    DataSource = ds_listarEtiquetas
     TabOrder = 2
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -12
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'pro_nome'
-        Width = 154
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'pro_barra'
-        Width = 200
-        Visible = True
-      end>
   end
   object btn_imprimirEtiqueta: TBitBtn
     Left = 407
@@ -1341,40 +1327,5 @@ object F_etiquetas: TF_etiquetas
       ImageIndex = 8
       DataSource = ds_produtos_cad
     end
-  end
-  object TB_gerarEtiquetas: TFDTable
-    IndexFieldNames = 'eti_id'
-    Connection = dm.conexao
-    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.etiquetas'
-    TableName = 'aguiarsvendasbd.etiquetas'
-    Left = 152
-    Top = 264
-    object TB_gerarEtiquetaseti_id: TFDAutoIncField
-      FieldName = 'eti_id'
-      Origin = 'eti_id'
-      ProviderFlags = [pfInWhere, pfInKey]
-    end
-    object TB_gerarEtiquetaseti_produto: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'eti_produto'
-      Origin = 'eti_produto'
-    end
-  end
-  object SQL_listarEtiquetas: TFDQuery
-    Connection = dm.conexao
-    SQL.Strings = (
-      'select * from view_etiquetas'
-      'group by pro_barra')
-    Left = 256
-    Top = 264
-  end
-  object FDQuery1: TFDQuery
-    Left = 640
-    Top = 344
-  end
-  object ds_listarEtiquetas: TDataSource
-    DataSet = SQL_listarEtiquetas
-    Left = 344
-    Top = 272
   end
 end

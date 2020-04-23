@@ -125,7 +125,7 @@ end;
 
 procedure TF_etiquetas.btn_gerar_etiquetaClick(Sender: TObject);
 begin
-  //selecionar produto para lançar
+  //selecionar produto para editar
 
 
 end;

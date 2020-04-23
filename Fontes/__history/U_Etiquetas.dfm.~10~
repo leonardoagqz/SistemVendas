@@ -4,7 +4,7 @@ object F_etiquetas: TF_etiquetas
   BorderStyle = bsDialog
   Caption = 'Gerar Etiquetas'
   ClientHeight = 422
-  ClientWidth = 994
+  ClientWidth = 711
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,18 +20,19 @@ object F_etiquetas: TF_etiquetas
   object stb_produtos: TStatusBar
     Left = 0
     Top = 404
-    Width = 994
+    Width = 711
     Height = 18
     Margins.Left = 4
     Margins.Top = 4
     Margins.Right = 4
     Margins.Bottom = 4
     Panels = <>
+    ExplicitWidth = 994
   end
   object page_produtos: TPageControl
     Left = 0
     Top = 0
-    Width = 994
+    Width = 711
     Height = 404
     Margins.Left = 4
     Margins.Top = 4
@@ -41,18 +42,20 @@ object F_etiquetas: TF_etiquetas
     Align = alClient
     TabOrder = 0
     TabWidth = 200
+    ExplicitWidth = 994
     object tab_consultar: TTabSheet
       Margins.Left = 4
       Margins.Top = 4
       Margins.Right = 4
       Margins.Bottom = 4
-      Caption = 'Consultar'
+      Caption = 'Lan'#231'ar Etiquetas'
       TabVisible = False
+      ExplicitWidth = 986
       object Image1: TImage
         Left = 0
         Top = 0
-        Width = 986
-        Height = 91
+        Width = 703
+        Height = 394
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
@@ -80,6 +83,7 @@ object F_etiquetas: TF_etiquetas
           AE426082}
         Stretch = True
         ExplicitTop = -8
+        ExplicitWidth = 986
         ExplicitHeight = 72
       end
       object Label1: TLabel
@@ -171,12 +175,12 @@ object F_etiquetas: TF_etiquetas
           FFFFFFFFFF00}
         OnClick = btn_buscarprodutosClick
       end
-      object btn_editar_produto: TSpeedButton
-        Left = 536
-        Top = 35
+      object btn_gerar_etiqueta: TSpeedButton
+        Left = 381
+        Top = 40
         Width = 201
         Height = 27
-        Caption = 'Editar / Apagar Selecionado'
+        Caption = 'Lan'#231'ar na Etiqueta'
         Glyph.Data = {
           F2060000424DF206000000000000360400002800000019000000190000000100
           080000000000BC020000120B0000120B000000010000570000006C829200F2F3
@@ -234,12 +238,12 @@ object F_etiquetas: TF_etiquetas
           6375383838383838383838383838383838383838383838383838386F63753838
           38383838383838383838383838383838383838383838386F6375383838383838
           383838383838383838383838383838383838386F6375}
-        OnClick = btn_editar_produtoClick
+        OnClick = btn_gerar_etiquetaClick
       end
       object btn_cadastrar_cad_prod: TSpeedButton
-        Left = 393
-        Top = 35
-        Width = 137
+        Left = 658
+        Top = 65
+        Width = 42
         Height = 27
         Caption = 'Cadastrar Novo'
         Glyph.Data = {
@@ -284,11 +288,12 @@ object F_etiquetas: TF_etiquetas
           0000000000000000000000000000000B0B0BC1C1C1FFFFFFFFFFFFFFFFFFFFFF
           FFFFFFFFFFFFFFFFFFFF}
         Transparent = False
+        Visible = False
         OnClick = btn_cadastrar_cad_prodClick
       end
       object img_ico_cad_prod: TImage
-        Left = 953
-        Top = 3
+        Left = 656
+        Top = 9
         Width = 30
         Height = 29
         Picture.Data = {
@@ -360,15 +365,15 @@ object F_etiquetas: TF_etiquetas
         Stretch = True
       end
       object dbg_produtos: TDBGrid
-        Left = 0
-        Top = 91
+        Left = -4
+        Top = 99
         Width = 986
-        Height = 303
+        Height = 150
         Margins.Left = 4
         Margins.Top = 4
         Margins.Right = 4
         Margins.Bottom = 4
-        Align = alBottom
+        Align = alCustom
         DataSource = dm.ds_produtos
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
@@ -401,21 +406,9 @@ object F_etiquetas: TF_etiquetas
           end
           item
             Expanded = False
-            FieldName = 'pro_ref'
-            Title.Caption = 'Ref'
-            Width = 200
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'pro_custo'
-            Title.Caption = 'R$ Custo'
-            Title.Color = clRed
-            Title.Font.Charset = DEFAULT_CHARSET
-            Title.Font.Color = clRed
-            Title.Font.Height = -11
-            Title.Font.Name = 'Tahoma'
-            Title.Font.Style = []
+            FieldName = 'pro_estoque'
+            Title.Caption = 'Qtd Estoque'
+            Width = 64
             Visible = True
           end
           item
@@ -427,6 +420,7 @@ object F_etiquetas: TF_etiquetas
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
+            Width = 64
             Visible = True
           end
           item
@@ -438,12 +432,7 @@ object F_etiquetas: TF_etiquetas
             Title.Font.Height = -11
             Title.Font.Name = 'Tahoma'
             Title.Font.Style = []
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'pro_estoque'
-            Title.Caption = 'Qtd Estoque'
+            Width = 64
             Visible = True
           end>
       end
@@ -492,17 +481,15 @@ object F_etiquetas: TF_etiquetas
       Margins.Right = 4
       Margins.Bottom = 4
       Caption = 'Cadastrar / Editar'
+      Enabled = False
       ImageIndex = 1
       TabVisible = False
       OnShow = tab_cadastrarShow
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
+      ExplicitWidth = 986
       object Image2: TImage
         Left = 0
         Top = 0
-        Width = 986
+        Width = 703
         Height = 394
         Margins.Left = 4
         Margins.Top = 4
@@ -531,6 +518,7 @@ object F_etiquetas: TF_etiquetas
           82}
         Stretch = True
         ExplicitTop = -4
+        ExplicitWidth = 986
       end
       object Label3: TLabel
         Left = 40
@@ -1254,12 +1242,12 @@ object F_etiquetas: TF_etiquetas
   end
   object ds_produtos_cad: TDataSource
     DataSet = dm.TB_produtos
-    Left = 264
-    Top = 216
+    Left = 272
+    Top = 152
   end
   object acm_produtos: TActionManager
-    Left = 440
-    Top = 224
+    Left = 456
+    Top = 152
     StyleName = 'Platform Default'
     object ac_insert: TDataSetInsert
       Category = 'Dataset'

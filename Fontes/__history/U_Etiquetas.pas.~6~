@@ -7,10 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.Grids, Vcl.DBGrids,
   Vcl.ComCtrls, Vcl.StdCtrls, Vcl.Imaging.jpeg, Vcl.ExtCtrls,
   Vcl.Imaging.pngimage, Vcl.Buttons, Vcl.Mask, Vcl.DBCtrls, Vcl.DBActns,
-  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet;
+  System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan;
 
 type
   TF_etiquetas = class(TForm)
@@ -59,15 +56,6 @@ type
     SpeedButton1: TSpeedButton;
     img_ico_cad_prod: TImage;
     lbl_titulo_gerarEtiquetas: TLabel;
-    DBGrid1: TDBGrid;
-    btn_imprimirEtiqueta: TBitBtn;
-    btn_cancelaretiqueta: TBitBtn;
-    TB_gerarEtiquetas: TFDTable;
-    TB_gerarEtiquetaseti_id: TFDAutoIncField;
-    TB_gerarEtiquetaseti_produto: TIntegerField;
-    SQL_listarEtiquetas: TFDQuery;
-    FDQuery1: TFDQuery;
-    ds_listarEtiquetas: TDataSource;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edt_buscaKeyPress(Sender: TObject; var Key: Char);
@@ -125,9 +113,9 @@ end;
 
 procedure TF_etiquetas.btn_gerar_etiquetaClick(Sender: TObject);
 begin
-  //selecionar produto para lançar
-
-
+  
+  btn_editar_cad.Click;
+  btn_novo_cad.Enabled:=True;
 end;
 
 procedure TF_etiquetas.dbg_produtosDblClick(Sender: TObject);
