@@ -10,7 +10,10 @@ uses
   System.Actions, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, Vcl.ActnMan,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
-  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet;
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
+  RxToolEdit, RxCurrEdit, ppProd, ppClass, ppReport, ppComm, ppRelatv, ppDB,
+  ppDBPipe, ppCtrls, ppPrnabl, ppBarCod, ppBands, ppCache, ppDesignLayer,
+  ppParameter;
 
 type
   TF_etiquetas = class(TForm)
@@ -66,8 +69,40 @@ type
     TB_gerarEtiquetaseti_id: TFDAutoIncField;
     TB_gerarEtiquetaseti_produto: TIntegerField;
     SQL_listarEtiquetas: TFDQuery;
-    FDQuery1: TFDQuery;
+    Sql_EtiquetasPrint: TFDQuery;
     ds_listarEtiquetas: TDataSource;
+    edt_etiquetaQtd: TCurrencyEdit;
+    ds_etiquetasPrint: TDataSource;
+    ppDBEtiquetasPrinter: TppDBPipeline;
+    Report_etiquetasPrinter: TppReport;
+    ppParameterList1: TppParameterList;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppHeaderBand1: TppHeaderBand;
+    ppDetailBand1: TppDetailBand;
+    ppFooterBand1: TppFooterBand;
+    ppColumnHeaderBand1: TppColumnHeaderBand;
+    ppColumnFooterBand1: TppColumnFooterBand;
+    ppDBBarCode1: TppDBBarCode;
+    ppDBText1: TppDBText;
+    ppLabel1: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel2: TppLabel;
+    ppDBText3: TppDBText;
+    ppLabel3: TppLabel;
+    SQL_etiquetasApagar: TFDQuery;
+    btn_removeretiqueta: TBitBtn;
+    SQL_listarEtiquetaseti_id: TIntegerField;
+    SQL_listarEtiquetaseti_produto: TIntegerField;
+    SQL_listarEtiquetaspro_id: TIntegerField;
+    SQL_listarEtiquetaspro_nome: TStringField;
+    SQL_listarEtiquetaspro_barra: TStringField;
+    SQL_listarEtiquetaspro_ref: TStringField;
+    SQL_listarEtiquetaspro_custo: TFloatField;
+    SQL_listarEtiquetaspro_preco: TFloatField;
+    SQL_listarEtiquetaspro_preco_prazo: TFloatField;
+    SQL_listarEtiquetaspro_estoque: TIntegerField;
+    SQL_listarEtiquetasquant: TLargeintField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure edt_buscaKeyPress(Sender: TObject; var Key: Char);
@@ -82,6 +117,11 @@ type
     procedure btn_cadastrar_cad_prodClick(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure tab_cadastrarShow(Sender: TObject);
+    procedure btn_imprimirEtiquetaClick(Sender: TObject);
+    procedure procedureEtiquetasApagar;
+    procedure btn_cancelaretiquetaClick(Sender: TObject);
+    procedure btn_removeretiquetaClick(Sender: TObject);
+
   private
     { Private declarations }
   public
@@ -97,6 +137,27 @@ uses
   u_DM, U_funcoes, U_PesquisarProduto;
 
 {$R *.dfm}
+
+procedure TF_etiquetas.procedureEtiquetasApagar;
+begin
+  // spsgsr etiquetas
+
+  with SQL_etiquetasApagar do
+  begin
+    Close;
+    sql.Clear;
+    SQL.Add('delete from etiquetas');
+    ExecSQL;
+  end;
+
+  SQL_listarEtiquetas.Close;
+  SQL_listarEtiquetas.Open;
+  Sql_EtiquetasPrint.Close;
+  Sql_EtiquetasPrint.Open;
+
+
+
+end;
 
 procedure TF_etiquetas.btn_apagar_cad_prodClick(Sender: TObject);
 begin
@@ -115,6 +176,11 @@ begin
 
 end;
 
+procedure TF_etiquetas.btn_cancelaretiquetaClick(Sender: TObject);
+begin
+  procedureEtiquetasApagar;
+end;
+
 procedure TF_etiquetas.btn_cancelar_cad_prodClick(Sender: TObject);
 begin
   dm.TB_produtos.Cancel;
@@ -124,9 +190,36 @@ begin
 end;
 
 procedure TF_etiquetas.btn_gerar_etiquetaClick(Sender: TObject);
+
+var i: Integer;
+
 begin
   //selecionar produto para lançar
 
+  if edt_etiquetaQtd.Value <1 then
+  begin
+    ShowMessage('Digite a quantidade de Etiquetas!');
+    edt_etiquetaQtd.SetFocus;
+    Exit
+  end;
+
+
+  TB_gerarEtiquetas.Active := True;
+
+  for i  := StrToInt(edt_etiquetaQtd.Text) downto 1 do
+    begin
+      TB_gerarEtiquetas.Insert;
+      TB_gerarEtiquetaseti_produto.Value := dm.SQL_produtospro_id.Value;
+      TB_gerarEtiquetas.Post;
+
+    end;
+
+   ShowMessage('Foram geradas '+ edt_etiquetaQtd.Text + ' Etiquetas!');
+
+   SQL_listarEtiquetas.Close;
+   SQL_listarEtiquetas.Open;
+   Sql_EtiquetasPrint.Close;
+   Sql_EtiquetasPrint.Open;
 
 end;
 
@@ -190,6 +283,8 @@ end;
 
 procedure TF_etiquetas.FormCreate(Sender: TObject);
 begin
+   procedureEtiquetasApagar;
+
   //dm.SQL_produtos.Open;
    dm.TB_produtos.Active:=True;
    page_produtos.ActivePage := tab_consultar;
@@ -202,6 +297,29 @@ begin
   dm.SQL_produtos.Open;
   page_produtos.ActivePage := tab_consultar;
 
+end;
+
+procedure TF_etiquetas.btn_imprimirEtiquetaClick(Sender: TObject);
+begin
+  Report_etiquetasPrinter.PrintReport;
+end;
+
+procedure TF_etiquetas.btn_removeretiquetaClick(Sender: TObject);
+begin
+   with SQL_etiquetasApagar do
+  begin
+    Close;
+    sql.Clear;
+    SQL.Add('delete from etiquetas');
+    SQL.Add('where eti_produto = :produto');
+    ParamByName('produto').Value := SQL_listarEtiquetaspro_id.Value;
+    ExecSQL;
+  end;
+
+  SQL_listarEtiquetas.Close;
+  SQL_listarEtiquetas.Open;
+  Sql_EtiquetasPrint.Close;
+  Sql_EtiquetasPrint.Open;
 end;
 
 procedure TF_etiquetas.img_buscarprodutosClick(Sender: TObject);
