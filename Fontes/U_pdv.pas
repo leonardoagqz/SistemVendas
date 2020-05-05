@@ -784,6 +784,7 @@ end;
 
 procedure TF_PDV.FormCreate(Sender: TObject);
 begin
+  SQL_listar_pedidos_dbglançamento.Close;
   ProcedureBloqueiacampos;
   dm.SQL_formapag.Active:=True;
 end;
@@ -974,7 +975,7 @@ begin
 
  ProcedureAtualizaDBGridLançamentos;
 
-   if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
+   {if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
    begin
      ShowMessage('Não existe itens no pedido!');
      Exit;
@@ -988,7 +989,7 @@ begin
       SQL.Add('where iten_pedido = :pedido');
       ParamByName('pedido').Value := codigo_venda;
       ExecSQL;
-    end;
+    end; }
 
     with SQL_cancela_venda do
     begin
@@ -1007,7 +1008,10 @@ begin
       ProcedureBloqueiacampos;
       edt_cli_nome_pdv.SetFocus;
       edt_cli_nome_pdv.SelectAll;
-
+      edt_cli_nome_pdv.Clear;
+      edt_total_pdv.Clear;
+      edt_total_prazo_pdv.Clear;
+      lkcbox_formapag_pdv.LookupDisplay := '';
 
 end;
 

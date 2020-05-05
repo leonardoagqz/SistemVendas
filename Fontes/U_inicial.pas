@@ -20,7 +20,6 @@ type
     Caixa1: TMenuItem;
     MVendas1: TMenuItem;
     N1: TMenuItem;
-    N2: TMenuItem;
     VendasRelatrio1: TMenuItem;
     btn_clientes: TSpeedButton;
     btn_produtos: TSpeedButton;
@@ -32,6 +31,7 @@ type
     GerarParcelas1: TMenuItem;
     BaixarParcelas1: TMenuItem;
     GerarEtiquetas1: TMenuItem;
+    SpeedButton1: TSpeedButton;
     procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);
@@ -43,6 +43,8 @@ type
     procedure GerarParcelas1Click(Sender: TObject);
     procedure BaixarParcelas1Click(Sender: TObject);
     procedure GerarEtiquetas1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure VendasRelatrio1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,7 +58,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas, U_vendasConsultas;
 
 //clique do botao clientes
 procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
@@ -162,6 +164,19 @@ begin
       F_PDV.Show;
    end;
 
+end;
+
+procedure TF_inicial.SpeedButton1Click(Sender: TObject);
+begin
+  GerarEtiquetas1.Click;
+end;
+
+procedure TF_inicial.VendasRelatrio1Click(Sender: TObject);
+begin
+  if F_vendasConsulta = nil then
+
+  F_vendasConsulta := TF_vendasConsulta.Create(self);
+  F_vendasConsulta.ShowModal;
 end;
 
 end.

@@ -14,7 +14,8 @@ uses
   U_lancamentos in 'Fontes\U_lancamentos.pas' {F_lancamento},
   U_GerarParcelas in 'Fontes\U_GerarParcelas.pas' {F_gerarparcelas},
   U_BaixarParcelas in 'Fontes\U_BaixarParcelas.pas' {F_baixarparcelas},
-  U_Etiquetas in 'Fontes\U_Etiquetas.pas' {F_etiquetas};
+  U_Etiquetas in 'Fontes\U_Etiquetas.pas' {F_etiquetas},
+  U_vendasConsultas in 'Fontes\U_vendasConsultas.pas' {F_vendasConsulta};
 
 {$R *.res}
 

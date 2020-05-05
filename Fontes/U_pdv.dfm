@@ -839,7 +839,7 @@
         Width = 167
         Height = 21
         DropDownCount = 8
-        LookupField = 'forma_id'
+        LookupField = 'forma_nome'
         LookupDisplay = 'forma_nome'
         LookupSource = dm.ds_formapag
         TabOrder = 0
@@ -1173,7 +1173,6 @@
     Top = 232
   end
   object SQL_listar_pedidos_dbglançamento: TFDQuery
-    Active = True
     OnCalcFields = SQL_listar_pedidos_dbglançamentoCalcFields
     Connection = dm.conexao
     SQL.Strings = (

@@ -115,7 +115,6 @@ object F_baixarparcelas: TF_baixarparcelas
         Expanded = False
         FieldName = 'ped_faturado'
         Title.Caption = 'Faturado'
-        Width = 64
         Visible = True
       end
       item
@@ -128,13 +127,11 @@ object F_baixarparcelas: TF_baixarparcelas
       item
         Expanded = False
         FieldName = 'ped_subtotal'
-        Width = 64
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'ped_subtotalprazo'
-        Width = 64
         Visible = True
       end>
   end

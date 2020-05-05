@@ -146,7 +146,7 @@ begin
   begin
     Close;
     sql.Clear;
-    SQL.Add('delete from etiquetas');
+    SQL.Add('truncate table etiquetas'); //deleta todos os itens eti_id volta para 1
     ExecSQL;
   end;
 
