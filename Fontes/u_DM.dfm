@@ -1,7 +1,7 @@
 object dm: Tdm
   OldCreateOrder = False
-  Height = 461
-  Width = 527
+  Height = 556
+  Width = 701
   object conexao: TFDConnection
     Params.Strings = (
       'Database=aguiarsvendasbd'
@@ -302,14 +302,14 @@ object dm: Tdm
     DataSource = F_PDV.ds_pedidos
     UserName = 'DB_Recibo_Pedido'
     Left = 48
-    Top = 248
+    Top = 376
     object ppDB_Recibo_PedidoppField1: TppField
       Alignment = taRightJustify
       FieldAlias = 'ped_id'
       FieldName = 'ped_id'
       FieldLength = 0
       DataType = dtLongint
-      DisplayWidth = 10
+      DisplayWidth = 0
       Position = 0
     end
     object ppDB_Recibo_PedidoppField2: TppField
@@ -697,8 +697,8 @@ object dm: Tdm
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 200
-    Top = 248
+    Left = 184
+    Top = 376
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Pedido'
@@ -1417,8 +1417,8 @@ object dm: Tdm
   object ppDB_Recibo_Lancamento: TppDBPipeline
     DataSource = F_lancamento.ds_listarlancamento_relat
     UserName = 'DB_Recibo_Lancamento'
-    Left = 56
-    Top = 305
+    Left = 40
+    Top = 433
     object ppDB_Recibo_LancamentoppField1: TppField
       Alignment = taRightJustify
       FieldAlias = 'ped_id'
@@ -1813,8 +1813,8 @@ object dm: Tdm
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 216
-    Top = 312
+    Left = 200
+    Top = 440
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -2601,8 +2601,8 @@ object dm: Tdm
     XLSSettings.Subject = 'Report'
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
-    Left = 400
-    Top = 312
+    Left = 384
+    Top = 440
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -3331,5 +3331,745 @@ object dm: Tdm
     end
     object ppParameterList3: TppParameterList
     end
+  end
+  object ppDB_relatorioVendas: TppDBPipeline
+    UserName = 'DB_relatorioVendas'
+    Left = 232
+    Top = 240
+  end
+  object report_relatorioVendas: TppReport
+    AutoStop = False
+    DataPipeline = ppDB_relatorioVendas
+    PrinterSetup.BinName = 'Default'
+    PrinterSetup.DocumentName = 'Report'
+    PrinterSetup.PaperName = 'A4'
+    PrinterSetup.PrinterName = 'Default'
+    PrinterSetup.SaveDeviceSettings = False
+    PrinterSetup.mmMarginBottom = 6350
+    PrinterSetup.mmMarginLeft = 6350
+    PrinterSetup.mmMarginRight = 6350
+    PrinterSetup.mmMarginTop = 6350
+    PrinterSetup.mmPaperHeight = 297000
+    PrinterSetup.mmPaperWidth = 210000
+    PrinterSetup.PaperSize = 9
+    ArchiveFileName = '($MyDocuments)\ReportArchive.raf'
+    DeviceType = 'Screen'
+    DefaultFileDeviceType = 'PDF'
+    EmailSettings.ReportFormat = 'PDF'
+    LanguageID = 'Default'
+    OpenFile = False
+    OutlineSettings.CreateNode = True
+    OutlineSettings.CreatePageNodes = True
+    OutlineSettings.Enabled = True
+    OutlineSettings.Visible = True
+    ThumbnailSettings.Enabled = True
+    ThumbnailSettings.Visible = True
+    ThumbnailSettings.DeadSpace = 30
+    ThumbnailSettings.PageHighlight.Width = 3
+    ThumbnailSettings.ThumbnailSize = tsSmall
+    PDFSettings.EmbedFontOptions = [efUseSubset]
+    PDFSettings.EncryptSettings.AllowCopy = True
+    PDFSettings.EncryptSettings.AllowInteract = True
+    PDFSettings.EncryptSettings.AllowModify = True
+    PDFSettings.EncryptSettings.AllowPrint = True
+    PDFSettings.EncryptSettings.AllowExtract = True
+    PDFSettings.EncryptSettings.AllowAssemble = True
+    PDFSettings.EncryptSettings.AllowQualityPrint = True
+    PDFSettings.EncryptSettings.Enabled = False
+    PDFSettings.EncryptSettings.KeyLength = kl40Bit
+    PDFSettings.EncryptSettings.EncryptionType = etRC4
+    PDFSettings.FontEncoding = feAnsi
+    PDFSettings.ImageCompressionLevel = 25
+    PDFSettings.PDFAFormat = pafNone
+    PreviewFormSettings.PageBorder.mmPadding = 0
+    RTFSettings.DefaultFont.Charset = DEFAULT_CHARSET
+    RTFSettings.DefaultFont.Color = clWindowText
+    RTFSettings.DefaultFont.Height = -13
+    RTFSettings.DefaultFont.Name = 'Arial'
+    RTFSettings.DefaultFont.Style = []
+    TextFileName = '($MyDocuments)\Report.pdf'
+    TextSearchSettings.DefaultString = '<Texto a localizar>'
+    TextSearchSettings.Enabled = True
+    XLSSettings.AppName = 'ReportBuilder'
+    XLSSettings.Author = 'ReportBuilder'
+    XLSSettings.Subject = 'Report'
+    XLSSettings.Title = 'Report'
+    XLSSettings.WorksheetName = 'Report'
+    Left = 360
+    Top = 240
+    Version = '20.01'
+    mmColumnWidth = 0
+    DataPipelineName = 'ppDB_relatorioVendas'
+    object ppHeaderBand4: TppHeaderBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 13229
+      mmPrintPosition = 0
+      object ppLine13: TppLine
+        DesignLayer = ppDesignLayer4
+        UserName = 'Line13'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 2381
+        mmLeft = 529
+        mmTop = 10583
+        mmWidth = 196586
+        BandType = 0
+        LayerName = Foreground3
+      end
+      object ppLabel39: TppLabel
+        DesignLayer = ppDesignLayer4
+        UserName = 'Label39'
+        Border.mmPadding = 0
+        Caption = 'Relat'#243'rio de Vendas'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 77523
+        mmTop = 3175
+        mmWidth = 37835
+        BandType = 0
+        LayerName = Foreground3
+      end
+    end
+    object ppDetailBand4: TppDetailBand
+      Background1.Brush.Style = bsClear
+      Background2.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 20902
+      mmPrintPosition = 0
+      object ppDBText45: TppDBText
+        DesignLayer = ppDesignLayer4
+        UserName = 'DBText45'
+        Border.mmPadding = 0
+        DataField = 'pro_nome'
+        DataPipeline = ppDB_relatorioVendas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        Transparent = True
+        DataPipelineName = 'ppDB_relatorioVendas'
+        mmHeight = 4763
+        mmLeft = 1588
+        mmTop = 3708
+        mmWidth = 56886
+        BandType = 4
+        LayerName = Foreground3
+      end
+      object ppDBText46: TppDBText
+        DesignLayer = ppDesignLayer4
+        UserName = 'DBText46'
+        Border.mmPadding = 0
+        DataField = 'iten_preco'
+        DataPipeline = ppDB_relatorioVendas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'ppDB_relatorioVendas'
+        mmHeight = 4763
+        mmLeft = 60590
+        mmTop = 3708
+        mmWidth = 15346
+        BandType = 4
+        LayerName = Foreground3
+      end
+      object ppDBText47: TppDBText
+        DesignLayer = ppDesignLayer4
+        UserName = 'DBText47'
+        Border.mmPadding = 0
+        DataField = 'iten_preco_prazo'
+        DataPipeline = ppDB_relatorioVendas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        TextAlignment = taRightJustified
+        Transparent = True
+        DataPipelineName = 'ppDB_relatorioVendas'
+        mmHeight = 4763
+        mmLeft = 78846
+        mmTop = 3708
+        mmWidth = 13758
+        BandType = 4
+        LayerName = Foreground3
+      end
+      object ppDBText48: TppDBText
+        DesignLayer = ppDesignLayer4
+        UserName = 'DBText48'
+        Border.mmPadding = 0
+        DataField = 'iten_qtd'
+        DataPipeline = ppDB_relatorioVendas
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        TextAlignment = taCentered
+        Transparent = True
+        DataPipelineName = 'ppDB_relatorioVendas'
+        mmHeight = 4763
+        mmLeft = 96309
+        mmTop = 3708
+        mmWidth = 11113
+        BandType = 4
+        LayerName = Foreground3
+      end
+      object ppLine15: TppLine
+        DesignLayer = ppDesignLayer4
+        UserName = 'Line15'
+        Border.mmPadding = 0
+        Weight = 0.750000000000000000
+        mmHeight = 3969
+        mmLeft = 1058
+        mmTop = 1058
+        mmWidth = 108215
+        BandType = 4
+        LayerName = Foreground3
+      end
+    end
+    object ppFooterBand4: TppFooterBand
+      Background.Brush.Style = bsClear
+      Border.mmPadding = 0
+      mmBottomOffset = 0
+      mmHeight = 13229
+      mmPrintPosition = 0
+    end
+    object ppGroup1: TppGroup
+      BreakName = 'ped_codigo'
+      DataPipeline = ppDB_relatorioVendas
+      GroupFileSettings.NewFile = False
+      GroupFileSettings.EmailFile = False
+      KeepTogether = True
+      OutlineSettings.CreateNode = True
+      StartOnOddPage = False
+      UserName = 'Group1'
+      mmNewColumnThreshold = 0
+      mmNewPageThreshold = 0
+      DataPipelineName = 'ppDB_relatorioVendas'
+      NewFile = False
+      object ppGroupHeaderBand1: TppGroupHeaderBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        mmBottomOffset = 0
+        mmHeight = 20373
+        mmPrintPosition = 0
+        object ppLabel40: TppLabel
+          DesignLayer = ppDesignLayer4
+          UserName = 'Label40'
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Data'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 1588
+          mmTop = 5298
+          mmWidth = 11377
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppDBText41: TppDBText
+          DesignLayer = ppDesignLayer4
+          UserName = 'DBText41'
+          Border.mmPadding = 0
+          DataField = 'ped_date'
+          DataPipeline = ppDB_relatorioVendas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDB_relatorioVendas'
+          mmHeight = 4763
+          mmLeft = 13229
+          mmTop = 5298
+          mmWidth = 24342
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppLabel50: TppLabel
+          DesignLayer = ppDesignLayer4
+          UserName = 'Label50'
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'C'#243'digo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 38894
+          mmTop = 5298
+          mmWidth = 15346
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppDBText42: TppDBText
+          DesignLayer = ppDesignLayer4
+          UserName = 'DBText42'
+          Border.mmPadding = 0
+          DataField = 'ped_codigo'
+          DataPipeline = ppDB_relatorioVendas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDB_relatorioVendas'
+          mmHeight = 4763
+          mmLeft = 55033
+          mmTop = 5298
+          mmWidth = 31750
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppLabel51: TppLabel
+          DesignLayer = ppDesignLayer4
+          UserName = 'Label51'
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Forma Pag'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 88636
+          mmTop = 5298
+          mmWidth = 24342
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppDBText43: TppDBText
+          DesignLayer = ppDesignLayer4
+          UserName = 'DBText43'
+          Border.mmPadding = 0
+          DataField = 'forma_nome'
+          DataPipeline = ppDB_relatorioVendas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDB_relatorioVendas'
+          mmHeight = 4763
+          mmLeft = 114829
+          mmTop = 5298
+          mmWidth = 24077
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppLabel52: TppLabel
+          DesignLayer = ppDesignLayer4
+          UserName = 'Label52'
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Cliente'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 1588
+          mmTop = 11116
+          mmWidth = 17727
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppDBText44: TppDBText
+          DesignLayer = ppDesignLayer4
+          UserName = 'DBText44'
+          Border.mmPadding = 0
+          DataField = 'cli_nome'
+          DataPipeline = ppDB_relatorioVendas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDB_relatorioVendas'
+          mmHeight = 4763
+          mmLeft = 20638
+          mmTop = 11116
+          mmWidth = 76200
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppLine14: TppLine
+          DesignLayer = ppDesignLayer4
+          UserName = 'Line14'
+          Border.mmPadding = 0
+          Weight = 0.750000000000000000
+          mmHeight = 3969
+          mmLeft = 529
+          mmTop = 2649
+          mmWidth = 196586
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppLabel53: TppLabel
+          DesignLayer = ppDesignLayer4
+          UserName = 'Label53'
+          AutoSize = False
+          Border.mmPadding = 0
+          Caption = 'Vendedor'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+          FormFieldSettings.FormFieldType = fftNone
+          Transparent = True
+          mmHeight = 4763
+          mmLeft = 99219
+          mmTop = 11113
+          mmWidth = 21696
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+        object ppDBText49: TppDBText
+          DesignLayer = ppDesignLayer4
+          UserName = 'DBText49'
+          Border.mmPadding = 0
+          DataField = 'user_nome'
+          DataPipeline = ppDB_relatorioVendas
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Name = 'Arial'
+          Font.Size = 12
+          Font.Style = []
+          Transparent = True
+          DataPipelineName = 'ppDB_relatorioVendas'
+          mmHeight = 4763
+          mmLeft = 121709
+          mmTop = 11113
+          mmWidth = 27252
+          BandType = 3
+          GroupNo = 0
+          LayerName = Foreground3
+        end
+      end
+      object ppGroupFooterBand1: TppGroupFooterBand
+        Background.Brush.Style = bsClear
+        Border.mmPadding = 0
+        HideWhenOneDetail = False
+        mmBottomOffset = 0
+        mmHeight = 8467
+        mmPrintPosition = 0
+      end
+    end
+    object ppDesignLayers4: TppDesignLayers
+      object ppDesignLayer4: TppDesignLayer
+        UserName = 'Foreground3'
+        LayerType = ltBanded
+        Index = 0
+      end
+    end
+    object ppParameterList4: TppParameterList
+    end
+  end
+  object SQL_relatoriovendas: TFDQuery
+    OnCalcFields = SQL_relatoriovendasCalcFields
+    Connection = conexao
+    SQL.Strings = (
+      
+        'select * from pedidos d, itens i, produtos p, clientes c, forma_' +
+        'pagamento f, usuarios u '
+      
+        ' where c.cli_id = d.ped_cliente and i.iten_pedido = d.ped_codigo' +
+        ' and d.ped_forma_pag = f.forma_id'
+      '  and i.iten_produto = p.pro_id and d.ped_usuario = u.user_id'
+      '')
+    Left = 32
+    Top = 240
+    object SQL_relatoriovendasped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object SQL_relatoriovendasped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object SQL_relatoriovendasped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object SQL_relatoriovendasped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object SQL_relatoriovendasped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object SQL_relatoriovendasped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object SQL_relatoriovendasped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object SQL_relatoriovendasped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object SQL_relatoriovendasped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
+    end
+    object SQL_relatoriovendasiten_id: TFDAutoIncField
+      FieldName = 'iten_id'
+      Origin = 'iten_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasiten_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_produto'
+      Origin = 'iten_produto'
+    end
+    object SQL_relatoriovendasiten_qtd: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_qtd'
+      Origin = 'iten_qtd'
+    end
+    object SQL_relatoriovendasiten_pedido: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_pedido'
+      Origin = 'iten_pedido'
+      Size = 50
+    end
+    object SQL_relatoriovendasiten_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco'
+      Origin = 'iten_preco'
+    end
+    object SQL_relatoriovendasiten_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco_prazo'
+      Origin = 'iten_preco_prazo'
+    end
+    object SQL_relatoriovendaspro_id: TFDAutoIncField
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendaspro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      Size = 100
+    end
+    object SQL_relatoriovendaspro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      Size = 100
+    end
+    object SQL_relatoriovendaspro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      Size = 100
+    end
+    object SQL_relatoriovendaspro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+    end
+    object SQL_relatoriovendaspro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+    end
+    object SQL_relatoriovendaspro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+    end
+    object SQL_relatoriovendaspro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+    end
+    object SQL_relatoriovendascli_id: TFDAutoIncField
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendascli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      Size = 100
+    end
+    object SQL_relatoriovendascli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      Size = 100
+    end
+    object SQL_relatoriovendascli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+    end
+    object SQL_relatoriovendascli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      Size = 50
+    end
+    object SQL_relatoriovendascli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      Size = 50
+    end
+    object SQL_relatoriovendascli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+    end
+    object SQL_relatoriovendascli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+    end
+    object SQL_relatoriovendascli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+    end
+    object SQL_relatoriovendascli_cnpj_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
+    end
+    object SQL_relatoriovendascli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      Size = 50
+    end
+    object SQL_relatoriovendascli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+    end
+    object SQL_relatoriovendasforma_id: TFDAutoIncField
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      Size = 40
+    end
+    object SQL_relatoriovendasuser_id: TFDAutoIncField
+      FieldName = 'user_id'
+      Origin = 'user_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasuser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      Size = 100
+    end
+    object SQL_relatoriovendasuser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      Size = 100
+    end
+    object SQL_relatoriovendasuser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      Size = 100
+    end
+    object SQL_relatoriovendassubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotal'
+      Calculated = True
+    end
+    object SQL_relatoriovendassubTotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotalPrazo'
+      Calculated = True
+    end
+  end
+  object ds_relatoriovendas: TDataSource
+    DataSet = SQL_relatoriovendas
+    Left = 112
+    Top = 240
   end
 end
