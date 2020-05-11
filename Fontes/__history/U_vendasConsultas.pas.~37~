@@ -138,92 +138,136 @@ type
     TB_faturarpedidoped_subtotalprazo: TFloatField;
     btn_gerarRelatorio: TBitBtn;
     ppDB_Recibo_Pedido: TppDBPipeline;
-    report_RelatorioVendas: TppReport;
-    ppHeaderBand3: TppHeaderBand;
-    ppLabel33: TppLabel;
-    ppLabel34: TppLabel;
-    ppLabel35: TppLabel;
-    ppLabel36: TppLabel;
-    ppLabel37: TppLabel;
-    ppLabel38: TppLabel;
-    ppLine9: TppLine;
-    ppLine10: TppLine;
-    ppLabel41: TppLabel;
-    ppDBText20: TppDBText;
-    ppLabel42: TppLabel;
-    ppDBText21: TppDBText;
-    ppLabel43: TppLabel;
-    ppDBText22: TppDBText;
-    ppDBText23: TppDBText;
-    ppDBText24: TppDBText;
-    ppDBText25: TppDBText;
-    ppLabel47: TppLabel;
-    ppLabel48: TppLabel;
-    ppLabel49: TppLabel;
-    ppLine11: TppLine;
-    ppDBText35: TppDBText;
-    ppDetailBand3: TppDetailBand;
-    ppDBText31: TppDBText;
-    ppDBText32: TppDBText;
-    ppDBText33: TppDBText;
-    ppDBText34: TppDBText;
-    ppDBText36: TppDBText;
-    ppDBText40: TppDBText;
-    ppFooterBand3: TppFooterBand;
-    ppSummaryBand3: TppSummaryBand;
-    ppLine12: TppLine;
-    ppLabel44: TppLabel;
-    ppLabel45: TppLabel;
-    ppLabel46: TppLabel;
-    ppDBText37: TppDBText;
-    ppDBText38: TppDBText;
-    ppDBText39: TppDBText;
-    ppDesignLayers3: TppDesignLayers;
-    ppDesignLayer3: TppDesignLayer;
-    ppParameterList3: TppParameterList;
     Report_reciboPedido: TppReport;
-    ppHeaderBand2: TppHeaderBand;
+    ppHeaderBand1: TppHeaderBand;
+    ppLabel1: TppLabel;
+    ppLabel2: TppLabel;
+    ppLabel3: TppLabel;
+    ppLabel4: TppLabel;
+    ppLabel5: TppLabel;
+    ppLabel6: TppLabel;
+    ppLine1: TppLine;
+    ppLine2: TppLine;
+    ppLabel7: TppLabel;
+    ppDBText1: TppDBText;
+    ppLabel8: TppLabel;
+    ppDBText2: TppDBText;
+    ppLabel9: TppLabel;
+    ppDBText3: TppDBText;
+    ppDBText4: TppDBText;
+    ppDBText5: TppDBText;
+    ppDBText6: TppDBText;
+    ppLabel10: TppLabel;
+    ppLabel11: TppLabel;
+    ppLabel12: TppLabel;
+    ppLine3: TppLine;
+    ppDBText7: TppDBText;
+    ppDetailBand1: TppDetailBand;
+    ppDBText8: TppDBText;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
+    ppDBText11: TppDBText;
+    ppDBText12: TppDBText;
+    ppDBText13: TppDBText;
+    ppFooterBand1: TppFooterBand;
+    ppSummaryBand1: TppSummaryBand;
+    ppLine4: TppLine;
+    ppLabel13: TppLabel;
+    ppLabel14: TppLabel;
+    ppLabel30: TppLabel;
+    ppDBText46: TppDBText;
+    ppDBText47: TppDBText;
+    ppDBText48: TppDBText;
+    ppDesignLayers1: TppDesignLayers;
+    ppDesignLayer1: TppDesignLayer;
+    ppParameterList1: TppParameterList;
+    ppDB_relatorioVendas: TppDBPipeline;
+    reportrelatorioVendas: TppReport;
+    ppHeaderBand4: TppHeaderBand;
+    ppLabel39: TppLabel;
+    ppDetailBand4: TppDetailBand;
+    ppDBText45: TppDBText;
+    ppDBText14: TppDBText;
+    ppDBText15: TppDBText;
+    ppDBText16: TppDBText;
+    ppFooterBand4: TppFooterBand;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppLabel40: TppLabel;
+    ppDBText41: TppDBText;
+    ppLabel50: TppLabel;
+    ppDBText42: TppDBText;
+    ppLabel51: TppLabel;
+    ppDBText43: TppDBText;
+    ppLabel52: TppLabel;
+    ppDBText44: TppDBText;
+    ppLabel53: TppLabel;
+    ppDBText49: TppDBText;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers4: TppDesignLayers;
+    ppDesignLayer4: TppDesignLayer;
+    ppParameterList4: TppParameterList;
+    SQL_relatoriovendass: TFDQuery;
+    SQL_relatoriovendassped_id: TFDAutoIncField;
+    SQL_relatoriovendassped_date: TDateField;
+    SQL_relatoriovendassped_codigo: TStringField;
+    SQL_relatoriovendassped_cliente: TIntegerField;
+    SQL_relatoriovendassped_usuario: TIntegerField;
+    SQL_relatoriovendassped_forma_pag: TIntegerField;
+    SQL_relatoriovendassped_fechado: TStringField;
+    SQL_relatoriovendassped_faturado: TStringField;
+    SQL_relatoriovendassped_subtotal: TFloatField;
+    SQL_relatoriovendassped_subtotalprazo: TFloatField;
+    SQL_relatoriovendassiten_id: TFDAutoIncField;
+    SQL_relatoriovendassiten_produto: TIntegerField;
+    SQL_relatoriovendassiten_qtd: TIntegerField;
+    SQL_relatoriovendassiten_pedido: TStringField;
+    SQL_relatoriovendassiten_preco: TFloatField;
+    SQL_relatoriovendassiten_preco_prazo: TFloatField;
+    SQL_relatoriovendasspro_id: TFDAutoIncField;
+    SQL_relatoriovendasspro_nome: TStringField;
+    SQL_relatoriovendasspro_barra: TStringField;
+    SQL_relatoriovendasspro_ref: TStringField;
+    SQL_relatoriovendasspro_custo: TFloatField;
+    SQL_relatoriovendasspro_preco: TFloatField;
+    SQL_relatoriovendasspro_preco_prazo: TFloatField;
+    SQL_relatoriovendasspro_estoque: TIntegerField;
+    SQL_relatoriovendasscli_id: TFDAutoIncField;
+    SQL_relatoriovendasscli_nome: TStringField;
+    SQL_relatoriovendasscli_endereco: TStringField;
+    SQL_relatoriovendasscli_numero: TStringField;
+    SQL_relatoriovendasscli_bairro: TStringField;
+    SQL_relatoriovendasscli_cidade: TStringField;
+    SQL_relatoriovendasscli_fone: TStringField;
+    SQL_relatoriovendasscli_celular: TStringField;
+    SQL_relatoriovendasscli_rg: TStringField;
+    SQL_relatoriovendasscli_cnpj_cpf: TStringField;
+    SQL_relatoriovendasscli_profissao: TStringField;
+    SQL_relatoriovendasscli_data_nasc: TDateField;
+    SQL_relatoriovendassforma_id: TFDAutoIncField;
+    SQL_relatoriovendassforma_nome: TStringField;
+    SQL_relatoriovendassuser_id: TFDAutoIncField;
+    SQL_relatoriovendassuser_nome: TStringField;
+    SQL_relatoriovendassuser_nome_completo: TStringField;
+    SQL_relatoriovendassuser_senha: TStringField;
+    SQL_relatoriovendasssubTotal: TFloatField;
+    SQL_relatoriovendasssubTotalPrazo: TFloatField;
+    ds_relatoriovendass: TDataSource;
+    ppDBText17: TppDBText;
+    ppDBText18: TppDBText;
     ppLabel15: TppLabel;
+    ppLine15: TppLine;
     ppLabel16: TppLabel;
     ppLabel17: TppLabel;
     ppLabel18: TppLabel;
     ppLabel19: TppLabel;
     ppLabel20: TppLabel;
-    ppLine5: TppLine;
-    ppLine6: TppLine;
+    ppShape1: TppShape;
+    ppShape2: TppShape;
     ppLabel21: TppLabel;
-    ppDBText14: TppDBText;
-    ppLabel22: TppLabel;
-    ppDBText15: TppDBText;
-    ppLabel23: TppLabel;
-    ppDBText16: TppDBText;
-    ppDBText17: TppDBText;
-    ppDBText18: TppDBText;
-    ppDBText19: TppDBText;
-    ppLabel24: TppLabel;
-    ppLabel25: TppLabel;
-    ppLabel26: TppLabel;
-    ppLine7: TppLine;
-    ppDBText26: TppDBText;
-    ppDetailBand2: TppDetailBand;
-    ppDBText27: TppDBText;
-    ppDBText28: TppDBText;
-    ppDBText29: TppDBText;
-    ppDBText30: TppDBText;
-    ppDBText41: TppDBText;
-    ppDBText42: TppDBText;
-    ppFooterBand2: TppFooterBand;
-    ppSummaryBand2: TppSummaryBand;
-    ppLine8: TppLine;
-    ppLabel27: TppLabel;
-    ppLabel28: TppLabel;
-    ppLabel29: TppLabel;
-    ppDBText43: TppDBText;
-    ppDBText44: TppDBText;
-    ppDBText45: TppDBText;
-    ppDesignLayers2: TppDesignLayers;
-    ppDesignLayer2: TppDesignLayer;
-    ppParameterList2: TppParameterList;
+    ppLine5: TppLine;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -235,6 +279,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btn_fecharpedidoClick(Sender: TObject);
     procedure btn_gerarRelatorioClick(Sender: TObject);
+    procedure SQL_relatoriovendassCalcFields(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -300,6 +345,18 @@ begin
    btn_listaritensdopedido_lanc.Click;
 end;
 
+procedure TF_vendasConsulta.SQL_relatoriovendassCalcFields(DataSet: TDataSet);
+begin
+  // soma do subtotal
+  SQL_relatoriovendasssubTotal.Value :=
+  SQL_relatoriovendassiten_preco.Value * SQL_relatoriovendassiten_qtd.Value;
+
+  // soma do subtotalprazo
+
+   SQL_relatoriovendasssubTotalPrazo.Value :=
+  SQL_relatoriovendassiten_preco_prazo.Value * SQL_relatoriovendassiten_qtd.Value;
+end;
+
 procedure TF_vendasConsulta.btn_gerarRelatorioClick(Sender: TObject);
 begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
@@ -315,7 +372,7 @@ begin
    Open;
    end;
 
-  report_RelatorioVendas.PrintReport;
+  reportrelatorioVendas.PrintReport;
 end;
 
 procedure TF_vendasConsulta.btn_imprimereciboClick(Sender: TObject);
@@ -397,16 +454,24 @@ begin
   if SQL_ListarLancamentos.RecordCount = 0 then
     begin
       ShowMessage('Não existem pedidos!');
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
     end;
+
 
   //sql que gera o relatório
 
-  dm.SQL_relatoriovendas.Close;
-  dm.SQL_relatoriovendas.SQL.Clear;
-  dm.SQL_relatoriovendas.SQL.Add ('select * from view_listar_pedidos');
-  dm.SQL_relatoriovendas.SQL.Add('where ped_faturado = "SIM"');
-  dm.SQL_relatoriovendas.SQL.Add ('group by ped_codigo');
-  dm.SQL_relatoriovendas.Open;
+  SQL_relatoriovendass.Close;
+  SQL_relatoriovendass.SQL.Clear;
+  SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM"');
+  SQL_relatoriovendass.Open;
+
+
+
 
 
 end;
@@ -439,9 +504,31 @@ begin
          SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "SIM"');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
-
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
        end;
+       if SQL_ListarLancamentos.RecordCount > 0 then
+       begin
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
+       end;
+
+
+      // SQL para preparar o relatório do botão Imprimir todos
+      SQL_relatoriovendass.Close;
+      SQL_relatoriovendass.SQL.Clear;
+      SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+      SQL_relatoriovendass.SQL.Add ('where cli_nome like :nome');
+      SQL_relatoriovendass.SQL.Add ('and ped_faturado = "SIM"');
+      SQL_relatoriovendass.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
+      SQL_relatoriovendass.Open;
+
     end;
+
+
+
+
+
 end;
 
 procedure TF_vendasConsulta.edt_buscarCodVendalancKeyPress(Sender: TObject;
@@ -466,8 +553,27 @@ begin
          SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "SIM"');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
 
        end;
+       if SQL_ListarLancamentos.RecordCount > 0 then
+       begin
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
+       end;
+
+      // SQL para preparar o relatório do botão Imprimir todos
+      SQL_relatoriovendass.Close;
+      SQL_relatoriovendass.SQL.Clear;
+      SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+      SQL_relatoriovendass.SQL.Add ('where ped_codigo like :cod');
+      SQL_relatoriovendass.SQL.Add ('and ped_faturado = "SIM"');
+      SQL_relatoriovendass.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
+      SQL_relatoriovendass.Open;
+
+
+
     end;
 end;
 
@@ -479,6 +585,9 @@ end;
 procedure TF_vendasConsulta.FormCreate(Sender: TObject);
 begin
   dm.SQL_formapag.Active:=True;
+
+  btn_gerarRelatorio.Enabled := False;
+  btn_imprimerecibo.Enabled := False;
 end;
 
 end.

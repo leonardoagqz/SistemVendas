@@ -184,14 +184,12 @@ type
     ppDB_relatorioVendas: TppDBPipeline;
     reportrelatorioVendas: TppReport;
     ppHeaderBand4: TppHeaderBand;
-    ppLine13: TppLine;
     ppLabel39: TppLabel;
     ppDetailBand4: TppDetailBand;
     ppDBText45: TppDBText;
     ppDBText14: TppDBText;
     ppDBText15: TppDBText;
     ppDBText16: TppDBText;
-    ppLine15: TppLine;
     ppFooterBand4: TppFooterBand;
     ppGroup1: TppGroup;
     ppGroupHeaderBand1: TppGroupHeaderBand;
@@ -203,7 +201,6 @@ type
     ppDBText43: TppDBText;
     ppLabel52: TppLabel;
     ppDBText44: TppDBText;
-    ppLine14: TppLine;
     ppLabel53: TppLabel;
     ppDBText49: TppDBText;
     ppGroupFooterBand1: TppGroupFooterBand;
@@ -256,6 +253,23 @@ type
     SQL_relatoriovendasssubTotal: TFloatField;
     SQL_relatoriovendasssubTotalPrazo: TFloatField;
     ds_relatoriovendass: TDataSource;
+    ppDBText17: TppDBText;
+    ppDBText18: TppDBText;
+    ppLabel15: TppLabel;
+    ppLine15: TppLine;
+    ppLabel16: TppLabel;
+    ppLabel17: TppLabel;
+    ppLabel18: TppLabel;
+    ppLabel19: TppLabel;
+    ppLabel20: TppLabel;
+    ppShape1: TppShape;
+    ppShape2: TppShape;
+    ppLabel21: TppLabel;
+    ppLine5: TppLine;
+    ppDBCalc1: TppDBCalc;
+    ppDBCalc2: TppDBCalc;
+    SQL_listarlancamento_relatsubTotal: TFloatField;
+    SQL_listarlancamento_relatsubTotalPrazo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -268,6 +282,7 @@ type
     procedure btn_fecharpedidoClick(Sender: TObject);
     procedure btn_gerarRelatorioClick(Sender: TObject);
     procedure SQL_relatoriovendassCalcFields(DataSet: TDataSet);
+    procedure SQL_listarlancamento_relatCalcFields(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -333,8 +348,24 @@ begin
    btn_listaritensdopedido_lanc.Click;
 end;
 
+procedure TF_vendasConsulta.SQL_listarlancamento_relatCalcFields(
+  DataSet: TDataSet);
+begin
+     //Botão Imprimir Selecionado
+
+   // soma do subtotal
+  SQL_listarlancamento_relatsubTotal.Value :=
+  SQL_listarlancamento_relatiten_preco.Value * SQL_listarlancamento_relatiten_qtd.Value;
+
+  // soma do subtotalprazo
+
+   SQL_listarlancamento_relatsubTotalPrazo.Value :=
+  SQL_listarlancamento_relatiten_preco_prazo.Value * SQL_listarlancamento_relatiten_qtd.Value;
+end;
+
 procedure TF_vendasConsulta.SQL_relatoriovendassCalcFields(DataSet: TDataSet);
 begin
+   //Botão Imprimir Todos
   // soma do subtotal
   SQL_relatoriovendasssubTotal.Value :=
   SQL_relatoriovendassiten_preco.Value * SQL_relatoriovendassiten_qtd.Value;
@@ -442,7 +473,13 @@ begin
   if SQL_ListarLancamentos.RecordCount = 0 then
     begin
       ShowMessage('Não existem pedidos!');
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
     end;
+
 
   //sql que gera o relatório
 
@@ -451,6 +488,9 @@ begin
   SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
   SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM"');
   SQL_relatoriovendass.Open;
+
+
+
 
 
 end;
@@ -483,9 +523,31 @@ begin
          SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "SIM"');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
-
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
        end;
+       if SQL_ListarLancamentos.RecordCount > 0 then
+       begin
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
+       end;
+
+
+      // SQL para preparar o relatório do botão Imprimir todos
+      SQL_relatoriovendass.Close;
+      SQL_relatoriovendass.SQL.Clear;
+      SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+      SQL_relatoriovendass.SQL.Add ('where cli_nome like :nome');
+      SQL_relatoriovendass.SQL.Add ('and ped_faturado = "SIM"');
+      SQL_relatoriovendass.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
+      SQL_relatoriovendass.Open;
+
     end;
+
+
+
+
+
 end;
 
 procedure TF_vendasConsulta.edt_buscarCodVendalancKeyPress(Sender: TObject;
@@ -510,8 +572,27 @@ begin
          SQL_ListarLancamentos.SQL.Add ('where ped_faturado = "SIM"');
          SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
          SQL_ListarLancamentos.Open;
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
 
        end;
+       if SQL_ListarLancamentos.RecordCount > 0 then
+       begin
+         btn_gerarRelatorio.Enabled := True;
+         btn_imprimerecibo.Enabled := True;
+       end;
+
+      // SQL para preparar o relatório do botão Imprimir todos
+      SQL_relatoriovendass.Close;
+      SQL_relatoriovendass.SQL.Clear;
+      SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+      SQL_relatoriovendass.SQL.Add ('where ped_codigo like :cod');
+      SQL_relatoriovendass.SQL.Add ('and ped_faturado = "SIM"');
+      SQL_relatoriovendass.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
+      SQL_relatoriovendass.Open;
+
+
+
     end;
 end;
 
@@ -523,6 +604,9 @@ end;
 procedure TF_vendasConsulta.FormCreate(Sender: TObject);
 begin
   dm.SQL_formapag.Active:=True;
+
+  btn_gerarRelatorio.Enabled := False;
+  btn_imprimerecibo.Enabled := False;
 end;
 
 end.
