@@ -1191,7 +1191,7 @@
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object SQL_listar_pedidos_dbglançamentoped_date: TDateField
+    object SQL_listar_pedidos_dbglançamentoped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -1507,7 +1507,7 @@
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object TB_pedidosped_date: TDateField
+    object TB_pedidosped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'

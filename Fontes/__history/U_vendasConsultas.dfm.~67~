@@ -315,6 +315,20 @@ object F_vendasConsulta: TF_vendasConsulta
       Height = 13
       Caption = 'Buscar Cod. Venda'
     end
+    object Label1: TLabel
+      Left = 443
+      Top = 6
+      Width = 20
+      Height = 13
+      Caption = 'De: '
+    end
+    object Label2: TLabel
+      Left = 439
+      Top = 27
+      Width = 24
+      Height = 13
+      Caption = 'At'#233': '
+    end
     object edt_buscarClientelanc: TEdit
       Left = 11
       Top = 21
@@ -341,6 +355,32 @@ object F_vendasConsulta: TF_vendasConsulta
       Caption = 'Mostrar Todos'
       TabOrder = 2
       OnClick = btn_mostrarTodoslancClick
+    end
+    object dtp_data_inicio: TDateTimePicker
+      Left = 464
+      Top = 4
+      Width = 97
+      Height = 21
+      Date = 43962.815610243060000000
+      Time = 43962.815610243060000000
+      TabOrder = 3
+    end
+    object dtp_data_fim: TDateTimePicker
+      Left = 464
+      Top = 25
+      Width = 97
+      Height = 21
+      Date = 43962.817277673610000000
+      Time = 43962.817277673610000000
+      TabOrder = 4
+    end
+    object btn_buscardata: TBitBtn
+      Left = 567
+      Top = 25
+      Width = 27
+      Height = 24
+      Caption = 'OK'
+      TabOrder = 5
     end
   end
   object lk_formapaglanc: TRxDBLookupCombo
@@ -693,10 +733,11 @@ object F_vendasConsulta: TF_vendasConsulta
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
-    Left = 664
+    Left = 680
+    Top = 16
   end
   object SQL_listarlancamento_relat: TFDQuery
-    Active = True
+    OnCalcFields = SQL_listarlancamento_relatCalcFields
     Connection = dm.conexao
     SQL.Strings = (
       
@@ -996,6 +1037,16 @@ object F_vendasConsulta: TF_vendasConsulta
       ReadOnly = True
       Size = 100
     end
+    object SQL_listarlancamento_relatsubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotal'
+      Calculated = True
+    end
+    object SQL_listarlancamento_relatsubTotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotalPrazo'
+      Calculated = True
+    end
     object SQL_listarlancamento_relatuser_senha: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'user_senha'
@@ -1015,7 +1066,8 @@ object F_vendasConsulta: TF_vendasConsulta
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 584
+    Left = 648
+    Top = 65520
     object TB_faturarpedidoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
@@ -1076,340 +1128,6 @@ object F_vendasConsulta: TF_vendasConsulta
     UserName = 'DB_Recibo_Pedido'
     Left = 632
     Top = 416
-    object ppDB_Recibo_PedidoppField1: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_id'
-      FieldName = 'ped_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 0
-      Position = 0
-    end
-    object ppDB_Recibo_PedidoppField2: TppField
-      FieldAlias = 'ped_date'
-      FieldName = 'ped_date'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 1
-    end
-    object ppDB_Recibo_PedidoppField3: TppField
-      FieldAlias = 'ped_codigo'
-      FieldName = 'ped_codigo'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 2
-    end
-    object ppDB_Recibo_PedidoppField4: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_cliente'
-      FieldName = 'ped_cliente'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 3
-    end
-    object ppDB_Recibo_PedidoppField5: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_usuario'
-      FieldName = 'ped_usuario'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 4
-    end
-    object ppDB_Recibo_PedidoppField6: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_forma_pag'
-      FieldName = 'ped_forma_pag'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 5
-    end
-    object ppDB_Recibo_PedidoppField7: TppField
-      FieldAlias = 'ped_fechado'
-      FieldName = 'ped_fechado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 6
-    end
-    object ppDB_Recibo_PedidoppField8: TppField
-      FieldAlias = 'ped_faturado'
-      FieldName = 'ped_faturado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 7
-    end
-    object ppDB_Recibo_PedidoppField9: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_subtotal'
-      FieldName = 'ped_subtotal'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 8
-    end
-    object ppDB_Recibo_PedidoppField10: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_subtotalprazo'
-      FieldName = 'ped_subtotalprazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 9
-    end
-    object ppDB_Recibo_PedidoppField11: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_id'
-      FieldName = 'iten_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 10
-    end
-    object ppDB_Recibo_PedidoppField12: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_produto'
-      FieldName = 'iten_produto'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 11
-    end
-    object ppDB_Recibo_PedidoppField13: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_qtd'
-      FieldName = 'iten_qtd'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 12
-    end
-    object ppDB_Recibo_PedidoppField14: TppField
-      FieldAlias = 'iten_pedido'
-      FieldName = 'iten_pedido'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 13
-    end
-    object ppDB_Recibo_PedidoppField15: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco'
-      FieldName = 'iten_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 14
-    end
-    object ppDB_Recibo_PedidoppField16: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco_prazo'
-      FieldName = 'iten_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 15
-    end
-    object ppDB_Recibo_PedidoppField17: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_id'
-      FieldName = 'pro_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 16
-    end
-    object ppDB_Recibo_PedidoppField18: TppField
-      FieldAlias = 'pro_nome'
-      FieldName = 'pro_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 17
-    end
-    object ppDB_Recibo_PedidoppField19: TppField
-      FieldAlias = 'pro_barra'
-      FieldName = 'pro_barra'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 18
-    end
-    object ppDB_Recibo_PedidoppField20: TppField
-      FieldAlias = 'pro_ref'
-      FieldName = 'pro_ref'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 19
-    end
-    object ppDB_Recibo_PedidoppField21: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_custo'
-      FieldName = 'pro_custo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 20
-    end
-    object ppDB_Recibo_PedidoppField22: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco'
-      FieldName = 'pro_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 21
-    end
-    object ppDB_Recibo_PedidoppField23: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco_prazo'
-      FieldName = 'pro_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 22
-    end
-    object ppDB_Recibo_PedidoppField24: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_estoque'
-      FieldName = 'pro_estoque'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 23
-    end
-    object ppDB_Recibo_PedidoppField25: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'cli_id'
-      FieldName = 'cli_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 24
-    end
-    object ppDB_Recibo_PedidoppField26: TppField
-      FieldAlias = 'cli_nome'
-      FieldName = 'cli_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 25
-    end
-    object ppDB_Recibo_PedidoppField27: TppField
-      FieldAlias = 'cli_endereco'
-      FieldName = 'cli_endereco'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 26
-    end
-    object ppDB_Recibo_PedidoppField28: TppField
-      FieldAlias = 'cli_numero'
-      FieldName = 'cli_numero'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 27
-    end
-    object ppDB_Recibo_PedidoppField29: TppField
-      FieldAlias = 'cli_bairro'
-      FieldName = 'cli_bairro'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 28
-    end
-    object ppDB_Recibo_PedidoppField30: TppField
-      FieldAlias = 'cli_cidade'
-      FieldName = 'cli_cidade'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 29
-    end
-    object ppDB_Recibo_PedidoppField31: TppField
-      FieldAlias = 'cli_fone'
-      FieldName = 'cli_fone'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 30
-    end
-    object ppDB_Recibo_PedidoppField32: TppField
-      FieldAlias = 'cli_celular'
-      FieldName = 'cli_celular'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 31
-    end
-    object ppDB_Recibo_PedidoppField33: TppField
-      FieldAlias = 'cli_rg'
-      FieldName = 'cli_rg'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 32
-    end
-    object ppDB_Recibo_PedidoppField34: TppField
-      FieldAlias = 'cli_cnpj_cpf'
-      FieldName = 'cli_cnpj_cpf'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 33
-    end
-    object ppDB_Recibo_PedidoppField35: TppField
-      FieldAlias = 'cli_profissao'
-      FieldName = 'cli_profissao'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 34
-    end
-    object ppDB_Recibo_PedidoppField36: TppField
-      FieldAlias = 'cli_data_nasc'
-      FieldName = 'cli_data_nasc'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 35
-    end
-    object ppDB_Recibo_PedidoppField37: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'forma_id'
-      FieldName = 'forma_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 36
-    end
-    object ppDB_Recibo_PedidoppField38: TppField
-      FieldAlias = 'forma_nome'
-      FieldName = 'forma_nome'
-      FieldLength = 40
-      DisplayWidth = 40
-      Position = 37
-    end
-    object ppDB_Recibo_PedidoppField39: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'user_id'
-      FieldName = 'user_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 38
-    end
-    object ppDB_Recibo_PedidoppField40: TppField
-      FieldAlias = 'user_nome'
-      FieldName = 'user_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 39
-    end
-    object ppDB_Recibo_PedidoppField41: TppField
-      FieldAlias = 'user_nome_completo'
-      FieldName = 'user_nome_completo'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 40
-    end
-    object ppDB_Recibo_PedidoppField42: TppField
-      FieldAlias = 'user_senha'
-      FieldName = 'user_senha'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 41
-    end
   end
   object Report_reciboPedido: TppReport
     AutoStop = False
@@ -1914,7 +1632,7 @@ object F_vendasConsulta: TF_vendasConsulta
       Background2.Brush.Style = bsClear
       Border.mmPadding = 0
       mmBottomOffset = 0
-      mmHeight = 11642
+      mmHeight = 9260
       mmPrintPosition = 0
       object ppDBText8: TppDBText
         DesignLayer = ppDesignLayer1
@@ -1940,7 +1658,7 @@ object F_vendasConsulta: TF_vendasConsulta
         DesignLayer = ppDesignLayer1
         UserName = 'DBText2'
         Border.mmPadding = 0
-        DataField = 'ped_subtotal'
+        DataField = 'subTotal'
         DataPipeline = ppDB_Recibo_Pedido
         DisplayFormat = ',0.00;-,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1948,11 +1666,12 @@ object F_vendasConsulta: TF_vendasConsulta
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
+        ParentDataPipeline = False
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'ppDB_Recibo_Pedido'
         mmHeight = 4763
-        mmLeft = 141817
+        mmLeft = 144727
         mmTop = 0
         mmWidth = 23019
         BandType = 4
@@ -1962,7 +1681,7 @@ object F_vendasConsulta: TF_vendasConsulta
         DesignLayer = ppDesignLayer1
         UserName = 'DBText3'
         Border.mmPadding = 0
-        DataField = 'ped_subtotalprazo'
+        DataField = 'subTotalPrazo'
         DataPipeline = ppDB_Recibo_Pedido
         DisplayFormat = ',0.00;-,0.00'
         Font.Charset = DEFAULT_CHARSET
@@ -1970,11 +1689,12 @@ object F_vendasConsulta: TF_vendasConsulta
         Font.Name = 'Arial'
         Font.Size = 12
         Font.Style = []
+        ParentDataPipeline = False
         TextAlignment = taRightJustified
         Transparent = True
         DataPipelineName = 'ppDB_Recibo_Pedido'
         mmHeight = 4763
-        mmLeft = 166952
+        mmLeft = 167157
         mmTop = 0
         mmWidth = 25665
         BandType = 4
@@ -2038,27 +1758,6 @@ object F_vendasConsulta: TF_vendasConsulta
         mmLeft = 83079
         mmTop = 0
         mmWidth = 39688
-        BandType = 4
-        LayerName = BandLayer4
-      end
-      object ppDBText19: TppDBText
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBText5'
-        Border.mmPadding = 0
-        DataField = 'subTotal'
-        DataPipeline = ppDB_relatorioVendas
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        ParentDataPipeline = False
-        Transparent = True
-        DataPipelineName = 'ppDB_relatorioVendas'
-        mmHeight = 4763
-        mmLeft = 142082
-        mmTop = 6085
-        mmWidth = 32808
         BandType = 4
         LayerName = BandLayer4
       end
@@ -2208,69 +1907,6 @@ object F_vendasConsulta: TF_vendasConsulta
         mmLeft = 171974
         mmTop = 8731
         mmWidth = 21168
-        BandType = 7
-        LayerName = BandLayer4
-      end
-      object ppDBCalc3: TppDBCalc
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBCalc3'
-        Border.mmPadding = 0
-        DataField = 'ped_subtotal'
-        DataPipeline = ppDB_Recibo_Pedido
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
-        DataPipelineName = 'ppDB_Recibo_Pedido'
-        mmHeight = 4498
-        mmLeft = 148167
-        mmTop = 14023
-        mmWidth = 17198
-        BandType = 7
-        LayerName = BandLayer4
-      end
-      object ppDBCalc4: TppDBCalc
-        DesignLayer = ppDesignLayer1
-        UserName = 'DBCalc4'
-        Border.mmPadding = 0
-        DataField = 'ped_subtotalprazo'
-        DataPipeline = ppDB_Recibo_Pedido
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        TextAlignment = taRightJustified
-        Transparent = True
-        DataPipelineName = 'ppDB_Recibo_Pedido'
-        mmHeight = 4498
-        mmLeft = 177007
-        mmTop = 14023
-        mmWidth = 17198
-        BandType = 7
-        LayerName = BandLayer4
-      end
-      object ppLabel22: TppLabel
-        DesignLayer = ppDesignLayer1
-        UserName = 'Label8'
-        AutoSize = False
-        Border.mmPadding = 0
-        Caption = 'subTotal'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 4763
-        mmLeft = 93134
-        mmTop = 25929
-        mmWidth = 16669
         BandType = 7
         LayerName = BandLayer4
       end

@@ -10,7 +10,7 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons,
   RxLookup, ppDB, ppParameter, ppDesignLayer, ppCtrls, ppBands, ppPrnabl,
-  ppClass, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe;
+  ppClass, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, Vcl.ComCtrls;
 
 type
   TF_vendasConsulta = class(TForm)
@@ -19,7 +19,6 @@ type
     SQL_ListarLancamentos: TFDQuery;
     ds_listarlancamentos: TDataSource;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -69,7 +68,6 @@ type
     SQL_listarlancamento_relat: TFDQuery;
     ds_listarlancamento_relat: TDataSource;
     SQL_listarlancamento_relatped_id: TFDAutoIncField;
-    SQL_listarlancamento_relatped_date: TDateField;
     SQL_listarlancamento_relatped_codigo: TStringField;
     SQL_listarlancamento_relatped_cliente: TIntegerField;
     SQL_listarlancamento_relatped_usuario: TIntegerField;
@@ -127,7 +125,6 @@ type
     btn_fecharpedido: TBitBtn;
     TB_faturarpedido: TFDTable;
     TB_faturarpedidoped_id: TFDAutoIncField;
-    TB_faturarpedidoped_date: TDateField;
     TB_faturarpedidoped_codigo: TStringField;
     TB_faturarpedidoped_cliente: TIntegerField;
     TB_faturarpedidoped_usuario: TIntegerField;
@@ -209,7 +206,6 @@ type
     ppParameterList4: TppParameterList;
     SQL_relatoriovendass: TFDQuery;
     SQL_relatoriovendassped_id: TFDAutoIncField;
-    SQL_relatoriovendassped_date: TDateField;
     SQL_relatoriovendassped_codigo: TStringField;
     SQL_relatoriovendassped_cliente: TIntegerField;
     SQL_relatoriovendassped_usuario: TIntegerField;
@@ -268,8 +264,18 @@ type
     ppLine5: TppLine;
     ppDBCalc1: TppDBCalc;
     ppDBCalc2: TppDBCalc;
-    ppDBCalc3: TppDBCalc;
-    ppDBCalc4: TppDBCalc;
+    SQL_listarlancamento_relatsubTotal: TFloatField;
+    SQL_listarlancamento_relatsubTotalPrazo: TFloatField;
+    dtp_data_inicio: TDateTimePicker;
+    dtp_data_fim: TDateTimePicker;
+    btn_buscardata: TBitBtn;
+    Label1: TLabel;
+    Label2: TLabel;
+    SQL_ListarLancamentosped_date: TDateTimeField;
+    SQL_listarlancamento_relatped_date: TDateTimeField;
+    TB_faturarpedidoped_date: TDateTimeField;
+    SQL_relatoriovendassped_date: TDateTimeField;
+    edt_total_lancamento: TCurrencyEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -283,6 +289,7 @@ type
     procedure btn_gerarRelatorioClick(Sender: TObject);
     procedure SQL_relatoriovendassCalcFields(DataSet: TDataSet);
     procedure SQL_listarlancamento_relatCalcFields(DataSet: TDataSet);
+    procedure btn_buscardataClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -292,6 +299,7 @@ type
 
   public
     { Public declarations }
+    total_pedido, total_pedido_prazo : Double;
   end;
 
 var
@@ -324,45 +332,73 @@ begin
    Open;
    end;
 
-   {SQL_listarancamentos.First;
-
-   while not SQL_listarancamentos.Eof do
-   begin
-     total_vista := total_vista + F_PDV.SQL_listar_pedidos_dbglançamentosubTotal.Value;
-     total_prazo := total_prazo + F_PDV.SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
-     SQL_listarancamentos.Next;
-   end; }
-
    edt_valoravista_lancamento.Value := SQL_ListarLancamentosped_subtotal.Value;
    edt_valorprazo_lancamento.Value := SQL_ListarLancamentosped_subtotalprazo.Value;
 
-  {  with SQL_listarancamentos do
+   btn_listaritensdopedido_lanc.Click;
+
+   with SQL_lanc do
    begin
    Close;
    SQL.Clear;
-   SQL.Add('select * from view_listar_pedidos ');
+   SQL.Add('select * from view_listar_pedidos '); //
+   SQL.Add('where ped_faturado = "SIM"');
+   SQL.Add('group by ped_codigo');
    Open;
 
+   end;
 
-   end;}
-   btn_listaritensdopedido_lanc.Click;
+    total_pedido :=0;
+   total_pedido_prazo :=0;
+   while not SQL_lanc.Eof do //enquanto não terminar os registros
+   begin
+   edt_total_lancamento.Text := FloatToStr(total_pedido + SQL_ListarLancamentosped_subtotal.Value);
+   //total_pedido_prazo := total_pedido_prazo + SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
+
+   SQL_ListarLancamentos.Next;
+   end;
+
+
+
+    {SQL_listar_pedidos_dbglançamento.Close;
+   SQL_listar_pedidos_dbglançamento.Open;
+
+
+   SQL_listar_pedidos_dbglançamento.First;
+   total_pedido :=0;
+   total_pedido_prazo :=0;
+   while not SQL_listar_pedidos_dbglançamento.Eof do //enquanto não terminar os registros
+   begin
+   total_pedido := total_pedido + SQL_listar_pedidos_dbglançamentosubTotal.Value;
+   total_pedido_prazo := total_pedido_prazo + SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
+
+   SQL_listar_pedidos_dbglançamento.Next;
+   end;
+
+   edt_total_pdv.Value := total_pedido;
+   edt_total_prazo_pdv.Value := total_pedido_prazo;}
+
+
 end;
 
 procedure TF_vendasConsulta.SQL_listarlancamento_relatCalcFields(
   DataSet: TDataSet);
 begin
+     //Botão Imprimir Selecionado
+
    // soma do subtotal
-  SQL_relatoriovendasssubTotal.Value :=
-  SQL_relatoriovendassiten_preco.Value * SQL_relatoriovendassiten_qtd.Value;
+  SQL_listarlancamento_relatsubTotal.Value :=
+  SQL_listarlancamento_relatiten_preco.Value * SQL_listarlancamento_relatiten_qtd.Value;
 
   // soma do subtotalprazo
 
-   SQL_relatoriovendasssubTotalPrazo.Value :=
-  SQL_relatoriovendassiten_preco_prazo.Value * SQL_relatoriovendassiten_qtd.Value;
+   SQL_listarlancamento_relatsubTotalPrazo.Value :=
+  SQL_listarlancamento_relatiten_preco_prazo.Value * SQL_listarlancamento_relatiten_qtd.Value;
 end;
 
 procedure TF_vendasConsulta.SQL_relatoriovendassCalcFields(DataSet: TDataSet);
 begin
+   //Botão Imprimir Todos
   // soma do subtotal
   SQL_relatoriovendasssubTotal.Value :=
   SQL_relatoriovendassiten_preco.Value * SQL_relatoriovendassiten_qtd.Value;
@@ -406,6 +442,45 @@ begin
    Open;
    end;
     Report_reciboPedido.PrintReport;
+end;
+
+procedure TF_vendasConsulta.btn_buscardataClick(Sender: TObject);
+begin
+   //Pesquisar por Datas
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" ');
+  SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.ParamByName('data_ini').Value := dtp_data_inicio.DateTime;
+  SQL_ListarLancamentos.ParamByName('data_fim').Value := dtp_data_fim.DateTime;
+  SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      ShowMessage('Não existem pedidos!');
+      btn_gerarRelatorio.Enabled := False;
+      btn_imprimerecibo.Enabled := False;
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
+    end;
+
+
+  //sql que gera o relatório
+
+  SQL_relatoriovendass.Close;
+  SQL_relatoriovendass.SQL.Clear;
+  SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM"');
+  SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
+  SQL_relatoriovendass.ParamByName('data_ini').Value := dtp_data_inicio.DateTime;
+  SQL_relatoriovendass.ParamByName('data_fim').Value := dtp_data_fim.DateTime;
+  SQL_relatoriovendass.Open;
 end;
 
 procedure TF_vendasConsulta.btn_fecharpedidoClick(Sender: TObject);
@@ -600,6 +675,9 @@ end;
 
 procedure TF_vendasConsulta.FormCreate(Sender: TObject);
 begin
+   dtp_data_inicio.Date := Date;
+   dtp_data_fim.Date    := Date;
+
   dm.SQL_formapag.Active:=True;
 
   btn_gerarRelatorio.Enabled := False;

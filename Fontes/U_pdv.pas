@@ -62,7 +62,6 @@ type
     btn_venda_sair_pdv: TBitBtn;
     SQL_listar_pedidos_dbglançamento: TFDQuery;
     SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField;
-    SQL_listar_pedidos_dbglançamentoped_date: TDateField;
     SQL_listar_pedidos_dbglançamentoped_codigo: TStringField;
     SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField;
     SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField;
@@ -89,7 +88,6 @@ type
     ds_pedidos2: TDataSource;
     TB_pedidos: TFDTable;
     TB_pedidosped_id: TFDAutoIncField;
-    TB_pedidosped_date: TDateField;
     TB_pedidosped_codigo: TStringField;
     TB_pedidosped_cliente: TIntegerField;
     TB_pedidosped_usuario: TIntegerField;
@@ -123,6 +121,8 @@ type
     SQL_listar_pedidos_dbglançamentouser_senha: TStringField;
     TB_pedidosped_subtotal: TFloatField;
     TB_pedidosped_subtotalprazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentoped_date: TDateTimeField;
+    TB_pedidosped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);

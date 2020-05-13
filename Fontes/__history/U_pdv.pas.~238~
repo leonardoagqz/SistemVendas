@@ -62,7 +62,6 @@ type
     btn_venda_sair_pdv: TBitBtn;
     SQL_listar_pedidos_dbglançamento: TFDQuery;
     SQL_listar_pedidos_dbglançamentoped_id: TFDAutoIncField;
-    SQL_listar_pedidos_dbglançamentoped_date: TDateField;
     SQL_listar_pedidos_dbglançamentoped_codigo: TStringField;
     SQL_listar_pedidos_dbglançamentoped_cliente: TIntegerField;
     SQL_listar_pedidos_dbglançamentoped_usuario: TIntegerField;
@@ -121,6 +120,9 @@ type
     SQL_listar_pedidos_dbglançamentouser_nome: TStringField;
     SQL_listar_pedidos_dbglançamentouser_nome_completo: TStringField;
     SQL_listar_pedidos_dbglançamentouser_senha: TStringField;
+    TB_pedidosped_subtotal: TFloatField;
+    TB_pedidosped_subtotalprazo: TFloatField;
+    SQL_listar_pedidos_dbglançamentoped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -679,16 +681,14 @@ procedure TF_PDV.edt_pro_nome_pdvKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   case Key of
-  VK_F2:
-  begin
-    F_pdv_produtos_listar := TF_pdv_produtos_listar.Create(self);
-    F_pdv_produtos_listar.ShowModal;
-    edt_pro_qtd_pdv.SetFocus;
-  end;
+    VK_F2:
+    begin
+      F_pdv_produtos_listar := TF_pdv_produtos_listar.Create(self);
+      F_pdv_produtos_listar.ShowModal;
+      edt_pro_qtd_pdv.SetFocus;
+    end;
 
   end;
-
-
 end;
 
 procedure TF_PDV.edt_pro_nome_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -784,6 +784,7 @@ end;
 
 procedure TF_PDV.FormCreate(Sender: TObject);
 begin
+  SQL_listar_pedidos_dbglançamento.Close;
   ProcedureBloqueiacampos;
   dm.SQL_formapag.Active:=True;
 end;
@@ -974,7 +975,7 @@ begin
 
  ProcedureAtualizaDBGridLançamentos;
 
-   if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
+   {if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
    begin
      ShowMessage('Não existe itens no pedido!');
      Exit;
@@ -988,7 +989,7 @@ begin
       SQL.Add('where iten_pedido = :pedido');
       ParamByName('pedido').Value := codigo_venda;
       ExecSQL;
-    end;
+    end; }
 
     with SQL_cancela_venda do
     begin
@@ -1007,7 +1008,10 @@ begin
       ProcedureBloqueiacampos;
       edt_cli_nome_pdv.SetFocus;
       edt_cli_nome_pdv.SelectAll;
-
+      edt_cli_nome_pdv.Clear;
+      edt_total_pdv.Clear;
+      edt_total_prazo_pdv.Clear;
+      lkcbox_formapag_pdv.LookupDisplay := '';
 
 end;
 
@@ -1033,6 +1037,8 @@ begin
       TB_pedidosped_fechado.AsString := 'SIM';
       TB_pedidosped_faturado.AsString:= 'NAO';
       TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+      TB_pedidosped_subtotal.AsFloat := StrToFloat(edt_total_pdv.Text);
+      TB_pedidosped_subtotalprazo.AsFloat := StrToFloat(edt_total_prazo_pdv.Text);
       TB_pedidos.Post;
       ShowMessage('Pedido Finalizado com sucesso!');
       SQL_listar_pedidos_dbglançamento.Close;
