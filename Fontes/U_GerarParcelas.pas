@@ -19,7 +19,6 @@ type
     SQL_ListarLancamentos: TFDQuery;
     ds_listarlancamentos: TDataSource;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -128,7 +127,6 @@ type
     ppDBText8: TppDBText;
     SQL_listarProdutos: TFDQuery;
     SQL_listarProdutosped_id: TFDAutoIncField;
-    SQL_listarProdutosped_date: TDateField;
     SQL_listarProdutosped_codigo: TStringField;
     SQL_listarProdutosped_cliente: TIntegerField;
     SQL_listarProdutosped_usuario: TIntegerField;
@@ -228,6 +226,8 @@ type
     ppDesignLayers3: TppDesignLayers;
     ppDesignLayer3: TppDesignLayer;
     ppParameterList3: TppParameterList;
+    SQL_listarProdutosped_date: TDateTimeField;
+    SQL_ListarLancamentosped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);

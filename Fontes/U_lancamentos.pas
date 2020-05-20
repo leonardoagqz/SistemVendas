@@ -18,7 +18,6 @@ type
     SQL_ListarLancamentos: TFDQuery;
     ds_listarlancamentos: TDataSource;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -68,7 +67,6 @@ type
     SQL_listarlancamento_relat: TFDQuery;
     ds_listarlancamento_relat: TDataSource;
     SQL_listarlancamento_relatped_id: TFDAutoIncField;
-    SQL_listarlancamento_relatped_date: TDateField;
     SQL_listarlancamento_relatped_codigo: TStringField;
     SQL_listarlancamento_relatped_cliente: TIntegerField;
     SQL_listarlancamento_relatped_usuario: TIntegerField;
@@ -126,7 +124,6 @@ type
     btn_fecharpedido: TBitBtn;
     TB_faturarpedido: TFDTable;
     TB_faturarpedidoped_id: TFDAutoIncField;
-    TB_faturarpedidoped_date: TDateField;
     TB_faturarpedidoped_codigo: TStringField;
     TB_faturarpedidoped_cliente: TIntegerField;
     TB_faturarpedidoped_usuario: TIntegerField;
@@ -135,6 +132,9 @@ type
     TB_faturarpedidoped_faturado: TStringField;
     TB_faturarpedidoped_subtotal: TFloatField;
     TB_faturarpedidoped_subtotalprazo: TFloatField;
+    SQL_ListarLancamentosped_date: TDateTimeField;
+    TB_faturarpedidoped_date: TDateTimeField;
+    SQL_listarlancamento_relatped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);

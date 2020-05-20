@@ -1,0 +1,107 @@
+unit U_login;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TF_login = class(TForm)
+    edtNome_login: TEdit;
+    edtSenha_login: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    btnEntrar_login: TBitBtn;
+    btnSair_login: TBitBtn;
+    Panel1: TPanel;
+    procedure btnEntrar_loginClick(Sender: TObject);
+    procedure btnSair_loginClick(Sender: TObject);
+    procedure edtNome_loginKeyPress(Sender: TObject; var Key: Char);
+    procedure edtSenha_loginKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  F_login: TF_login;
+
+implementation
+
+uses
+  u_DM, U_inicial;
+
+{$R *.dfm}
+
+procedure TF_login.btnEntrar_loginClick(Sender: TObject);
+begin
+  dm.SQL_usuario.Close;
+  dm.SQL_usuario.SQL.Clear;
+  dm.SQL_usuario.SQL.Add('select * from usuarios');
+  dm.SQL_usuario.SQL.Add('where user_nome = :nome and user_senha = :senha');
+  dm.SQL_usuario.ParamByName('nome').AsString := edtNome_login.Text;
+  dm.SQL_usuario.ParamByName('senha').AsString := edtSenha_login.Text;
+  dm.SQL_usuario.Open;
+  if dm.SQL_usuario.RecordCount > 0 then
+  begin
+   ShowMessage('Bem vindo');
+   F_inicial.Stb_inicial.Panels[0].Text := 'Usuário: ';
+   F_inicial.Stb_inicial.Panels[1].Text := edtNome_login.Text;
+   F_inicial.Stb_inicial.Panels[2].Text := 'Data: ';
+   F_inicial.Stb_inicial.Panels[3].Text :=' '+formatdatetime ('dddd","dd" de "mmmm" de "yyyy',now);
+   F_inicial.Stb_inicial.Panels[4].Text := 'Hora: ';
+   F_inicial.Stb_inicial.Panels[5].Text :=  ' '+formatdatetime ('hh:mm:ss',now);
+   F_login.Close;
+
+  end
+  else
+  begin
+  ShowMessage('Usuário ou Senha Incorreto!');
+
+  end;
+end;
+
+procedure TF_login.btnSair_loginClick(Sender: TObject);
+begin
+  Application.Terminate;
+end;
+
+procedure TF_login.edtNome_loginKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  edtSenha_login.SetFocus;
+end;
+
+procedure TF_login.edtSenha_loginKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  btnEntrar_login.Click;
+end;
+
+procedure TF_login.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  dm.SQL_usuario.Close;
+  dm.SQL_usuario.SQL.Clear;
+  dm.SQL_usuario.SQL.Add('select * from usuarios');
+  dm.SQL_usuario.SQL.Add('where user_nome = :nome and user_senha = :senha');
+  dm.SQL_usuario.ParamByName('nome').AsString := edtNome_login.Text;
+  dm.SQL_usuario.ParamByName('senha').AsString := edtSenha_login.Text;
+  dm.SQL_usuario.Open;
+  if dm.SQL_usuario.RecordCount > 0 then
+  begin
+
+
+  end
+  else
+  begin
+  F_login:= nil;
+   Application.Terminate;
+  {ShowMessage('Usuário ou Senha Incorreto!');
+  Action := caNone;}
+  end;
+end;
+
+end.

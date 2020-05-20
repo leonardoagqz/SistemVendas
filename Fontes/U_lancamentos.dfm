@@ -381,7 +381,7 @@ object F_lancamento: TF_lancamento
       Origin = 'ped_id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object SQL_ListarLancamentosped_date: TDateField
+    object SQL_ListarLancamentosped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -699,7 +699,7 @@ object F_lancamento: TF_lancamento
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object SQL_listarlancamento_relatped_date: TDateField
+    object SQL_listarlancamento_relatped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -1004,7 +1004,7 @@ object F_lancamento: TF_lancamento
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object TB_faturarpedidoped_date: TDateField
+    object TB_faturarpedidoped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'

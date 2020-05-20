@@ -18,16 +18,33 @@
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object lbl_nomelogin_pdv: TLabel
+    Left = 824
+    Top = 520
+    Width = 88
+    Height = 13
+    Caption = 'lbl_nomelogin_pdv'
+  end
   object stb_pdv: TStatusBar
     Left = 0
-    Top = 515
+    Top = 518
     Width = 898
-    Height = 19
-    Panels = <>
+    Height = 16
+    Panels = <
+      item
+        Width = 50
+      end
+      item
+        Width = 50
+      end
+      item
+        Width = 50
+      end>
+    ExplicitTop = 517
   end
   object pn_pdv_baixo: TPanel
     Left = 0
-    Top = 456
+    Top = 459
     Width = 898
     Height = 59
     Align = alBottom
@@ -35,6 +52,7 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
+    ExplicitTop = 456
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0

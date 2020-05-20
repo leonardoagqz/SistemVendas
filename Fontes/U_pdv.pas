@@ -123,6 +123,7 @@ type
     TB_pedidosped_subtotalprazo: TFloatField;
     SQL_listar_pedidos_dbglançamentoped_date: TDateTimeField;
     TB_pedidosped_date: TDateTimeField;
+    lbl_nomelogin_pdv: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -353,7 +354,7 @@ begin
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;
       TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
-      TB_pedidosped_usuario.Value := 1;
+      TB_pedidosped_usuario.Value := dm.SQL_usuariouser_id.Value;
       TB_pedidosped_fechado.AsString := 'NAO';
       TB_pedidosped_faturado.AsString:= 'NAO';
       TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
@@ -1033,7 +1034,7 @@ begin
       TB_pedidosped_date.Value := Date;
       TB_pedidosped_codigo.AsString := codigo_venda;
       TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
-      TB_pedidosped_usuario.Value := 1;
+      TB_pedidosped_usuario.Value := dm.SQL_usuariouser_id.Value;
       TB_pedidosped_fechado.AsString := 'SIM';
       TB_pedidosped_faturado.AsString:= 'NAO';
       TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;

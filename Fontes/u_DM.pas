@@ -271,6 +271,14 @@ type
     SQL_relatoriovendassubTotal: TFloatField;
     SQL_relatoriovendassubTotalPrazo: TFloatField;
     ds_relatoriovendas: TDataSource;
+    TB_formapag: TFDTable;
+    TB_formapagforma_id: TFDAutoIncField;
+    TB_formapagforma_nome: TStringField;
+    SQL_usuario: TFDQuery;
+    SQL_usuariouser_id: TFDAutoIncField;
+    SQL_usuariouser_nome: TStringField;
+    SQL_usuariouser_nome_completo: TStringField;
+    SQL_usuariouser_senha: TStringField;
     procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
   private
     { Private declarations }

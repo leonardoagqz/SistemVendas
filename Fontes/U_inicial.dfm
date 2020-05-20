@@ -13,6 +13,7 @@ object F_inicial: TF_inicial
   Menu = menu_principal
   OldCreateOrder = False
   Position = poDesktopCenter
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Stb_inicial: TStatusBar
@@ -20,7 +21,37 @@ object F_inicial: TF_inicial
     Top = 523
     Width = 1184
     Height = 19
-    Panels = <>
+    Panels = <
+      item
+        Width = 55
+      end
+      item
+        Width = 100
+      end
+      item
+        Width = 35
+      end
+      item
+        Width = 200
+      end
+      item
+        Width = 106
+      end
+      item
+        Width = 60
+      end
+      item
+        Width = 100
+      end
+      item
+        Width = 100
+      end
+      item
+        Width = 100
+      end
+      item
+        Width = 100
+      end>
   end
   object Panel_menu: TPanel
     Left = 0

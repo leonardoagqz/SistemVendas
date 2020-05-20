@@ -10,7 +10,8 @@ uses
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Grids, Vcl.DBGrids,
   Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.Mask, RxToolEdit, RxCurrEdit, Vcl.Buttons,
   RxLookup, ppDB, ppParameter, ppDesignLayer, ppCtrls, ppBands, ppPrnabl,
-  ppClass, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, Vcl.ComCtrls;
+  ppClass, ppCache, ppProd, ppReport, ppComm, ppRelatv, ppDBPipe, Vcl.ComCtrls,
+  Vcl.DBCtrls;
 
 type
   TF_vendasConsulta = class(TForm)
@@ -277,6 +278,8 @@ type
     SQL_relatoriovendassped_date: TDateTimeField;
     edt_total_lancamento: TCurrencyEdit;
     edt_totalPrazo_lancamento: TCurrencyEdit;
+    lkcbox_formapag_ConsultarVendas: TDBLookupComboBox;
+    Label4: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -300,7 +303,8 @@ type
 
   public
     { Public declarations }
-    total_pedido, total_pedido_prazo : Double;
+  total_pedido, total_pedido_prazo :Double;
+
   end;
 
 var
@@ -349,24 +353,6 @@ begin
 
    end;
 
-
-   //soma total dos valores avista e prazo para os Edits
-   total_pedido :=0;
-   total_pedido_prazo :=0;
-   SQL_ListarLancamentos.First;
-   while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
-   begin
-   total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
-   total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
-
-   SQL_ListarLancamentos.Next;
-   end;
-
-    edt_total_lancamento.Value := total_pedido;
-    edt_totalPrazo_lancamento.Value := total_pedido_prazo;
-
-
-
 end;
 
 procedure TF_vendasConsulta.SQL_listarlancamento_relatCalcFields(
@@ -399,7 +385,7 @@ end;
 
 procedure TF_vendasConsulta.btn_gerarRelatorioClick(Sender: TObject);
 begin
-  codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
+  {codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar o pedido em lançamentos para filtrar atual
   with SQL_listarlancamento_relat do
@@ -410,7 +396,7 @@ begin
    SQL.Add('where  ped_codigo = :codigo ');
    ParamByName('codigo').Value := codigo_venda;
    Open;
-   end;
+   end;}
 
   reportrelatorioVendas.PrintReport;
 end;
@@ -434,22 +420,91 @@ end;
 
 procedure TF_vendasConsulta.btn_buscardataClick(Sender: TObject);
 begin
-   //Pesquisar por Datas
+
+
+  SQL_listarlancamento_relat.SQL.Clear;
+
+  if lkcbox_formapag_ConsultarVendas.Text = '' then
+    begin
+      //Pesquisar por Datas
+      SQL_ListarLancamentos.Close;
+      SQL_ListarLancamentos.SQL.Clear;
+      SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+      SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" ');
+      SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+      SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
+      SQL_ListarLancamentos.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+      SQL_ListarLancamentos.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+      SQL_ListarLancamentos.Open;
+      if SQL_ListarLancamentos.RecordCount = 0 then
+      begin
+        SQL_listarlancamento_relat.SQL.Clear;
+        ShowMessage('Não existem pedidos!');
+        btn_gerarRelatorio.Enabled := False;
+        btn_imprimerecibo.Enabled := False;
+        edt_valoravista_lancamento.Clear;
+        edt_valorprazo_lancamento.Clear
+      end
+      else
+      begin
+        btn_gerarRelatorio.Enabled := True;
+        btn_imprimerecibo.Enabled := True;
+
+      end;
+
+      //sql que gera o relatório
+        SQL_relatoriovendass.Close;
+        SQL_relatoriovendass.SQL.Clear;
+        SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+        SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM"');
+        SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+        SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
+        SQL_relatoriovendass.SQL.Add ('order by ped_date desc');
+        SQL_relatoriovendass.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+        SQL_relatoriovendass.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+        SQL_relatoriovendass.Open;
+
+       //soma total dos valores avista e prazo listados para os Edits
+
+        SQL_ListarLancamentos.First;
+        total_pedido :=0;
+        total_pedido_prazo :=0;
+        while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+         begin
+           total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+           total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+           SQL_ListarLancamentos.Next;
+         end;
+
+         edt_total_lancamento.Value := total_pedido;
+         edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
+    end;
+
+    if lkcbox_formapag_ConsultarVendas.Text = 'CREDIARIO' then
+  begin
+      //Pesquisar por Datas
 
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.SQL.Clear;
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
-  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" ');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome ');
   SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
-  SQL_ListarLancamentos.ParamByName('data_ini').Value := dtp_data_inicio.DateTime;
-  SQL_ListarLancamentos.ParamByName('data_fim').Value := dtp_data_fim.DateTime;
+  SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
+  SQL_ListarLancamentos.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_ListarLancamentos.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_ListarLancamentos.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
   SQL_ListarLancamentos.Open;
   if SQL_ListarLancamentos.RecordCount = 0 then
     begin
+      SQL_listarlancamento_relat.SQL.Clear;
       ShowMessage('Não existem pedidos!');
       btn_gerarRelatorio.Enabled := False;
       btn_imprimerecibo.Enabled := False;
+      edt_valoravista_lancamento.Clear;
+      edt_valorprazo_lancamento.Clear
     end
     else
     begin
@@ -463,12 +518,291 @@ begin
   SQL_relatoriovendass.Close;
   SQL_relatoriovendass.SQL.Clear;
   SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
-  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM"');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome');
   SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
   SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
-  SQL_relatoriovendass.ParamByName('data_ini').Value := dtp_data_inicio.DateTime;
-  SQL_relatoriovendass.ParamByName('data_fim').Value := dtp_data_fim.DateTime;
+  SQL_relatoriovendass.SQL.Add ('order by ped_date desc');
+  SQL_relatoriovendass.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_relatoriovendass.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_relatoriovendass.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
   SQL_relatoriovendass.Open;
+
+  //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
+  end;
+
+  if lkcbox_formapag_ConsultarVendas.Text = 'DINHEIRO' then
+  begin
+      //Pesquisar por Datas
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome ');
+  SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
+  SQL_ListarLancamentos.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_ListarLancamentos.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_ListarLancamentos.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      SQL_listarlancamento_relat.SQL.Clear;
+      ShowMessage('Não existem pedidos!');
+      btn_gerarRelatorio.Enabled := False;
+      btn_imprimerecibo.Enabled := False;
+      edt_valoravista_lancamento.Clear;
+      edt_valorprazo_lancamento.Clear
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
+    end;
+
+
+  //sql que gera o relatório
+
+
+  SQL_relatoriovendass.Close;
+  SQL_relatoriovendass.SQL.Clear;
+  SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome');
+  SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
+  SQL_relatoriovendass.SQL.Add ('order by ped_date desc');
+  SQL_relatoriovendass.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_relatoriovendass.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_relatoriovendass.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_relatoriovendass.Open;
+
+
+  //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
+  end;
+
+    if lkcbox_formapag_ConsultarVendas.Text = 'CARTAO' then
+  begin
+      //Pesquisar por Datas
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome ');
+  SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
+  SQL_ListarLancamentos.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_ListarLancamentos.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_ListarLancamentos.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      SQL_listarlancamento_relat.SQL.Clear;
+      ShowMessage('Não existem pedidos!');
+      btn_gerarRelatorio.Enabled := False;
+      btn_imprimerecibo.Enabled := False;
+      edt_valoravista_lancamento.Clear;
+      edt_valorprazo_lancamento.Clear
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
+    end;
+
+
+  //sql que gera o relatório
+
+
+  SQL_relatoriovendass.Close;
+  SQL_relatoriovendass.SQL.Clear;
+  SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome');
+  SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
+  SQL_relatoriovendass.SQL.Add ('order by ped_date desc');
+  SQL_relatoriovendass.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_relatoriovendass.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_relatoriovendass.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_relatoriovendass.Open;
+
+
+  //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
+  end;
+
+   if lkcbox_formapag_ConsultarVendas.Text = 'CHEQUE' then
+  begin
+      //Pesquisar por Datas
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome ');
+  SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
+  SQL_ListarLancamentos.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_ListarLancamentos.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_ListarLancamentos.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      SQL_listarlancamento_relat.SQL.Clear;
+      ShowMessage('Não existem pedidos!');
+      btn_gerarRelatorio.Enabled := False;
+      btn_imprimerecibo.Enabled := False;
+      edt_valoravista_lancamento.Clear;
+      edt_valorprazo_lancamento.Clear
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
+    end;
+
+
+  //sql que gera o relatório
+
+  SQL_relatoriovendass.Close;
+  SQL_relatoriovendass.SQL.Clear;
+  SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome');
+  SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
+  SQL_relatoriovendass.SQL.Add ('order by ped_date desc');
+  SQL_relatoriovendass.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_relatoriovendass.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);;
+  SQL_relatoriovendass.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_relatoriovendass.Open;
+
+
+  //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
+  end;
+
+   if lkcbox_formapag_ConsultarVendas.Text = 'PARCELADO' then
+  begin
+      //Pesquisar por Datas
+
+  SQL_ListarLancamentos.Close;
+  SQL_ListarLancamentos.SQL.Clear;
+  SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
+  SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome ');
+  SQL_ListarLancamentos.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
+  SQL_ListarLancamentos.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_ListarLancamentos.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_ListarLancamentos.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      SQL_listarlancamento_relat.SQL.Clear;
+      ShowMessage('Não existem pedidos!');
+      btn_gerarRelatorio.Enabled := False;
+      btn_imprimerecibo.Enabled := False;
+      edt_valoravista_lancamento.Clear;
+      edt_valorprazo_lancamento.Clear
+    end
+    else
+    begin
+      btn_gerarRelatorio.Enabled := True;
+      btn_imprimerecibo.Enabled := True;
+    end;
+
+
+  //sql que gera o relatório
+
+
+  SQL_relatoriovendass.Close;
+  SQL_relatoriovendass.SQL.Clear;
+  SQL_relatoriovendass.SQL.Add ('select * from view_listar_pedidos');
+  SQL_relatoriovendass.SQL.Add('where ped_faturado = "SIM" and forma_nome = :formanome');
+  SQL_relatoriovendass.SQL.Add('and ped_date >= :data_ini and ped_date <= :data_fim');
+  SQL_relatoriovendass.SQL.Add ('group by ped_codigo');
+  SQL_relatoriovendass.SQL.Add ('order by ped_date desc');
+  SQL_relatoriovendass.ParamByName('formanome').Value := lkcbox_formapag_ConsultarVendas.Text;
+  SQL_relatoriovendass.ParamByName('data_ini').Value := FormatDateTime('yyyy-mm-dd',dtp_data_inicio.DateTime);
+  SQL_relatoriovendass.ParamByName('data_fim').Value := FormatDateTime('yyyy-mm-dd',dtp_data_fim.DateTime);
+  SQL_relatoriovendass.Open;
+
+
+  //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
+  end;
+
+
+   SQL_ListarLancamentos.First;
+
+
 end;
 
 procedure TF_vendasConsulta.btn_fecharpedidoClick(Sender: TObject);
@@ -529,6 +863,7 @@ begin
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
   SQL_ListarLancamentos.SQL.Add('where ped_faturado = "SIM"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add ('order by ped_date desc');
   SQL_ListarLancamentos.Open;
   if SQL_ListarLancamentos.RecordCount = 0 then
     begin
@@ -550,6 +885,23 @@ begin
   SQL_relatoriovendass.Open;
 
 
+  //soma total dos valores avista e prazo para os Edits
+
+  begin
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+     SQL_ListarLancamentos.First;
+   end;
 
 
 
@@ -557,8 +909,10 @@ end;
 
 procedure TF_vendasConsulta.dbg_listarlancamentosCellClick(Column: TColumn);
 begin
- procedureMostrarPedido;
-
+  if SQL_ListarLancamentos.RecordCount > 0 then
+    begin
+      procedureMostrarPedido;
+    end
 end;
 
 procedure TF_vendasConsulta.edt_buscarClientelancKeyPress(Sender: TObject;
@@ -601,6 +955,21 @@ begin
       SQL_relatoriovendass.SQL.Add ('and ped_faturado = "SIM"');
       SQL_relatoriovendass.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
       SQL_relatoriovendass.Open;
+
+      //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
 
     end;
 
@@ -651,6 +1020,21 @@ begin
       SQL_relatoriovendass.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
       SQL_relatoriovendass.Open;
 
+      //soma total dos valores avista e prazo para os Edits
+
+    SQL_ListarLancamentos.First;
+    total_pedido :=0;
+    total_pedido_prazo :=0;
+    while not SQL_ListarLancamentos.Eof do //enquanto não terminar os registros
+     begin
+       total_pedido := total_pedido + SQL_ListarLancamentosped_subtotal.Value;
+       total_pedido_prazo := total_pedido_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+       SQL_ListarLancamentos.Next;
+     end;
+
+     edt_total_lancamento.Value := total_pedido;
+     edt_totalPrazo_lancamento.Value := total_pedido_prazo;
+
 
 
     end;
@@ -666,10 +1050,13 @@ begin
    dtp_data_inicio.Date := Date;
    dtp_data_fim.Date    := Date;
 
-  dm.SQL_formapag.Active:=True;
+  //dm.SQL_formapag.Active:=True;
 
   btn_gerarRelatorio.Enabled := False;
   btn_imprimerecibo.Enabled := False;
+
+  dm.SQL_formapag.Close;
+  dm.SQL_formapag.open;
 end;
 
 end.

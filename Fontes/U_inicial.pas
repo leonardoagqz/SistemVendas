@@ -45,6 +45,7 @@ type
     procedure GerarEtiquetas1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure VendasRelatrio1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,7 +59,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas, U_vendasConsultas;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas, U_vendasConsultas, U_login;
 
 //clique do botao clientes
 procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
@@ -126,6 +127,15 @@ begin
       F_PDV := TF_PDV.Create(Self);
       F_PDV.Show;
    end;
+end;
+
+procedure TF_inicial.FormCreate(Sender: TObject);
+begin
+  //trazer a tela de login
+  F_login := TF_login.Create(Self);
+  F_login.ShowModal;
+
+
 end;
 
 procedure TF_inicial.GerarEtiquetas1Click(Sender: TObject);
