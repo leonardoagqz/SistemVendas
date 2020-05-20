@@ -135,7 +135,7 @@ begin
   F_login := TF_login.Create(Self);
   F_login.ShowModal;
 
- 
+
 end;
 
 procedure TF_inicial.GerarEtiquetas1Click(Sender: TObject);

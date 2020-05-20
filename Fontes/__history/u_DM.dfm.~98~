@@ -303,340 +303,6 @@ object dm: Tdm
     UserName = 'DB_Recibo_Pedido'
     Left = 48
     Top = 376
-    object ppDB_Recibo_PedidoppField1: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_id'
-      FieldName = 'ped_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 0
-      Position = 0
-    end
-    object ppDB_Recibo_PedidoppField2: TppField
-      FieldAlias = 'ped_date'
-      FieldName = 'ped_date'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 1
-    end
-    object ppDB_Recibo_PedidoppField3: TppField
-      FieldAlias = 'ped_codigo'
-      FieldName = 'ped_codigo'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 2
-    end
-    object ppDB_Recibo_PedidoppField4: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_cliente'
-      FieldName = 'ped_cliente'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 3
-    end
-    object ppDB_Recibo_PedidoppField5: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_usuario'
-      FieldName = 'ped_usuario'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 4
-    end
-    object ppDB_Recibo_PedidoppField6: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_forma_pag'
-      FieldName = 'ped_forma_pag'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 5
-    end
-    object ppDB_Recibo_PedidoppField7: TppField
-      FieldAlias = 'ped_fechado'
-      FieldName = 'ped_fechado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 6
-    end
-    object ppDB_Recibo_PedidoppField8: TppField
-      FieldAlias = 'ped_faturado'
-      FieldName = 'ped_faturado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 7
-    end
-    object ppDB_Recibo_PedidoppField9: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_id'
-      FieldName = 'pro_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 8
-    end
-    object ppDB_Recibo_PedidoppField10: TppField
-      FieldAlias = 'pro_nome'
-      FieldName = 'pro_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 9
-    end
-    object ppDB_Recibo_PedidoppField11: TppField
-      FieldAlias = 'pro_barra'
-      FieldName = 'pro_barra'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 10
-    end
-    object ppDB_Recibo_PedidoppField12: TppField
-      FieldAlias = 'pro_ref'
-      FieldName = 'pro_ref'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 11
-    end
-    object ppDB_Recibo_PedidoppField13: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_custo'
-      FieldName = 'pro_custo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 12
-    end
-    object ppDB_Recibo_PedidoppField14: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco'
-      FieldName = 'pro_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 13
-    end
-    object ppDB_Recibo_PedidoppField15: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco_prazo'
-      FieldName = 'pro_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 14
-    end
-    object ppDB_Recibo_PedidoppField16: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_estoque'
-      FieldName = 'pro_estoque'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 15
-    end
-    object ppDB_Recibo_PedidoppField17: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_id'
-      FieldName = 'iten_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 16
-    end
-    object ppDB_Recibo_PedidoppField18: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_produto'
-      FieldName = 'iten_produto'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 17
-    end
-    object ppDB_Recibo_PedidoppField19: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_qtd'
-      FieldName = 'iten_qtd'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 18
-    end
-    object ppDB_Recibo_PedidoppField20: TppField
-      FieldAlias = 'iten_pedido'
-      FieldName = 'iten_pedido'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 19
-    end
-    object ppDB_Recibo_PedidoppField21: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco'
-      FieldName = 'iten_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 20
-    end
-    object ppDB_Recibo_PedidoppField22: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco_prazo'
-      FieldName = 'iten_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 21
-    end
-    object ppDB_Recibo_PedidoppField23: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'subTotal'
-      FieldName = 'subTotal'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 22
-    end
-    object ppDB_Recibo_PedidoppField24: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'subTotalPrazo'
-      FieldName = 'subTotalPrazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 23
-    end
-    object ppDB_Recibo_PedidoppField25: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'cli_id'
-      FieldName = 'cli_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 24
-    end
-    object ppDB_Recibo_PedidoppField26: TppField
-      FieldAlias = 'cli_nome'
-      FieldName = 'cli_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 25
-    end
-    object ppDB_Recibo_PedidoppField27: TppField
-      FieldAlias = 'cli_endereco'
-      FieldName = 'cli_endereco'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 26
-    end
-    object ppDB_Recibo_PedidoppField28: TppField
-      FieldAlias = 'cli_numero'
-      FieldName = 'cli_numero'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 27
-    end
-    object ppDB_Recibo_PedidoppField29: TppField
-      FieldAlias = 'cli_bairro'
-      FieldName = 'cli_bairro'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 28
-    end
-    object ppDB_Recibo_PedidoppField30: TppField
-      FieldAlias = 'cli_cidade'
-      FieldName = 'cli_cidade'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 29
-    end
-    object ppDB_Recibo_PedidoppField31: TppField
-      FieldAlias = 'cli_fone'
-      FieldName = 'cli_fone'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 30
-    end
-    object ppDB_Recibo_PedidoppField32: TppField
-      FieldAlias = 'cli_celular'
-      FieldName = 'cli_celular'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 31
-    end
-    object ppDB_Recibo_PedidoppField33: TppField
-      FieldAlias = 'cli_rg'
-      FieldName = 'cli_rg'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 32
-    end
-    object ppDB_Recibo_PedidoppField34: TppField
-      FieldAlias = 'cli_cnpj_cpf'
-      FieldName = 'cli_cnpj_cpf'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 33
-    end
-    object ppDB_Recibo_PedidoppField35: TppField
-      FieldAlias = 'cli_profissao'
-      FieldName = 'cli_profissao'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 34
-    end
-    object ppDB_Recibo_PedidoppField36: TppField
-      FieldAlias = 'cli_data_nasc'
-      FieldName = 'cli_data_nasc'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 35
-    end
-    object ppDB_Recibo_PedidoppField37: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'forma_id'
-      FieldName = 'forma_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 36
-    end
-    object ppDB_Recibo_PedidoppField38: TppField
-      FieldAlias = 'forma_nome'
-      FieldName = 'forma_nome'
-      FieldLength = 40
-      DisplayWidth = 40
-      Position = 37
-    end
-    object ppDB_Recibo_PedidoppField39: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'user_id'
-      FieldName = 'user_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 38
-    end
-    object ppDB_Recibo_PedidoppField40: TppField
-      FieldAlias = 'user_nome'
-      FieldName = 'user_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 39
-    end
-    object ppDB_Recibo_PedidoppField41: TppField
-      FieldAlias = 'user_nome_completo'
-      FieldName = 'user_nome_completo'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 40
-    end
-    object ppDB_Recibo_PedidoppField42: TppField
-      FieldAlias = 'user_senha'
-      FieldName = 'user_senha'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 41
-    end
   end
   object Report_reciboPedido: TppReport
     AutoStop = False
@@ -1394,7 +1060,7 @@ object dm: Tdm
     Connection = conexao
     SQL.Strings = (
       'select * from forma_pagamento')
-    Left = 32
+    Left = 24
     Top = 178
     object SQL_formapagforma_id: TFDAutoIncField
       FieldName = 'forma_id'
@@ -1419,340 +1085,6 @@ object dm: Tdm
     UserName = 'DB_Recibo_Lancamento'
     Left = 40
     Top = 433
-    object ppDB_Recibo_LancamentoppField1: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_id'
-      FieldName = 'ped_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 0
-      Position = 0
-    end
-    object ppDB_Recibo_LancamentoppField2: TppField
-      FieldAlias = 'ped_date'
-      FieldName = 'ped_date'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 1
-    end
-    object ppDB_Recibo_LancamentoppField3: TppField
-      FieldAlias = 'ped_codigo'
-      FieldName = 'ped_codigo'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 2
-    end
-    object ppDB_Recibo_LancamentoppField4: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_cliente'
-      FieldName = 'ped_cliente'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 3
-    end
-    object ppDB_Recibo_LancamentoppField5: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_usuario'
-      FieldName = 'ped_usuario'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 4
-    end
-    object ppDB_Recibo_LancamentoppField6: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_forma_pag'
-      FieldName = 'ped_forma_pag'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 5
-    end
-    object ppDB_Recibo_LancamentoppField7: TppField
-      FieldAlias = 'ped_fechado'
-      FieldName = 'ped_fechado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 6
-    end
-    object ppDB_Recibo_LancamentoppField8: TppField
-      FieldAlias = 'ped_faturado'
-      FieldName = 'ped_faturado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 7
-    end
-    object ppDB_Recibo_LancamentoppField9: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_subtotal'
-      FieldName = 'ped_subtotal'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 8
-    end
-    object ppDB_Recibo_LancamentoppField10: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_subtotalprazo'
-      FieldName = 'ped_subtotalprazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 9
-    end
-    object ppDB_Recibo_LancamentoppField11: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_id'
-      FieldName = 'iten_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 10
-    end
-    object ppDB_Recibo_LancamentoppField12: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_produto'
-      FieldName = 'iten_produto'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 11
-    end
-    object ppDB_Recibo_LancamentoppField13: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_qtd'
-      FieldName = 'iten_qtd'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 12
-    end
-    object ppDB_Recibo_LancamentoppField14: TppField
-      FieldAlias = 'iten_pedido'
-      FieldName = 'iten_pedido'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 13
-    end
-    object ppDB_Recibo_LancamentoppField15: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco'
-      FieldName = 'iten_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 14
-    end
-    object ppDB_Recibo_LancamentoppField16: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco_prazo'
-      FieldName = 'iten_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 15
-    end
-    object ppDB_Recibo_LancamentoppField17: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_id'
-      FieldName = 'pro_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 16
-    end
-    object ppDB_Recibo_LancamentoppField18: TppField
-      FieldAlias = 'pro_nome'
-      FieldName = 'pro_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 17
-    end
-    object ppDB_Recibo_LancamentoppField19: TppField
-      FieldAlias = 'pro_barra'
-      FieldName = 'pro_barra'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 18
-    end
-    object ppDB_Recibo_LancamentoppField20: TppField
-      FieldAlias = 'pro_ref'
-      FieldName = 'pro_ref'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 19
-    end
-    object ppDB_Recibo_LancamentoppField21: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_custo'
-      FieldName = 'pro_custo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 20
-    end
-    object ppDB_Recibo_LancamentoppField22: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco'
-      FieldName = 'pro_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 21
-    end
-    object ppDB_Recibo_LancamentoppField23: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco_prazo'
-      FieldName = 'pro_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 22
-    end
-    object ppDB_Recibo_LancamentoppField24: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_estoque'
-      FieldName = 'pro_estoque'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 23
-    end
-    object ppDB_Recibo_LancamentoppField25: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'cli_id'
-      FieldName = 'cli_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 24
-    end
-    object ppDB_Recibo_LancamentoppField26: TppField
-      FieldAlias = 'cli_nome'
-      FieldName = 'cli_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 25
-    end
-    object ppDB_Recibo_LancamentoppField27: TppField
-      FieldAlias = 'cli_endereco'
-      FieldName = 'cli_endereco'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 26
-    end
-    object ppDB_Recibo_LancamentoppField28: TppField
-      FieldAlias = 'cli_numero'
-      FieldName = 'cli_numero'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 27
-    end
-    object ppDB_Recibo_LancamentoppField29: TppField
-      FieldAlias = 'cli_bairro'
-      FieldName = 'cli_bairro'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 28
-    end
-    object ppDB_Recibo_LancamentoppField30: TppField
-      FieldAlias = 'cli_cidade'
-      FieldName = 'cli_cidade'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 29
-    end
-    object ppDB_Recibo_LancamentoppField31: TppField
-      FieldAlias = 'cli_fone'
-      FieldName = 'cli_fone'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 30
-    end
-    object ppDB_Recibo_LancamentoppField32: TppField
-      FieldAlias = 'cli_celular'
-      FieldName = 'cli_celular'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 31
-    end
-    object ppDB_Recibo_LancamentoppField33: TppField
-      FieldAlias = 'cli_rg'
-      FieldName = 'cli_rg'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 32
-    end
-    object ppDB_Recibo_LancamentoppField34: TppField
-      FieldAlias = 'cli_cnpj_cpf'
-      FieldName = 'cli_cnpj_cpf'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 33
-    end
-    object ppDB_Recibo_LancamentoppField35: TppField
-      FieldAlias = 'cli_profissao'
-      FieldName = 'cli_profissao'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 34
-    end
-    object ppDB_Recibo_LancamentoppField36: TppField
-      FieldAlias = 'cli_data_nasc'
-      FieldName = 'cli_data_nasc'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 35
-    end
-    object ppDB_Recibo_LancamentoppField37: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'forma_id'
-      FieldName = 'forma_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 36
-    end
-    object ppDB_Recibo_LancamentoppField38: TppField
-      FieldAlias = 'forma_nome'
-      FieldName = 'forma_nome'
-      FieldLength = 40
-      DisplayWidth = 40
-      Position = 37
-    end
-    object ppDB_Recibo_LancamentoppField39: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'user_id'
-      FieldName = 'user_id'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 38
-    end
-    object ppDB_Recibo_LancamentoppField40: TppField
-      FieldAlias = 'user_nome'
-      FieldName = 'user_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 39
-    end
-    object ppDB_Recibo_LancamentoppField41: TppField
-      FieldAlias = 'user_nome_completo'
-      FieldName = 'user_nome_completo'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 40
-    end
-    object ppDB_Recibo_LancamentoppField42: TppField
-      FieldAlias = 'user_senha'
-      FieldName = 'user_senha'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 41
-    end
   end
   object Report_reciboPedidoLancamento1: TppReport
     AutoStop = False
@@ -3332,613 +2664,10 @@ object dm: Tdm
     object ppParameterList3: TppParameterList
     end
   end
-  object SQL_relatoriovendas: TFDQuery
-    Active = True
-    OnCalcFields = SQL_relatoriovendasCalcFields
-    Connection = conexao
-    SQL.Strings = (
-      
-        'select * from pedidos d, itens i, produtos p, clientes c, forma_' +
-        'pagamento f, usuarios u '
-      
-        ' where c.cli_id = d.ped_cliente and i.iten_pedido = d.ped_codigo' +
-        ' and d.ped_forma_pag = f.forma_id'
-      '  and i.iten_produto = p.pro_id and d.ped_usuario = u.user_id')
-    Left = 32
-    Top = 240
-    object SQL_relatoriovendasped_id: TFDAutoIncField
-      FieldName = 'ped_id'
-      Origin = 'ped_id'
-    end
-    object SQL_relatoriovendasped_date: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_date'
-      Origin = 'ped_date'
-    end
-    object SQL_relatoriovendasped_codigo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_codigo'
-      Origin = 'ped_codigo'
-      Size = 50
-    end
-    object SQL_relatoriovendasped_cliente: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_cliente'
-      Origin = 'ped_cliente'
-    end
-    object SQL_relatoriovendasped_usuario: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_usuario'
-      Origin = 'ped_usuario'
-    end
-    object SQL_relatoriovendasped_forma_pag: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_forma_pag'
-      Origin = 'ped_forma_pag'
-    end
-    object SQL_relatoriovendasped_fechado: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_fechado'
-      Origin = 'ped_fechado'
-      Size = 3
-    end
-    object SQL_relatoriovendasped_faturado: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_faturado'
-      Origin = 'ped_faturado'
-      Size = 3
-    end
-    object SQL_relatoriovendasped_subtotal: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotal'
-      Origin = 'ped_subtotal'
-    end
-    object SQL_relatoriovendasped_subtotalprazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_subtotalprazo'
-      Origin = 'ped_subtotalprazo'
-    end
-    object SQL_relatoriovendasiten_id: TFDAutoIncField
-      FieldName = 'iten_id'
-      Origin = 'iten_id'
-    end
-    object SQL_relatoriovendasiten_produto: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_produto'
-      Origin = 'iten_produto'
-    end
-    object SQL_relatoriovendasiten_qtd: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_qtd'
-      Origin = 'iten_qtd'
-    end
-    object SQL_relatoriovendasiten_pedido: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_pedido'
-      Origin = 'iten_pedido'
-      Size = 50
-    end
-    object SQL_relatoriovendasiten_preco: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_preco'
-      Origin = 'iten_preco'
-    end
-    object SQL_relatoriovendasiten_preco_prazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'iten_preco_prazo'
-      Origin = 'iten_preco_prazo'
-    end
-    object SQL_relatoriovendaspro_id: TFDAutoIncField
-      FieldName = 'pro_id'
-      Origin = 'pro_id'
-    end
-    object SQL_relatoriovendaspro_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_nome'
-      Origin = 'pro_nome'
-      Size = 100
-    end
-    object SQL_relatoriovendaspro_barra: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_barra'
-      Origin = 'pro_barra'
-      Size = 100
-    end
-    object SQL_relatoriovendaspro_ref: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_ref'
-      Origin = 'pro_ref'
-      Size = 100
-    end
-    object SQL_relatoriovendaspro_custo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_custo'
-      Origin = 'pro_custo'
-    end
-    object SQL_relatoriovendaspro_preco: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_preco'
-      Origin = 'pro_preco'
-    end
-    object SQL_relatoriovendaspro_preco_prazo: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_preco_prazo'
-      Origin = 'pro_preco_prazo'
-    end
-    object SQL_relatoriovendaspro_estoque: TIntegerField
-      AutoGenerateValue = arDefault
-      FieldName = 'pro_estoque'
-      Origin = 'pro_estoque'
-    end
-    object SQL_relatoriovendascli_id: TFDAutoIncField
-      FieldName = 'cli_id'
-      Origin = 'cli_id'
-    end
-    object SQL_relatoriovendascli_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_nome'
-      Origin = 'cli_nome'
-      Size = 100
-    end
-    object SQL_relatoriovendascli_endereco: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_endereco'
-      Origin = 'cli_endereco'
-      Size = 100
-    end
-    object SQL_relatoriovendascli_numero: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_numero'
-      Origin = 'cli_numero'
-    end
-    object SQL_relatoriovendascli_bairro: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_bairro'
-      Origin = 'cli_bairro'
-      Size = 50
-    end
-    object SQL_relatoriovendascli_cidade: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_cidade'
-      Origin = 'cli_cidade'
-      Size = 50
-    end
-    object SQL_relatoriovendascli_fone: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_fone'
-      Origin = 'cli_fone'
-    end
-    object SQL_relatoriovendascli_celular: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_celular'
-      Origin = 'cli_celular'
-    end
-    object SQL_relatoriovendascli_rg: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_rg'
-      Origin = 'cli_rg'
-    end
-    object SQL_relatoriovendascli_cnpj_cpf: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_cnpj_cpf'
-      Origin = 'cli_cnpj_cpf'
-    end
-    object SQL_relatoriovendascli_profissao: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_profissao'
-      Origin = 'cli_profissao'
-      Size = 50
-    end
-    object SQL_relatoriovendascli_data_nasc: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'cli_data_nasc'
-      Origin = 'cli_data_nasc'
-    end
-    object SQL_relatoriovendasforma_id: TFDAutoIncField
-      FieldName = 'forma_id'
-      Origin = 'forma_id'
-    end
-    object SQL_relatoriovendasforma_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'forma_nome'
-      Origin = 'forma_nome'
-      Size = 40
-    end
-    object SQL_relatoriovendasuser_id: TFDAutoIncField
-      FieldName = 'user_id'
-      Origin = 'user_id'
-    end
-    object SQL_relatoriovendasuser_nome: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_nome'
-      Origin = 'user_nome'
-      Size = 100
-    end
-    object SQL_relatoriovendasuser_nome_completo: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_nome_completo'
-      Origin = 'user_nome_completo'
-      Size = 100
-    end
-    object SQL_relatoriovendasuser_senha: TStringField
-      AutoGenerateValue = arDefault
-      FieldName = 'user_senha'
-      Origin = 'user_senha'
-      Size = 100
-    end
-    object SQL_relatoriovendassubTotal: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'subTotal'
-      Calculated = True
-    end
-    object SQL_relatoriovendassubTotalPrazo: TFloatField
-      FieldKind = fkCalculated
-      FieldName = 'subTotalPrazo'
-      Calculated = True
-    end
-  end
-  object ds_relatoriovendas: TDataSource
-    DataSet = SQL_relatoriovendas
-    Left = 112
-    Top = 240
-  end
   object ppDB_relatorioVendas: TppDBPipeline
-    DataSource = ds_relatoriovendas
     UserName = 'DB_relatorioVendas'
     Left = 232
     Top = 240
-    object ppDB_relatorioVendasppField1: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_id'
-      FieldName = 'ped_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 0
-      Position = 0
-    end
-    object ppDB_relatorioVendasppField2: TppField
-      FieldAlias = 'ped_date'
-      FieldName = 'ped_date'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 1
-    end
-    object ppDB_relatorioVendasppField3: TppField
-      FieldAlias = 'ped_codigo'
-      FieldName = 'ped_codigo'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 2
-    end
-    object ppDB_relatorioVendasppField4: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_cliente'
-      FieldName = 'ped_cliente'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 3
-    end
-    object ppDB_relatorioVendasppField5: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_usuario'
-      FieldName = 'ped_usuario'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 4
-    end
-    object ppDB_relatorioVendasppField6: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_forma_pag'
-      FieldName = 'ped_forma_pag'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 5
-    end
-    object ppDB_relatorioVendasppField7: TppField
-      FieldAlias = 'ped_fechado'
-      FieldName = 'ped_fechado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 6
-    end
-    object ppDB_relatorioVendasppField8: TppField
-      FieldAlias = 'ped_faturado'
-      FieldName = 'ped_faturado'
-      FieldLength = 3
-      DisplayWidth = 3
-      Position = 7
-    end
-    object ppDB_relatorioVendasppField9: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_subtotal'
-      FieldName = 'ped_subtotal'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 8
-    end
-    object ppDB_relatorioVendasppField10: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'ped_subtotalprazo'
-      FieldName = 'ped_subtotalprazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 9
-    end
-    object ppDB_relatorioVendasppField11: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_id'
-      FieldName = 'iten_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 10
-      Position = 10
-    end
-    object ppDB_relatorioVendasppField12: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_produto'
-      FieldName = 'iten_produto'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 11
-    end
-    object ppDB_relatorioVendasppField13: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_qtd'
-      FieldName = 'iten_qtd'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 12
-    end
-    object ppDB_relatorioVendasppField14: TppField
-      FieldAlias = 'iten_pedido'
-      FieldName = 'iten_pedido'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 13
-    end
-    object ppDB_relatorioVendasppField15: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco'
-      FieldName = 'iten_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 14
-    end
-    object ppDB_relatorioVendasppField16: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'iten_preco_prazo'
-      FieldName = 'iten_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 15
-    end
-    object ppDB_relatorioVendasppField17: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_id'
-      FieldName = 'pro_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 10
-      Position = 16
-    end
-    object ppDB_relatorioVendasppField18: TppField
-      FieldAlias = 'pro_nome'
-      FieldName = 'pro_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 17
-    end
-    object ppDB_relatorioVendasppField19: TppField
-      FieldAlias = 'pro_barra'
-      FieldName = 'pro_barra'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 18
-    end
-    object ppDB_relatorioVendasppField20: TppField
-      FieldAlias = 'pro_ref'
-      FieldName = 'pro_ref'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 19
-    end
-    object ppDB_relatorioVendasppField21: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_custo'
-      FieldName = 'pro_custo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 20
-    end
-    object ppDB_relatorioVendasppField22: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco'
-      FieldName = 'pro_preco'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 21
-    end
-    object ppDB_relatorioVendasppField23: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_preco_prazo'
-      FieldName = 'pro_preco_prazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 22
-    end
-    object ppDB_relatorioVendasppField24: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'pro_estoque'
-      FieldName = 'pro_estoque'
-      FieldLength = 0
-      DataType = dtInteger
-      DisplayWidth = 10
-      Position = 23
-    end
-    object ppDB_relatorioVendasppField25: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'cli_id'
-      FieldName = 'cli_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 10
-      Position = 24
-    end
-    object ppDB_relatorioVendasppField26: TppField
-      FieldAlias = 'cli_nome'
-      FieldName = 'cli_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 25
-    end
-    object ppDB_relatorioVendasppField27: TppField
-      FieldAlias = 'cli_endereco'
-      FieldName = 'cli_endereco'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 26
-    end
-    object ppDB_relatorioVendasppField28: TppField
-      FieldAlias = 'cli_numero'
-      FieldName = 'cli_numero'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 27
-    end
-    object ppDB_relatorioVendasppField29: TppField
-      FieldAlias = 'cli_bairro'
-      FieldName = 'cli_bairro'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 28
-    end
-    object ppDB_relatorioVendasppField30: TppField
-      FieldAlias = 'cli_cidade'
-      FieldName = 'cli_cidade'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 29
-    end
-    object ppDB_relatorioVendasppField31: TppField
-      FieldAlias = 'cli_fone'
-      FieldName = 'cli_fone'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 30
-    end
-    object ppDB_relatorioVendasppField32: TppField
-      FieldAlias = 'cli_celular'
-      FieldName = 'cli_celular'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 31
-    end
-    object ppDB_relatorioVendasppField33: TppField
-      FieldAlias = 'cli_rg'
-      FieldName = 'cli_rg'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 32
-    end
-    object ppDB_relatorioVendasppField34: TppField
-      FieldAlias = 'cli_cnpj_cpf'
-      FieldName = 'cli_cnpj_cpf'
-      FieldLength = 20
-      DisplayWidth = 20
-      Position = 33
-    end
-    object ppDB_relatorioVendasppField35: TppField
-      FieldAlias = 'cli_profissao'
-      FieldName = 'cli_profissao'
-      FieldLength = 50
-      DisplayWidth = 50
-      Position = 34
-    end
-    object ppDB_relatorioVendasppField36: TppField
-      FieldAlias = 'cli_data_nasc'
-      FieldName = 'cli_data_nasc'
-      FieldLength = 0
-      DataType = dtDate
-      DisplayWidth = 10
-      Position = 35
-    end
-    object ppDB_relatorioVendasppField37: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'forma_id'
-      FieldName = 'forma_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 10
-      Position = 36
-    end
-    object ppDB_relatorioVendasppField38: TppField
-      FieldAlias = 'forma_nome'
-      FieldName = 'forma_nome'
-      FieldLength = 40
-      DisplayWidth = 40
-      Position = 37
-    end
-    object ppDB_relatorioVendasppField39: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'user_id'
-      FieldName = 'user_id'
-      FieldLength = 0
-      DataType = dtLongint
-      DisplayWidth = 10
-      Position = 38
-    end
-    object ppDB_relatorioVendasppField40: TppField
-      FieldAlias = 'user_nome'
-      FieldName = 'user_nome'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 39
-    end
-    object ppDB_relatorioVendasppField41: TppField
-      FieldAlias = 'user_nome_completo'
-      FieldName = 'user_nome_completo'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 40
-    end
-    object ppDB_relatorioVendasppField42: TppField
-      FieldAlias = 'user_senha'
-      FieldName = 'user_senha'
-      FieldLength = 100
-      DisplayWidth = 100
-      Position = 41
-    end
-    object ppDB_relatorioVendasppField43: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'subTotal'
-      FieldName = 'subTotal'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 42
-    end
-    object ppDB_relatorioVendasppField44: TppField
-      Alignment = taRightJustify
-      FieldAlias = 'subTotalPrazo'
-      FieldName = 'subTotalPrazo'
-      FieldLength = 0
-      DataType = dtDouble
-      DisplayWidth = 10
-      Position = 43
-    end
   end
   object report_relatorioVendas: TppReport
     AutoStop = False
@@ -4417,6 +3146,313 @@ object dm: Tdm
       end
     end
     object ppParameterList4: TppParameterList
+    end
+  end
+  object SQL_relatoriovendas: TFDQuery
+    OnCalcFields = SQL_relatoriovendasCalcFields
+    Connection = conexao
+    SQL.Strings = (
+      
+        'select * from pedidos d, itens i, produtos p, clientes c, forma_' +
+        'pagamento f, usuarios u '
+      
+        ' where c.cli_id = d.ped_cliente and i.iten_pedido = d.ped_codigo' +
+        ' and d.ped_forma_pag = f.forma_id'
+      '  and i.iten_produto = p.pro_id and d.ped_usuario = u.user_id'
+      '')
+    Left = 32
+    Top = 240
+    object SQL_relatoriovendasped_id: TFDAutoIncField
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasped_date: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object SQL_relatoriovendasped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object SQL_relatoriovendasped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object SQL_relatoriovendasped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object SQL_relatoriovendasped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object SQL_relatoriovendasped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object SQL_relatoriovendasped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object SQL_relatoriovendasped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object SQL_relatoriovendasped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
+    end
+    object SQL_relatoriovendasiten_id: TFDAutoIncField
+      FieldName = 'iten_id'
+      Origin = 'iten_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasiten_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_produto'
+      Origin = 'iten_produto'
+    end
+    object SQL_relatoriovendasiten_qtd: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_qtd'
+      Origin = 'iten_qtd'
+    end
+    object SQL_relatoriovendasiten_pedido: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_pedido'
+      Origin = 'iten_pedido'
+      Size = 50
+    end
+    object SQL_relatoriovendasiten_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco'
+      Origin = 'iten_preco'
+    end
+    object SQL_relatoriovendasiten_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco_prazo'
+      Origin = 'iten_preco_prazo'
+    end
+    object SQL_relatoriovendaspro_id: TFDAutoIncField
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendaspro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      Size = 100
+    end
+    object SQL_relatoriovendaspro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      Size = 100
+    end
+    object SQL_relatoriovendaspro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      Size = 100
+    end
+    object SQL_relatoriovendaspro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+    end
+    object SQL_relatoriovendaspro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+    end
+    object SQL_relatoriovendaspro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+    end
+    object SQL_relatoriovendaspro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+    end
+    object SQL_relatoriovendascli_id: TFDAutoIncField
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendascli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      Size = 100
+    end
+    object SQL_relatoriovendascli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      Size = 100
+    end
+    object SQL_relatoriovendascli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+    end
+    object SQL_relatoriovendascli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      Size = 50
+    end
+    object SQL_relatoriovendascli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      Size = 50
+    end
+    object SQL_relatoriovendascli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+    end
+    object SQL_relatoriovendascli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+    end
+    object SQL_relatoriovendascli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+    end
+    object SQL_relatoriovendascli_cnpj_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
+    end
+    object SQL_relatoriovendascli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      Size = 50
+    end
+    object SQL_relatoriovendascli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+    end
+    object SQL_relatoriovendasforma_id: TFDAutoIncField
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      Size = 40
+    end
+    object SQL_relatoriovendasuser_id: TFDAutoIncField
+      FieldName = 'user_id'
+      Origin = 'user_id'
+      ReadOnly = True
+    end
+    object SQL_relatoriovendasuser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      Size = 100
+    end
+    object SQL_relatoriovendasuser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      Size = 100
+    end
+    object SQL_relatoriovendasuser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      Size = 100
+    end
+    object SQL_relatoriovendassubTotal: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotal'
+      Calculated = True
+    end
+    object SQL_relatoriovendassubTotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'subTotalPrazo'
+      Calculated = True
+    end
+  end
+  object ds_relatoriovendas: TDataSource
+    DataSet = SQL_relatoriovendas
+    Left = 112
+    Top = 240
+  end
+  object TB_formapag: TFDTable
+    IndexFieldNames = 'forma_id'
+    MasterSource = ds_formapag
+    Connection = conexao
+    UpdateOptions.UpdateTableName = 'aguiarsvendasbd.forma_pagamento'
+    TableName = 'aguiarsvendasbd.forma_pagamento'
+    Left = 192
+    Top = 184
+    object TB_formapagforma_id: TFDAutoIncField
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object TB_formapagforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      Size = 40
+    end
+  end
+  object SQL_usuario: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from usuarios')
+    Left = 24
+    Top = 304
+    object SQL_usuariouser_id: TFDAutoIncField
+      FieldName = 'user_id'
+      Origin = 'user_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+    end
+    object SQL_usuariouser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      Size = 100
+    end
+    object SQL_usuariouser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      Size = 100
+    end
+    object SQL_usuariouser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      Size = 100
     end
   end
 end

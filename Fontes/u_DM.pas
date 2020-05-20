@@ -279,6 +279,7 @@ type
     SQL_usuariouser_nome: TStringField;
     SQL_usuariouser_nome_completo: TStringField;
     SQL_usuariouser_senha: TStringField;
+    SQL_acesso: TFDQuery;
     procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
   private
     { Private declarations }

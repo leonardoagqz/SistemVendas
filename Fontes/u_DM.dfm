@@ -302,7 +302,7 @@ object dm: Tdm
     DataSource = F_PDV.ds_pedidos
     UserName = 'DB_Recibo_Pedido'
     Left = 48
-    Top = 376
+    Top = 424
   end
   object Report_reciboPedido: TppReport
     AutoStop = False
@@ -364,7 +364,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 184
-    Top = 376
+    Top = 424
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Pedido'
@@ -1084,7 +1084,7 @@ object dm: Tdm
     DataSource = F_lancamento.ds_listarlancamento_relat
     UserName = 'DB_Recibo_Lancamento'
     Left = 40
-    Top = 433
+    Top = 481
   end
   object Report_reciboPedidoLancamento1: TppReport
     AutoStop = False
@@ -1146,7 +1146,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 200
-    Top = 440
+    Top = 488
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -1934,7 +1934,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 384
-    Top = 440
+    Top = 488
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -3454,5 +3454,12 @@ object dm: Tdm
       Origin = 'user_senha'
       Size = 100
     end
+  end
+  object SQL_acesso: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from view_testar_permissao')
+    Left = 24
+    Top = 368
   end
 end

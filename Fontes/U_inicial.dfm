@@ -384,9 +384,11 @@ object F_inicial: TF_inicial
       end
       object Caixa1: TMenuItem
         Caption = 'Caixa'
+        OnClick = Caixa1Click
       end
       object MVendas1: TMenuItem
         Caption = 'Vendas Abertas'
+        OnClick = MVendas1Click
       end
       object N1: TMenuItem
         Caption = '-'
@@ -398,6 +400,7 @@ object F_inicial: TF_inicial
     end
     object Configuraes1: TMenuItem
       Caption = 'Configura'#231#245'es'
+      OnClick = Configuraes1Click
     end
     object Sair1: TMenuItem
       Caption = 'Sair'

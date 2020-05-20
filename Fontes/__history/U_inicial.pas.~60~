@@ -20,7 +20,6 @@ type
     Caixa1: TMenuItem;
     MVendas1: TMenuItem;
     N1: TMenuItem;
-    N2: TMenuItem;
     VendasRelatrio1: TMenuItem;
     btn_clientes: TSpeedButton;
     btn_produtos: TSpeedButton;
@@ -32,6 +31,7 @@ type
     GerarParcelas1: TMenuItem;
     BaixarParcelas1: TMenuItem;
     GerarEtiquetas1: TMenuItem;
+    SpeedButton1: TSpeedButton;
     procedure onclick_menu_clientes(Sender: TObject);
     procedure btn_clientesClick(Sender: TObject);
     procedure btn_produtosClick(Sender: TObject);
@@ -43,6 +43,11 @@ type
     procedure GerarParcelas1Click(Sender: TObject);
     procedure BaixarParcelas1Click(Sender: TObject);
     procedure GerarEtiquetas1Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure VendasRelatrio1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Caixa1Click(Sender: TObject);
+    procedure MVendas1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -56,7 +61,7 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas, U_vendasConsultas, U_login;
 
 //clique do botao clientes
 procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
@@ -93,7 +98,8 @@ end;
 
 procedure TF_inicial.onclick_menu_clientes(Sender: TObject);
 begin
-
+   if TestarPermissao('F_clientes') = false then
+   Exit;
   begin
       if F_clientes = nil then
       F_clientes := TF_clientes.Create(self);
@@ -105,6 +111,8 @@ end;
 
 procedure TF_inicial.onclick_menu_produtos(Sender: TObject);
 begin
+   if TestarPermissao('F_produtos') = false then
+   Exit;
     if F_produtos = nil then
      F_produtos := TF_produtos.Create(self);
      F_produtos.Show;
@@ -126,8 +134,25 @@ begin
    end;
 end;
 
+procedure TF_inicial.Caixa1Click(Sender: TObject);
+begin
+    if TestarPermissao('F_caixa') = false then
+   Exit;
+end;
+
+procedure TF_inicial.FormCreate(Sender: TObject);
+begin
+  //trazer a tela de login
+  F_login := TF_login.Create(Self);
+  F_login.ShowModal;
+
+
+end;
+
 procedure TF_inicial.GerarEtiquetas1Click(Sender: TObject);
 begin
+  if TestarPermissao('F_etiquetas') = false then
+   Exit;
   if F_etiquetas = nil then
     begin
       F_etiquetas := TF_etiquetas.Create(self);
@@ -146,6 +171,8 @@ end;
 
 procedure TF_inicial.Lanamentos1Click(Sender: TObject);
 begin
+   if TestarPermissao('F_lancamento') = false then
+   Exit;
   if F_lancamento = nil then
     begin
       F_lancamento := TF_lancamento.Create(self);
@@ -153,15 +180,35 @@ begin
     end;
 end;
 
+procedure TF_inicial.MVendas1Click(Sender: TObject);
+begin
+    if TestarPermissao('F_vendasabertas') = false then
+   Exit;
+end;
+
 procedure TF_inicial.onclick_menu_vendas(Sender: TObject);
 begin
-
+   if TestarPermissao('F_PDV') = false then
+   Exit;
   if F_PDV = nil then
   begin
       F_PDV := TF_PDV.Create(Self);
       F_PDV.Show;
    end;
 
+end;
+
+procedure TF_inicial.SpeedButton1Click(Sender: TObject);
+begin
+  GerarEtiquetas1.Click;
+end;
+
+procedure TF_inicial.VendasRelatrio1Click(Sender: TObject);
+begin
+  if F_vendasConsulta = nil then
+
+  F_vendasConsulta := TF_vendasConsulta.Create(self);
+  F_vendasConsulta.ShowModal;
 end;
 
 end.

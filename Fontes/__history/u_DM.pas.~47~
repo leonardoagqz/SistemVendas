@@ -196,7 +196,90 @@ type
     ppDBText35: TppDBText;
     ppDBText36: TppDBText;
     ppDBText40: TppDBText;
+    ppDB_relatorioVendas: TppDBPipeline;
+    report_relatorioVendas: TppReport;
+    ppHeaderBand4: TppHeaderBand;
+    ppLine13: TppLine;
+    ppLabel39: TppLabel;
+    ppDetailBand4: TppDetailBand;
+    ppDBText45: TppDBText;
+    ppDBText46: TppDBText;
+    ppDBText47: TppDBText;
+    ppDBText48: TppDBText;
+    ppLine15: TppLine;
+    ppFooterBand4: TppFooterBand;
+    ppGroup1: TppGroup;
+    ppGroupHeaderBand1: TppGroupHeaderBand;
+    ppLabel40: TppLabel;
+    ppDBText41: TppDBText;
+    ppLabel50: TppLabel;
+    ppDBText42: TppDBText;
+    ppLabel51: TppLabel;
+    ppDBText43: TppDBText;
+    ppLabel52: TppLabel;
+    ppDBText44: TppDBText;
+    ppLine14: TppLine;
+    ppLabel53: TppLabel;
+    ppDBText49: TppDBText;
+    ppGroupFooterBand1: TppGroupFooterBand;
+    ppDesignLayers4: TppDesignLayers;
+    ppDesignLayer4: TppDesignLayer;
+    ppParameterList4: TppParameterList;
     SQL_relatoriovendas: TFDQuery;
+    SQL_relatoriovendasped_id: TFDAutoIncField;
+    SQL_relatoriovendasped_date: TDateField;
+    SQL_relatoriovendasped_codigo: TStringField;
+    SQL_relatoriovendasped_cliente: TIntegerField;
+    SQL_relatoriovendasped_usuario: TIntegerField;
+    SQL_relatoriovendasped_forma_pag: TIntegerField;
+    SQL_relatoriovendasped_fechado: TStringField;
+    SQL_relatoriovendasped_faturado: TStringField;
+    SQL_relatoriovendasped_subtotal: TFloatField;
+    SQL_relatoriovendasped_subtotalprazo: TFloatField;
+    SQL_relatoriovendasiten_id: TFDAutoIncField;
+    SQL_relatoriovendasiten_produto: TIntegerField;
+    SQL_relatoriovendasiten_qtd: TIntegerField;
+    SQL_relatoriovendasiten_pedido: TStringField;
+    SQL_relatoriovendasiten_preco: TFloatField;
+    SQL_relatoriovendasiten_preco_prazo: TFloatField;
+    SQL_relatoriovendaspro_id: TFDAutoIncField;
+    SQL_relatoriovendaspro_nome: TStringField;
+    SQL_relatoriovendaspro_barra: TStringField;
+    SQL_relatoriovendaspro_ref: TStringField;
+    SQL_relatoriovendaspro_custo: TFloatField;
+    SQL_relatoriovendaspro_preco: TFloatField;
+    SQL_relatoriovendaspro_preco_prazo: TFloatField;
+    SQL_relatoriovendaspro_estoque: TIntegerField;
+    SQL_relatoriovendascli_id: TFDAutoIncField;
+    SQL_relatoriovendascli_nome: TStringField;
+    SQL_relatoriovendascli_endereco: TStringField;
+    SQL_relatoriovendascli_numero: TStringField;
+    SQL_relatoriovendascli_bairro: TStringField;
+    SQL_relatoriovendascli_cidade: TStringField;
+    SQL_relatoriovendascli_fone: TStringField;
+    SQL_relatoriovendascli_celular: TStringField;
+    SQL_relatoriovendascli_rg: TStringField;
+    SQL_relatoriovendascli_cnpj_cpf: TStringField;
+    SQL_relatoriovendascli_profissao: TStringField;
+    SQL_relatoriovendascli_data_nasc: TDateField;
+    SQL_relatoriovendasforma_id: TFDAutoIncField;
+    SQL_relatoriovendasforma_nome: TStringField;
+    SQL_relatoriovendasuser_id: TFDAutoIncField;
+    SQL_relatoriovendasuser_nome: TStringField;
+    SQL_relatoriovendasuser_nome_completo: TStringField;
+    SQL_relatoriovendasuser_senha: TStringField;
+    SQL_relatoriovendassubTotal: TFloatField;
+    SQL_relatoriovendassubTotalPrazo: TFloatField;
+    ds_relatoriovendas: TDataSource;
+    TB_formapag: TFDTable;
+    TB_formapagforma_id: TFDAutoIncField;
+    TB_formapagforma_nome: TStringField;
+    SQL_usuario: TFDQuery;
+    SQL_usuariouser_id: TFDAutoIncField;
+    SQL_usuariouser_nome: TStringField;
+    SQL_usuariouser_nome_completo: TStringField;
+    SQL_usuariouser_senha: TStringField;
+    procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -214,5 +297,19 @@ uses
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+procedure Tdm.SQL_relatoriovendasCalcFields(DataSet: TDataSet);
+begin
+  {// soma do subtotal
+  SQL_relatoriovendassubTotal.Value :=
+  SQL_relatoriovendasiten_preco.Value * SQL_relatoriovendasiten_qtd.Value;
+
+  // soma do subtotalprazo
+
+   SQL_relatoriovendassubTotalPrazo.Value :=
+  SQL_relatoriovendasiten_preco_prazo.Value * SQL_relatoriovendasiten_qtd.Value; }
+
+
+end;
 
 end.

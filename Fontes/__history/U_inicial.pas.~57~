@@ -45,6 +45,7 @@ type
     procedure GerarEtiquetas1Click(Sender: TObject);
     procedure SpeedButton1Click(Sender: TObject);
     procedure VendasRelatrio1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -126,6 +127,15 @@ begin
       F_PDV := TF_PDV.Create(Self);
       F_PDV.Show;
    end;
+end;
+
+procedure TF_inicial.FormCreate(Sender: TObject);
+begin
+  //trazer a tela de login
+  F_login := TF_login.Create(Self);
+  F_login.ShowModal;
+
+
 end;
 
 procedure TF_inicial.GerarEtiquetas1Click(Sender: TObject);

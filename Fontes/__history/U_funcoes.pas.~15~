@@ -26,28 +26,26 @@ begin
   dm.SQL_acesso.Close;
   dm.SQL_acesso.SQL.Clear;
   dm.SQL_acesso.SQL.Add('select * from view_testar_permissao');
-  dm.SQL_acesso.SQL.Add('where acesso_user = :user');
-  dm.SQL_acesso.SQL.Add('and forms_nome = :forms');
-  dm.SQL_acesso.ParamByName('user').AsInteger := dm.SQL_usuariouser_id.AsInteger;
-  dm.SQL_acesso.ParamByName('forms').Value := NOME_FORM;
+  dm.SQL_acesso.SQL.Add('where acesso_user = :user and forms_nome = :forms');
+  dm.SQL_acesso.ParamByName('user').AsString := dm.SQL_usuariouser_nome.AsString;
+  dm.SQL_acesso.ParamByName('forms').AsString := NOME_FORM;
   dm.SQL_acesso.Open;
+
+  if dm.SQL_acesso.RecordCount > 0 then
   begin
-    if dm.SQL_acesso.RecordCount > 0 then
-    begin
-      Result := True;
-    end
-    else
-    begin
-      Result := False;
-    end;
-     if dm.SQL_usuariouser_id.Value = 1 then
-    begin
-      Result := true;
-    end;
+
+  Result := True;
+  end
+  else
+  begin
+
+  Result := False;
   end;
 
-  if Result = False then
-  ShowMessage('Acesso Negado!');
+  if result = false then
+    begin
+      ShowMessage('Acesso Negado.');
+    end
 end;
 
     // funcao  para gerar codigo de barras ------------------------
