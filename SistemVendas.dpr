@@ -16,7 +16,8 @@ uses
   U_BaixarParcelas in 'Fontes\U_BaixarParcelas.pas' {F_baixarparcelas},
   U_Etiquetas in 'Fontes\U_Etiquetas.pas' {F_etiquetas},
   U_vendasConsultas in 'Fontes\U_vendasConsultas.pas' {F_vendasConsulta},
-  U_login in 'Fontes\U_login.pas' {F_login};
+  U_login in 'Fontes\U_login.pas' {F_login},
+  U_usuarios in 'Fontes\U_usuarios.pas' {F_usuarios};
 
 {$R *.res}
 

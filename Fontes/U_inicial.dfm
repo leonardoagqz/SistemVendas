@@ -356,6 +356,10 @@ object F_inicial: TF_inicial
         Caption = 'Clientes'
         OnClick = onclick_menu_clientes
       end
+      object Usurios1: TMenuItem
+        Caption = 'Usu'#225'rios'
+        OnClick = Usurios1Click
+      end
     end
     object Movimentos1: TMenuItem
       Caption = 'Movimentos'

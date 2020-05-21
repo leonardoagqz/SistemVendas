@@ -8,14 +8,14 @@
     <Transaction>2019/10/03 19:28:06.000.783,=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2019/12/14 18:16:53.000.040,=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2019/12/17 15:56:00.000.338,=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
-    <Transaction>2019/12/17 15:56:49.000.571,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_inicial.pas=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2019/12/17 15:56:49.000.571,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_inicial.dfm=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2019/12/17 15:56:49.000.571,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_inicial.pas=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
     <Transaction>2019/12/17 15:57:10.000.788,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\AguiarSVendas.dproj=C:\Users\Administrador\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
     <Transaction>2019/12/23 21:13:51.000.664,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
-    <Transaction>2019/12/23 21:16:30.000.073,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.dfm</Transaction>
     <Transaction>2019/12/23 21:16:30.000.073,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.pas</Transaction>
-    <Transaction>2019/12/23 21:17:36.000.093,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_clientes.pas</Transaction>
+    <Transaction>2019/12/23 21:16:30.000.073,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.dfm</Transaction>
     <Transaction>2019/12/23 21:17:36.000.093,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_clientes.dfm</Transaction>
+    <Transaction>2019/12/23 21:17:36.000.093,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_cadastrodeclientes.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_clientes.pas</Transaction>
     <Transaction>2019/12/23 21:36:21.000.793,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2019/12/23 21:36:45.000.842,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_funcoes.pas</Transaction>
     <Transaction>2019/12/23 21:50:59.000.802,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
@@ -49,16 +49,16 @@
     <Transaction>2020/04/09 14:59:36.000.251,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2020/04/09 15:00:01.000.415,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_Teste.pas</Transaction>
     <Transaction>2020/04/09 15:00:01.000.415,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_Teste.dfm</Transaction>
-    <Transaction>2020/04/09 15:01:34.000.960,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm</Transaction>
     <Transaction>2020/04/09 15:01:34.000.960,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas</Transaction>
-    <Transaction>2020/04/09 15:02:03.000.246,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm</Transaction>
-    <Transaction>2020/04/09 15:02:03.000.246,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas</Transaction>
-    <Transaction>2020/04/09 15:02:03.000.267,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas</Transaction>
+    <Transaction>2020/04/09 15:01:34.000.960,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm</Transaction>
     <Transaction>2020/04/09 15:02:03.000.267,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm</Transaction>
+    <Transaction>2020/04/09 15:02:03.000.246,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm</Transaction>
+    <Transaction>2020/04/09 15:02:03.000.267,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas</Transaction>
+    <Transaction>2020/04/09 15:02:03.000.246,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas</Transaction>
+    <Transaction>2020/04/09 15:02:11.000.242,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas</Transaction>
+    <Transaction>2020/04/09 15:02:11.000.242,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm</Transaction>
     <Transaction>2020/04/09 15:02:11.000.260,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas</Transaction>
     <Transaction>2020/04/09 15:02:11.000.260,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm</Transaction>
-    <Transaction>2020/04/09 15:02:11.000.242,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.dfm</Transaction>
-    <Transaction>2020/04/09 15:02:11.000.242,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos2.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas</Transaction>
     <Transaction>2020/04/09 15:13:24.000.499,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_lancamentos.pas</Transaction>
     <Transaction>2020/04/09 15:14:09.000.227,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_GerarParcelas.pas=</Transaction>
     <Transaction>2020/04/10 11:16:55.000.293,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
@@ -72,5 +72,8 @@
     <Transaction>2020/05/18 16:12:11.051,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2020/05/18 16:17:09.780,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_login.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
     <Transaction>2020/05/18 16:17:09.780,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_login.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.dfm</Transaction>
+    <Transaction>2020/05/20 16:56:12.693,=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
+    <Transaction>2020/05/20 16:57:21.058,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_usuarios.pas=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.pas</Transaction>
+    <Transaction>2020/05/20 16:57:21.058,C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Fontes\U_usuarios.dfm=C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SVENDAS\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>
