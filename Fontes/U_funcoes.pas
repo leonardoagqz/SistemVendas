@@ -3,22 +3,29 @@ unit U_funcoes;
 
 interface
 
-uses vcl.dialogs, system.sysutils;
+uses vcl.dialogs, system.sysutils,System.NetEncoding;
 //declara funcoes e variaveis
 
 // criad funcao TestarPermissao, com a variavel NOME_FORM do tipo STRING
 //, esperado retorno do tipo boolean
 function TestarPermissao (NOME_FORM:STRING):boolean;
 function EAN13 ():string;
-
+function MsgConfirm(aMessage: string): boolean;
 
 
 
 implementation
 
 uses
-  u_DM;
+  u_DM, Winapi.Windows,Vcl.Forms;
 //implementando as funcoes
+
+function MsgConfirm(aMessage: string): boolean;
+begin
+  Result := Application.MessageBox(PWideChar(aMessage), 'SistemVendas',
+  MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = ID_YES;
+end;
+
 
 function TestarPermissao (NOME_FORM:STRING):boolean;
 begin

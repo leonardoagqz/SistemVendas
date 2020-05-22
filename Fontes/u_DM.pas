@@ -280,7 +280,17 @@ type
     SQL_usuariouser_nome_completo: TStringField;
     SQL_usuariouser_senha: TStringField;
     SQL_acesso: TFDQuery;
+    SQL_caixa: TFDQuery;
+    SQL_caixacaixa_id: TFDAutoIncField;
+    SQL_caixacaixa_valor: TFloatField;
+    SQL_caixacaixa_data_abre: TDateField;
+    SQL_caixacaixa_data_fecha: TDateField;
+    SQL_caixacaixa_inicial: TFloatField;
+    SQL_caixacaixa_usuario: TIntegerField;
+    ds_caixa: TDataSource;
+
     procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
+    procedure CaixaVerifica;
   private
     { Private declarations }
   public
@@ -298,6 +308,25 @@ uses
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
 {$R *.dfm}
+
+// verifico o caixa
+procedure Tdm.CaixaVerifica;
+begin
+  // verifico se o caixa esta aberto para data atual e para o usuário selecionado
+
+  with SQL_caixa do
+  begin
+    close;
+    SQL.Clear;
+    SQL.Add('select * from caixa');
+    SQL.Add('where caixa_usuario = :user');
+    SQL.Add('and caixa_data_abre = :data');
+    ParamByName('user').Value := SQL_usuariouser_id.Value;
+    ParamByName('data').Value := Date;
+    Open;
+  end;
+end;
+
 
 procedure Tdm.SQL_relatoriovendasCalcFields(DataSet: TDataSet);
 begin

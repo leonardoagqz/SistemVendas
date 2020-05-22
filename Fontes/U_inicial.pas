@@ -64,15 +64,16 @@ implementation
 
 {$R *.dfm}
 
-uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas, U_vendasConsultas, U_login, U_usuarios;
+uses U_clientes, U_funcoes, U_produtos, U_pdv, u_DM, U_lancamentos, U_GerarParcelas, U_BaixarParcelas, U_Etiquetas, U_vendasConsultas, U_login, U_usuarios, U_caixa;
 
 //clique do botao clientes
 procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
 begin
-
-      if F_baixarparcelas = nil then
-      F_baixarparcelas := TF_baixarparcelas.Create(self);
-      F_baixarparcelas.Show;
+  if TestarPermissao('F_baixarparcelas') = false then
+  Exit;
+  if F_baixarparcelas = nil then
+  F_baixarparcelas := TF_baixarparcelas.Create(self);
+  F_baixarparcelas.Show;
 
 end;
 
@@ -139,14 +140,21 @@ end;
 
 procedure TF_inicial.Caixa1Click(Sender: TObject);
 begin
-    if TestarPermissao('F_caixa') = false then
-   Exit;
+  if TestarPermissao('F_caixa') = false then
+  Exit;
+  if F_caixa = nil then
+  F_caixa := TF_caixa.Create(Self);
+  F_caixa.Show;
+
 end;
 
 procedure TF_inicial.Configuraes1Click(Sender: TObject);
 begin
   if TestarPermissao('F_configuracoes') = false then
-   Exit;
+  Exit;
+  {if F_configuracoes = nil then
+  F_configuracoes := TF_configuracoes.Create(Self);
+  F_configuracoes.show;}
 end;
 
 procedure TF_inicial.FormCreate(Sender: TObject);
@@ -171,6 +179,8 @@ end;
 
 procedure TF_inicial.GerarParcelas1Click(Sender: TObject);
 begin
+ if TestarPermissao('F_gerarparcelas') = false then
+   Exit;
   if F_gerarparcelas = nil then
     begin
       F_gerarparcelas := TF_gerarparcelas.Create(self);

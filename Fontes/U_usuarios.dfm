@@ -23,14 +23,12 @@ object F_usuarios: TF_usuarios
     Top = 0
     Width = 491
     Height = 426
-    ActivePage = tb_controle
+    ActivePage = tb_cadastrar
     Align = alClient
     TabOrder = 0
     TabWidth = 200
-    ExplicitWidth = 592
     object tb_cadastrar: TTabSheet
       Caption = 'Cadastro de Usu'#225'rios'
-      ExplicitWidth = 584
       object Image1: TImage
         Left = 0
         Top = 0
@@ -202,7 +200,6 @@ object F_usuarios: TF_usuarios
     object tb_controle: TTabSheet
       Caption = 'Controle de Acesso'
       ImageIndex = 1
-      ExplicitWidth = 584
       object Image2: TImage
         Left = 0
         Top = 0
@@ -235,13 +232,44 @@ object F_usuarios: TF_usuarios
         ExplicitWidth = 105
         ExplicitHeight = 105
       end
-      object DBGrid1: TDBGrid
+      object Label6: TLabel
+        Left = 175
+        Top = 22
+        Width = 147
+        Height = 13
+        Caption = 'Selecione uma tela apra liberar'
+      end
+      object dbg_ListarUsuarios_ContAcesso: TDBGrid
         Left = 3
         Top = 80
         Width = 200
         Height = 225
         DataSource = ds_listarUsuarios
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        OnCellClick = dbg_ListarUsuarios_ContAcessoCellClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'user_nome'
+            Title.Caption = 'Usu'#225'rios'
+            Width = 150
+            Visible = True
+          end>
+      end
+      object dbg_ListarAcessos_ContAcesso: TDBGrid
+        Left = 280
+        Top = 80
+        Width = 200
+        Height = 225
+        DataSource = ds_acessosPermitidos
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+        TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -250,38 +278,39 @@ object F_usuarios: TF_usuarios
         Columns = <
           item
             Expanded = False
-            FieldName = 'user_nome'
-            Width = 150
+            FieldName = 'forms_desc'
+            Title.Caption = 'Telas Liberadas'
             Visible = True
           end>
       end
-      object DBGrid2: TDBGrid
-        Left = 280
-        Top = 80
+      object lkcTelas: TRxDBLookupCombo
+        Left = 149
+        Top = 36
         Width = 200
-        Height = 225
-        TabOrder = 1
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Tahoma'
-        TitleFont.Style = []
-      end
-      object btnLiberarTudo: TBitBtn
-        Left = 204
-        Top = 89
-        Width = 75
-        Height = 25
-        Caption = 'Liberar Tudo'
+        Height = 21
+        DropDownCount = 8
+        LookupField = 'forms_id'
+        LookupDisplay = 'forms_desc'
+        LookupSource = ds_listarTelas
         TabOrder = 2
       end
-      object btnBloquearTudo: TBitBtn
-        Left = 204
-        Top = 120
+      object btnLiberarTela: TBitBtn
+        Left = 205
+        Top = 82
         Width = 75
         Height = 25
-        Caption = 'Bloquear Tudo'
+        Caption = 'Liberar Tela'
         TabOrder = 3
+        OnClick = btnLiberarTelaClick
+      end
+      object btnRemoverTela: TBitBtn
+        Left = 205
+        Top = 113
+        Width = 75
+        Height = 25
+        Caption = 'Bloquear Tela'
+        TabOrder = 4
+        OnClick = btnRemoverTelaClick
       end
     end
   end
@@ -296,6 +325,7 @@ object F_usuarios: TF_usuarios
       FieldName = 'user_id'
       Origin = 'user_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object TB_usuariouser_nome: TStringField
       AutoGenerateValue = arDefault
@@ -322,16 +352,16 @@ object F_usuarios: TF_usuarios
     Top = 384
   end
   object SQL_listarUsuarios: TFDQuery
-    Active = True
     Connection = dm.conexao
     SQL.Strings = (
       'select * from usuarios')
-    Left = 20
-    Top = 336
+    Left = 12
+    Top = 232
     object SQL_listarUsuariosuser_id: TFDAutoIncField
       FieldName = 'user_id'
       Origin = 'user_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_listarUsuariosuser_nome: TStringField
       AutoGenerateValue = arDefault
@@ -354,11 +384,86 @@ object F_usuarios: TF_usuarios
   end
   object ds_listarUsuarios: TDataSource
     DataSet = SQL_listarUsuarios
-    Left = 94
-    Top = 339
+    Left = 14
+    Top = 291
   end
   object SQL_listarAcessosPermitidos: TFDQuery
-    Left = 364
-    Top = 320
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from view_testar_permissao')
+    Left = 420
+    Top = 248
+    object SQL_listarAcessosPermitidosacesso_id: TFDAutoIncField
+      FieldName = 'acesso_id'
+      Origin = 'acesso_id'
+      ReadOnly = True
+    end
+    object SQL_listarAcessosPermitidosacesso_user: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'acesso_user'
+      Origin = 'acesso_user'
+    end
+    object SQL_listarAcessosPermitidosacesso_tela: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'acesso_tela'
+      Origin = 'acesso_tela'
+    end
+    object SQL_listarAcessosPermitidosforms_id: TFDAutoIncField
+      FieldName = 'forms_id'
+      Origin = 'forms_id'
+      ReadOnly = True
+    end
+    object SQL_listarAcessosPermitidosforms_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forms_nome'
+      Origin = 'forms_nome'
+      Size = 30
+    end
+    object SQL_listarAcessosPermitidosforms_desc: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forms_desc'
+      Origin = 'forms_desc'
+      Size = 40
+    end
+  end
+  object ds_acessosPermitidos: TDataSource
+    DataSet = SQL_listarAcessosPermitidos
+    Left = 420
+    Top = 296
+  end
+  object SQL_listarTelas: TFDQuery
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from forms')
+    Left = 28
+    Top = 24
+    object SQL_listarTelasforms_id: TFDAutoIncField
+      FieldName = 'forms_id'
+      Origin = 'forms_id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object SQL_listarTelasforms_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forms_nome'
+      Origin = 'forms_nome'
+      Size = 30
+    end
+    object SQL_listarTelasforms_desc: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forms_desc'
+      Origin = 'forms_desc'
+      Size = 40
+    end
+  end
+  object ds_listarTelas: TDataSource
+    DataSet = SQL_listarTelas
+    Left = 100
+    Top = 32
+  end
+  object SQL_gravarTela: TFDQuery
+    Connection = dm.conexao
+    Left = 420
+    Top = 40
   end
 end
