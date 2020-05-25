@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.UI, ppComm, ppRelatv, ppDB, ppDBPipe,
   ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer, ppParameter,
-  ppProd, ppReport;
+  ppProd, ppReport,Vcl.Dialogs;
 
 type
   Tdm = class(TDataModule)
@@ -290,10 +290,12 @@ type
     ds_caixa: TDataSource;
 
     procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
-    procedure CaixaVerifica;
+
   private
     { Private declarations }
   public
+  procedure CaixaVerifica;
+  var CAIXA_ABERTO : Boolean;
     { Public declarations }
   end;
 
@@ -324,6 +326,19 @@ begin
     ParamByName('user').Value := SQL_usuariouser_id.Value;
     ParamByName('data').Value := Date;
     Open;
+
+    //verifica se o caixa esta aberto
+    if RecordCount <1 then
+    begin
+      ShowMessage('Caixa não foi aberto, precisa iniciar o caixa.');
+      CAIXA_ABERTO := False;
+    end
+    else
+    if RecordCount >0 then
+    begin
+      CAIXA_ABERTO := True;
+
+    end;
   end;
 end;
 

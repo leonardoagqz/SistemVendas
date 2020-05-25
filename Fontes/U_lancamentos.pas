@@ -359,7 +359,11 @@ end;
 
 procedure TF_lancamento.FormCreate(Sender: TObject);
 begin
+  //abrir a sql de forma de pagamento
   dm.SQL_formapag.Active:=True;
+
+ 
+
 end;
 
 end.

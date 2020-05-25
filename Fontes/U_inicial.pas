@@ -71,6 +71,14 @@ procedure TF_inicial.BaixarParcelas1Click(Sender: TObject);
 begin
   if TestarPermissao('F_baixarparcelas') = false then
   Exit;
+
+    //verifico se o caixa esta aberto
+   dm.CaixaVerifica;
+   if dm.CAIXA_ABERTO = False then
+   begin
+     Exit;
+   end;
+
   if F_baixarparcelas = nil then
   F_baixarparcelas := TF_baixarparcelas.Create(self);
   F_baixarparcelas.Show;
@@ -192,6 +200,14 @@ procedure TF_inicial.Lanamentos1Click(Sender: TObject);
 begin
    if TestarPermissao('F_lancamento') = false then
    Exit;
+
+    //verifico se o caixa esta aberto
+   dm.CaixaVerifica;
+   if dm.CAIXA_ABERTO = False then
+   begin
+     Exit;
+   end;
+
   if F_lancamento = nil then
     begin
       F_lancamento := TF_lancamento.Create(self);

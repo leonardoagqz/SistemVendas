@@ -179,6 +179,7 @@ begin
   if lkcTelas.Text = '' then
   begin
     ShowMessage('Selecione uma Tela');
+    lkcTelas.SetFocus;
     Exit
   end;
 

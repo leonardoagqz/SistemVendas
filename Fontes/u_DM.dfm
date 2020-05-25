@@ -3473,11 +3473,13 @@ object dm: Tdm
       FieldName = 'caixa_id'
       Origin = 'caixa_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_caixacaixa_valor: TFloatField
       AutoGenerateValue = arDefault
       FieldName = 'caixa_valor'
       Origin = 'caixa_valor'
+      DisplayFormat = ',0.00,-,0.00'
     end
     object SQL_caixacaixa_data_abre: TDateField
       AutoGenerateValue = arDefault
@@ -3493,6 +3495,7 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'caixa_inicial'
       Origin = 'caixa_inicial'
+      DisplayFormat = ',0.00,-,0.00'
     end
     object SQL_caixacaixa_usuario: TIntegerField
       AutoGenerateValue = arDefault
