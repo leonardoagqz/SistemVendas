@@ -288,6 +288,10 @@ type
     SQL_caixacaixa_inicial: TFloatField;
     SQL_caixacaixa_usuario: TIntegerField;
     ds_caixa: TDataSource;
+    SQL_caixauser_id: TFDAutoIncField;
+    SQL_caixauser_nome: TStringField;
+    SQL_caixauser_nome_completo: TStringField;
+    SQL_caixauser_senha: TStringField;
 
     procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
 
@@ -320,7 +324,7 @@ begin
   begin
     close;
     SQL.Clear;
-    SQL.Add('select * from caixa');
+    SQL.Add('select * from view_caixa');
     SQL.Add('where caixa_usuario = :user');
     SQL.Add('and caixa_data_abre = :data');
     ParamByName('user').Value := SQL_usuariouser_id.Value;

@@ -3466,7 +3466,7 @@ object dm: Tdm
   object SQL_caixa: TFDQuery
     Connection = conexao
     SQL.Strings = (
-      'select * from caixa')
+      'select * from view_caixa')
     Left = 16
     Top = 440
     object SQL_caixacaixa_id: TFDAutoIncField
@@ -3479,7 +3479,7 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'caixa_valor'
       Origin = 'caixa_valor'
-      DisplayFormat = ',0.00,-,0.00'
+      DisplayFormat = ',0.00'
     end
     object SQL_caixacaixa_data_abre: TDateField
       AutoGenerateValue = arDefault
@@ -3495,12 +3495,34 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'caixa_inicial'
       Origin = 'caixa_inicial'
-      DisplayFormat = ',0.00,-,0.00'
+      DisplayFormat = ',0.00'
     end
     object SQL_caixacaixa_usuario: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'caixa_usuario'
       Origin = 'caixa_usuario'
+    end
+    object SQL_caixauser_id: TFDAutoIncField
+      FieldName = 'user_id'
+      Origin = 'user_id'
+    end
+    object SQL_caixauser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      Size = 100
+    end
+    object SQL_caixauser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      Size = 100
+    end
+    object SQL_caixauser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      Size = 100
     end
   end
   object ds_caixa: TDataSource
