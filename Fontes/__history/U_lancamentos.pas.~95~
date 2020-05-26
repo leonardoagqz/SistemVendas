@@ -229,6 +229,7 @@ end;
 
 procedure TF_lancamento.btn_fecharpedidoClick(Sender: TObject);
 begin
+  //verifico se o forme pag foi informado
   if lk_formapaglanc.Text = '' then
     begin
       ShowMessage('Escolha a forma de Pagamento');
@@ -236,12 +237,13 @@ begin
       Exit
     end;
 
+    //verifica se o pedido já esta faturado
   if SQL_ListarLancamentosped_faturado.Value = 'SIM' then
     begin
       ShowMessage('Pedido já esta Faturado.');
     end;
 
-
+  //faturando pedido
   TB_faturarpedido.Active := True;
   TB_faturarpedido.Locate('ped_codigo',SQL_ListarLancamentosped_codigo.AsString);
   TB_faturarpedido.Edit;
@@ -251,10 +253,34 @@ begin
 
   ShowMessage('Pedido faturado com Sucesso!');
 
+
+  //imprime recibo
   btn_imprimerecibo.Click;
 
+  //lançar no caixa
+  //lanço no caixa se não for parcelado
+  if dm.SQL_formapagforma_id.Value <> 2  then
+  begin
+    with dm.SQL_caixa do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('update caixa set caixa_valor = caixa_valor + :valor');
+      SQL.Add('where caixa_data_abre = :data and caixa_usuario = :user');
+      ParamByName('user').Value := DM.SQL_usuariouser_id.Value;
+      ParamByName('data').Value := Date;
+      ParamByName('valor').Value := total_vista;
+      ExecSQL;
+    end;
+  end;
+
+
+
+  //atualiza grid
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.Open;
+
+
 
 
 end;
@@ -285,6 +311,7 @@ begin
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
   SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
   SQL_ListarLancamentos.Open;
   if SQL_ListarLancamentos.RecordCount = 0 then
     begin
@@ -309,6 +336,7 @@ begin
      SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
      SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+     SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
      SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
      SQL_ListarLancamentos.Open;
      if SQL_ListarLancamentos.RecordCount = 0 then
@@ -362,12 +390,7 @@ begin
   //abrir a sql de forma de pagamento
   dm.SQL_formapag.Active:=True;
 
-  //verifico o caixa
-   dm.CaixaVerifica;
-   if dm.CAIXA_ABERTO = False then
-   begin
-     F_lancamento.Close;
-   end;
+ 
 
 end;
 

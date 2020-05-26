@@ -43,13 +43,13 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object SpeedButton1: TSpeedButton
+  object btn_imprimerecibo: TSpeedButton
     Left = 604
     Top = 458
     Width = 106
     Height = 25
     Caption = 'Imprimir Selecionado'
-    OnClick = SpeedButton1Click
+    OnClick = btn_imprimereciboClick
   end
   object btn_listaritensdopedido_lanc: TSpeedButton
     Left = 672
@@ -181,7 +181,7 @@ object F_lancamento: TF_lancamento
     ParentFont = False
     TabOrder = 3
   end
-  object DBGrid1: TDBGrid
+  object dbg_listarItensPedido: TDBGrid
     Left = 0
     Top = 286
     Width = 718
@@ -381,7 +381,7 @@ object F_lancamento: TF_lancamento
       Origin = 'ped_id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object SQL_ListarLancamentosped_date: TDateField
+    object SQL_ListarLancamentosped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -676,8 +676,7 @@ object F_lancamento: TF_lancamento
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
-    Left = 328
-    Top = 400
+    Left = 664
   end
   object SQL_listarlancamento_relat: TFDQuery
     Connection = dm.conexao
@@ -700,7 +699,7 @@ object F_lancamento: TF_lancamento
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object SQL_listarlancamento_relatped_date: TDateField
+    object SQL_listarlancamento_relatped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -998,13 +997,14 @@ object F_lancamento: TF_lancamento
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 504
+    Left = 584
     object TB_faturarpedidoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
-    object TB_faturarpedidoped_date: TDateField
+    object TB_faturarpedidoped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'

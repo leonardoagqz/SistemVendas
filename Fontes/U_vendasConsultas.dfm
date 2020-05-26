@@ -306,7 +306,6 @@ object F_vendasConsulta: TF_vendasConsulta
     Height = 49
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 718
     object lbl_buscarclientelanc: TLabel
       Left = 12
       Top = -1
@@ -445,7 +444,7 @@ object F_vendasConsulta: TF_vendasConsulta
     Left = 544
     Top = 259
     Width = 71
-    Height = 18
+    Height = 21
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -459,7 +458,7 @@ object F_vendasConsulta: TF_vendasConsulta
     Left = 636
     Top = 259
     Width = 71
-    Height = 18
+    Height = 21
     Enabled = False
     TabOrder = 13
   end

@@ -36,20 +36,20 @@ type
     lbl_buscarclientelanc: TLabel;
     lbl_buscarcodvendalanc: TLabel;
     btn_mostrarTodoslanc: TBitBtn;
-    TB_gerarParcelas: TFDTable;
+    TB_baixarParcelas: TFDTable;
     btn_imprimerecibo: TSpeedButton;
     btn_lancarParcelas: TBitBtn;
     edt_parcelasQtd: TDBCurrencyEdit;
     lbl_qtdparcelas: TLabel;
     btn_parcelasapagar: TBitBtn;
     btn_parcelasimpimir: TBitBtn;
-    TB_gerarParcelasparc_id: TFDAutoIncField;
-    TB_gerarParcelasparc_cod_carne: TStringField;
-    TB_gerarParcelasparc_numero: TIntegerField;
-    TB_gerarParcelasparc_valor: TFloatField;
-    TB_gerarParcelasparc_data_venc: TDateField;
-    TB_gerarParcelasparc_pago: TStringField;
-    TB_gerarParcelasparc_data_pago: TDateField;
+    TB_baixarParcelasparc_id: TFDAutoIncField;
+    TB_baixarParcelasparc_cod_carne: TStringField;
+    TB_baixarParcelasparc_numero: TIntegerField;
+    TB_baixarParcelasparc_valor: TFloatField;
+    TB_baixarParcelasparc_data_venc: TDateField;
+    TB_baixarParcelasparc_pago: TStringField;
+    TB_baixarParcelasparc_data_pago: TDateField;
     SQL_parcelasProntasparc_id: TFDAutoIncField;
     SQL_parcelasProntasparc_cod_carne: TStringField;
     SQL_parcelasProntasparc_numero: TIntegerField;
@@ -199,7 +199,6 @@ type
     SQL_ListarLancamentoscli_profissao: TStringField;
     SQL_ListarLancamentoscli_data_nasc: TDateField;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -215,6 +214,8 @@ type
     SQL_ListarLancamentosparc_data_venc: TDateField;
     SQL_ListarLancamentosparc_pago: TStringField;
     SQL_ListarLancamentosparc_data_pago: TDateField;
+    btn_pagarParcela: TBitBtn;
+    SQL_ListarLancamentosped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -228,6 +229,7 @@ type
     procedure btn_lancarParcelasClick(Sender: TObject);
     procedure btn_parcelasimpimirClick(Sender: TObject);
     procedure btn_parcelasapagarClick(Sender: TObject);
+    procedure btn_pagarParcelaClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -348,7 +350,7 @@ procedure TF_baixarparcelas.btn_lancarParcelasClick(Sender: TObject);
 var total_parcelas, atual_parcela : Integer;
 begin
   //verifica se já existe parcela
-  with SQL_parcelasProntas do
+  {with SQL_parcelasProntas do
     begin
       Close;
       SQL.Clear;
@@ -380,10 +382,10 @@ begin
           begin
             atual_parcela := atual_parcela + 1;
             TB_gerarParcelas.Insert;
-            TB_gerarParcelasparc_cod_carne.Value := SQL_ListarLancamentosped_codigo.Value;               {}
+            TB_gerarParcelasparc_cod_carne.Value := SQL_ListarLancamentosped_codigo.Value;
             TB_gerarParcelasparc_numero.Value := atual_parcela;
             TB_gerarParcelasparc_valor.Value := edt_valorprazo_lancamento.Value / total_parcelas;
-            TB_gerarParcelasparc_data_venc.Value := IncMonth(Date,atual_parcela);{incrementa mes em mes, incrementa um mesm no date no meu parametro atual_parcela}
+            TB_gerarParcelasparc_data_venc.Value := IncMonth(Date,atual_parcela); //incrementa mes em mes, incrementa um mesm no date no meu parametro atual_parcela
             TB_gerarParcelasparc_pago.Value := 'NAO';
             TB_gerarParcelas.Post;
           end;
@@ -398,7 +400,7 @@ begin
               ParamByName('cod').Value := codigo_venda;
               Open;
               ShowMessage('Parcelas geradas com Sucesso!');
-            end; }
+            end;
 
             //refresh na dbg listar parcelas
             ShowMessage('Parcelas geradas com Sucesso!');
@@ -406,7 +408,7 @@ begin
             SQL_parcelasProntas.Open;
 
         end;
-    end;
+    end;  }
 end;
 
 
@@ -442,6 +444,35 @@ begin
     begin
       ShowMessage('Não existem pedidos para serem baixados!');
     end;
+end;
+
+procedure TF_baixarparcelas.btn_pagarParcelaClick(Sender: TObject);
+begin
+  //rotina para baixar a parcela selecionada
+  TB_baixarParcelas.Active := True;
+  TB_baixarParcelas.Locate('parc_id',SQL_parcelasProntasparc_id.Value,[]);
+  TB_baixarParcelas.Edit;
+  TB_baixarParcelasparc_pago.Value := 'SIM';
+  TB_baixarParcelasparc_data_pago.Value := Date;
+  TB_baixarParcelas.Post;
+  ShowMessage('Parcela paga com sucesso!');
+
+  { with dm.SQL_caixa do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('update caixa set caixa_valor = caixa_valor + :valor');
+      SQL.Add('where caixa_data_abre = :data and caixa_usuario = :user');
+      ParamByName('user').Value := DM.SQL_usuariouser_id.Value;
+      ParamByName('data').Value := Date;
+      ParamByName('valor').Value := total_vista;
+      ExecSQL;
+    end;}
+
+  SQL_parcelasProntas.Close;
+  SQL_parcelasProntas.Open;
+
+
 end;
 
 procedure TF_baixarparcelas.btn_parcelasapagarClick(Sender: TObject);
@@ -531,7 +562,7 @@ end;
 procedure TF_baixarparcelas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   F_baixarparcelas := nil;
-  TB_gerarParcelas.Active := False;
+  TB_baixarParcelas.Active := False;
 end;
 
 procedure TF_baixarparcelas.FormCreate(Sender: TObject);

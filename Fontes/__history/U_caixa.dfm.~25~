@@ -3,8 +3,8 @@ object F_caixa: TF_caixa
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Caixa'
-  ClientHeight = 343
-  ClientWidth = 568
+  ClientHeight = 291
+  ClientWidth = 425
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,22 +18,22 @@ object F_caixa: TF_caixa
   PixelsPerInch = 96
   TextHeight = 13
   object lbl_caixahoje: TLabel
-    Left = 72
-    Top = 101
+    Left = 8
+    Top = 35
     Width = 67
     Height = 13
     Caption = 'Caixa de Hoje'
   end
   object Label1: TLabel
-    Left = 439
-    Top = 13
+    Left = 310
+    Top = 6
     Width = 91
     Height = 13
     Caption = 'Digite o valor inicial'
   end
   object lblCaixa: TLabel
-    Left = 24
-    Top = 16
+    Left = 8
+    Top = 8
     Width = 48
     Height = 16
     Caption = 'lblCaixa'
@@ -45,10 +45,10 @@ object F_caixa: TF_caixa
     ParentFont = False
   end
   object dbgListarCaixa: TDBGrid
-    Left = 72
-    Top = 160
-    Width = 409
-    Height = 161
+    Left = 8
+    Top = 109
+    Width = 393
+    Height = 152
     DataSource = dm.ds_caixa
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
@@ -84,40 +84,74 @@ object F_caixa: TF_caixa
         Title.Caption = 'Valor Inicial'
         Width = 70
         Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'user_nome'
+        Title.Caption = 'Usu'#225'rio'
+        Width = 90
+        Visible = True
       end>
   end
   object edt_CaixaHoje: TCurrencyEdit
-    Left = 72
-    Top = 120
+    Left = 8
+    Top = 54
     Width = 121
     Height = 21
     Enabled = False
     TabOrder = 1
   end
   object edtCaixaInicial: TCurrencyEdit
-    Left = 439
-    Top = 32
+    Left = 310
+    Top = 25
     Width = 91
     Height = 21
     Enabled = False
     TabOrder = 2
   end
   object btnAbreCaixa: TBitBtn
-    Left = 455
-    Top = 59
+    Left = 326
+    Top = 52
     Width = 75
     Height = 25
     Caption = 'Abrir Caixa'
     TabOrder = 3
     OnClick = btnAbreCaixaClick
   end
+  object btnMostrarTodosUsuarios: TBitBtn
+    Left = 264
+    Top = 89
+    Width = 137
+    Height = 19
+    Caption = 'Mostrar Todos Usu'#225'rios'
+    Enabled = False
+    TabOrder = 4
+    OnClick = btnMostrarTodosUsuariosClick
+  end
+  object btnMostrarTodosDias: TBitBtn
+    Left = 8
+    Top = 89
+    Width = 137
+    Height = 19
+    Caption = 'Mostrar Todos Dias'
+    TabOrder = 5
+    OnClick = btnMostrarTodosDiasClick
+  end
+  object btnFecharCaixa: TBitBtn
+    Left = 326
+    Top = 264
+    Width = 75
+    Height = 25
+    Caption = 'Fechar Caixa'
+    TabOrder = 6
+  end
   object TB_AbreCaixa: TFDTable
     IndexFieldNames = 'caixa_id'
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.caixa'
     TableName = 'aguiarsvendasbd.caixa'
-    Left = 464
-    Top = 112
+    Left = 256
+    Top = 208
     object TB_AbreCaixacaixa_id: TFDAutoIncField
       FieldName = 'caixa_id'
       Origin = 'caixa_id'

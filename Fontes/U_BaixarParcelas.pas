@@ -199,7 +199,6 @@ type
     SQL_ListarLancamentoscli_profissao: TStringField;
     SQL_ListarLancamentoscli_data_nasc: TDateField;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -216,6 +215,7 @@ type
     SQL_ListarLancamentosparc_pago: TStringField;
     SQL_ListarLancamentosparc_data_pago: TDateField;
     btn_pagarParcela: TBitBtn;
+    SQL_ListarLancamentosped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -455,6 +455,20 @@ begin
   TB_baixarParcelasparc_pago.Value := 'SIM';
   TB_baixarParcelasparc_data_pago.Value := Date;
   TB_baixarParcelas.Post;
+  ShowMessage('Parcela paga com sucesso!');
+
+   with dm.SQL_caixa do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('update caixa set caixa_valor = caixa_valor + :valor');
+      SQL.Add('where caixa_data_abre = :data and caixa_usuario = :user');
+      ParamByName('user').Value := DM.SQL_usuariouser_id.Value;
+      ParamByName('data').Value := Date;
+      ParamByName('valor').Value := SQL_parcelasProntasparc_valor.Value;
+      ExecSQL;
+    end;
+
   SQL_parcelasProntas.Close;
   SQL_parcelasProntas.Open;
 

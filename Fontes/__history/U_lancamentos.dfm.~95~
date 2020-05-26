@@ -4,7 +4,7 @@ object F_lancamento: TF_lancamento
   BorderStyle = bsDialog
   Caption = 'Lan'#231'amentos'
   ClientHeight = 507
-  ClientWidth = 718
+  ClientWidth = 748
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -43,13 +43,13 @@ object F_lancamento: TF_lancamento
     Font.Style = []
     ParentFont = False
   end
-  object SpeedButton1: TSpeedButton
+  object btn_imprimerecibo: TSpeedButton
     Left = 604
     Top = 458
     Width = 106
     Height = 25
     Caption = 'Imprimir Selecionado'
-    OnClick = SpeedButton1Click
+    OnClick = btn_imprimereciboClick
   end
   object btn_listaritensdopedido_lanc: TSpeedButton
     Left = 672
@@ -75,7 +75,7 @@ object F_lancamento: TF_lancamento
   object Panel1: TPanel
     Left = 0
     Top = 55
-    Width = 718
+    Width = 748
     Height = 12
     Align = alCustom
     Color = clGradientInactiveCaption
@@ -85,7 +85,7 @@ object F_lancamento: TF_lancamento
   object dbg_listarlancamentos: TDBGrid
     Left = 0
     Top = 67
-    Width = 718
+    Width = 748
     Height = 192
     Align = alCustom
     DataSource = ds_listarlancamentos
@@ -181,10 +181,10 @@ object F_lancamento: TF_lancamento
     ParentFont = False
     TabOrder = 3
   end
-  object DBGrid1: TDBGrid
+  object dbg_listarItensPedido: TDBGrid
     Left = 0
     Top = 286
-    Width = 718
+    Width = 748
     Height = 154
     DataSource = ds_listarlancamento_relat
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
@@ -253,7 +253,7 @@ object F_lancamento: TF_lancamento
   object Panel2: TPanel
     Left = 0
     Top = 274
-    Width = 718
+    Width = 748
     Height = 13
     Color = clGradientInactiveCaption
     ParentBackground = False
@@ -275,7 +275,7 @@ object F_lancamento: TF_lancamento
   object Panel3: TPanel
     Left = 0
     Top = 258
-    Width = 718
+    Width = 748
     Height = 13
     Color = clGradientInactiveCaption
     ParentBackground = False
@@ -293,10 +293,11 @@ object F_lancamento: TF_lancamento
   object Panel5: TPanel
     Left = 0
     Top = 0
-    Width = 718
+    Width = 748
     Height = 49
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 718
     object lbl_buscarclientelanc: TLabel
       Left = 14
       Top = 7
@@ -345,8 +346,10 @@ object F_lancamento: TF_lancamento
     Width = 153
     Height = 27
     DropDownCount = 8
-    DataField = 'forma_nome'
-    DataSource = dm.ds_formapag
+    EmptyStrIsNull = False
+    LookupField = 'forma_id'
+    LookupDisplay = 'forma_nome'
+    LookupSource = dm.ds_formapag
     TabOrder = 9
   end
   object btn_fecharpedido: TBitBtn
@@ -379,7 +382,7 @@ object F_lancamento: TF_lancamento
       Origin = 'ped_id'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
     end
-    object SQL_ListarLancamentosped_date: TDateField
+    object SQL_ListarLancamentosped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -674,8 +677,7 @@ object F_lancamento: TF_lancamento
   end
   object SQL_lanc: TFDQuery
     Connection = dm.conexao
-    Left = 328
-    Top = 400
+    Left = 544
   end
   object SQL_listarlancamento_relat: TFDQuery
     Connection = dm.conexao
@@ -698,7 +700,7 @@ object F_lancamento: TF_lancamento
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object SQL_listarlancamento_relatped_date: TDateField
+    object SQL_listarlancamento_relatped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -996,13 +998,14 @@ object F_lancamento: TF_lancamento
     Connection = dm.conexao
     UpdateOptions.UpdateTableName = 'aguiarsvendasbd.pedidos'
     TableName = 'aguiarsvendasbd.pedidos'
-    Left = 504
+    Left = 464
     object TB_faturarpedidoped_id: TFDAutoIncField
       FieldName = 'ped_id'
       Origin = 'ped_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
-    object TB_faturarpedidoped_date: TDateField
+    object TB_faturarpedidoped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -1049,6 +1052,249 @@ object F_lancamento: TF_lancamento
       AutoGenerateValue = arDefault
       FieldName = 'ped_subtotalprazo'
       Origin = 'ped_subtotalprazo'
+    end
+  end
+  object SQL_ListarPedido: TFDQuery
+    OnCalcFields = SQL_ListarPedidoCalcFields
+    Connection = dm.conexao
+    SQL.Strings = (
+      'select * from view_listar_pedidos')
+    Left = 624
+    object SQL_ListarPedidoped_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_id'
+      Origin = 'ped_id'
+    end
+    object SQL_ListarPedidoped_date: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
+    end
+    object SQL_ListarPedidoped_codigo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_codigo'
+      Origin = 'ped_codigo'
+      Size = 50
+    end
+    object SQL_ListarPedidoped_cliente: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_cliente'
+      Origin = 'ped_cliente'
+    end
+    object SQL_ListarPedidoped_usuario: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_usuario'
+      Origin = 'ped_usuario'
+    end
+    object SQL_ListarPedidoped_forma_pag: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_forma_pag'
+      Origin = 'ped_forma_pag'
+    end
+    object SQL_ListarPedidoped_fechado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_fechado'
+      Origin = 'ped_fechado'
+      Size = 3
+    end
+    object SQL_ListarPedidoped_faturado: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_faturado'
+      Origin = 'ped_faturado'
+      Size = 3
+    end
+    object SQL_ListarPedidoped_subtotal: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotal'
+      Origin = 'ped_subtotal'
+    end
+    object SQL_ListarPedidoped_subtotalprazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_subtotalprazo'
+      Origin = 'ped_subtotalprazo'
+    end
+    object SQL_ListarPedidoiten_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_id'
+      Origin = 'iten_id'
+    end
+    object SQL_ListarPedidoiten_produto: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_produto'
+      Origin = 'iten_produto'
+    end
+    object SQL_ListarPedidoiten_qtd: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_qtd'
+      Origin = 'iten_qtd'
+    end
+    object SQL_ListarPedidoiten_pedido: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_pedido'
+      Origin = 'iten_pedido'
+      Size = 50
+    end
+    object SQL_ListarPedidoiten_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco'
+      Origin = 'iten_preco'
+    end
+    object SQL_ListarPedidoiten_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'iten_preco_prazo'
+      Origin = 'iten_preco_prazo'
+    end
+    object SQL_ListarPedidopro_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_id'
+      Origin = 'pro_id'
+    end
+    object SQL_ListarPedidopro_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_nome'
+      Origin = 'pro_nome'
+      Size = 100
+    end
+    object SQL_ListarPedidopro_barra: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_barra'
+      Origin = 'pro_barra'
+      Size = 100
+    end
+    object SQL_ListarPedidopro_ref: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_ref'
+      Origin = 'pro_ref'
+      Size = 100
+    end
+    object SQL_ListarPedidopro_custo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_custo'
+      Origin = 'pro_custo'
+    end
+    object SQL_ListarPedidopro_preco: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco'
+      Origin = 'pro_preco'
+    end
+    object SQL_ListarPedidopro_preco_prazo: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_preco_prazo'
+      Origin = 'pro_preco_prazo'
+    end
+    object SQL_ListarPedidopro_estoque: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'pro_estoque'
+      Origin = 'pro_estoque'
+    end
+    object SQL_ListarPedidocli_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_id'
+      Origin = 'cli_id'
+    end
+    object SQL_ListarPedidocli_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_nome'
+      Origin = 'cli_nome'
+      Size = 100
+    end
+    object SQL_ListarPedidocli_endereco: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_endereco'
+      Origin = 'cli_endereco'
+      Size = 100
+    end
+    object SQL_ListarPedidocli_numero: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_numero'
+      Origin = 'cli_numero'
+    end
+    object SQL_ListarPedidocli_bairro: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_bairro'
+      Origin = 'cli_bairro'
+      Size = 50
+    end
+    object SQL_ListarPedidocli_cidade: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cidade'
+      Origin = 'cli_cidade'
+      Size = 50
+    end
+    object SQL_ListarPedidocli_fone: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_fone'
+      Origin = 'cli_fone'
+    end
+    object SQL_ListarPedidocli_celular: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_celular'
+      Origin = 'cli_celular'
+    end
+    object SQL_ListarPedidocli_rg: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_rg'
+      Origin = 'cli_rg'
+    end
+    object SQL_ListarPedidocli_cnpj_cpf: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_cnpj_cpf'
+      Origin = 'cli_cnpj_cpf'
+    end
+    object SQL_ListarPedidocli_profissao: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_profissao'
+      Origin = 'cli_profissao'
+      Size = 50
+    end
+    object SQL_ListarPedidocli_data_nasc: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'cli_data_nasc'
+      Origin = 'cli_data_nasc'
+    end
+    object SQL_ListarPedidoforma_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_id'
+      Origin = 'forma_id'
+    end
+    object SQL_ListarPedidoforma_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'forma_nome'
+      Origin = 'forma_nome'
+      Size = 40
+    end
+    object SQL_ListarPedidouser_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_id'
+      Origin = 'user_id'
+    end
+    object SQL_ListarPedidouser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      Size = 100
+    end
+    object SQL_ListarPedidouser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      Size = 100
+    end
+    object SQL_ListarPedidouser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      Size = 100
+    end
+    object SQL_ListarPedidosub_Total: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'sub_Total'
+      Calculated = True
+    end
+    object SQL_ListarPedidosub_TotalPrazo: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'sub_TotalPrazo'
+      Calculated = True
     end
   end
 end

@@ -26,9 +26,15 @@ type
     TB_AbreCaixacaixa_data_fecha: TDateField;
     TB_AbreCaixacaixa_inicial: TFloatField;
     TB_AbreCaixacaixa_usuario: TIntegerField;
+    btnMostrarTodosUsuarios: TBitBtn;
+    btnMostrarTodosDias: TBitBtn;
+    btnFecharCaixa: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btnAbreCaixaClick(Sender: TObject);
+    procedure btnMostrarTodosUsuariosClick(Sender: TObject);
+    procedure btnMostrarTodosDiasClick(Sender: TObject);
+    procedure btnFecharCaixaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +53,7 @@ uses
 
 procedure TF_caixa.btnAbreCaixaClick(Sender: TObject);
 begin
-  //abriro caixa do dia
+  //abrir o caixa do dia
   TB_AbreCaixa.Active:= True;
   TB_AbreCaixa.Insert;
   TB_AbreCaixacaixa_data_abre.Value:= Date;
@@ -57,6 +63,7 @@ begin
   TB_AbreCaixa.Post;
   btnAbreCaixa.Enabled := false;
   edtCaixaInicial.Enabled:= False;
+  lblCaixa.Caption := 'Caixa Aberto';
   lblCaixa.Font.Color :=clGreen;
   //refresh no caixa
   dm.SQL_caixa.Close;
@@ -85,6 +92,43 @@ begin
 
 end;
 
+procedure TF_caixa.btnFecharCaixaClick(Sender: TObject);
+begin
+  //fechar caixa
+  TB_AbreCaixa.Active:= True;
+  TB_AbreCaixa.Locate('caixa_id', dm.SQL_caixacaixa_id.Value, []);
+  TB_AbreCaixa.Edit;
+  TB_AbreCaixacaixa_data_fecha.Value:= Date;
+  TB_AbreCaixa.Post;
+  ShowMessage('Caixa Fechado com Sucesso!');
+  dm.SQL_caixa.Close;
+  dm.SQL_caixa.Open;
+  end;
+
+procedure TF_caixa.btnMostrarTodosDiasClick(Sender: TObject);
+begin
+  with dm.SQL_caixa do
+  begin
+    close;
+    SQL.Clear;
+    SQL.Add('select * from view_caixa');
+    SQL.Add('where caixa_usuario = :user');
+    ParamByName('user').Value := dm.SQL_usuariouser_id.Value;
+    Open;
+  end;
+end;
+
+procedure TF_caixa.btnMostrarTodosUsuariosClick(Sender: TObject);
+begin
+  with dm.SQL_caixa do
+  begin
+    close;
+    SQL.Clear;
+    SQL.Add('select * from view_caixa');
+    Open;
+  end;
+end;
+
 procedure TF_caixa.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   F_caixa := nil;
@@ -92,6 +136,13 @@ end;
 
 procedure TF_caixa.FormCreate(Sender: TObject);
 begin
+  if dm.SQL_usuariouser_id.Value = 1 then
+  begin
+    btnMostrarTodosUsuarios.Enabled := True;
+  end;
+
+
+
  //verifico se o caixa esta aberto
  dm.CaixaVerifica;
  if dm.CAIXA_ABERTO = False then

@@ -19,14 +19,14 @@ object F_caixa: TF_caixa
   TextHeight = 13
   object lbl_caixahoje: TLabel
     Left = 8
-    Top = 42
+    Top = 35
     Width = 67
     Height = 13
     Caption = 'Caixa de Hoje'
   end
   object Label1: TLabel
     Left = 310
-    Top = 13
+    Top = 6
     Width = 91
     Height = 13
     Caption = 'Digite o valor inicial'
@@ -46,7 +46,7 @@ object F_caixa: TF_caixa
   end
   object dbgListarCaixa: TDBGrid
     Left = 8
-    Top = 116
+    Top = 109
     Width = 393
     Height = 152
     DataSource = dm.ds_caixa
@@ -95,7 +95,7 @@ object F_caixa: TF_caixa
   end
   object edt_CaixaHoje: TCurrencyEdit
     Left = 8
-    Top = 61
+    Top = 54
     Width = 121
     Height = 21
     Enabled = False
@@ -103,7 +103,7 @@ object F_caixa: TF_caixa
   end
   object edtCaixaInicial: TCurrencyEdit
     Left = 310
-    Top = 32
+    Top = 25
     Width = 91
     Height = 21
     Enabled = False
@@ -111,7 +111,7 @@ object F_caixa: TF_caixa
   end
   object btnAbreCaixa: TBitBtn
     Left = 326
-    Top = 59
+    Top = 52
     Width = 75
     Height = 25
     Caption = 'Abrir Caixa'
@@ -120,7 +120,7 @@ object F_caixa: TF_caixa
   end
   object btnMostrarTodosUsuarios: TBitBtn
     Left = 264
-    Top = 96
+    Top = 89
     Width = 137
     Height = 19
     Caption = 'Mostrar Todos Usu'#225'rios'
@@ -130,12 +130,21 @@ object F_caixa: TF_caixa
   end
   object btnMostrarTodosDias: TBitBtn
     Left = 8
-    Top = 96
+    Top = 89
     Width = 137
     Height = 19
     Caption = 'Mostrar Todos Dias'
     TabOrder = 5
     OnClick = btnMostrarTodosDiasClick
+  end
+  object btnFecharCaixa: TBitBtn
+    Left = 326
+    Top = 264
+    Width = 75
+    Height = 25
+    Caption = 'Fechar Caixa'
+    TabOrder = 6
+    OnClick = btnFecharCaixaClick
   end
   object TB_AbreCaixa: TFDTable
     IndexFieldNames = 'caixa_id'

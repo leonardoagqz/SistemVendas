@@ -18,7 +18,6 @@ type
     SQL_ListarLancamentos: TFDQuery;
     ds_listarlancamentos: TDataSource;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -64,11 +63,10 @@ type
     SQL_ListarLancamentosped_subtotal: TFloatField;
     SQL_ListarLancamentosped_subtotalprazo: TFloatField;
     SQL_lanc: TFDQuery;
-    SpeedButton1: TSpeedButton;
+    btn_imprimerecibo: TSpeedButton;
     SQL_listarlancamento_relat: TFDQuery;
     ds_listarlancamento_relat: TDataSource;
     SQL_listarlancamento_relatped_id: TFDAutoIncField;
-    SQL_listarlancamento_relatped_date: TDateField;
     SQL_listarlancamento_relatped_codigo: TStringField;
     SQL_listarlancamento_relatped_cliente: TIntegerField;
     SQL_listarlancamento_relatped_usuario: TIntegerField;
@@ -110,7 +108,7 @@ type
     SQL_listarlancamento_relatuser_nome_completo: TStringField;
     SQL_listarlancamento_relatuser_senha: TStringField;
     btn_listaritensdopedido_lanc: TSpeedButton;
-    DBGrid1: TDBGrid;
+    dbg_listarItensPedido: TDBGrid;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -126,7 +124,6 @@ type
     btn_fecharpedido: TBitBtn;
     TB_faturarpedido: TFDTable;
     TB_faturarpedidoped_id: TFDAutoIncField;
-    TB_faturarpedidoped_date: TDateField;
     TB_faturarpedidoped_codigo: TStringField;
     TB_faturarpedidoped_cliente: TIntegerField;
     TB_faturarpedidoped_usuario: TIntegerField;
@@ -135,16 +132,65 @@ type
     TB_faturarpedidoped_faturado: TStringField;
     TB_faturarpedidoped_subtotal: TFloatField;
     TB_faturarpedidoped_subtotalprazo: TFloatField;
+    SQL_ListarLancamentosped_date: TDateTimeField;
+    TB_faturarpedidoped_date: TDateTimeField;
+    SQL_listarlancamento_relatped_date: TDateTimeField;
+    SQL_ListarPedido: TFDQuery;
+    SQL_ListarPedidoped_id: TIntegerField;
+    SQL_ListarPedidoped_date: TDateTimeField;
+    SQL_ListarPedidoped_codigo: TStringField;
+    SQL_ListarPedidoped_cliente: TIntegerField;
+    SQL_ListarPedidoped_usuario: TIntegerField;
+    SQL_ListarPedidoped_forma_pag: TIntegerField;
+    SQL_ListarPedidoped_fechado: TStringField;
+    SQL_ListarPedidoped_faturado: TStringField;
+    SQL_ListarPedidoped_subtotal: TFloatField;
+    SQL_ListarPedidoped_subtotalprazo: TFloatField;
+    SQL_ListarPedidoiten_id: TIntegerField;
+    SQL_ListarPedidoiten_produto: TIntegerField;
+    SQL_ListarPedidoiten_qtd: TIntegerField;
+    SQL_ListarPedidoiten_pedido: TStringField;
+    SQL_ListarPedidoiten_preco: TFloatField;
+    SQL_ListarPedidoiten_preco_prazo: TFloatField;
+    SQL_ListarPedidopro_id: TIntegerField;
+    SQL_ListarPedidopro_nome: TStringField;
+    SQL_ListarPedidopro_barra: TStringField;
+    SQL_ListarPedidopro_ref: TStringField;
+    SQL_ListarPedidopro_custo: TFloatField;
+    SQL_ListarPedidopro_preco: TFloatField;
+    SQL_ListarPedidopro_preco_prazo: TFloatField;
+    SQL_ListarPedidopro_estoque: TIntegerField;
+    SQL_ListarPedidocli_id: TIntegerField;
+    SQL_ListarPedidocli_nome: TStringField;
+    SQL_ListarPedidocli_endereco: TStringField;
+    SQL_ListarPedidocli_numero: TStringField;
+    SQL_ListarPedidocli_bairro: TStringField;
+    SQL_ListarPedidocli_cidade: TStringField;
+    SQL_ListarPedidocli_fone: TStringField;
+    SQL_ListarPedidocli_celular: TStringField;
+    SQL_ListarPedidocli_rg: TStringField;
+    SQL_ListarPedidocli_cnpj_cpf: TStringField;
+    SQL_ListarPedidocli_profissao: TStringField;
+    SQL_ListarPedidocli_data_nasc: TDateField;
+    SQL_ListarPedidoforma_id: TIntegerField;
+    SQL_ListarPedidoforma_nome: TStringField;
+    SQL_ListarPedidouser_id: TIntegerField;
+    SQL_ListarPedidouser_nome: TStringField;
+    SQL_ListarPedidouser_nome_completo: TStringField;
+    SQL_ListarPedidouser_senha: TStringField;
+    SQL_ListarPedidosub_Total: TFloatField;
+    SQL_ListarPedidosub_TotalPrazo: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btn_imprimereciboClick(Sender: TObject);
     procedure btn_listaritensdopedido_lancClick(Sender: TObject);
     procedure edt_buscarClientelancKeyPress(Sender: TObject; var Key: Char);
     procedure edt_buscarCodVendalancKeyPress(Sender: TObject; var Key: Char);
     procedure btn_mostrarTodoslancClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btn_fecharpedidoClick(Sender: TObject);
+    procedure SQL_ListarPedidoCalcFields(DataSet: TDataSet);
 
   private
     { Private declarations }
@@ -170,12 +216,12 @@ uses
 procedure TF_lancamento.procedureMostrarPedido;
 begin
   //mostrar pedido selecionado
-  {total_vista := 0;
-  total_prazo := 0;}
+  total_vista := 0;
+  total_prazo := 0;
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
   //executo a sql listar lançamentos para filtrar atual
-  with SQL_lanc do
+  with SQL_ListarPedido do
    begin
    Close;
    SQL.Clear;
@@ -186,19 +232,19 @@ begin
    Open;
    end;
 
-   {SQL_listarancamentos.First;
+   SQL_ListarPedido.First;
 
-   while not SQL_listarancamentos.Eof do
+   while not SQL_ListarPedido.Eof do
    begin
-     total_vista := total_vista + F_PDV.SQL_listar_pedidos_dbglançamentosubTotal.Value;
-     total_prazo := total_prazo + F_PDV.SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
-     SQL_listarancamentos.Next;
-   end; }
+     total_vista := total_vista + SQL_ListarPedido.Value;
+     total_prazo := total_prazo + SQL_ListarLancamentosped_subtotalprazo.Value;
+     SQL_ListarLancamentos.Next;
+   end;
 
    edt_valoravista_lancamento.Value := SQL_ListarLancamentosped_subtotal.Value;
    edt_valorprazo_lancamento.Value := SQL_ListarLancamentosped_subtotalprazo.Value;
 
-  {  with SQL_listarancamentos do
+    with SQL_listarancamentos do
    begin
    Close;
    SQL.Clear;
@@ -210,7 +256,17 @@ begin
    btn_listaritensdopedido_lanc.Click;
 end;
 
-procedure TF_lancamento.SpeedButton1Click(Sender: TObject);
+procedure TF_lancamento.SQL_ListarPedidoCalcFields(DataSet: TDataSet);
+begin
+  SQL_ListarPedidosub_Total.Value :=
+  SQL_ListarPedidopro_preco.Value * SQL_ListarPedidoiten_qtd.Value;
+
+ // pegando subtotal do item  prazo
+ SQL_ListarPedidosub_TotalPrazo.Value :=
+ SQL_ListarPedidopro_preco_prazo.Value * SQL_ListarPedidoiten_qtd.Value;
+end;
+
+procedure TF_lancamento.btn_imprimereciboClick(Sender: TObject);
 begin
   codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
 
@@ -229,6 +285,7 @@ end;
 
 procedure TF_lancamento.btn_fecharpedidoClick(Sender: TObject);
 begin
+  //verifico se o forme pag foi informado
   if lk_formapaglanc.Text = '' then
     begin
       ShowMessage('Escolha a forma de Pagamento');
@@ -236,12 +293,13 @@ begin
       Exit
     end;
 
+    //verifica se o pedido já esta faturado
   if SQL_ListarLancamentosped_faturado.Value = 'SIM' then
     begin
       ShowMessage('Pedido já esta Faturado.');
     end;
 
-
+  //faturando pedido
   TB_faturarpedido.Active := True;
   TB_faturarpedido.Locate('ped_codigo',SQL_ListarLancamentosped_codigo.AsString);
   TB_faturarpedido.Edit;
@@ -251,8 +309,39 @@ begin
 
   ShowMessage('Pedido faturado com Sucesso!');
 
+
+  //imprime recibo
+  btn_imprimerecibo.Click;
+
+  //lançar no caixa
+  //lanço no caixa se não for parcelado
+  if dm.SQL_formapagforma_id.Value <> 2  then
+  begin
+    with dm.SQL_caixa do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('update caixa set caixa_valor = caixa_valor + :valor');
+      SQL.Add('where caixa_data_abre = :data and caixa_usuario = :user');
+      ParamByName('user').Value := DM.SQL_usuariouser_id.Value;
+      ParamByName('data').Value := Date;
+      ParamByName('valor').Value := total_vista;
+      ExecSQL;
+    end;
+  end
+  else
+  begin
+    ShowMessage('Não é permitido faturar quando o tipo de pagamento é Crédiario');
+    Exit
+  end;
+
+
+
+  //atualiza grid
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.Open;
+
+
 
 
 end;
@@ -283,12 +372,19 @@ begin
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
   SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+  SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
   SQL_ListarLancamentos.Open;
+  if SQL_ListarLancamentos.RecordCount = 0 then
+    begin
+      ShowMessage('Não existem pedidos para serem faturados!');
+    end;
 end;
 
 procedure TF_lancamento.dbg_listarlancamentosCellClick(Column: TColumn);
 begin
- procedureMostrarPedido;
+// procedureMostrarPedido;
+edt_valoravista_lancamento.Value := SQL_ListarLancamentosped_subtotal.Value;
+   edt_valorprazo_lancamento.Value := SQL_ListarLancamentosped_subtotalprazo.Value;
 
 end;
 
@@ -303,6 +399,7 @@ begin
      SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
      SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+     SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
      SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
      SQL_ListarLancamentos.Open;
      if SQL_ListarLancamentos.RecordCount = 0 then
@@ -330,6 +427,7 @@ begin
      SQL_ListarLancamentos.SQL.Add ('where ped_codigo like :cod');
      SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "NAO"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+     SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
      SQL_ListarLancamentos.ParamByName('cod').Value := edt_buscarCodVendalanc.Text + '%';
      SQL_ListarLancamentos.Open;
      if SQL_ListarLancamentos.RecordCount = 0 then
@@ -353,7 +451,11 @@ end;
 
 procedure TF_lancamento.FormCreate(Sender: TObject);
 begin
+  //abrir a sql de forma de pagamento
   dm.SQL_formapag.Active:=True;
+
+ 
+
 end;
 
 end.

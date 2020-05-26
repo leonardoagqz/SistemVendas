@@ -91,7 +91,7 @@ object F_vendasConsulta: TF_vendasConsulta
     Height = 192
     Align = alCustom
     DataSource = ds_listarlancamentos
-    Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    Options = [dgTitles, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
@@ -306,7 +306,6 @@ object F_vendasConsulta: TF_vendasConsulta
     Height = 49
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 718
     object lbl_buscarclientelanc: TLabel
       Left = 12
       Top = -1
@@ -334,6 +333,13 @@ object F_vendasConsulta: TF_vendasConsulta
       Width = 24
       Height = 13
       Caption = 'At'#233': '
+    end
+    object Label4: TLabel
+      Left = 443
+      Top = 28
+      Width = 94
+      Height = 13
+      Caption = 'Forma Pagamento: '
     end
     object edt_buscarClientelanc: TEdit
       Left = 9
@@ -389,8 +395,8 @@ object F_vendasConsulta: TF_vendasConsulta
       TabOrder = 5
       OnClick = btn_buscardataClick
     end
-    object DBLookupComboBox1: TDBLookupComboBox
-      Left = 464
+    object lkcbox_formapag_ConsultarVendas: TDBLookupComboBox
+      Left = 544
       Top = 25
       Width = 145
       Height = 21
@@ -438,7 +444,7 @@ object F_vendasConsulta: TF_vendasConsulta
     Left = 544
     Top = 259
     Width = 71
-    Height = 18
+    Height = 21
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -452,7 +458,7 @@ object F_vendasConsulta: TF_vendasConsulta
     Left = 636
     Top = 259
     Width = 71
-    Height = 18
+    Height = 21
     Enabled = False
     TabOrder = 13
   end

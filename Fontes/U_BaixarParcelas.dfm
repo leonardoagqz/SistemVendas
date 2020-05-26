@@ -82,6 +82,7 @@ object F_baixarparcelas: TF_baixarparcelas
         Expanded = False
         FieldName = 'ped_date'
         Title.Caption = 'Data'
+        Width = 83
         Visible = True
       end
       item
@@ -437,11 +438,6 @@ object F_baixarparcelas: TF_baixarparcelas
       FieldName = 'ped_id'
       Origin = 'ped_id'
     end
-    object SQL_ListarLancamentosped_date: TDateField
-      AutoGenerateValue = arDefault
-      FieldName = 'ped_date'
-      Origin = 'ped_date'
-    end
     object SQL_ListarLancamentosped_codigo: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'ped_codigo'
@@ -522,6 +518,11 @@ object F_baixarparcelas: TF_baixarparcelas
       AutoGenerateValue = arDefault
       FieldName = 'parc_data_pago'
       Origin = 'parc_data_pago'
+    end
+    object SQL_ListarLancamentosped_date: TDateTimeField
+      AutoGenerateValue = arDefault
+      FieldName = 'ped_date'
+      Origin = 'ped_date'
     end
   end
   object ds_listarlancamentos: TDataSource

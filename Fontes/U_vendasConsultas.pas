@@ -926,6 +926,7 @@ begin
      SQL_ListarLancamentos.SQL.Add ('where cli_nome like :nome');
      SQL_ListarLancamentos.SQL.Add ('and ped_faturado = "SIM"');
      SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
+     SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
      SQL_ListarLancamentos.ParamByName('nome').Value := edt_buscarClientelanc.Text + '%';
      SQL_ListarLancamentos.Open;
      if SQL_ListarLancamentos.RecordCount = 0 then

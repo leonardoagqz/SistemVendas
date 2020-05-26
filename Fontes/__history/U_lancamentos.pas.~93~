@@ -18,7 +18,6 @@ type
     SQL_ListarLancamentos: TFDQuery;
     ds_listarlancamentos: TDataSource;
     SQL_ListarLancamentosped_id: TIntegerField;
-    SQL_ListarLancamentosped_date: TDateField;
     SQL_ListarLancamentosped_codigo: TStringField;
     SQL_ListarLancamentosped_cliente: TIntegerField;
     SQL_ListarLancamentosped_usuario: TIntegerField;
@@ -68,7 +67,6 @@ type
     SQL_listarlancamento_relat: TFDQuery;
     ds_listarlancamento_relat: TDataSource;
     SQL_listarlancamento_relatped_id: TFDAutoIncField;
-    SQL_listarlancamento_relatped_date: TDateField;
     SQL_listarlancamento_relatped_codigo: TStringField;
     SQL_listarlancamento_relatped_cliente: TIntegerField;
     SQL_listarlancamento_relatped_usuario: TIntegerField;
@@ -110,7 +108,7 @@ type
     SQL_listarlancamento_relatuser_nome_completo: TStringField;
     SQL_listarlancamento_relatuser_senha: TStringField;
     btn_listaritensdopedido_lanc: TSpeedButton;
-    DBGrid1: TDBGrid;
+    dbg_listarItensPedido: TDBGrid;
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
@@ -126,7 +124,6 @@ type
     btn_fecharpedido: TBitBtn;
     TB_faturarpedido: TFDTable;
     TB_faturarpedidoped_id: TFDAutoIncField;
-    TB_faturarpedidoped_date: TDateField;
     TB_faturarpedidoped_codigo: TStringField;
     TB_faturarpedidoped_cliente: TIntegerField;
     TB_faturarpedidoped_usuario: TIntegerField;
@@ -135,6 +132,9 @@ type
     TB_faturarpedidoped_faturado: TStringField;
     TB_faturarpedidoped_subtotal: TFloatField;
     TB_faturarpedidoped_subtotalprazo: TFloatField;
+    SQL_ListarLancamentosped_date: TDateTimeField;
+    TB_faturarpedidoped_date: TDateTimeField;
+    SQL_listarlancamento_relatped_date: TDateTimeField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -229,6 +229,7 @@ end;
 
 procedure TF_lancamento.btn_fecharpedidoClick(Sender: TObject);
 begin
+  //verifico se o forme pag foi informado
   if lk_formapaglanc.Text = '' then
     begin
       ShowMessage('Escolha a forma de Pagamento');
@@ -236,12 +237,13 @@ begin
       Exit
     end;
 
+    //verifica se o pedido já esta faturado
   if SQL_ListarLancamentosped_faturado.Value = 'SIM' then
     begin
       ShowMessage('Pedido já esta Faturado.');
     end;
 
-
+  //faturando pedido
   TB_faturarpedido.Active := True;
   TB_faturarpedido.Locate('ped_codigo',SQL_ListarLancamentosped_codigo.AsString);
   TB_faturarpedido.Edit;
@@ -251,10 +253,34 @@ begin
 
   ShowMessage('Pedido faturado com Sucesso!');
 
+
+  //imprime recibo
   btn_imprimerecibo.Click;
 
+  //lançar no caixa
+  //lanço no caixa se não for parcelado
+  if dm.SQL_formapagforma_id.Value <> 2  then
+  begin
+    with dm.SQL_caixa do
+    begin
+      Close;
+      SQL.Clear;
+      SQL.Add('update caixa set caixa_valor = caixa_valor + :valor');
+      SQL.Add('where caixa_data_abre = :data and caixa_usuario = :user');
+      ParamByName('user').Value := DM.SQL_usuariouser_id.Value;
+      ParamByName('data').Value := Date;
+      ParamByName('valor').Value := total_vista;
+      ExecSQL;
+    end;
+  end;
+
+
+
+  //atualiza grid
   SQL_ListarLancamentos.Close;
   SQL_ListarLancamentos.Open;
+
+
 
 
 end;
@@ -359,7 +385,11 @@ end;
 
 procedure TF_lancamento.FormCreate(Sender: TObject);
 begin
+  //abrir a sql de forma de pagamento
   dm.SQL_formapag.Active:=True;
+
+ 
+
 end;
 
 end.

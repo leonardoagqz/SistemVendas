@@ -28,11 +28,13 @@ type
     TB_AbreCaixacaixa_usuario: TIntegerField;
     btnMostrarTodosUsuarios: TBitBtn;
     btnMostrarTodosDias: TBitBtn;
+    btnFecharCaixa: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure btnAbreCaixaClick(Sender: TObject);
     procedure btnMostrarTodosUsuariosClick(Sender: TObject);
     procedure btnMostrarTodosDiasClick(Sender: TObject);
+    procedure btnFecharCaixaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -88,7 +90,22 @@ begin
    edtCaixaInicial.Enabled:= False;
  end;
 
+ edt_CaixaHoje.Value := dm.SQL_caixacaixa_valor.Value;
+
 end;
+
+procedure TF_caixa.btnFecharCaixaClick(Sender: TObject);
+begin
+  //fechar caixa
+  TB_AbreCaixa.Active:= True;
+  TB_AbreCaixa.Locate('caixa_id', dm.SQL_caixacaixa_id.Value, []);
+  TB_AbreCaixa.Edit;
+  TB_AbreCaixacaixa_data_fecha.Value:= Date;
+  TB_AbreCaixa.Post;
+  ShowMessage('Caixa Fechado com Sucesso!');
+  dm.SQL_caixa.Close;
+  dm.SQL_caixa.Open;
+  end;
 
 procedure TF_caixa.btnMostrarTodosDiasClick(Sender: TObject);
 begin
@@ -144,6 +161,9 @@ begin
    btnAbreCaixa.Enabled := false;
    edtCaixaInicial.Enabled:= False;
  end;
+
+
+ edt_CaixaHoje.Value := dm.SQL_caixacaixa_valor.Value;
 
 end;
 
