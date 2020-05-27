@@ -666,6 +666,7 @@ object F_gerarparcelas: TF_gerarparcelas
     Top = 456
   end
   object SQL_parcelasProntas: TFDQuery
+    Active = True
     Connection = dm.conexao
     SQL.Strings = (
       'select * from view_parcelas_prontas'
@@ -1303,26 +1304,6 @@ object F_gerarparcelas: TF_gerarparcelas
         BandType = 4
         LayerName = Foreground
       end
-      object ppLabel10: TppLabel
-        DesignLayer = ppDesignLayer1
-        UserName = 'lbl_minhaLoja'
-        Border.mmPadding = 0
-        Caption = 'Minha Loja - (85) 3232-3232'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 12
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 4762
-        mmLeft = 61383
-        mmTop = 4498
-        mmWidth = 52388
-        BandType = 4
-        LayerName = Foreground
-      end
       object ppLabel11: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label10'
@@ -1416,9 +1397,9 @@ object F_gerarparcelas: TF_gerarparcelas
         UserName = 'Shape7'
         Brush.Style = bsClear
         Shape = stRoundRect
-        mmHeight = 8467
+        mmHeight = 8194
         mmLeft = 59002
-        mmTop = 3440
+        mmTop = 4575
         mmWidth = 78581
         BandType = 4
         LayerName = Foreground
@@ -1456,6 +1437,69 @@ object F_gerarparcelas: TF_gerarparcelas
         mmLeft = 2379
         mmTop = 13759
         mmWidth = 51329
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppLabel10: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label11'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Empresa:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 4763
+        mmLeft = 61383
+        mmTop = 5821
+        mmWidth = 18256
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText9: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText9'
+        Border.mmPadding = 0
+        DataField = 'emp_nome'
+        DataPipeline = dm.ppDB_empresa
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB_empresa'
+        mmHeight = 4763
+        mmLeft = 79904
+        mmTop = 5821
+        mmWidth = 29633
+        BandType = 4
+        LayerName = Foreground
+      end
+      object ppDBText10: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText101'
+        Border.mmPadding = 0
+        DataField = 'emp_fone'
+        DataPipeline = dm.ppDB_empresa
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB_empresa'
+        mmHeight = 4763
+        mmLeft = 109802
+        mmTop = 5821
+        mmWidth = 26723
         BandType = 4
         LayerName = Foreground
       end

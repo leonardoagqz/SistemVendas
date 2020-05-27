@@ -4,7 +4,7 @@ object F_caixa: TF_caixa
   BorderStyle = bsDialog
   Caption = 'Caixa'
   ClientHeight = 291
-  ClientWidth = 425
+  ClientWidth = 413
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -48,7 +48,7 @@ object F_caixa: TF_caixa
     Left = 8
     Top = 109
     Width = 393
-    Height = 152
+    Height = 174
     DataSource = dm.ds_caixa
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0
@@ -119,7 +119,7 @@ object F_caixa: TF_caixa
     OnClick = btnAbreCaixaClick
   end
   object btnMostrarTodosUsuarios: TBitBtn
-    Left = 264
+    Left = 153
     Top = 89
     Width = 137
     Height = 19
@@ -139,9 +139,9 @@ object F_caixa: TF_caixa
   end
   object btnFecharCaixa: TBitBtn
     Left = 326
-    Top = 264
+    Top = 89
     Width = 75
-    Height = 25
+    Height = 19
     Caption = 'Fechar Caixa'
     TabOrder = 6
     OnClick = btnFecharCaixaClick

@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.UI, ppComm, ppRelatv, ppDB, ppDBPipe,
   ppPrnabl, ppClass, ppCtrls, ppBands, ppCache, ppDesignLayer, ppParameter,
-  ppProd, ppReport,Vcl.Dialogs;
+  ppProd, ppReport,Vcl.Dialogs, System.IniFiles, vcl.forms;
 
 type
   Tdm = class(TDataModule)
@@ -71,12 +71,10 @@ type
     ppHeaderBand1: TppHeaderBand;
     ppDetailBand1: TppDetailBand;
     ppFooterBand1: TppFooterBand;
-    ppLabel2: TppLabel;
     ppDBText1: TppDBText;
     ppDBText2: TppDBText;
     ppDBText3: TppDBText;
     ppDBText4: TppDBText;
-    ppLabel3: TppLabel;
     ppLabel4: TppLabel;
     ppLabel5: TppLabel;
     ppLabel6: TppLabel;
@@ -292,8 +290,18 @@ type
     SQL_caixauser_nome: TStringField;
     SQL_caixauser_nome_completo: TStringField;
     SQL_caixauser_senha: TStringField;
+    SQL_empresa: TFDQuery;
+    ds_empresa: TDataSource;
+    ppDB_empresa: TppDBPipeline;
+    ppDBText50: TppDBText;
+    ppDBText51: TppDBText;
+    ppDBText53: TppDBText;
+    ppLabel3: TppLabel;
+    ppLabel54: TppLabel;
+    ppDBText52: TppDBText;
 
     procedure SQL_relatoriovendasCalcFields(DataSet: TDataSet);
+    procedure DataModuleCreate(Sender: TObject);
 
   private
     { Private declarations }
@@ -309,7 +317,7 @@ var
 implementation
 
 uses
-  U_pdv, U_lancamentos;
+  U_pdv, U_lancamentos, U_inicial;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
@@ -346,6 +354,47 @@ begin
   end;
 end;
 
+
+procedure Tdm.DataModuleCreate(Sender: TObject);
+var server,user,senha,lib:string;
+var PORTA:Integer;
+var conf:TIniFile;
+begin
+   SetCurrentDir(ExtractFilePath(Application.ExeName));
+   lib := GetCurrentDir + '\libmysql.dll' ;
+   conf := TIniFile.Create(GetCurrentDir+ '\conf.ini');
+   server := conf.ReadString('banco','server','');
+   user :=  conf.ReadString('banco','user','');
+   senha :=  conf.ReadString('banco','senha','');
+   PORTA :=  StrToInt(conf.ReadString('banco','porta',''));
+
+   {Conexão com banco dinamicamente}
+
+
+   try
+   conexao.Connected := False;
+   //Mysql_link.VendorLib := lib;
+   Mysql_link.DriverID := 'MySQL';
+   conexao.DriverName := 'MySQL';
+   conexao.Params.Add('Server='    +server);
+   conexao.Params.Add('User_name=' +user);
+   conexao.Params.Add('Password='  +senha);
+   conexao.Params.Add('Port='      +IntToStr(porta));
+   conexao.Connected := True;
+   except
+   ShowMessage('Banco de Dados não Conectado! Verifique o Arquivo de Configuração!');
+     Application.Terminate;
+     Exit;
+   end;
+
+
+
+
+
+
+
+
+end;
 
 procedure Tdm.SQL_relatoriovendasCalcFields(DataSet: TDataSet);
 begin

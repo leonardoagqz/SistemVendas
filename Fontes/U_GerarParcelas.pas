@@ -170,7 +170,6 @@ type
     ds_listarProdutos: TDataSource;
     ppLine2: TppLine;
     ppLabel9: TppLabel;
-    ppLabel10: TppLabel;
     ppLabel11: TppLabel;
     lbl_nomeCliente: TppLabel;
     ppShape3: TppShape;
@@ -228,6 +227,9 @@ type
     ppParameterList3: TppParameterList;
     SQL_listarProdutosped_date: TDateTimeField;
     SQL_ListarLancamentosped_date: TDateTimeField;
+    ppLabel10: TppLabel;
+    ppDBText9: TppDBText;
+    ppDBText10: TppDBText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
