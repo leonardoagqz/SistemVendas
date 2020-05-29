@@ -212,9 +212,16 @@ begin
    ExecSQL;
    end;
 
+
    //refres na listagem de permitidos
    SQL_listarAcessosPermitidos.Close;
    SQL_listarAcessosPermitidos.Open;
+
+   if SQL_listarAcessosPermitidos.RecordCount > 0then
+    begin
+      btnLiberarTela.Enabled:=True;
+      btnRemoverTela.Enabled:=True;
+    end;
 
 end;
 
@@ -232,6 +239,7 @@ end;
 
 procedure TF_usuarios.btnRemoverTelaClick(Sender: TObject);
 begin
+
 //remover tela do usuario
     with SQL_gravarTela  do
    begin
@@ -249,6 +257,14 @@ begin
    SQL_listarAcessosPermitidos.Close;
    SQL_listarAcessosPermitidos.Open;
 
+
+
+   if SQL_listarAcessosPermitidos.RecordCount = 0then
+    begin
+      btnLiberarTela.Enabled:=True;
+      btnRemoverTela.Enabled:=False;
+    end;
+
 end;
 
 procedure TF_usuarios.dbg_ListarUsuarios_ContAcessoCellClick(Column: TColumn);
@@ -259,6 +275,27 @@ begin
   SQL_listarAcessosPermitidos.SQL.Add('where acesso_user = :user');
   SQL_listarAcessosPermitidos.ParamByName('user').Value := SQL_listarUsuariosuser_id.Value;
   SQL_listarAcessosPermitidos.Open;
+
+   if SQL_listarUsuariosuser_id.Value = 1 then
+  begin
+    btnLiberarTela.Enabled:=False;
+    btnRemoverTela.Enabled:=False;
+  end
+  else
+  begin
+    if SQL_listarAcessosPermitidos.RecordCount > 0then
+    begin
+      btnLiberarTela.Enabled:=True;
+      btnRemoverTela.Enabled:=True;
+    end
+    else
+    begin
+      btnLiberarTela.Enabled:=True;
+      btnRemoverTela.Enabled:=False;
+    end;
+  end;
+
+
 end;
 
 procedure TF_usuarios.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -270,6 +307,7 @@ procedure TF_usuarios.FormCreate(Sender: TObject);
 begin
   SQL_listarUsuarios.Active:=True;
   SQL_listarTelas.Open;
+  btnRemoverTela.Enabled:=False;
 end;
 
 procedure TF_usuarios.FormShow(Sender: TObject);

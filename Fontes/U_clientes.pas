@@ -121,6 +121,7 @@ begin
 
             if RecordCount = 0 then
               ShowMessage('Cliente não encontrado!');
+              edt_buscar_cli.Clear;
           end
     end;
 end;
@@ -159,7 +160,16 @@ end;
 
 procedure TF_clientes.dbg_clientesDblClick(Sender: TObject);
 begin
-  btn_editar_cliente.Click;
+  if dbg_clientes.DataSource.DataSet.RecordCount > 0 then
+  begin
+    btn_editar_cliente.Click;
+  end
+  else
+  begin
+  ShowMessage('Você não pesquisou nenhum cliente!');
+  edt_buscar_cli.SetFocus;
+  end;
+
 end;
 
 procedure TF_clientes.edt_buscar_cliKeyPress(Sender: TObject; var Key: Char);

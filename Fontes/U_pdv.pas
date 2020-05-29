@@ -124,6 +124,7 @@ type
     SQL_listar_pedidos_dbglançamentoped_date: TDateTimeField;
     TB_pedidosped_date: TDateTimeField;
     lbl_nomelogin_pdv: TLabel;
+    SQL_estoque: TFDQuery;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edt_cli_codigo_pdvKeyPress(Sender: TObject; var Key: Char);
     procedure edt_pro_barras_pdvKeyPress(Sender: TObject; var Key: Char);
@@ -183,45 +184,42 @@ uses
 
 procedure TF_PDV.ProcedureAtualizaDBGridLançamentos;
 begin
-   SQL_listar_pedidos_dbglançamento.Close;
-   SQL_listar_pedidos_dbglançamento.Open;
+  SQL_listar_pedidos_dbglançamento.Close;
+  SQL_listar_pedidos_dbglançamento.Open;
 
+  SQL_listar_pedidos_dbglançamento.First;
+  total_pedido :=0;
+  total_pedido_prazo :=0;
+  while not SQL_listar_pedidos_dbglançamento.Eof do //enquanto não terminar os registros
+  begin
+    total_pedido := total_pedido + SQL_listar_pedidos_dbglançamentosubTotal.Value;
+    total_pedido_prazo := total_pedido_prazo + SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
 
-   SQL_listar_pedidos_dbglançamento.First;
-   total_pedido :=0;
-   total_pedido_prazo :=0;
-   while not SQL_listar_pedidos_dbglançamento.Eof do //enquanto não terminar os registros
-   begin
-   total_pedido := total_pedido + SQL_listar_pedidos_dbglançamentosubTotal.Value;
-   total_pedido_prazo := total_pedido_prazo + SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value;
+    SQL_listar_pedidos_dbglançamento.Next;
+  end;
 
-   SQL_listar_pedidos_dbglançamento.Next;
-   end;
-
-   edt_total_pdv.Value := total_pedido;
-   edt_total_prazo_pdv.Value := total_pedido_prazo;
-
+  edt_total_pdv.Value := total_pedido;
+  edt_total_prazo_pdv.Value := total_pedido_prazo;
 end;
-
 
 procedure TF_PDV.ProcedureProdutosAdd;
 var produto, qtd :Integer;
 var preco, preco_prazo :Double;
 begin
-    if edt_pro_qtd_pdv.Value < 0 then
-     begin
-       ShowMessage('Quantidade Incorreta!');
-       Exit;
-     end;
+  if edt_pro_qtd_pdv.Value < 0 then
+  begin
+    ShowMessage('Quantidade Incorreta!');
+    Exit;
+  end;
 
-    if (edt_pro_barras_pdv.Text = '') and (edt_pro_nome_pdv.Text = '') then
-    begin
-      ShowMessage('Precisa informar os dados do produto!');
-      edt_pro_nome_pdv.SetFocus;
-      Exit;
-    end;
+  if (edt_pro_barras_pdv.Text = '') and (edt_pro_nome_pdv.Text = '') then
+  begin
+    ShowMessage('Precisa informar os dados do produto!');
+    edt_pro_nome_pdv.SetFocus;
+    Exit;
+  end;
 
-
+  //verifico se o usuário informou o produto
        with dm.SQL_produtos do
         begin
           Close;
@@ -232,83 +230,97 @@ begin
           ParamByName('barra').Value := edt_pro_barras_pdv.Text;
           ParamByName('nome').Value := edt_pro_nome_pdv.Text;
           Open;
+          if RecordCount = 0 then
+          begin
+            ShowMessage('Produto não encontrado!');
+            edt_pro_barras_pdv.Clear ;
+            edt_pro_nome_pdv.Clear;
+            edt_pro_preco_pdv.Clear;
+            edt_pro_prazo_pdv.Clear;
+            edt_pro_nome_pdv.SetFocus ;
+          end
+          else
+          begin
+            if RecordCount = 1 then
+            begin
+              produto     := dm.SQL_produtospro_id.Value;
+              qtd         := StrToInt(edt_pro_qtd_pdv.Text);
+              preco       := dm.SQL_produtospro_preco.Value;
+              preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
+
+              //verifico na tabela itens se já existe o iten e o produto
+              with SQL_itens_add do
               begin
-                  if RecordCount = 0 then
-                   ShowMessage('Produto não encontrado!');
-                   edt_pro_barras_pdv.Clear ;
-                   edt_pro_nome_pdv.Clear;
-                   edt_pro_preco_pdv.Clear;
-                   edt_pro_prazo_pdv.Clear;
-                   edt_pro_nome_pdv.SetFocus ;
-               end;
+                Close;
+                SQL.Clear;
+                SQL.Add('select * from itens');
+                SQL.Add('where iten_produto = :produto');
+                SQL.Add('and iten_pedido = :pedido');
+                ParamByName('produto').Value  := produto;
+                ParamByName('pedido').Value   := codigo_venda;
+                Open;
 
+                //se exitir faço a alteração
+                if SQL_itens_add.RecordCount > 0 then
                 begin
-                   if RecordCount = 1 then
-
-                   begin
-                      produto     := dm.SQL_produtospro_id.Value;
-                      qtd         := StrToInt(edt_pro_qtd_pdv.Text);
-                      preco       := dm.SQL_produtospro_preco.Value;
-                      preco_prazo := dm.SQL_produtospro_preco_prazo.Value;
-
-                      with SQL_itens_add do
-                      begin
-                      Close;
-                      SQL.Clear;
-                      SQL.Add('select * from itens');
-                      SQL.Add('where iten_produto = :produto');
-                      SQL.Add('and iten_pedido = :pedido');
-                      ParamByName('produto').Value  := produto;
-                      ParamByName('pedido').Value   := codigo_venda;
-                      Open;
-
-                        if SQL_itens_add.RecordCount > 0 then
-                          begin
-                          //
-                            with SQL_itens_add do
-                            begin
-                            Close;
-                            SQL.Clear;
-                            SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
-                            SQL.Add('where iten_produto = :produto and iten_pedido = :pedido');
-                            ParamByName('pedido').Value := codigo_venda;
-                            ParamByName('produto').Value := produto;
-                            ParamByName('qtd').Value := qtd;
-                            ExecSQL;
-                            end;
-                          end
-
-                        else
-                              begin
-                                   with SQL_itens_add do
-                                    begin
-                                        Close;
-                                        SQL.Clear;
-                                        SQL.Add('insert into itens ');
-                                        SQL.Add('(iten_produto, iten_qtd, iten_pedido, iten_preco, iten_preco_prazo)');
-                                        SQL.Add('values( :produto,:qtd,:pedido,:preco, :preco_prazo)');
-                                        //SQL.Add('select * from itens');
-                                        //SQL.Add('where iten_produto = produto');
-                                        ParamByName('produto').Value := produto;
-                                        ParamByName('qtd').Value := qtd;
-                                        ParamByName('pedido').Value :=  codigo_venda;
-                                        ParamByName('preco').Value := preco;
-                                        ParamByName('preco_prazo').Value :=  preco_prazo;
-                                        ExecSQL;
-
-                                        ShowMessage('Produto Adiocionado!');
-                                        edt_pro_nome_pdv.SetFocus;
-                                    end;
-                              end;
-
-                               edt_pro_qtd_pdv.Value := 1;
-                              ProcedureAtualizaDBGridLançamentos;
-                      end;
-
-
-                   end;
-
+                  //
+                  with SQL_itens_add do
+                  begin
+                    Close;
+                    SQL.Clear;
+                    SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
+                    SQL.Add('where iten_produto = :produto and iten_pedido = :pedido');
+                    ParamByName('pedido').Value := codigo_venda;
+                    ParamByName('produto').Value := produto;
+                    ParamByName('qtd').Value := qtd;
+                    ExecSQL;
+                    ShowMessage('Produto Adiocionado!');
+                  end;
+                end
+                else
+                begin
+                  //se não existir insiro um novo registo
+                  with SQL_itens_add do
+                  begin
+                    Close;
+                    SQL.Clear;
+                    SQL.Add('insert into itens ');
+                    SQL.Add('(iten_produto, iten_qtd, iten_pedido, iten_preco, iten_preco_prazo)');
+                    SQL.Add('values( :produto,:qtd,:pedido,:preco, :preco_prazo)');
+                    //SQL.Add('select * from itens');
+                    //SQL.Add('where iten_produto = produto');
+                    ParamByName('produto').Value := produto;
+                    ParamByName('qtd').Value := qtd;
+                    ParamByName('pedido').Value :=  codigo_venda;
+                    ParamByName('preco').Value := preco;
+                    ParamByName('preco_prazo').Value :=  preco_prazo;
+                    ExecSQL;
+                    ShowMessage('Produto Adiocionado!');
+                    edt_pro_nome_pdv.SetFocus;
+                  end;
                 end;
+
+                //atualizo o estoque
+                with SQL_estoque do
+                begin
+                  Close;
+                  SQL.Clear;
+                  SQL.Add('update produtos set pro_estoque = pro_estoque - :qtd');
+                  SQL.Add('where pro_id = :produto');
+                  ParamByName('qtd').Value := qtd;
+                  ParamByName('produto').Value := produto;
+                  ExecSQL;
+                end;
+
+                //=---------
+
+                edt_pro_qtd_pdv.Value := 1;
+                ProcedureAtualizaDBGridLançamentos;
+              end;
+
+            end;
+
+          end;
 
         end;
 
@@ -318,59 +330,57 @@ end;
 
 procedure TF_PDV.SQL_listar_pedidos_dbglançamentoCalcFields(DataSet: TDataSet);
 begin
-    SQL_listar_pedidos_dbglançamentosubTotal.Value :=
-    SQL_listar_pedidos_dbglançamentopro_preco.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+  SQL_listar_pedidos_dbglançamentosubTotal.Value :=
+  SQL_listar_pedidos_dbglançamentopro_preco.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
-    SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value :=
-    SQL_listar_pedidos_dbglançamentopro_preco_prazo.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+  SQL_listar_pedidos_dbglançamentosubTotalPrazo.Value :=
+  SQL_listar_pedidos_dbglançamentopro_preco_prazo.Value * SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 end;
 
 procedure TF_PDV.ProcedureIniciaVenda;
 begin
-   ProcedureDesbloqueiaCampos;
+  ProcedureDesbloqueiaCampos;
 
-   //if codigo_venda = '' then
-   begin
-   codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
+  //if codigo_venda = '' then
+  begin
+    codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
 
-   end;
+  end;
 
-   F_PDV.Caption := 'Pedido '+ codigo_venda;
-   with SQL_verifica_venda do
-   begin
-   Close;
-   SQL.Clear;
-   SQL.Add('select * from pedidos');
-   SQL.Add('where ped_codigo = :codigo');
-   ParamByName('codigo').Value := codigo_venda;
-   Open;
+  F_PDV.Caption := 'Pedido '+ codigo_venda;
+  with SQL_verifica_venda do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('select * from pedidos');
+    SQL.Add('where ped_codigo = :codigo');
+    ParamByName('codigo').Value := codigo_venda;
+    Open;
+  end;
 
-   end;
-
-   if SQL_verifica_venda.RecordCount = 0 then
-   begin
-      TB_pedidos.Active:=True;
-      TB_pedidos.Append;
-      TB_pedidosped_date.Value := Date;
-      TB_pedidosped_codigo.AsString := codigo_venda;
-      TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
-      TB_pedidosped_usuario.Value := dm.SQL_usuariouser_id.Value;
-      TB_pedidosped_fechado.AsString := 'NAO';
-      TB_pedidosped_faturado.AsString:= 'NAO';
-      TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
-      TB_pedidos.Post;
-   end;
+  if SQL_verifica_venda.RecordCount = 0 then
+  begin
+    TB_pedidos.Active:=True;
+    TB_pedidos.Append;
+    TB_pedidosped_date.Value := Date;
+    TB_pedidosped_codigo.AsString := codigo_venda;
+    TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
+    TB_pedidosped_usuario.Value := dm.SQL_usuariouser_id.Value;
+    TB_pedidosped_fechado.AsString := 'NAO';
+    TB_pedidosped_faturado.AsString:= 'NAO';
+    TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+    TB_pedidos.Post;
+  end;
 
   with SQL_listar_pedidos_dbglançamento do
-   begin
-   Close;
-   SQL.Clear;
-   SQL.Add('select* from view_listar_pedidos');
-   SQL.Add('where ped_codigo = :codigo');
-   ParamByName('codigo').Value := codigo_venda;
-   Open;
-
-   end;
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('select* from view_listar_pedidos');
+    SQL.Add('where ped_codigo = :codigo');
+    ParamByName('codigo').Value := codigo_venda;
+    Open;
+  end;
 
 
 
@@ -684,6 +694,8 @@ begin
   case Key of
     VK_F2:
     begin
+      dm.SQL_produtos.Close;
+      dm.SQL_produtos.Open;
       F_pdv_produtos_listar := TF_pdv_produtos_listar.Create(self);
       F_pdv_produtos_listar.ShowModal;
       edt_pro_qtd_pdv.SetFocus;
@@ -830,6 +842,21 @@ begin
       ExecSQL;
     end;
 
+
+    //atualizo o estoque
+                with SQL_estoque do
+                begin
+                  Close;
+                  SQL.Clear;
+                  SQL.Add('update produtos set pro_estoque = pro_estoque + :qtd');
+                  SQL.Add('where pro_id = :produto');
+                  ParamByName('qtd').Value := qtd;
+                  ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
+                  ExecSQL;
+                end;
+
+                //=---------
+
     ProcedureAtualizaDBGridLançamentos;
 end;
 
@@ -843,13 +870,15 @@ begin
     begin
     try
      qtd:= StrToInt(InputBox ('Digite a quantidade','Qual a quantidade correta?','1'));
-     qtd := qtd*1;
+     //qtd := qtd*1;
     except
     ShowMessage('Valor Invalido!');
     Exit;
     end;
-
-
+    end
+    else
+    begin
+      ShowMessage('Não existem itens lançados');
     end;
 
 
@@ -877,24 +906,35 @@ end;
 procedure TF_PDV.btn_add1_qtd_pdvClick(Sender: TObject);
 var produto, qtd, qtd_existente : Integer;
 begin
-    produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
-    qtd := 1;
+  produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
+  qtd := 1;
 
-   with SQL_itens_add do
-    begin
+  with SQL_itens_add do
+  begin
     //remove a quantidade da do campo QTD
-     Close;
-     SQL.Clear;
-     SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
-     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
-     ParamByName('pedido').Value := codigo_venda;
-     ParamByName('produto').Value := produto;
-     ParamByName('qtd').Value := qtd;
-     ExecSQL;
+    Close;
+    SQL.Clear;
+    SQL.Add('update itens set iten_qtd = iten_qtd + :qtd');
+    SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
+    ParamByName('pedido').Value := codigo_venda;
+    ParamByName('produto').Value := produto;
+    ParamByName('qtd').Value := qtd;
+    ExecSQL;
+  end;
 
-    end;
+  //atualizo o estoque
+                with SQL_estoque do
+                begin
+                  Close;
+                  SQL.Clear;
+                  SQL.Add('update produtos set pro_estoque = pro_estoque - :qtd');
+                  SQL.Add('where pro_id = :produto');
+                  ParamByName('qtd').Value := qtd;
+                  ParamByName('produto').Value :=SQL_listar_pedidos_dbglançamentopro_id.Value;
+                  ExecSQL;
+                end;
 
-    
+                //=---------
 
     ProcedureAtualizaDBGridLançamentos;
 end;
@@ -965,9 +1005,21 @@ begin
        SQL.Add('delete from itens');
        SQL.Add('where iten_qtd = 0');
        ExecSQL;
-
+       ShowMessage('Produto Removido!');
       end;
+  //atualizo o estoque
+                with SQL_estoque do
+                begin
+                  Close;
+                  SQL.Clear;
+                  SQL.Add('update produtos set pro_estoque = pro_estoque + :qtd');
+                  SQL.Add('where pro_id = :produto');
+                  ParamByName('qtd').Value := qtd;
+                  ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
+                  ExecSQL;
+                end;
 
+                //=---------
     ProcedureAtualizaDBGridLançamentos;
 end;
 

@@ -40,7 +40,6 @@
       item
         Width = 50
       end>
-    ExplicitTop = 517
   end
   object pn_pdv_baixo: TPanel
     Left = 0
@@ -52,7 +51,6 @@
     ParentBackground = False
     TabOrder = 4
     TabStop = True
-    ExplicitTop = 456
     object lbl_total_pn_baixo_pdv: TLabel
       Left = 32
       Top = 0
@@ -1578,5 +1576,10 @@
     Connection = dm.conexao
     Left = 792
     Top = 296
+  end
+  object SQL_estoque: TFDQuery
+    Connection = dm.conexao
+    Left = 120
+    Top = 400
   end
 end

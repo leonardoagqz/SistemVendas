@@ -355,7 +355,7 @@ object F_usuarios: TF_usuarios
     Connection = dm.conexao
     SQL.Strings = (
       'select * from usuarios')
-    Left = 12
+    Left = 44
     Top = 232
     object SQL_listarUsuariosuser_id: TFDAutoIncField
       FieldName = 'user_id'
@@ -384,7 +384,7 @@ object F_usuarios: TF_usuarios
   end
   object ds_listarUsuarios: TDataSource
     DataSet = SQL_listarUsuarios
-    Left = 14
+    Left = 46
     Top = 291
   end
   object SQL_listarAcessosPermitidos: TFDQuery

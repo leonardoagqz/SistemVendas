@@ -115,12 +115,20 @@ begin
   dm.TB_produtos.Locate('pro_id',dm.SQL_produtospro_id.Value,[]);
   page_produtos.ActivePage := tab_cadastrar;
   btn_editar_cad.Click;
-  btn_novo_cad.Enabled:=True;
+  btn_novo_cad.Enabled:=false;
 end;
 
 procedure TF_produtos.dbg_produtosDblClick(Sender: TObject);
 begin
-btn_editar_produto.Click;
+  if dbg_produtos.DataSource.DataSet.RecordCount > 0 then
+  begin
+    btn_editar_produto.Click;
+   end
+  else
+  begin
+  ShowMessage('Você não pesquisou nenhum produto!');
+  edt_busca.SetFocus;
+  end;
 end;
 
 procedure TF_produtos.edt_buscaChange(Sender: TObject);
@@ -144,9 +152,9 @@ procedure TF_produtos.edt_buscaKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
     begin
-      if edt_busca.Text = '' then
+      {if edt_busca.Text = '' then
         ShowMessage('Campo vazio!')
-      else
+      else }
         begin
           with dm.SQL_produtos do
             begin
@@ -163,6 +171,7 @@ begin
 
               if RecordCount = 0 then
               ShowMessage('Produto não encontrado!');
+              edt_busca.Clear;
 
             end;
         end;
@@ -254,6 +263,7 @@ begin
             Open;
             if RecordCount = 0 then
               ShowMessage('Produto não encontrado!');
+              edt_busca.Clear;
           end
     end;
 end;

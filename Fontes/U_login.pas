@@ -60,6 +60,7 @@ begin
   else
   begin
   ShowMessage('Usuário ou Senha Incorreto!');
+  edtNome_login.SetFocus;
 
   end;
 end;

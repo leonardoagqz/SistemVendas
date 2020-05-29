@@ -370,6 +370,7 @@ object F_produtos: TF_produtos
         Margins.Bottom = 4
         Align = alBottom
         DataSource = dm.ds_produtos
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
