@@ -1,14 +1,13 @@
 object dm: Tdm
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 671
   Width = 710
   object conexao: TFDConnection
     Params.Strings = (
       'Database=aguiarsvendasbd'
       'User_Name=root'
-      'Password=root'
       'DriverID=MySQL')
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 8
@@ -302,7 +301,7 @@ object dm: Tdm
     DataSource = F_PDV.ds_pedidos
     UserName = 'DB_Recibo_Pedido'
     Left = 32
-    Top = 496
+    Top = 536
   end
   object Report_reciboPedido: TppReport
     AutoStop = False
@@ -364,7 +363,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 168
-    Top = 496
+    Top = 536
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Pedido'
@@ -374,47 +373,6 @@ object dm: Tdm
       mmBottomOffset = 0
       mmHeight = 29369
       mmPrintPosition = 0
-      object ppLabel2: TppLabel
-        DesignLayer = ppDesignLayer1
-        UserName = 'Label2'
-        Border.mmPadding = 0
-        Caption = 'Fone: (85) 3232-3232'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 14
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        Transparent = True
-        mmHeight = 5821
-        mmLeft = 147902
-        mmTop = 2117
-        mmWidth = 49477
-        BandType = 0
-        LayerName = Foreground
-      end
-      object ppLabel3: TppLabel
-        DesignLayer = ppDesignLayer1
-        UserName = 'Label3'
-        Border.mmPadding = 0
-        Caption = 'Minha  Loja'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Name = 'Arial'
-        Font.Size = 20
-        Font.Style = []
-        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
-        FormFieldSettings.FormFieldType = fftNone
-        TextAlignment = taRightJustified
-        Transparent = True
-        mmHeight = 8467
-        mmLeft = 1058
-        mmTop = -529
-        mmWidth = 37306
-        BandType = 0
-        LayerName = Foreground
-      end
       object ppLabel4: TppLabel
         DesignLayer = ppDesignLayer1
         UserName = 'Label4'
@@ -760,6 +718,132 @@ object dm: Tdm
         BandType = 0
         LayerName = Foreground
       end
+      object ppDBText50: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText50'
+        Border.mmPadding = 0
+        DataField = 'emp_nome'
+        DataPipeline = ppDB_empresa
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 12
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB_empresa'
+        mmHeight = 4763
+        mmLeft = 1058
+        mmTop = 1058
+        mmWidth = 35983
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppDBText51: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText51'
+        Border.mmPadding = 0
+        DataField = 'emp_lgr'
+        DataPipeline = ppDB_empresa
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB_empresa'
+        mmHeight = 3704
+        mmLeft = 36513
+        mmTop = 265
+        mmWidth = 64029
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppDBText53: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText53'
+        Border.mmPadding = 0
+        DataField = 'emp_cnpj'
+        DataPipeline = ppDB_empresa
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB_empresa'
+        mmHeight = 3969
+        mmLeft = 44979
+        mmTop = 3969
+        mmWidth = 27517
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel3: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label3'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Cnpj: '
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 5121
+        mmLeft = 36513
+        mmTop = 3969
+        mmWidth = 8194
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppLabel54: TppLabel
+        DesignLayer = ppDesignLayer1
+        UserName = 'Label54'
+        AutoSize = False
+        Border.mmPadding = 0
+        Caption = 'Fone:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        FormFieldSettings.FormSubmitInfo.SubmitMethod = fstPost
+        FormFieldSettings.FormFieldType = fftNone
+        Transparent = True
+        mmHeight = 3969
+        mmLeft = 73290
+        mmTop = 3969
+        mmWidth = 9260
+        BandType = 0
+        LayerName = Foreground
+      end
+      object ppDBText52: TppDBText
+        DesignLayer = ppDesignLayer1
+        UserName = 'DBText52'
+        Border.mmPadding = 0
+        DataField = 'emp_fone'
+        DataPipeline = ppDB_empresa
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Name = 'Arial'
+        Font.Size = 9
+        Font.Style = []
+        ParentDataPipeline = False
+        Transparent = True
+        DataPipelineName = 'ppDB_empresa'
+        mmHeight = 3969
+        mmLeft = 82286
+        mmTop = 3969
+        mmWidth = 20902
+        BandType = 0
+        LayerName = Foreground
+      end
     end
     object ppDetailBand1: TppDetailBand
       Background1.Brush.Style = bsClear
@@ -1084,7 +1168,7 @@ object dm: Tdm
     DataSource = F_lancamento.ds_listarlancamento_relat
     UserName = 'DB_Recibo_Lancamento'
     Left = 24
-    Top = 553
+    Top = 593
   end
   object Report_reciboPedidoLancamento1: TppReport
     AutoStop = False
@@ -1146,7 +1230,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 184
-    Top = 560
+    Top = 600
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -1934,7 +2018,7 @@ object dm: Tdm
     XLSSettings.Title = 'Report'
     XLSSettings.WorksheetName = 'Report'
     Left = 368
-    Top = 560
+    Top = 600
     Version = '20.01'
     mmColumnWidth = 0
     DataPipelineName = 'ppDB_Recibo_Lancamento'
@@ -3430,7 +3514,7 @@ object dm: Tdm
     SQL.Strings = (
       'select * from usuarios')
     Left = 24
-    Top = 304
+    Top = 296
     object SQL_usuariouser_id: TFDAutoIncField
       FieldName = 'user_id'
       Origin = 'user_id'
@@ -3461,23 +3545,25 @@ object dm: Tdm
     SQL.Strings = (
       'select * from view_testar_permissao')
     Left = 24
-    Top = 368
+    Top = 352
   end
   object SQL_caixa: TFDQuery
     Connection = conexao
     SQL.Strings = (
-      'select * from caixa')
-    Left = 16
-    Top = 440
+      'select * from view_caixa')
+    Left = 24
+    Top = 408
     object SQL_caixacaixa_id: TFDAutoIncField
       FieldName = 'caixa_id'
       Origin = 'caixa_id'
       ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
     end
     object SQL_caixacaixa_valor: TFloatField
       AutoGenerateValue = arDefault
       FieldName = 'caixa_valor'
       Origin = 'caixa_valor'
+      DisplayFormat = ',0.00'
     end
     object SQL_caixacaixa_data_abre: TDateField
       AutoGenerateValue = arDefault
@@ -3493,16 +3579,57 @@ object dm: Tdm
       AutoGenerateValue = arDefault
       FieldName = 'caixa_inicial'
       Origin = 'caixa_inicial'
+      DisplayFormat = ',0.00'
     end
     object SQL_caixacaixa_usuario: TIntegerField
       AutoGenerateValue = arDefault
       FieldName = 'caixa_usuario'
       Origin = 'caixa_usuario'
     end
+    object SQL_caixauser_id: TFDAutoIncField
+      FieldName = 'user_id'
+      Origin = 'user_id'
+    end
+    object SQL_caixauser_nome: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome'
+      Origin = 'user_nome'
+      Size = 100
+    end
+    object SQL_caixauser_nome_completo: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_nome_completo'
+      Origin = 'user_nome_completo'
+      Size = 100
+    end
+    object SQL_caixauser_senha: TStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'user_senha'
+      Origin = 'user_senha'
+      Size = 100
+    end
   end
   object ds_caixa: TDataSource
     DataSet = SQL_caixa
-    Left = 88
-    Top = 440
+    Left = 96
+    Top = 408
+  end
+  object SQL_empresa: TFDQuery
+    Connection = conexao
+    SQL.Strings = (
+      'select * from empresa')
+    Left = 24
+    Top = 472
+  end
+  object ds_empresa: TDataSource
+    DataSet = SQL_empresa
+    Left = 104
+    Top = 472
+  end
+  object ppDB_empresa: TppDBPipeline
+    DataSource = ds_empresa
+    UserName = 'DB_empresa'
+    Left = 184
+    Top = 472
   end
 end

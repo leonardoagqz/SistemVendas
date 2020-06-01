@@ -3589,6 +3589,7 @@ object dm: Tdm
     object SQL_caixauser_id: TFDAutoIncField
       FieldName = 'user_id'
       Origin = 'user_id'
+      ReadOnly = True
     end
     object SQL_caixauser_nome: TStringField
       AutoGenerateValue = arDefault

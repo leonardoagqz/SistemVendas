@@ -853,13 +853,6 @@ begin
     ShowMessage('Não existem produtos lançados');
   end;
 
-   if SQL_listar_pedidos_dbglançamentopro_estoque.Value < qtd then
-  begin
-    ShowMessage('Estoque insuficiente!');
-    Exit;
-  end
-  else
-  begin
   //qtd := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
   with SQL_itens_add do
@@ -871,23 +864,10 @@ begin
     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
     ParamByName('pedido').Value := codigo_venda;
     ParamByName('produto').Value := produto;
-    ParamByName('qtd').Value := qtd + qtd_existente;
-    ExecSQL;
-  end;
-     //atualizo o estoque
-  with SQL_estoque do
-  begin
-    Close;
-    SQL.Clear;
-    SQL.Add('update produtos set pro_estoque = pro_estoque - :qtd');
-    SQL.Add('where pro_id = :produto');
     ParamByName('qtd').Value := qtd;
-    ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
     ExecSQL;
   end;
 
-  //=---------
-  end;
   ProcedureAtualizaDBGridLançamentos;
 end;
 
@@ -1067,69 +1047,69 @@ begin
   end;
 
   //atualizo o estoque
-  SQL_listar_pedidos_dbglançamento.First;
-  while not SQL_listar_pedidos_dbglançamento.eof do
-  begin
   with SQL_estoque do
   begin
     Close;
-    SQL.Clear;
-    SQL.Add('update produtos set pro_estoque = pro_estoque + :qtd');
-    SQL.Add('where pro_id = :produto');
-    ParamByName('qtd').Value := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
-    ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
-    ExecSQL;
-  end;
-  SQL_listar_pedidos_dbglançamento.Next;
-  end;
-  //=---------
+                  SQL.Clear;
+                  SQL.Add('update produtos set pro_estoque = pro_estoque + :qtd');
+                  SQL.Add('where pro_id = :produto');
+                  ParamByName('qtd').Value := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
+                  ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
+                  ExecSQL;
+                end;
 
-  ShowMessage('Pedido cancelado!');
-  SQL_listar_pedidos_dbglançamento.Close;
-  SQL_listar_pedidos_dbglançamento.SQL.Clear;
-  F_PDV.Caption:= 'Venda';
-  ProcedureBloqueiacampos;
-  edt_cli_nome_pdv.SetFocus;
-  edt_cli_nome_pdv.SelectAll;
-  edt_cli_nome_pdv.Clear;
-  edt_total_pdv.Clear;
-  edt_total_prazo_pdv.Clear;
-  lkcbox_formapag_pdv.LookupDisplay := '';
+                //=---------
+
+      ShowMessage('Pedido cancelado!');
+      SQL_listar_pedidos_dbglançamento.Close;
+      SQL_listar_pedidos_dbglançamento.SQL.Clear;
+      F_PDV.Caption:= 'Venda';
+      ProcedureBloqueiacampos;
+      edt_cli_nome_pdv.SetFocus;
+      edt_cli_nome_pdv.SelectAll;
+      edt_cli_nome_pdv.Clear;
+      edt_total_pdv.Clear;
+      edt_total_prazo_pdv.Clear;
+      lkcbox_formapag_pdv.LookupDisplay := '';
+
+
+
 end;
 
 procedure TF_PDV.btn_venda_finalizar_pdvClick(Sender: TObject);
 begin
-  ProcedureAtualizaDBGridLançamentos;
+   ProcedureAtualizaDBGridLançamentos;
 
-  if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
-  begin
-    ShowMessage('Não existe itens no pedido!');
-    Exit;
-  end;
+   if SQL_listar_pedidos_dbglançamento.RecordCount < 1 then
+   begin
+     ShowMessage('Não existe itens no pedido!');
+     Exit;
+   end;
 
-  if SQL_verifica_venda.RecordCount >= 0 then
-  begin
-    TB_pedidos.Active:=True;
-    TB_pedidos.Locate('ped_codigo', codigo_venda,[]);
-    TB_pedidos.Edit;
-    TB_pedidosped_date.Value := Date;
-    TB_pedidosped_codigo.AsString := codigo_venda;
-    TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
-    TB_pedidosped_usuario.Value := dm.SQL_usuariouser_id.Value;
-    TB_pedidosped_fechado.AsString := 'SIM';
-    TB_pedidosped_faturado.AsString:= 'NAO';
-    TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
-    TB_pedidosped_subtotal.AsFloat := StrToFloat(edt_total_pdv.Text);
-    TB_pedidosped_subtotalprazo.AsFloat := StrToFloat(edt_total_prazo_pdv.Text);
-    TB_pedidos.Post;
-    ShowMessage('Pedido Finalizado com sucesso!');
-    SQL_listar_pedidos_dbglançamento.Close;
-    SQL_listar_pedidos_dbglançamento.SQL.Clear;
-    F_PDV.Caption:= 'Venda';
-    ProcedureBloqueiacampos;
-    edt_cli_nome_pdv.SetFocus;
-    edt_cli_nome_pdv.SelectAll;
-  end;
+    if SQL_verifica_venda.RecordCount >= 0 then
+   begin
+      TB_pedidos.Active:=True;
+      TB_pedidos.Locate('ped_codigo', codigo_venda,[]);
+      TB_pedidos.Edit;
+      TB_pedidosped_date.Value := Date;
+      TB_pedidosped_codigo.AsString := codigo_venda;
+      TB_pedidosped_cliente.Value := dm.SQL_clientescli_id.Value;
+      TB_pedidosped_usuario.Value := dm.SQL_usuariouser_id.Value;
+      TB_pedidosped_fechado.AsString := 'SIM';
+      TB_pedidosped_faturado.AsString:= 'NAO';
+      TB_pedidosped_forma_pag.Value := dm.SQL_formapagforma_id.Value;
+      TB_pedidosped_subtotal.AsFloat := StrToFloat(edt_total_pdv.Text);
+      TB_pedidosped_subtotalprazo.AsFloat := StrToFloat(edt_total_prazo_pdv.Text);
+      TB_pedidos.Post;
+      ShowMessage('Pedido Finalizado com sucesso!');
+      SQL_listar_pedidos_dbglançamento.Close;
+      SQL_listar_pedidos_dbglançamento.SQL.Clear;
+      F_PDV.Caption:= 'Venda';
+      ProcedureBloqueiacampos;
+      edt_cli_nome_pdv.SetFocus;
+      edt_cli_nome_pdv.SelectAll;
+   end;
+
 
 end;
 

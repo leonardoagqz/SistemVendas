@@ -941,8 +941,8 @@
         OnClick = btn_venda_cancelar_pdvClick
       end
       object btn_venda_finalizar_pdv: TBitBtn
-        Left = 122
-        Top = 8
+        Left = 5
+        Top = 4
         Width = 111
         Height = 27
         Caption = 'Finalizar Venda'
@@ -950,11 +950,12 @@
         OnClick = btn_venda_finalizar_pdvClick
       end
       object btn_venda_gravar_pdv: TBitBtn
-        Left = 5
-        Top = 8
-        Width = 111
+        Left = 122
+        Top = 41
+        Width = 33
         Height = 27
         Caption = '  Gravar Venda'
+        Enabled = False
         Glyph.Data = {
           A2070000424DA207000000000000360000002800000019000000190000000100
           1800000000006C070000232E0000232E00000000000000000001FFFFFFFFFFFF
@@ -1019,6 +1020,7 @@
           FCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFCFDFDFDF9F9F9CFCFD0D4D4D4FEFEFEFF
           FFFFFEFEFE00}
         TabOrder = 0
+        Visible = False
       end
     end
   end

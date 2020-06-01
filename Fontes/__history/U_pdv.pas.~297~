@@ -838,6 +838,12 @@ begin
   produto :=  SQL_listar_pedidos_dbglançamentoiten_id.Value;
   qtd_existente := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
+  if SQL_listar_pedidos_dbglançamentopro_estoque.Value < 1 then
+  begin
+    ShowMessage('Estoque insuficiente!');
+  end
+  else
+  begin
   if qtd_existente >= 1 then
   begin
     try
@@ -853,13 +859,6 @@ begin
     ShowMessage('Não existem produtos lançados');
   end;
 
-   if SQL_listar_pedidos_dbglançamentopro_estoque.Value < qtd then
-  begin
-    ShowMessage('Estoque insuficiente!');
-    Exit;
-  end
-  else
-  begin
   //qtd := SQL_listar_pedidos_dbglançamentoiten_qtd.Value;
 
   with SQL_itens_add do
@@ -871,22 +870,9 @@ begin
     SQL.Add('where iten_id = :produto and iten_pedido = :pedido');
     ParamByName('pedido').Value := codigo_venda;
     ParamByName('produto').Value := produto;
-    ParamByName('qtd').Value := qtd + qtd_existente;
-    ExecSQL;
-  end;
-     //atualizo o estoque
-  with SQL_estoque do
-  begin
-    Close;
-    SQL.Clear;
-    SQL.Add('update produtos set pro_estoque = pro_estoque - :qtd');
-    SQL.Add('where pro_id = :produto');
     ParamByName('qtd').Value := qtd;
-    ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
     ExecSQL;
   end;
-
-  //=---------
   end;
   ProcedureAtualizaDBGridLançamentos;
 end;
@@ -1067,9 +1053,6 @@ begin
   end;
 
   //atualizo o estoque
-  SQL_listar_pedidos_dbglançamento.First;
-  while not SQL_listar_pedidos_dbglançamento.eof do
-  begin
   with SQL_estoque do
   begin
     Close;
@@ -1080,8 +1063,7 @@ begin
     ParamByName('produto').Value := SQL_listar_pedidos_dbglançamentopro_id.Value;
     ExecSQL;
   end;
-  SQL_listar_pedidos_dbglançamento.Next;
-  end;
+
   //=---------
 
   ShowMessage('Pedido cancelado!');

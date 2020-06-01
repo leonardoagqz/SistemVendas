@@ -18,16 +18,32 @@
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
+  object lbl_nomelogin_pdv: TLabel
+    Left = 824
+    Top = 520
+    Width = 88
+    Height = 13
+    Caption = 'lbl_nomelogin_pdv'
+  end
   object stb_pdv: TStatusBar
     Left = 0
-    Top = 515
+    Top = 518
     Width = 898
-    Height = 19
-    Panels = <>
+    Height = 16
+    Panels = <
+      item
+        Width = 50
+      end
+      item
+        Width = 50
+      end
+      item
+        Width = 50
+      end>
   end
   object pn_pdv_baixo: TPanel
     Left = 0
-    Top = 456
+    Top = 459
     Width = 898
     Height = 59
     Align = alBottom
@@ -1191,7 +1207,7 @@
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object SQL_listar_pedidos_dbglançamentoped_date: TDateField
+    object SQL_listar_pedidos_dbglançamentoped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -1507,7 +1523,7 @@
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
     end
-    object TB_pedidosped_date: TDateField
+    object TB_pedidosped_date: TDateTimeField
       AutoGenerateValue = arDefault
       FieldName = 'ped_date'
       Origin = 'ped_date'
@@ -1560,5 +1576,10 @@
     Connection = dm.conexao
     Left = 792
     Top = 296
+  end
+  object SQL_estoque: TFDQuery
+    Connection = dm.conexao
+    Left = 120
+    Top = 400
   end
 end
