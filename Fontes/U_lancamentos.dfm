@@ -44,7 +44,7 @@ object F_lancamento: TF_lancamento
     ParentFont = False
   end
   object btn_imprimerecibo: TSpeedButton
-    Left = 604
+    Left = 634
     Top = 458
     Width = 106
     Height = 25
@@ -98,6 +98,13 @@ object F_lancamento: TF_lancamento
     TitleFont.Style = []
     OnCellClick = dbg_listarlancamentosCellClick
     Columns = <
+      item
+        Expanded = False
+        FieldName = 'ped_id'
+        Title.Caption = 'ID'
+        Width = 43
+        Visible = True
+      end
       item
         Expanded = False
         FieldName = 'ped_date'
@@ -297,7 +304,6 @@ object F_lancamento: TF_lancamento
     Height = 49
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 718
     object lbl_buscarclientelanc: TLabel
       Left = 14
       Top = 7
@@ -353,13 +359,22 @@ object F_lancamento: TF_lancamento
     TabOrder = 9
   end
   object btn_fecharpedido: TBitBtn
-    Left = 454
+    Left = 435
     Top = 474
     Width = 97
     Height = 25
     Caption = 'Fechar e Faturar'
     TabOrder = 10
     OnClick = btn_fecharpedidoClick
+  end
+  object btnReabrirPedido: TBitBtn
+    Left = 538
+    Top = 474
+    Width = 79
+    Height = 25
+    Caption = 'Reabrir Pedido'
+    TabOrder = 11
+    OnClick = btnReabrirPedidoClick
   end
   object SQL_ListarLancamentos: TFDQuery
     Connection = dm.conexao

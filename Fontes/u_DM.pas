@@ -356,26 +356,31 @@ end;
 
 
 procedure Tdm.DataModuleCreate(Sender: TObject);
-var server,user,senha,lib:string;
+var server,user,senha,lib,pasta, DB:string;
 var PORTA:Integer;
 var conf:TIniFile;
 begin
+   pasta := ExtractFilePath(Application.ExeName);
+
    SetCurrentDir(ExtractFilePath(Application.ExeName));
-   lib := GetCurrentDir + '\libmysql.dll' ;
-   conf := TIniFile.Create(GetCurrentDir+ '\conf.ini');
+   conf := TIniFile.Create(pasta + '\conf.ini');
+   lib := pasta + '\libmysql.dll' ;
    server := conf.ReadString('banco','server','');
    user :=  conf.ReadString('banco','user','');
    senha :=  conf.ReadString('banco','senha','');
    PORTA :=  StrToInt(conf.ReadString('banco','porta',''));
+   DB   := conf.ReadString('banco','database','');
 
    {Conexão com banco dinamicamente}
 
 
-   try
+  { try
    conexao.Connected := False;
-   //Mysql_link.VendorLib := lib;
+   conexao.Params.Clear;
+   Mysql_link.VendorLib := lib;
    Mysql_link.DriverID := 'MySQL';
    conexao.DriverName := 'MySQL';
+   conexao.Params.Add('Database='  +DB);
    conexao.Params.Add('Server='    +server);
    conexao.Params.Add('User_name=' +user);
    conexao.Params.Add('Password='  +senha);
@@ -385,11 +390,42 @@ begin
    ShowMessage('Banco de Dados não Conectado! Verifique o Arquivo de Configuração!');
      Application.Terminate;
      Exit;
-   end;
+   end;}
+
+   conexao.Connected := False;
+   conexao.Params.Clear;
+   Mysql_link.VendorLib := lib;
+   Mysql_link.DriverID := 'MySQL';
+   conexao.DriverName := 'MySQL';
+   conexao.Params.Add('Database='  +DB);
+   conexao.Params.Add('Server='    +server);
+   conexao.Params.Add('User_name=' +user);
+   conexao.Params.Add('Password='  +senha);
+   conexao.Params.Add('Port='      +IntToStr(porta));
+
+     {try
+
+     conexao.Connected := True;
+     except
+     ShowMessage('Banco de Dados não Conectado! Verifique o Arquivo de Configuração!');
+       Application.Terminate;
+       Exit;
+     end;}
 
 
+   ShowMessage(conexao.Params.Database);
+   ShowMessage(conexao.Params.UserName);
+   ShowMessage(conexao.Params.Password);
 
 
+  try
+
+  conexao.Connected := true;
+
+  except
+  showmessage('Banco de dados não conectado');
+
+  end;
 
 
 

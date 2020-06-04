@@ -178,7 +178,7 @@ var
 implementation
 
 uses
-  U_clientes, u_DM, U_PesquisarProduto, U_funcoes, U_PesquisarCliente;
+  U_clientes, u_DM, U_PesquisarProduto, U_funcoes, U_PesquisarCliente, U_lancamentos;
 
 {$R *.dfm}
 
@@ -340,13 +340,14 @@ procedure TF_PDV.ProcedureIniciaVenda;
 begin
   ProcedureDesbloqueiaCampos;
 
-  //if codigo_venda = '' then
+  if codigo_venda = '' then
   begin
     codigo_venda := FormatDateTime('yymmdd', Date) + FormatDateTime('hhmmss', Time);
 
   end;
 
   F_PDV.Caption := 'Pedido '+ codigo_venda;
+
   with SQL_verifica_venda do
   begin
     Close;
@@ -966,7 +967,10 @@ begin
   end;
 
   ProcedureIniciavenda;
+  ProcedureAtualizaDBGridLançamentos;
   edt_pro_nome_pdv.SetFocus;
+  F_PDV.btn_venda_finalizar_pdv.Enabled:=True;
+  F_PDV.btn_venda_cancelar_pdv.Enabled:=True;
 end;
 
 procedure TF_PDV.btn_pro_iten_add_pdv2Click(Sender: TObject);
@@ -1085,6 +1089,10 @@ begin
   //=---------
 
   ShowMessage('Pedido cancelado!');
+  F_lancamento.SQL_ListarLancamentos.Close;
+  F_lancamento.SQL_listarlancamento_relat.Close;
+  F_lancamento.SQL_ListarLancamentos.open;
+  F_lancamento.SQL_listarlancamento_relat.open;
   SQL_listar_pedidos_dbglançamento.Close;
   SQL_listar_pedidos_dbglançamento.SQL.Clear;
   F_PDV.Caption:= 'Venda';
@@ -1125,6 +1133,13 @@ begin
     ShowMessage('Pedido Finalizado com sucesso!');
     SQL_listar_pedidos_dbglançamento.Close;
     SQL_listar_pedidos_dbglançamento.SQL.Clear;
+    F_lancamento := TF_lancamento.Create(Self);
+    F_lancamento.SQL_ListarLancamentos.Close;
+    F_lancamento.SQL_listarlancamento_relat.Close;
+    F_lancamento.SQL_ListarLancamentos.open;
+    F_lancamento.SQL_listarlancamento_relat.open;
+    F_lancamento.procedureMostrarPedido;
+    F_lancamento:=nil;
     F_PDV.Caption:= 'Venda';
     ProcedureBloqueiacampos;
     edt_cli_nome_pdv.SetFocus;

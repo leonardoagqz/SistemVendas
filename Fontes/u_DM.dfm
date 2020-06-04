@@ -16,7 +16,7 @@ object dm: Tdm
     DriverID = 'MySQL'
     VendorLib = 
       'C:\Users\Public\Documents\Embarcadero\Studio\Projects\AdSites_SV' +
-      'ENDAS\Fontes\libmysql.dll'
+      'ENDAS\libmysql.dll'
     Left = 104
     Top = 8
   end

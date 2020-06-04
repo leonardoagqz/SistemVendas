@@ -180,6 +180,7 @@ type
     SQL_ListarPedidouser_senha: TStringField;
     SQL_ListarPedidosub_Total: TFloatField;
     SQL_ListarPedidosub_TotalPrazo: TFloatField;
+    btnReabrirPedido: TBitBtn;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure procedureMostrarPedido;
     procedure dbg_listarlancamentosCellClick(Column: TColumn);
@@ -191,6 +192,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btn_fecharpedidoClick(Sender: TObject);
     procedure SQL_ListarPedidoCalcFields(DataSet: TDataSet);
+    procedure btnReabrirPedidoClick(Sender: TObject);
 
   private
     { Private declarations }
@@ -283,6 +285,42 @@ begin
   dm.Report_reciboPedidoLancamento.PrintReport;
 end;
 
+procedure TF_lancamento.btnReabrirPedidoClick(Sender: TObject);
+begin
+  if F_PDV = nil then
+  begin
+  F_PDV := TF_PDV.Create(Self);
+
+  F_PDV.codigo_venda := SQL_ListarLancamentosped_codigo.AsString;
+  F_PDV.edt_cli_codigo_pdv.Text := SQL_ListarLancamentoscli_id.AsString;
+  F_PDV.edt_cli_nome_pdv.Text := SQL_ListarLancamentoscli_nome.AsString;
+
+  with dm.SQL_clientes do
+  begin
+    Close;
+    SQL.Clear;
+    SQL.Add('select * from clientes');
+    SQL.Add('where cli_id = :id');
+    ParamByName('id').Value := SQL_ListarLancamentosped_cliente.Value;
+    Open;
+  end;
+
+  dm.SQL_formapag.Open;
+  dm.SQL_formapag.Locate('forma_id',SQL_ListarLancamentosped_forma_pag.Value);
+  F_PDV.lkcbox_formapag_pdv.DisplayValue := dm.SQL_formapagforma_nome.AsString;
+
+  F_PDV.ProcedureDesbloqueiaCampos;
+  F_PDV.lkcbox_formapag_pdv.Enabled:=True;
+  F_PDV.btn_iniciar_venda_pdv.Enabled:=True;
+  F_PDV.btn_venda_finalizar_pdv.Enabled:=False;
+  F_PDV.btn_venda_cancelar_pdv.Enabled:=False;
+
+  F_PDV.ShowModal;
+  end;
+
+
+end;
+
 procedure TF_lancamento.btn_fecharpedidoClick(Sender: TObject);
 begin
   //verifico se o forme pag foi informado
@@ -372,7 +410,7 @@ begin
   SQL_ListarLancamentos.SQL.Add ('select * from view_listar_pedidos');
   SQL_ListarLancamentos.SQL.Add('where ped_faturado = "NAO"');
   SQL_ListarLancamentos.SQL.Add ('group by ped_codigo');
-  SQL_ListarLancamentos.SQL.Add('order by ped_date desc');
+  SQL_ListarLancamentos.SQL.Add('order by ped_id desc');
   SQL_ListarLancamentos.Open;
   if SQL_ListarLancamentos.RecordCount = 0 then
     begin

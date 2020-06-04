@@ -1,0 +1,6 @@
+[banco]
+database = aguiarsvendasbd
+server = localhost
+user = root
+senha = root 
+porta = 3306
